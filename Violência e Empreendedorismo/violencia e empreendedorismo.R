@@ -14,6 +14,7 @@ cid_10 <- read_excel("~/LAPEI/violência e empreendedorismo/cid_10.xlsx") %>%
                             filter(IPEA != "NA") %>% 
                             janitor::clean_names()
 
+#comentário
 
 ### ler a base de projeções populacionais aqui 
 
