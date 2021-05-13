@@ -41,7 +41,11 @@ SIM_CONT2018 <- SIM_DO2018 %>%
   left_join(populacao_empilhada, by = c("codmunocor"="ibge", "sexo")) %>% 
   mutate(uf_codigo = str_sub(codmunocor, end = 2)) %>% 
   filter(uf_codigo == "52")%>%
-  mutate(taxa_incidencia = n/total)
+  mutate(taxa_incidencia = (n/total) * 1000) %>% 
+  rename(populacao = total) %>% 
+  select(-uf_codigo)
+# taxa por 1000 habitantes
+
 
 # Juntar bases de projeções populacional e SIM_CONT2018
 # criar uma nova variável que corresponde à divisão entre o número de óbitos por 
@@ -70,3 +74,25 @@ analise_populosos <- SIM_CONT2018 %>%
   filter(codmunocor %in% ibge_municipios_populosos)
 ggplot(analise_populoso, aes()) + geom_col()
  
+
+
+# Fazendo gráficos - Daniel -----------------------------------------------
+## Pensei em fazer algo assim 
+
+
+SIM_CONT2018_feminino <- SIM_CONT2018 %>% 
+                              filter(sexo == "Feminino")
+
+SIM_CONT2018_feminino %>% 
+  filter(ipea == "Agressões") %>%
+  ungroup() %>% 
+  arrange(desc(taxa_incidencia)) %>% 
+  top_n(10, taxa_incidencia) %>% 
+  ggplot(aes(x = fct_reorder(municipio, taxa_incidencia), y = taxa_incidencia)) + 
+  geom_col(aes(fill = "red")) + coord_flip() + guides(fill=FALSE) +
+  theme_bw() + xlab("top 10 municípios") + ylab("Taxa de incidência para cada 1000 habitantes") +
+  ggtitle("Top 10 municípios com maiores taxas de óbito por agressão - sexo feminino", 
+          "Dados do SIM (Datasus) - 2018")
+
+
+
