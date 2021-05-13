@@ -89,7 +89,7 @@ SIM_CONT2018_feminino %>%
   arrange(desc(taxa_incidencia)) %>% 
   top_n(10, taxa_incidencia) %>% 
   ggplot(aes(x = fct_reorder(municipio, taxa_incidencia), y = taxa_incidencia)) + 
-  geom_col(aes(fill = "red")) + coord_flip() + guides(fill=FALSE) +
+  geom_col(fill="darkblue") + coord_flip() + guides(fill=FALSE) +
   theme_bw() + xlab("top 10 municípios") + ylab("Taxa de incidência para cada 1000 habitantes") +
   ggtitle("Top 10 municípios com maiores taxas de óbito por agressão - sexo feminino", 
           "Dados do SIM (Datasus) - 2018")
