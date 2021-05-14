@@ -152,3 +152,24 @@ SIM_CONT2018_masculino %>%
   Estados$Ibge <- as.character(Estados$Ibge)
   
   glimpse (Estados)
+  
+##-------------------Gráficos Brasil---------------------------------------
+  
+  Brasil_obitos_feminino <- Brasil_Obitos_sexo %>% 
+    filter(sexo == "Feminino")
+  
+  
+  Brasil_obitos_feminino %>% 
+    filter(ipea == "Agressões") %>%
+    ungroup() %>% 
+    arrange(desc(taxa_incidencia)) %>% 
+    top_n(10, taxa_incidencia) %>% 
+    ggplot(aes(x = fct_reorder(Municipios, taxa_incidencia), y = taxa_incidencia, fill = UF)) +
+    geom_col() + coord_flip() + guides(fill=FALSE) + scale_fill_brewer(palette = "Reds")+
+    theme_bw() + xlab("Municípios") + ylab("Taxa de incidência para cada 1000 habitantes")+
+    ggtitle("Top 10 unicípios do Brasil com maiores taxas de óbito por agressões- sexo feminino", 
+            "Dados do SIM (Datasus) - 2018") 
+
+  
+  help(scale_fill_brewer)
+    
