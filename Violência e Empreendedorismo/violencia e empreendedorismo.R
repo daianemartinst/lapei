@@ -130,6 +130,25 @@ SIM_CONT2018_masculino %>%
   ggtitle("Top 10 municípios com maiores taxas de óbito por agressão - sexo feminino", 
           "Dados do SIM (Datasus) - 2018")
 
+  write.csv(SIM_CONT2018, "Base_SIM_2018.csv")
+  
+  
+##------------------Base Brasil Todo---------------------------------------
 
+##tratamento
+  
+  populacao_empilhada_Brasil <- Municipios_Brasil %>% 
+    gather(key = "sexo", value = "total", 3:4)
+  
+ 
+  Brasil_Obitos_sexo <-obitos_brasil%>%
+  left_join(populacao_empilhada_Brasil, by = c("codmunocor"="Ibge", "sexo"))%>%
+    rename(populacao = total)%>%
+    mutate(taxa_incidencia = (n/populacao) * 1000)%>%
+    mutate(uf_codigo = str_sub(codmunocor, end = 2))%>%
+    left_join(Estados, by = c ("uf_codigo" = "Ibge"))
 
-
+  
+  Estados$Ibge <- as.character(Estados$Ibge)
+  
+  glimpse (Estados)
