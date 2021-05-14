@@ -57,7 +57,9 @@ variaveis_selecionadas <- c("V0001", "V0015", "B001", "C001", "C00301", "C004", 
                             "N017", "N018", "Q092", "Q09201", "Q09301", "Q094", "Q09502", "Q09605", "Q09606", "Q10101", 
                             "Q10202", "Q105", "Q10701", "Q109", "Q11006", "Q11007", "Q11008", "Q11009", "Q11010", "Q111",
                             "Q11201", "Q11406", "Q11408", "Q115")
+
 dadospns <- get_pns(year=2019, labels=TRUE, deflator=TRUE, design=TRUE, vars=variaveis_selecionadas)
+
 
 ### ANÁLISE DOS DADOS
 
