@@ -68,31 +68,61 @@ SIM_CONT2018 %>%
 ##------------------filtrando os municipios--------------------------------------------
 
 ibge_municipios_populosos <- c("520870","520140","520110", "521880","520025","521250")
+sexo_feminino <- c ("Feminino")
+sexo_masculino <- c ("Masculino")
 #Aqui é só para filtrar 
 
 analise_populosos <- SIM_CONT2018 %>%
-  filter(codmunocor %in% ibge_municipios_populosos)
-ggplot(analise_populoso, aes()) + geom_col()
+  filter(codmunocor%in% ibge_municipios_populosos)
+ggplot(analise_populosos, aes(fct_reorder(municipio,taxa_incidencia),taxa_incidencia, fill= ipea)) + geom_col(position = "dodge") + coord_flip() + theme_bw() + xlab(" Municípios") + ylab("Taxa de incidência para cada 1000 habitantes") +
+  ggtitle("Taxas de óbito - Municípios com mais de 200 mil habitantes ", 
+          "Dados do SIM (Datasus) - 2018")
  
+
+analise_populosos_feminino <- SIM_CONT2018 %>%
+  filter(codmunocor%in% ibge_municipios_populosos, sexo%in% sexo_feminino)
+ggplot(analise_populosos_feminino, aes(fct_reorder(municipio,taxa_incidencia),taxa_incidencia, fill= ipea)) + geom_col(position = "dodge") + coord_flip() + theme_bw() + xlab(" Municípios") + ylab("Taxa de incidência para cada 1000 habitantes") +
+  ggtitle("Taxas de óbito Feminino - Municípios com mais de 200 mil habitantes ", 
+          "Dados do SIM (Datasus) - 2018")
+
+analise_populosos_masculino <- SIM_CONT2018 %>%
+  filter(codmunocor%in% ibge_municipios_populosos, sexo%in% sexo_masculino)
+ggplot(analise_populosos_masculino, aes(fct_reorder(municipio,taxa_incidencia),taxa_incidencia, fill= ipea)) + geom_col(position = "dodge") + coord_flip() + theme_bw() + xlab(" Municípios") + ylab("Taxa de incidência para cada 1000 habitantes") +
+  ggtitle("Taxas de óbito Masculino - Municípios com mais de 200 mil habitantes ", 
+          "Dados do SIM (Datasus) - 2018")
+
 
 
 # Fazendo gráficos - Daniel -----------------------------------------------
 ## Pensei em fazer algo assim 
 
-
 SIM_CONT2018_feminino <- SIM_CONT2018 %>% 
                               filter(sexo == "Feminino")
-
 SIM_CONT2018_feminino %>% 
-  filter(ipea == "Agressões") %>%
+  filter(ipea == "Intervenções legais e operações de guerra") %>%
   ungroup() %>% 
   arrange(desc(taxa_incidencia)) %>% 
   top_n(10, taxa_incidencia) %>% 
   ggplot(aes(x = fct_reorder(municipio, taxa_incidencia), y = taxa_incidencia)) + 
-  geom_col(aes(fill = "red")) + coord_flip() + guides(fill=FALSE) +
-  theme_bw() + xlab("top 10 municípios") + ylab("Taxa de incidência para cada 1000 habitantes") +
-  ggtitle("Top 10 municípios com maiores taxas de óbito por agressão - sexo feminino", 
-          "Dados do SIM (Datasus) - 2018")
+  geom_col(fill = "red") + coord_flip() + guides(fill=FALSE) +
+  theme_bw() + xlab("Municípios") + ylab("Taxa de incidência para cada 1000 habitantes") +
+  ggtitle("Municípios com maiores taxas de óbito por intervenções legais e operações de guerra- sexo feminino", 
+          "Dados do SIM (Datasus) - 2018") 
+
+SIM_CONT2018_masculino <- SIM_CONT2018 %>% 
+  filter(sexo == "Masculino")
+
+
+SIM_CONT2018_masculino %>% 
+  filter(ipea == "Intervenções legais e operações de guerra") %>%
+  ungroup() %>% 
+  arrange(desc(taxa_incidencia)) %>% 
+  top_n(10, taxa_incidencia) %>% 
+  ggplot(aes(x = fct_reorder(municipio, taxa_incidencia), y = taxa_incidencia)) + 
+  geom_col(fill="blue") + coord_flip() + guides(fill=FALSE) + 
+  theme_bw() + xlab("Municípios") + ylab("Taxa de incidência para cada 1000 habitantes") +
+  ggtitle("Municípios com maiores taxas de óbito por intervenções legais e operações de guerra- sexo masculino", 
+          "Dados do SIM (Datasus) - 2018") 
 
 
 
