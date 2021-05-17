@@ -28,8 +28,8 @@ populacao_empilhada <- populacao %>%
 populacao_empilhada$ibge <- as.factor(populacao_empilhada$ibge)
 
 # tratamento inicial ------------------------------------------------------
-options(scipen = 999)
 
+options(scipen = 999)
 SIM_CONT2018 <- SIM_DO2018 %>%
   group_by(sexo,codmunocor,causabas)%>%
   count() %>% 
@@ -46,6 +46,7 @@ SIM_CONT2018 <- SIM_DO2018 %>%
   select(-uf_codigo)
 # taxa por 1000 habitantes
 
+write.csv(Brasil_Obitos_sexo, "Brasil_obitos_sexo.csv")
 
 # Juntar bases de projeções populacional e SIM_CONT2018
 # criar uma nova variável que corresponde à divisão entre o número de óbitos por 
@@ -130,7 +131,7 @@ SIM_CONT2018_masculino %>%
   ggtitle("Top 10 municípios com maiores taxas de óbito por agressão - sexo feminino", 
           "Dados do SIM (Datasus) - 2018")
 
-  write.csv(SIM_CONT2018, "Base_SIM_2018.csv")
+  write.csv(SIM_CONT2018, "BaseSIM_2018.csv")
   
   
 ##------------------Base Brasil Todo---------------------------------------
@@ -154,22 +155,75 @@ SIM_CONT2018_masculino %>%
   glimpse (Estados)
   
 ##-------------------Gráficos Brasil---------------------------------------
+
+## Municipios  
+  Brasil_obitos_feminino <- Brasil_Obitos_sexo %>% 
+    filter(sexo == "Feminino")
+  
+  
+  Brasil_obitos_feminino %>% 
+    filter(ipea == "Exposição à fumaça, ao fogo e às chamas") %>%
+    ungroup() %>% 
+    arrange(desc(taxa_incidencia)) %>% 
+    top_n(10, taxa_incidencia) %>% 
+    ggplot(aes(x = fct_reorder(Municipios, taxa_incidencia), y = taxa_incidencia, fill = UF)) +
+    geom_col() + coord_flip() + scale_fill_brewer(palette = "Reds")+
+    theme_bw() + xlab("Municípios") + ylab("Taxa de incidência para cada 1000 habitantes")+ labs(fill="Estados")+ 
+    ggtitle("Municípios do Brasil com maiores taxas de óbito por exposição à fumaça, ao fogo e às chamas- sexo feminino", 
+            "Dados do SIM (Datasus) - 2018") 
+
+  
+  
+  Brasil_obitos_masculino <- Brasil_Obitos_sexo %>% 
+    filter(sexo == "Masculino")
+  
+  
+  Brasil_obitos_masculino %>% 
+    filter(ipea == "Intervenções legais e operações de guerra") %>%
+    ungroup() %>% 
+    arrange(desc(taxa_incidencia)) %>% 
+    top_n(10, taxa_incidencia) %>% 
+    ggplot(aes(x = fct_reorder(Municipios, taxa_incidencia), y = taxa_incidencia, fill = UF)) +
+    geom_col() + coord_flip() + scale_fill_brewer(palette = "Blues")+
+    theme_bw() + xlab("Municípios") + ylab("Taxa de incidência para cada 1000 habitantes")+ labs(fill="Estados")+ 
+    ggtitle("Municípios do Brasil com maiores taxas de óbito por intervenções legais e operações de guerra- sexo masculino", 
+            "Dados do SIM (Datasus) - 2018") 
+  
+  
+  help(scale_fill_brewer)
+  
+  glimpse(SIM_CONT2018)
+  
+## Estados
   
   Brasil_obitos_feminino <- Brasil_Obitos_sexo %>% 
     filter(sexo == "Feminino")
   
   
   Brasil_obitos_feminino %>% 
-    filter(ipea == "Agressões") %>%
+    filter(ipea == "Exposição à fumaça, ao fogo e às chamas") %>%
     ungroup() %>% 
     arrange(desc(taxa_incidencia)) %>% 
     top_n(10, taxa_incidencia) %>% 
-    ggplot(aes(x = fct_reorder(Municipios, taxa_incidencia), y = taxa_incidencia, fill = UF)) +
-    geom_col() + coord_flip() + guides(fill=FALSE) + scale_fill_brewer(palette = "Reds")+
-    theme_bw() + xlab("Municípios") + ylab("Taxa de incidência para cada 1000 habitantes")+
-    ggtitle("Top 10 unicípios do Brasil com maiores taxas de óbito por agressões- sexo feminino", 
+    ggplot(aes(x = fct_reorder(UF, taxa_incidencia), y = taxa_incidencia)) +
+    geom_col(fill= "purple") + coord_flip() + guides(fill=FALSE)+
+    theme_bw() + xlab("Estados") + ylab("Taxa de incidência para cada 1000 habitantes")+ 
+    ggtitle("Estados do Brasil com maiores taxas de óbito por exposição à fumaça, ao fogo e às chamas- sexo feminino", 
             "Dados do SIM (Datasus) - 2018") 
-
   
-  help(scale_fill_brewer)
-    
+  Brasil_obitos_masculino <- Brasil_Obitos_sexo %>% 
+    filter(sexo == "Masculino")
+  
+  
+  
+  Brasil_obitos_feminino %>% 
+    filter(ipea == "Exposição à fumaça, ao fogo e às chamas") %>%
+    ungroup() %>% 
+    arrange(desc(taxa_incidencia)) %>% 
+    top_n(10, taxa_incidencia) %>% 
+    ggplot(aes(x = fct_reorder(UF, taxa_incidencia), y = taxa_incidencia)) +
+    geom_col(fill= "green") + coord_flip() + guides(fill=FALSE)+
+    theme_bw() + xlab("Estados") + ylab("Taxa de incidência para cada 1000 habitantes")+ 
+    ggtitle("Estados do Brasil com maiores taxas de óbito por exposição à fumaça, ao fogo e às chamas- sexo masculino", 
+            "Dados do SIM (Datasus) - 2018") 
+  
