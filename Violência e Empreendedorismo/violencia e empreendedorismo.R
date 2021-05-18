@@ -46,7 +46,7 @@ SIM_CONT2018 <- SIM_DO2018 %>%
   select(-uf_codigo)
 # taxa por 1000 habitantes
 
-write.csv(Brasil_Obitos_sexo, "Brasil_obitos_sexo.csv")
+write.csv(SIM_CONT2018_feminino, "SIM_CONT2018_feminino.csv")
 
 # Juntar bases de projeções populacional e SIM_CONT2018
 # criar uma nova variável que corresponde à divisão entre o número de óbitos por 
@@ -226,4 +226,40 @@ SIM_CONT2018_masculino %>%
     theme_bw() + xlab("Estados") + ylab("Taxa de incidência para cada 1000 habitantes")+ 
     ggtitle("Estados do Brasil com maiores taxas de óbito por exposição à fumaça, ao fogo e às chamas- sexo masculino", 
             "Dados do SIM (Datasus) - 2018") 
+  
+
+  
+  
+##------------Somando taxas de incidencias----------------------
+  
+  
+  ## Base total de taxa de incidencia Feminino para o Qgis
+  sim_taxa_total_feminino <- SIM_CONT2018_feminino%>%
+    group_by(codmunocor, municipio)%>%
+    summarise(taxa_total = sum(taxa_incidencia))
+  
+  left_Feminino_taxa <- sim_taxa_total_feminino%>%
+    left_join(cod_IBGE_7_csv, by = c("municipio"))
+ 
+  write.csv(left_Feminino_taxa, "Taxa_total_Feminino_Goias.csv")
+  
+  
+  
+ taxa_total_feminino <- SIM_CONT2018_feminino%>%
+   group_by(codmunocor,municipio,populacao)%>%
+   summarise(total_obitos = sum(n))%>%
+   summarise(taxa_total = (total_obitos/populacao)*1000)
+  
+  
+  
+  ## Base total de taxa de incidencia Masculino para o Qgis
+  sim_taxa_total_masculino <-SIM_CONT2018_masculino%>%
+    group_by(codmunocor, municipio)%>%
+    summarise(taxa_total = sum (taxa_incidencia))
+  
+  left_Masculino_taxa <- sim_taxa_total_masculino%>%
+    left_join(cod_IBGE_7_csv, by = c("municipio"))
+    
+  
+  write.csv(left_Masculino_taxa, "Taxa_total_masculino_Goias.csv")
   
