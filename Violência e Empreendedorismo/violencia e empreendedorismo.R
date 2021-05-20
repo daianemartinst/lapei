@@ -1,5 +1,7 @@
 library(microdatasus); library(tidyverse); library(forcats); library(readxl)
 
+install.packages("writexl")
+
 setwd("~/LAPEI/violência e empreendedorismo")
 
 # lendo base --------------------------------------------------------------
@@ -251,7 +253,7 @@ SIM_CONT2018_masculino %>%
    summarise(taxa_total = (total_obitos/populacao)*1000)%>%
    right_join(cod_IBGE_7_csv, by = c("municipio"))
   
- write.csv(taxa_total_feminino, "Taxa_total_Feminino_Goias_corrigida.csv")
+ writexl::write_xlsx(taxa_total_feminino, "Taxa_total_Feminino.xlsx")
   
   ## Base total de taxa de incidencia Masculino para o Qgis
   sim_taxa_total_masculino <-SIM_CONT2018_masculino%>%
@@ -271,4 +273,6 @@ SIM_CONT2018_masculino %>%
     right_join(cod_IBGE_7_csv, by = c("municipio"))
   
   write.csv(taxa_total_masculino, "Taxa_total_Masculino_Goias_corrigida.csv")
+  
+  writexl::write_xlsx(taxa_total_masculino, "Taxa_total_Masculino.xlsx")
   
