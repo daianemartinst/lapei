@@ -246,11 +246,12 @@ SIM_CONT2018_masculino %>%
   
   
  taxa_total_feminino <- SIM_CONT2018_feminino%>%
-   group_by(codmunocor,municipio,populacao)%>%
+   group_by(codmunocor,municipio, populacao)%>%
    summarise(total_obitos = sum(n))%>%
-   summarise(taxa_total = (total_obitos/populacao)*1000)
+   summarise(taxa_total = (total_obitos/populacao)*1000)%>%
+   right_join(cod_IBGE_7_csv, by = c("municipio"))
   
-  
+ write.csv(taxa_total_feminino, "Taxa_total_Feminino_Goias_corrigida.csv")
   
   ## Base total de taxa de incidencia Masculino para o Qgis
   sim_taxa_total_masculino <-SIM_CONT2018_masculino%>%
@@ -262,4 +263,12 @@ SIM_CONT2018_masculino %>%
     
   
   write.csv(left_Masculino_taxa, "Taxa_total_masculino_Goias.csv")
+  
+  taxa_total_masculino <- SIM_CONT2018_masculino%>%
+    group_by(codmunocor,municipio,populacao)%>%
+    summarise(total_obitos = sum(n))%>%
+    summarise(taxa_total = (total_obitos/populacao)*1000)%>%
+    right_join(cod_IBGE_7_csv, by = c("municipio"))
+  
+  write.csv(taxa_total_masculino, "Taxa_total_Masculino_Goias_corrigida.csv")
   
