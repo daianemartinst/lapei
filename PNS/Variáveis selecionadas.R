@@ -28,12 +28,12 @@ packageDescription("PNSIBGE")
 help(package="PNSIBGE")
 
 # Descrevendo as funcoes do pacote PNSIBGE
-get_pns
-read_pns
-pns_labeller
-pns_deflator
-pns_design
-pns_example
+# get_pns
+# read_pns
+# pns_labeller
+# pns_deflator
+# pns_design
+# pns_example
 
 # Carregando microdados da PNS
 
