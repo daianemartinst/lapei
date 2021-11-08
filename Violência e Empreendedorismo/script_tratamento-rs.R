@@ -6,7 +6,7 @@ setwd("~/LAPEI/Projeto SEBRAE/Atualização pesquisas/empreendedorismo RFB/estabel
 tab_cnae <- read_delim("https://raw.githubusercontent.com/danielppagotto/Sebrae-go-mulheres/main/bases%20de%20apoio/cnae.csv",
                        ",", escape_double = FALSE, trim_ws = TRUE, locale = locale(encoding = "windows-1252"))
 
-municipios <- read_delim("https://raw.githubusercontent.com/danielppagotto/Sebrae-go-mulheres/main/bases%20de%20apoio/municipios_serpro.csv",
+municipios <- read_delim("https://raw.githubusercontent.com/danielppagotto/Sebrae-go-mulheres/main/bases%20de%20apoio/municipios_rs.csv",
                          ";", escape_double = FALSE, trim_ws = TRUE, locale = locale(encoding = "windows-1252"))
 
 
@@ -18,19 +18,19 @@ natureza_juridica <- read_delim("https://raw.githubusercontent.com/danielppagott
 
 setwd("~/LAPEI/Projeto SEBRAE/Atualização pesquisas/empreendedorismo RFB/empresas")
 
-ativas_base <- vroom("~/LAPEI/Projeto SEBRAE/Atualização pesquisas/empreendedorismo RFB/empresas/empresas_ativas.csv")
+ativas_base <- vroom("~/LAPEI/Projeto SEBRAE/Atualização pesquisas/empreendedorismo RFB/empresas/empresas_ativas-rs.csv")
 
-ativas <- ativas_base %>% 
-  rename(razao_social = X2, natureza_juridica = X3, 
-         qualifica_responsavel = X4, capital_social = X5,
-         porte_empresa = X6, ente_federativo = X7) %>% 
-         left_join(natureza_juridica, by = c("natureza_juridica" = "cod_subclass_natureza_juridica")) %>% 
-         filter(cod_natureza_juridica > 1 & cod_natureza_juridica < 5)
+# ativas <- ativas_base %>% 
+#   rename(razao_social = X2, natureza_juridica = X3, 
+#          qualifica_responsavel = X4, capital_social = X5,
+#          porte_empresa = X6, ente_federativo = X7) %>% 
+#          left_join(natureza_juridica, by = c("natureza_juridica" = "cod_subclass_natureza_juridica")) %>% 
+#          filter(cod_natureza_juridica > 1 & cod_natureza_juridica < 5)
 
 
 # tratando ME separadamente -----------------------------------------------
 
-microempresas <- ativas %>% 
+microempresas <- ativas_base %>% 
         filter(natureza_juridica == "2135") 
 
 me <- microempresas %>% 
@@ -42,7 +42,7 @@ me <- microempresas %>%
 
 municipios_me <- me %>% 
   rename(nome_municipio = Municipio) %>% 
-  group_by(municipio, nome_municipio , genero) %>% 
+  group_by(cod_IBGE, municipio, nome_municipio , genero) %>% 
   count() %>% 
   mutate(natureza = "me")
 
@@ -57,9 +57,9 @@ total_anos <- me %>%
 total_anos %>% 
   filter(ano > 1965) %>% 
   ggplot() +
-  geom_line(aes(x = ano, y = prop_female, col = "darkred")) +
-  geom_line(aes(x = ano, y = prop_male, col = "darkblue")) + 
-  theme_minimal()
+  geom_line(aes(x = ano, y = prop_male, col = "blue")) + 
+  geom_line(aes(x = ano, y = prop_female, col = "red")) +
+  theme_minimal() + theme(legend.position = "none")
   
 
 writexl::write_xlsx(total_anos, "total_anos.xlsx")
@@ -76,7 +76,7 @@ nome_diferentes <- me %>%
 
 # tratando não ME --------------------------------------------------------------
 
-nao_me1 <- ativas %>% 
+nao_me1 <- ativas_base %>% 
   filter(natureza_juridica != "2135") 
 
 nao_me <- nao_me1 %>% 
@@ -97,15 +97,19 @@ nao_me_tratado_s_na <- nao_me_tratado %>%
 municipios_nao_me <- nao_me_tratado_s_na %>% 
                       left_join(municipios, by = c("municipio"="Codigo_TOM_SERPRO")) %>% 
                       rename(nome_municipio = Municipio) %>% 
-                      group_by(municipio,nome_municipio,genero) %>% 
+                      group_by(cod_IBGE, municipio,nome_municipio,genero) %>% 
                       count() %>% 
                       mutate(natureza = "não me")
 
 total <- rbind(municipios_me, municipios_nao_me)
 
-total <- total %>% 
-          group_by(nome_municipio, genero) %>% 
+total_geral <- total %>% 
+          group_by(cod_IBGE,nome_municipio, genero) %>% 
           summarise(total = sum(n))
+
+write.csv(total,"total_natureza-rs.csv")
+write.csv(total_geral, "total_geral-rs.csv")
+
 
 # total_por_sexo_spread <- nao_me_tratado_s_na %>% 
 #                       group_by(ano, cnpj_basico, genero) %>% 
@@ -130,3 +134,9 @@ total <- total %>%
 # 
 # 
 # write.csv(nao_me, "ativas_nao_me.csv")
+
+
+library(qsacnpj)
+
+a <- qsacnpj::tab_qualificacao_responsavel_socio
+

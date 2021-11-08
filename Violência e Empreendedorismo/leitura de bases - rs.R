@@ -1,57 +1,58 @@
-library(tidyverse)
+library(tidyverse); library(vroom)
 
+setwd("~/LAPEI/Projeto SEBRAE/Atualização pesquisas/empreendedorismo RFB/estabelecimentos")
 # Arquivo que contem as leituras inicias da base
 
 estab0 <- vroom("estab0.ESTABELE", col_names = FALSE) %>% 
   select(X1, X2, X3, X4, X5, 
          X6, X7, X11, X12, X20, X21) %>% 
-  filter(X20 == "GO" & X6 == "02")
+  filter(X20 == "RS" & X6 == "02")
 
 estab1 <- vroom("estab1.ESTABELE", col_names = FALSE) %>% 
   select(X1, X2, X3, X4, X5, 
          X6, X7, X11, X12, X20, X21) %>% 
-  filter(X20 == "GO" & X6 == "02")
+  filter(X20 == "RS" & X6 == "02")
 
 estab2 <- vroom("estab2.ESTABELE", col_names = FALSE) %>% 
   select(X1, X2, X3, X4, X5, 
          X6, X7, X11, X12, X20, X21) %>% 
-  filter(X20 == "GO" & X6 == "02")
+  filter(X20 == "RS" & X6 == "02")
 
 estab3 <- vroom("estab3.ESTABELE", col_names = FALSE) %>% 
   select(X1, X2, X3, X4, X5, 
          X6, X7, X11, X12, X20, X21) %>% 
-  filter(X20 == "GO" & X6 == "02")
+  filter(X20 == "RS" & X6 == "02")
 
 estab4 <- vroom("estab4.ESTABELE", col_names = FALSE) %>% 
   select(X1, X2, X3, X4, X5, 
          X6, X7, X11, X12, X20, X21) %>% 
-  filter(X20 == "GO" & X6 == "02")
+  filter(X20 == "RS" & X6 == "02")
 
 estab5 <- vroom("estab5.ESTABELE", col_names = FALSE) %>% 
   select(X1, X2, X3, X4, X5, 
          X6, X7, X11, X12, X20, X21) %>% 
-  filter(X20 == "GO" & X6 == "02")
+  filter(X20 == "RS" & X6 == "02")
 
 estab6 <- vroom("estab6.ESTABELE", col_names = FALSE) %>% 
   select(X1, X2, X3, X4, X5, 
          X6, X7, X11, X12, X20, X21) %>% 
-  filter(X20 == "GO" & X6 == "02")
+  filter(X20 == "RS" & X6 == "02")
 
 
 estab7 <- vroom("estab7.ESTABELE", col_names = FALSE) %>% 
   select(X1, X2, X3, X4, X5, 
          X6, X7, X11, X12, X20, X21) %>% 
-  filter(X20 == "GO" & X6 == "02")
+  filter(X20 == "RS" & X6 == "02")
 
 estab8 <- vroom("estab8.ESTABELE", col_names = FALSE) %>% 
   select(X1, X2, X3, X4, X5, 
          X6, X7, X11, X12, X20, X21) %>% 
-  filter(X20 == "GO" & X6 == "02")
+  filter(X20 == "RS" & X6 == "02")
 
 estab9 <- vroom("estab9.ESTABELE", col_names = FALSE) %>% 
   select(X1, X2, X3, X4, X5, 
          X6, X7, X11, X12, X20, X21) %>% 
-  filter(X20 == "GO" & X6 == "02")
+  filter(X20 == "RS" & X6 == "02")
 
 estabelecimentos <- rbind(estab0, estab1, estab2, 
                           estab3, estab4, estab5, 
@@ -83,6 +84,20 @@ emp8 <- vroom("empresa8.EMPRECSV", col_names = FALSE)
 emp9 <- vroom("empresa9.EMPRECSV", col_names = FALSE) 
 emp10 <- vroom("empresa10.EMPRECSV", col_names = FALSE) 
 
+empresa <- rbind(emp1, emp2, emp3, emp4, emp5, emp6, emp7, emp8, emp9, emp10)
+
+empresa <- empresa %>% 
+  rename(razao_social = X2, natureza_juridica = X3, 
+         qualifica_responsavel = X4, capital_social = X5,
+         porte_empresa = X6, ente_federativo = X7)
+
+
+# Tratamentos -------------------------------------------------------------
+
+ativas <- estabelecimentos %>% 
+  left_join(empresa, by = c("cnpj_basico" = "X1"))  
+
+write.csv(ativas,"empresas_ativas-rs.csv")
 
 
 # Socios ------------------------------------------------------------------
@@ -110,17 +125,4 @@ socios <- rbind(socio1, socio2, socio3, socio4, socio5,
 write.csv(socios, "socios.csv")
 
 
-# Tratamentos -------------------------------------------------------------
 
-
-empresa <- rbind(emp1, emp2, emp3, emp4, emp5, emp6, emp7, emp8, emp9, emp10)
-
-empresa <- empresa %>% 
-  rename(razao_social = X2, natureza_juridica = X3, 
-         qualifica_responsavel = X4, capital_social = X5,
-         porte_empresa = X6, ente_federativo = X7)
-
-ativas <- estabelecimentos %>% 
-  left_join(empresa, by = c("cnpj_basico" = "X1"))  
-
-write.csv(ativas,"empresas_ativas.csv")
