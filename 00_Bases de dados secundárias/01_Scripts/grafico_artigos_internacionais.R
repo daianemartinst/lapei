@@ -1,6 +1,7 @@
 library(tidyverse)
 library(readxl)
 
+# Analises
 # Lendo dados ----
 
 path <- "00_dados/publicacoes_internacionais.xlsx"
