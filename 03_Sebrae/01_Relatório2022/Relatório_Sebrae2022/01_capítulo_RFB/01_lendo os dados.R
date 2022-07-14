@@ -5,6 +5,8 @@ library(readxl);
 library(lubridate);
 library(dygraphs)
 
+setwd("~/LAPEI/Projeto SEBRAE/Atualizacao pesquisas/empreendedorismo RFB/estabelecimentos")
+
 
 # lendo dados ----
 
@@ -12,8 +14,10 @@ library(dygraphs)
 
 path_cnae <- "02_bases_apoio/cnae.csv"
 
+
 tab_cnae <- read_delim(path_cnae, 
-                       "#", escape_double = FALSE, trim_ws = TRUE) %>% 
+                       ",", escape_double = FALSE, trim_ws = TRUE,
+                       locale = locale(encoding = "ISO-8859-1")) %>% 
             select(cod_cnae, nm_cnae)
 
 # Arquivo que contem as leituras inicias da base
@@ -27,15 +31,18 @@ arquivos_estab <- c("estab0.ESTABELE","estab1.ESTABELE","estab2.ESTABELE",
 
 leitura_estab <- function(arquivo){
   
-  dados <- vroom(arquivo, col_names = FALSE) %>% 
-    select(X1, X2, X3, X4, X5, X6, X7, 
-           X11, X12, X20, X21) %>% 
-    filter(X6 == "02")
+  dados <- vroom(arquivo, col_names = TRUE) #%>% 
+    # select(X1, X2, X3, X4, X5, X6, X7, 
+    #        X11, X12, X20, X21) %>% 
+    #filter(X6 == "02")
   
   return(dados)
   
 }
 
+estab0 <- leitura_estab("estab0.ESTABELE")
+
+?vroom
 
 for(i in arquivos_estab){
   
