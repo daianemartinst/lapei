@@ -97,7 +97,7 @@ mediarenda_H_empregado20_4tri
 mediarenda_H_Empregador20_4tri <- svymean(~VD4017, subset(pnadc_homemGO20_4tri, VD4007 == "Empregador"), na.rm = T)
 mediarenda_H_Empregador20_4tri
 
-mediarenda_H_cpropria20_4tri <- svymean(~VD4017, subset(pnadc_homemGO20_4tri, VD4007 == "Conta pr?pria"), na.rm = T)
+mediarenda_H_cpropria20_4tri <- svymean(~VD4017, subset(pnadc_homemGO20_4tri, VD4007 == "Conta própria"), na.rm = T)
 mediarenda_H_cpropria20_4tri
 
 # Mediana Renda dos trabalhadores em Goias (divis?o por sexo)----
