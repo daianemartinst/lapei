@@ -25,8 +25,10 @@ library (readr)
 
 #dados da PNADc de modo automatico
 
-variaveis_selecionadas_PNADc <-c("VD2002", "VD2003", "V2007", "V2009", "V2010", "VD3004", "VD4007", "VD4010", "UF", 
-                                 "V4013", "V4016", "V4019", "V4020", "VD4016", "VD4036", "VD4017", "V1023","VD4031","VD4032")
+variaveis_selecionadas_PNADc <-c("VD2002", "VD2003", "V2007", "V2009", 
+                                 "V2010", "VD3004", "VD4007", "VD4010", "UF", 
+                                 "V4013", "V4016", "V4019", "V4020", "VD4016", 
+                                 "VD4036", "VD4017", "V1023","VD4031","VD4032")
 
 dados_pnadc20 <- get_pnadc(year=2020, quarter=1, vars=variaveis_selecionadas_PNADc)
 
@@ -59,7 +61,7 @@ totalsexo_empregado20_4tri # (total de empregado)
 totalsexo_Empregador20_4tri <- svytotal(~V2007, subset(pnadc_goias20_4tri, VD4007 == "Empregador"), na.rm = T)
 totalsexo_Empregador20_4tri # (total de empregador)
 
-totalsexo_cpropria20_4tri <- svytotal(~V2007, subset(pnadc_goias20_4tri, VD4007 == "Conta pr?pria"), na.rm = T)
+totalsexo_cpropria20_4tri <- svytotal(~V2007, subset(pnadc_goias20_4tri, VD4007 == "Conta própria"), na.rm = T)
 totalsexo_cpropria20_4tri  # (total por conta propria)
 
 total_trabalhador <- svytotal(~VD4007, pnadc_goias20_4tri, na.rm = T)
