@@ -38,7 +38,7 @@ dados_pnadc21_3tri <- get_pnadc(year=2021, quarter=3, vars=variaveis_selecionada
 
 dados_pnadc21_4tri <- get_pnadc(year=2021, quarter=4, vars=variaveis_selecionadas_PNADc)
 
-class(dados_pnadc21)
+class(dados_pnadc21_4tri)
 
 #-----------------------------------
 
@@ -65,6 +65,7 @@ totalsexo_cpropria21_4tri <- svytotal(~V2007, subset(pnadc_goias21_4tri, VD4007 
 totalsexo_cpropria21_4tri  # (total por conta propria)
 
 total_trabalhador <- svytotal(~VD4007, pnadc_goias21_4tri, na.rm = T)
+total_trabalhador
 
 proporcao_totalsexo_empregado21_4tri <- svymean(~V2007, subset(pnadc_goias21_4tri, VD4007 == "Empregado (inclusive trabalhador doméstico)"), na.rm = T)
 proporcao_totalsexo_empregado21_4tri
@@ -201,13 +202,13 @@ idade_H_cpropria21_4tri
 
 #-------Mulher-------
 
-horasT_M_empregado21_4tri <- svytotal(~VD4036, subset (pnadc_mulherGO20_4tri, VD4007 == "Empregado (inclusive trabalhador doméstico)"), na.rm = T)
+horasT_M_empregado21_4tri <- svytotal(~VD4036, subset (pnadc_mulherGO21_4tri, VD4007 == "Empregado (inclusive trabalhador doméstico)"), na.rm = T)
 horasT_M_empregado21_4tri
 
-horasT_M_Empregador21_4tri <- svytotal(~VD4036, subset (pnadc_mulherGO20_4tri, VD4007 == "Empregador"), na.rm = T)
+horasT_M_Empregador21_4tri <- svytotal(~VD4036, subset (pnadc_mulherGO21_4tri, VD4007 == "Empregador"), na.rm = T)
 horasT_M_Empregador21_4tri
 
-horasT_M_cpropria21_4tri <- svytotal(~VD4036, subset (pnadc_mulherGO20_4tri, VD4007 == "Conta própria"), na.rm = T)
+horasT_M_cpropria21_4tri <- svytotal(~VD4036, subset (pnadc_mulherGO21_4tri, VD4007 == "Conta própria"), na.rm = T)
 horasT_M_cpropria21_4tri
 
 #-------Homem--------
