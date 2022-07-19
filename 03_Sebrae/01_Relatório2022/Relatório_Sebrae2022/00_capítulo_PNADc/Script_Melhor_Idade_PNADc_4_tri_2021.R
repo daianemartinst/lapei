@@ -66,7 +66,7 @@ idade_M_empregado21_4tri
 
 #----------Homem---------
 
-idade_H_empregado21_4tri <- svytotal(~VD4007, subset(pnadc_homemGO21_4tri, V2009 >=60 , na.rm = T)
+idade_H_empregado21_4tri <- svytotal(~VD4007, subset(pnadc_homemGO21_4tri, V2009 >=60), na.rm = T)
 idade_H_empregado21_4tri
 
 #-----------------------------------
