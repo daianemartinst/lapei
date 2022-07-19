@@ -1,3 +1,38 @@
+
+
+# Variáveis de interesse (do relatório) e descrição ---------------------------
+
+# UF       Unidade da Federação  Filtro == Goiás
+# V2007    Sexo
+# V2009    Idade em anos
+# V2010    Cor ou raça
+# V20082   Ano de nascimento
+# V4017    Na semana de...a...(semana de referência)tinha pelo menos um sócio
+#          que trabalhava nesse negócio/empresa?
+
+# V4018    Na semana de ...a...(semana de referência),contando com ..., quantas
+#          pessoas trabalhavam nesse negócio/empresa?
+
+# V4019    Esse negócio/empresa era registrado no Cadastro Nacional de Pessoa
+#          Pessoa Jurídica - CNPJ
+
+# V4022    Onde exercia normalment esse trabalho?
+# V4040    Até o dia...(último dia da semana de referência), fazia quanto tempo
+#          que ... estava nesse trabalho?
+
+# V4072    No periodo de ...a...(período de referência de 30 dias), qual foi 
+#          a principal providência que... tomou para conseguir trabalho?
+
+# V40171   Quantos sócios?
+# VD3004   Escolaridade
+
+# VD4007   Posição na ocupação no trabalho principal da semana de referência
+#          para pessoas de 14 anos ou mais de idade.
+
+# VD4017   Renda
+
+########################## CÓDIGOS
+
 # Limpando arquivos armazenados na memoria
 rm(list=ls(all=TRUE))
 
