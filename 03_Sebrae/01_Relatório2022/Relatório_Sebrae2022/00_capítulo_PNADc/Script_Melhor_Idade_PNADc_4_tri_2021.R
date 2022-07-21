@@ -28,7 +28,7 @@ library (readr)
 variaveis_selecionadas_PNADc <-c("VD2002", "VD2003", "V2007", "V2009", 
                                  "V2010", "VD3004", "VD4007", "VD4010", "UF", 
                                  "V4013", "V4016", "V4019", "V4020", "VD4016", 
-                                 "VD4036", "VD4017", "V1023","VD4031","VD4032")
+                                 "VD4036", "VD4017", "V1023","VD4031","VD4032","V4040", "V4022")
 
 dados_pnadc21 <- get_pnadc(year=2021, quarter=1, vars=variaveis_selecionadas_PNADc)
 
@@ -72,7 +72,7 @@ idade_H_21_4tri
 #-----------------------------------
 # Total de trabalhadores por tipo de area em Goias (divisao por sexo)----
 
-trab_tipoarea_Mulher21_melhor_id_4tri <- svytotal(~interaction (VD4007, V1023), subset(pnadc_homemGO21_4tri, V2009 >=60), na.rm = T)
+trab_tipoarea_Mulher21_melhor_id_4tri <- svytotal(~interaction (VD4007, V1023), subset(pnadc_mulherGO21_4tri, V2009 >=60), na.rm = T)
 trab_tipoarea_Mulher21_melhor_id_4tri # (total de mulheres trabalhadoras por area em Goias)
 
 trab_tipoarea_Homem21_melhor_id_4tri <- svytotal(~interaction (VD4007, V1023), subset(pnadc_homemGO21_4tri, V2009 >=60), na.rm = T)
@@ -123,4 +123,7 @@ escolaridade_M_21_melhor_id_4tri
 
 escolaridade_H_21_melhor_id_4tri <- svytotal(~interaction(VD4007, VD3004), subset(pnadc_homemGO21_4tri, V2009 >=60), na.rm = T)
 escolaridade_H_21_melhor_id_4tri
+
+#----------------------------------------
+
 
