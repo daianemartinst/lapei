@@ -60,14 +60,14 @@ pnadc_homemGO21_4tri
 #-------- Mulher-----------
 
 
-idade_M_empregado21_4tri <- svytotal(~VD4007, subset(pnadc_mulherGO21_4tri, V2009 >=60 ), na.rm = T)
-idade_M_empregado21_4tri
+idade_M_21_4tri <- svytotal(~VD4007, subset(pnadc_mulherGO21_4tri, V2009 >=60 ), na.rm = T)
+idade_M_21_4tri
 
 
 #----------Homem---------
 
-idade_H_empregado21_4tri <- svytotal(~VD4007, subset(pnadc_homemGO21_4tri, V2009 >=60), na.rm = T)
-idade_H_empregado21_4tri
+idade_H_21_4tri <- svytotal(~VD4007, subset(pnadc_homemGO21_4tri, V2009 >=60), na.rm = T)
+idade_H_21_4tri
 
 #-----------------------------------
 # Total de trabalhadores por tipo de area em Goias (divisao por sexo)----
