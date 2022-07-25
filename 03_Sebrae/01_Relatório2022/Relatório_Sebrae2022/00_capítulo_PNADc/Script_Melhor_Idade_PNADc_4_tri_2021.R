@@ -118,7 +118,7 @@ totalraca_H_21_melhor_id_4tri
 
 # Total de trabalhadores da melhor idade  - Escolaridade (divisao por sexo)----
 
-escolaridade_M_21_melhor_id_4tri <- svytotal(~interaction(VD4007, VD3004), subset(pnadc_homemGO21_4tri, V2009 >=60), na.rm = T)
+escolaridade_M_21_melhor_id_4tri <- svytotal(~interaction(VD4007, VD3004), subset(pnadc_mulherGO21_4tri, V2009 >=60), na.rm = T)
 escolaridade_M_21_melhor_id_4tri
 
 escolaridade_H_21_melhor_id_4tri <- svytotal(~interaction(VD4007, VD3004), subset(pnadc_homemGO21_4tri, V2009 >=60), na.rm = T)
