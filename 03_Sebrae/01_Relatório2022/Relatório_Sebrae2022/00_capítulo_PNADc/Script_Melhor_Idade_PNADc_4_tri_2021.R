@@ -49,8 +49,13 @@ pnadc_goias21_4tri
 pnadc_mulherGO21_4tri <- subset(pnadc_goias21_4tri , V2007 == "Mulher")
 pnadc_mulherGO21_4tri
 
+melhor_idade_M <- subset(pnadc_mulherGO21_4tri, V2009 >=60 )
+
+
 pnadc_homemGO21_4tri <- subset(pnadc_goias21_4tri , V2007 == "Homem")
 pnadc_homemGO21_4tri
+
+melhor_idade_H <-subset(pnadc_homemGO21_4tri , V2009 >=60 )
 
 
 ###########################################################################
@@ -62,7 +67,6 @@ pnadc_homemGO21_4tri
 
 idade_M_21_4tri <- svytotal(~VD4007, subset(pnadc_mulherGO21_4tri, V2009 >=60 ), na.rm = T)
 idade_M_21_4tri
-
 
 #----------Homem---------
 
@@ -126,4 +130,27 @@ escolaridade_H_21_melhor_id_4tri
 
 #----------------------------------------
 
+#Media de Idade da Melhor idade por sexo e ocupação
+
+#------Mulher------
+
+media_id_melhor_Id_mulher_empregado<- svymean(~V2009, subset(melhor_idade_M, VD4007 == "Empregado (inclusive trabalhador doméstico)"), na.rm = T)
+media_id_melhor_Id_mulher_empregado
+
+media_id_melhor_Id_mulher_empregador <- svymean(~V2009, subset(melhor_idade_M, VD4007 == "Empregador"), na.rm = T)
+media_id_melhor_Id_mulher_empregador
+
+media_id_melhor_Id_mulher_cp <- svymean(~V2009, subset(melhor_idade_M, VD4007 == "Conta própria"), na.rm = T)
+media_id_melhor_Id_mulher_cp
+
+#----------Homem---------
+
+media_id_melhor_Id_homem_empregado<- svymean(~V2009, subset(melhor_idade_H, VD4007 == "Empregado (inclusive trabalhador doméstico)"), na.rm = T)
+media_id_melhor_Id_homem_empregado
+
+media_id_melhor_Id_homem_empregador <- svymean(~V2009, subset(melhor_idade_H, VD4007 == "Empregador"), na.rm = T)
+media_id_melhor_Id_homem_empregador
+
+media_id_melhor_Id_homem_cp <- svymean(~V2009, subset(melhor_idade_H, VD4007 == "Conta própria"), na.rm = T)
+media_id_melhor_Id_homem_cp
 
