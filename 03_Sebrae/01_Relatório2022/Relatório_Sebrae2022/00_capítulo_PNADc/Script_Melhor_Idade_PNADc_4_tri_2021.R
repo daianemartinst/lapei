@@ -46,7 +46,7 @@ class(dados_pnadc21_4tri)
 pnadc_goias21_4tri <- subset(dados_pnadc21_4tri, UF == "Goiás")
 pnadc_goias21_4tri
 
-pnadc_goias21_4tri <- subset(dados_pnadc21_4tri, V2009 >=60)
+pnadc_goias21_4tri <- subset(pnadc_goias21_4tri, V2009 >=60)
 pnadc_goias21_4tri
 
 pnadc_mulherGO21_4tri <- subset(pnadc_goias21_4tri , V2007 == "Mulher")
