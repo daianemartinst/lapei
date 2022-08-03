@@ -25,10 +25,10 @@ library (readr)
 
 #dados da PNADc de modo automatico
 
-variaveis_selecionadas_PNADc <-c("VD2002", "VD2003", "V2007", "V2009", 
-                                 "V2010", "VD3004", "VD4007", "VD4010", "UF", 
-                                 "V4013", "V4016", "V4019", "V4020", "VD4016", 
-                                 "VD4036", "VD4017", "V1023","VD4031","VD4032","V4040", "V4022")
+variaveis_selecionadas_PNADc <-c("UF", "V2007", "VD4007", "V1023", 
+                                 "V2009", "V2010", "VD3004", "VD4017", "VD4016", 
+                                 "V4019", "V4016", "V4017", "V40171", "V4022", 
+                                 "V4040", "V4072", "V1023","VD4031","VD4032")
 
 dados_pnadc21 <- get_pnadc(year=2021, quarter=1, vars=variaveis_selecionadas_PNADc)
 
