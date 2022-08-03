@@ -199,7 +199,7 @@ CNPJ_cpropria_mulher21_4tri
 CNPJ_empregador_homem21_4tri <- svytotal(~V4019, subset (pnadc_homemGO21_4tri, VD4007 == "Empregador"), na.rm = T)
 CNPJ_empregador_homem21_4tri
 
-CNPJ_empregador_homem21_4tri <- svytotal(~V4019, subset (pnadc_homemGO21_4tri, VD4007 == "Conta pr?pria"), na.rm = T)
+CNPJ_empregador_homem21_4tri <- svytotal(~V4019, subset (pnadc_homemGO21_4tri, VD4007 == "Conta própria"), na.rm = T)
 CNPJ_empregador_homem21_4tri
 
 
@@ -219,14 +219,14 @@ CNPJ_empregador_homem21_4tri
 qtdEMPREGADOS_empregador_mulher21_4tri <- svytotal(~V4016, subset (pnadc_mulherGO21_4tri, VD4007 == "Empregador"), na.rm = T)
 qtdEMPREGADOS_empregador_mulher21_4tri
 
-qtdEMPREGADOS_cpropria_mulher21_4tri <- svytotal(~V4016, subset (pnadc_mulherGO21_4tri, VD4007 == "Conta pr?pria"), na.rm = T)
+qtdEMPREGADOS_cpropria_mulher21_4tri <- svytotal(~V4016, subset (pnadc_mulherGO21_4tri, VD4007 == "Conta própria"), na.rm = T)
 qtdEMPREGADOS_cpropria_mulher21_4tri
 
 #-------Homem--------
 qtdEMPREGADOS_empregador_homem21_4tri <- svytotal(~V4016, subset (pnadc_homemGO21_4tri, VD4007 == "Empregador"), na.rm = T)
 qtdEMPREGADOS_empregador_homem21_4tri
 
-qtdEMPREGADOS_cpropria_homem21_4tri <- svytotal(~V4016, subset (pnadc_homemGO21_4tri, VD4007 == "Conta pr?pria"), na.rm = T)
+qtdEMPREGADOS_cpropria_homem21_4tri <- svytotal(~V4016, subset (pnadc_homemGO21_4tri, VD4007 == "Conta própria"), na.rm = T)
 qtdEMPREGADOS_cpropria_homem21_4tri
 
 
@@ -237,14 +237,14 @@ qtdEMPREGADOS_cpropria_homem21_4tri
 socio_empregador_mulher21_4tri <- svytotal(~V4017, subset (pnadc_mulherGO21_4tri, VD4007 == "Empregador"), na.rm = T)
 socio_empregador_mulher21_4tri
 
-socio_cpropria_mulher21_4tri <- svytotal(~V4017, subset (pnadc_mulherGO21_4tri, VD4007 == "Conta pr?pria"), na.rm = T)
+socio_cpropria_mulher21_4tri <- svytotal(~V4017, subset (pnadc_mulherGO21_4tri, VD4007 == "Conta própria"), na.rm = T)
 socio_cpropria_mulher21_4tri
 
 #-------Homem--------
 socio_empregador_homem21_4tri <- svytotal(~V4017, subset (pnadc_homemGO21_4tri, VD4007 == "Empregador"), na.rm = T)
 socio_empregador_homem21_4tri
 
-socio_cpropria_homem21_4tri <- svytotal(~V4017, subset (pnadc_homemGO21_4tri, VD4007 == "Conta pr?pria"), na.rm = T)
+socio_cpropria_homem21_4tri <- svytotal(~V4017, subset (pnadc_homemGO21_4tri, VD4007 == "Conta própria"), na.rm = T)
 socio_cpropria_homem21_4tri
 
 ##### 6 - Quantos s?cios#####
@@ -254,14 +254,14 @@ socio_cpropria_homem21_4tri
 qtdsocio_empregador_mulher21_4tri <- svytotal(~V40171, subset (pnadc_mulherGO21_4tri, VD4007 == "Empregador"), na.rm = T)
 qtdsocio_empregador_mulher21_4tri
 
-qtdsocio_cpropria_mulher21_4tri <- svytotal(~V40171, subset (pnadc_mulherGO21_4tri, VD4007 == "Conta pr?pria"), na.rm = T)
+qtdsocio_cpropria_mulher21_4tri <- svytotal(~V40171, subset (pnadc_mulherGO21_4tri, VD4007 == "Conta própria"), na.rm = T)
 qtdsocio_cpropria_mulher21_4tri
 
 #-------Homem--------
 qtdsocio_empregador_homem21_4tri <- svytotal(~V40171, subset (pnadc_homemGO21_4tri, VD4007 == "Empregador"), na.rm = T)
 qtdsocio_empregador_homem21_4tri
 
-qtdsocio_cpropria_homem21_4tri <- svytotal(~V40171, subset (pnadc_homemGO21_4tri, VD4007 == "Conta pr?pria"), na.rm = T)
+qtdsocio_cpropria_homem21_4tri <- svytotal(~V40171, subset (pnadc_homemGO21_4tri, VD4007 == "Conta própria"), na.rm = T)
 qtdsocio_cpropria_homem21_4tri
 
 
