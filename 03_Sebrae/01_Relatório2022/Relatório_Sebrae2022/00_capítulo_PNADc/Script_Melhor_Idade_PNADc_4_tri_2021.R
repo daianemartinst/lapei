@@ -46,16 +46,16 @@ class(dados_pnadc21_4tri)
 pnadc_goias21_4tri <- subset(dados_pnadc21_4tri, UF == "Goiás")
 pnadc_goias21_4tri
 
-pnadc_goias21_4tri <- subset(pnadc_goias21_4tri, V2009 >=60)
-pnadc_goias21_4tri
+pnadc_goias21_idade_4tri <- subset(pnadc_goias21_4tri, V2009 >=60)
+pnadc_goias21_idade_4tri
 
-pnadc_mulherGO21_4tri <- subset(pnadc_goias21_4tri , V2007 == "Mulher")
+pnadc_mulherGO21_4tri <- subset(pnadc_goias21_idade_4tri , V2007 == "Mulher")
 pnadc_mulherGO21_4tri
 
 melhor_idade_M <- subset(pnadc_mulherGO21_4tri, V2009 >=60 )
 
 
-pnadc_homemGO21_4tri <- subset(pnadc_goias21_4tri , V2007 == "Homem")
+pnadc_homemGO21_4tri <- subset(pnadc_goias21_idade_4tri , V2007 == "Homem")
 pnadc_homemGO21_4tri
 
 melhor_idade_H <-subset(pnadc_homemGO21_4tri , V2009 >=60 )
