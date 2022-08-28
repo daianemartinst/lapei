@@ -54,7 +54,7 @@ dados_pnadc21_4tri[["variables"]]<- dados_pnadc21_4tri[["variables"]] %>%
 
 #Estimativas do QUARTO TRIMESTRE DE 2020 - Goias----
 
-pnadc_goias21_4tri <- subset(dados_pnadc21_4tri, UF == "GoiÃ¡s")
+pnadc_goias21_4tri <- subset(dados_pnadc21_4tri, UF == "Goiás")
 pnadc_goias21_4tri
 
 pnadc_mulherGO21_4tri <- subset(pnadc_goias21_4tri , V2007 == "Mulher")
