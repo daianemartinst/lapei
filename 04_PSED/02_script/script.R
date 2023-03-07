@@ -1,17 +1,38 @@
 library(tidyverse)
 library(haven)
 
+
+# lendo os dados ----------------------------------------------------------
+
 psed <- read_sav("01_dataframe/psedii_scrn_ABCDEF.sav")
 
 psed_selecionado <- psed %>%
-  select(BA15,CA15,DA15,BA42,CA42,DA42,BA50,CA50,DA50,
-         AD2,BD2,CD2,DD2,BD9x,CD9x,DD9x,BD11x,CD11x,DD11x,
-         BD13x,CD13x,DD13x,AD13,BD13,CD13,DD13,AD24,BD24,CD24,DD24,
-         AE9,BE9,CE9,DE9,AE10,BE10,CE10,DE10,AH6_1,AH6_2,BH6_2,CH6_2,
-         DH6_2,AH6_3,BH6_3,CH6_3,DH6_3,AH6_4,BH6_4,CH6_4,DH6_4,
-         AH6_5,BH6_5,CH6_5,DH6_5,BH6_6,CH6_6,DH6_6,DH6_7,DH6_8,
-         DH6_9,DH6_10,AH7_2,BH7_2,CH7_2,DH7_2,AH7_3,BH7_3,CH7_3,DH7_3,
-         AH7_4,BH7_4,CH7_4,DH7_4,AH7_5,BH7_5,CH7_5,DH7_5,
+  select(BA15,CA15,DA15, 
+         BA42,CA42,DA42,
+         BA50,CA50,DA50,
+         AD1,BD1,CD1,DD1, # business plan
+         AD9,BD9,CD9,DD9,
+         AD11,BD11,CD11,DD11,
+         AD13,BD13,CD13,DD13,
+         AD16,BD16,CD16,DD16,
+         AD20,BD20,CD20,DD20, # talk with potential customers
+         AD22,BD22,CD22,DD22, # collect information about competitors
+         AD24,BD24,CD24,DD24, # define market opportunities 
+         AD26,BD26,CD26,DD26, # financial projections
+         BD30,CD30,DD30, 
+         AE9,BE9,CE9,DE9,
+         AE10,BE10,CE10,DE10,
+         AH6_1,
+         AH6_2,BH6_2,CH6_2,DH6_2,
+         AH6_3,BH6_3,CH6_3,DH6_3,
+         AH6_4,BH6_4,CH6_4,DH6_4,
+         AH6_5,BH6_5,CH6_5,DH6_5,
+         BH6_6,CH6_6,DH6_6,
+         DH6_7,DH6_8,DH6_9,DH6_10,
+         AH7_2,BH7_2,CH7_2,DH7_2,
+         AH7_3,BH7_3,CH7_3,DH7_3,
+         AH7_4,BH7_4,CH7_4,DH7_4,
+         AH7_5,BH7_5,CH7_5,DH7_5,
          BH7_6,CH7_6,DH7_6,DH7_7,DH7_8,DH7_9,DH7_10,
          AH11_1,AH11_2,
          BH11_2,CH11_2,DH11_2,AH11_3,BH11_3,CH11_3,DH11_3,
@@ -36,15 +57,20 @@ psed_selecionado <- psed %>%
 
 psed_selecionado <- 
   psed_selecionado %>% 
-  rename(disangaged_wB = BA15, disangaged_wC = CA15, disangaged_wD = DA15,
-       involved_wB = BA42, involved_wC = CA42, involved_wD = DA42,
-       new_firm_checkpoint_wB = BA50, new_firm_checkpoint_wC = CA50,new_firm_checkpoint_wD = DA50,
-       business_plan_wA = AD2,business_plan_wB = BD2, business_plan_wC = CD2,business_plan_wD = DD2,
-       marketing_checkpoint_wB = BD9x,marketing_checkpoint_wC = CD9x,marketing_checkpoint_wD = DD9x,
-       technology_checkpoint_wB = BD11x,technology_checkpoint_wC = CD11x,technology_checkpoint_wD = DD11x,
-       patent_checkpoint_wB = BD13x,patent_checkpoint_wC = CD13x,patent_checkpoint_wD = DD13x,
-       patent_wA = AD13,patent_wB = BD13, patent_wC = CD13, patent_wD = DD13,
-       opportunities_market_wA = AD24,opportunities_market_wB = BD24,opportunities_market_wC = CD24,opportunities_market_wD = DD24,
+  rename(disangaged_wB = BA15, disangaged_wC = CA15, disangaged_wD = DA15, 
+         
+         involved_wB = BA42, involved_wC = CA42, involved_wD = DA42,
+         
+         new_firm_checkpoint_wB = BA50, new_firm_checkpoint_wC = CA50,new_firm_checkpoint_wD = DA50,
+         business_plan_wA = AD1,business_plan_wB = BD1, business_plan_wC = CD1, business_plan_wD = DD1,
+         marketing_checkpoint_wA = AD9,marketing_checkpoint_wB = BD9,marketing_checkpoint_wC = CD9,marketing_checkpoint_wD = DD9, 
+         technology_checkpoint_wA = AD11, technology_checkpoint_wB = BD11, technology_checkpoint_wC = CD11, technology_checkpoint_wD = DD11,
+         patent_checkpoint_wA = AD13, patent_checkpoint_wB = BD13, patent_checkpoint_wC = CD13, patent_checkpoint_wD = DD13, 
+         opportunities_market_wA = AD24,opportunities_market_wB = BD24,opportunities_market_wC = CD24, opportunities_market_wD = DD24,
+         facilities_wA = AD16, facilities_wB = BD16, facilities_wC = CD16, facilities_wD = DD16,
+         talk_customer_wA = AD20, talk_customer_wB = BD20, talk_customer_wC = CD20, talk_customer_wD = DD20, 
+         financial_proj_wA = AD26, financial_proj_wB = BD26, financial_proj_wC = CD26, financial_proj_wD = DD26,
+       business_plan_modB = BD30, business_plan_modC = CD30, business_plan_modD = DD30,
        employees_more35hours_wA = AE9,employees_more35hours_wB = BE9,employees_more35hours_wC = CE9,employees_more35hours_wD = DE9,
        employees_less35hours_wA = AE10,employees_less35hours_wB = BE10,employees_less35hours_wC = CE10,employees_less35hours_wD = DE10,
        education_wA = AH6_1,education_name2_wA = AH6_2,education_name2_wB = BH6_2,education_name2_wC = CH6_2,education_name2_wD = DH6_2,
@@ -110,6 +136,66 @@ psed_selecionado <-
        wealth_importance_wA = AW12, personal_vision_importance_wA = AW13,power_influence_organization_wA = AW14)
 
 
-skimr::skim(psed_selecionado)
+#skimr::skim(psed_selecionado)
 
+
+# Tratamento de bases -----------------------------------------------------
+
+psed_tratado <- 
+  psed_selecionado %>% 
+  # operando
+  mutate(status = case_when(involved_wB == 5 | 
+                            involved_wC == 5 | 
+                            involved_wD == 5 ~ 'saiu', 
+                            TRUE ~ 'operando')) %>% 
+  # business plan
+  mutate(business_plan = case_when(business_plan_wA == 1 |
+                                   business_plan_wB == 1 |
+                                   business_plan_wC == 1 |
+                                   business_plan_wD == 1 ~ 'preparou BP',
+                                   TRUE ~ 'não preparou BP')) %>% 
+  # business plan modification 
+  mutate(business_plan_mod = case_when(business_plan_modB == 1 |
+                                       business_plan_modC == 1 |
+                                       business_plan_modD == 1 ~ 'modificacao BP',
+                                       TRUE ~ 'nao modificou BP')) %>% 
+  # mkt efforts
+  mutate(mkt_efforts = case_when(marketing_checkpoint_wA == 1 |
+                                 marketing_checkpoint_wB == 1 |
+                                 marketing_checkpoint_wC == 1 |
+                                 marketing_checkpoint_wD == 1 ~ 'mkt efforts',
+                                 TRUE ~ 'nao fez mkt efforts')) %>% 
+  # technology efforts
+  mutate(tech_efforts = case_when(technology_checkpoint_wA == 1 |
+                                  technology_checkpoint_wB == 1 |
+                                  technology_checkpoint_wC == 1 |
+                                  technology_checkpoint_wD == 1 ~ 'tech efforts',
+                                  TRUE ~ 'não tech efforts')) %>% 
+  # patent
+  mutate(patents = case_when(patent_checkpoint_wA == 1 |
+                             patent_checkpoint_wB == 1 |
+                             patent_checkpoint_wC == 1 | 
+                             patent_checkpoint_wD == 1  ~ 'patent',
+                             TRUE ~ 'nao patent')) %>% 
+  
+  # facilities 
+  mutate(facilities = case_when(facilities_wA == 1 |
+                                facilities_wB == 1 |
+                                facilities_wC == 1 |
+                                facilities_wD == 1 ~ 'facilities',
+                                TRUE ~ 'nao facilities')) %>% 
+  # talk customers 
+  mutate(talk_customers = case_when(talk_customer_wA == 1 |
+                                    talk_customer_wB == 1 |
+                                    talk_customer_wC == 1 |
+                                    talk_customer_wD == 1 ~ 'talk to customers',
+                                    TRUE ~ 'did not talk to customers')) %>% 
+  # financial projectios
+  mutate(financial_projections = case_when(financial_proj_wA == 1 |
+                                           financial_proj_wB == 1 |
+                                           financial_proj_wC == 1 |
+                                           financial_proj_wD == 1 ~ 'financial projections',
+                                           TRUE ~ 'did not financial projections'))
+
+table(psed_tratado$financial_projections)
 
