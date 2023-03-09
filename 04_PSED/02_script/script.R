@@ -27,22 +27,26 @@ psed_selecionado <- psed %>%
          AD26,BD26,CD26,DD26, # financial projections
          BD30,CD30,DD30, #business modified or updated
 
+# Sócios ----------------------------------------------------
+         AG2, #quantidade de sócios
+
 # employee ----------------------------------------------------------------
 
          AE9,BE9,CE9,DE9, #employees working 35h or more
          AE10,BE10,CE10,DE10, #employees working less than 35h
 
+
 # Highest level of education ----------------------------------------------
          AH6_1,
-         AH6_2,BH6_2,CH6_2,DH6_2, 
-         AH6_3,BH6_3,CH6_3,DH6_3, 
-         AH6_4,BH6_4,CH6_4,DH6_4, 
-         AH6_5,BH6_5,CH6_5,DH6_5, 
-         BH6_6,CH6_6,DH6_6, 
-         DH6_7,
-         DH6_8,
-         DH6_9, 
-         DH6_10, 
+         AH6_2,#BH6_2,CH6_2,DH6_2, 
+         AH6_3,#BH6_3,CH6_3,DH6_3, 
+         AH6_4,#BH6_4,CH6_4,DH6_4, 
+         AH6_5,#BH6_5,CH6_5,DH6_5, 
+         #BH6_6,CH6_6,DH6_6, 
+         #DH6_7,
+         #DH6_8,
+         #DH6_9, 
+         #DH6_10, 
 
 # How many years have you known? ------------------------------------------
          AH7_2,BH7_2,CH7_2,DH7_2, 
@@ -142,6 +146,8 @@ psed_selecionado <- psed %>%
 )
 
 
+
+
 # Renomeando --------------------------------------------------------------
 
 psed_renomeado <- 
@@ -172,6 +178,10 @@ psed_renomeado <-
          
          business_plan_modB = BD30, business_plan_modC = CD30, business_plan_modD = DD30,
 
+# Sócios ------------------------------------------------------------------
+         
+         n_socios = AG2,
+         
 # employee ----------------------------------------------------------------
        
        employees_more35hours_wA = AE9,employees_more35hours_wB = BE9,employees_more35hours_wC = CE9,employees_more35hours_wD = DE9,
@@ -182,23 +192,23 @@ psed_renomeado <-
        
        education_wA = AH6_1,
 
-       education_name2_wA = AH6_2,education_name2_wB = BH6_2,education_name2_wC = CH6_2,education_name2_wD = DH6_2,
+       education_name2_wA = AH6_2, #education_name2_wB = BH6_2,education_name2_wC = CH6_2,education_name2_wD = DH6_2,
        
-       education_name3_wA = AH6_3, education_name3_wB = BH6_3, education_name3_wC = CH6_3, education_name3_wD = DH6_3,
+       education_name3_wA = AH6_3, #education_name3_wB = BH6_3, education_name3_wC = CH6_3, education_name3_wD = DH6_3,
        
-       education_name4_wA = AH6_4,education_name4_wB = BH6_4,education_name4_wC = CH6_4, education_name4_wD = DH6_4,
+       education_name4_wA = AH6_4, #education_name4_wB = BH6_4,education_name4_wC = CH6_4, education_name4_wD = DH6_4,
        
-       education_name5_wA = AH6_5,education_name5_wB = BH6_5,education_name5_wC = CH6_5,education_name5_wD = DH6_5,
+       education_name5_wA = AH6_5, #education_name5_wB = BH6_5,education_name5_wC = CH6_5,education_name5_wD = DH6_5,
        
-       education_name6_wB = BH6_6,education_name6_wC = CH6_6,education_name6_wD = DH6_6,
+       #education_name6_wB = BH6_6, education_name6_wC = CH6_6,education_name6_wD = DH6_6,
        
-       education_name7_wD = DH6_7,
+       #education_name7_wD = DH6_7,
 
-       education_name8_wD = DH6_8, 
+       #education_name8_wD = DH6_8, 
 
-       education_name9_wD = DH6_9,
+       #education_name9_wD = DH6_9,
        
-       education_name10_wD = DH6_10,
+       #education_name10_wD = DH6_10,
     
 # How many years have you known? ----------------------------------
        
@@ -383,9 +393,10 @@ psed_renomeado <-
 #skimr::skim(psed_selecionado)
 
 
+
 # Tratamento de bases -----------------------------------------------------
 
-  # tratando algumas variáveis numericas antes 
+  # tratando algumas variáveis numéricas antes 
 
     # mais que 35hrs
     psed_renomeado$employees_more35hours_wA[is.na(psed_renomeado$employees_more35hours_wA)] <- 0
@@ -399,6 +410,13 @@ psed_renomeado <-
     psed_renomeado$employees_less35hours_wC[is.na(psed_renomeado$employees_less35hours_wC)] <- 0
     psed_renomeado$employees_less35hours_wD[is.na(psed_renomeado$employees_less35hours_wD)] <- 0
 
+    # nível de educação
+    psed_renomeado$education_wA[is.na(psed_renomeado$education_wA)] <- 0
+    psed_renomeado$education_name2_wA[is.na(psed_renomeado$education_name2_wA)] <- 0
+    psed_renomeado$education_name3_wA[is.na(psed_renomeado$education_name3_wA)] <- 0
+    psed_renomeado$education_name4_wA[is.na(psed_renomeado$education_name4_wA)] <- 0
+    psed_renomeado$education_name5_wA[is.na(psed_renomeado$education_name5_wA)] <- 0
+    
     # years you know 2
     psed_renomeado$years_known_name2_wA[is.na(psed_renomeado$years_known_name2_wA)] <- 0
     psed_renomeado$years_known_name2_wB[is.na(psed_renomeado$years_known_name2_wB)] <- 0
@@ -788,8 +806,8 @@ psed_renomeado <-
                                                financial_proj_wB == 1 |
                                                financial_proj_wC == 1 |
                                                financial_proj_wD == 1 ~ 'financial projections',
-                                             TRUE ~ 'did not financial projections'))
-  
+                                             TRUE ~ 'did not financial projections')) %>% 
+    
   # Employee ----------------------------------------------------------------
   
     # mais que 35hrs 
@@ -808,221 +826,245 @@ psed_renomeado <-
 
   # Highest level of education ----------------------------------------------
     
-    # education_wA
+    mutate(level_education = (education_wA + education_name2_wA + education_name3_wA +
+                              education_name4_wA + education_name5_wA)/n_socios) %>% 
  
 
   # How many years have you known? ------------------------------------------
 
     # years known 2
     mutate(years_you_known_2 = (years_known_name2_wA + years_known_name2_wB +
-                                years_known_name2_wC + years_known_name2_wD)/4) %>% 
+                                years_known_name2_wC + years_known_name2_wD)/n_socios) %>% 
     
     # years known 3
     mutate(years_you_known_3 = (years_known_name3_wA + years_known_name3_wB +
-                                years_known_name3_wC + years_known_name3_wD)/4) %>% 
+                                years_known_name3_wC + years_known_name3_wD)/n_socios) %>% 
     
     # years known 4
     mutate(years_you_known_4 = (years_known_name4_wA + years_known_name4_wB +
-                                years_known_name4_wC + years_known_name4_wD)/4) %>%
+                                years_known_name4_wC + years_known_name4_wD)/n_socios) %>%
     
     # years known 5
     mutate(years_you_known_5 = (years_known_name5_wA + years_known_name5_wB +
-                                years_known_name5_wC + years_known_name5_wD)/4) %>%
+                                years_known_name5_wC + years_known_name5_wD)/n_socios) %>%
     
     # years known 6
     mutate(years_you_known_6 = (years_known_name6_wB + years_known_name6_wC +
-                                years_known_name6_wD)/3) %>%
+                                years_known_name6_wD)/n_socios) %>%
     
     # years known 7
+    mutate(years_you_known_7 = (years_known_name7_wD)/n_socios) %>%
     
     # years known 8
+    mutate(years_you_known_8 = (years_known_name8_wD)/n_socios) %>%
     
     # years known 9
+    mutate(years_you_known_9 = (years_known_name9_wD)/n_socios) %>%
     
     # years known 10
+    mutate(years_you_known_10 = (years_known_name10_wD)/n_socios) %>%
     
   # Years of work experience ------------------------------------------------
     
     # years work experience 1
+    mutate(years_work_experience_1 = (experience_wA)/n_socios) %>% 
     
     # years work experience 2
     mutate(years_work_experience_2 = (experience_nome2_wA + experience_nome2_wB +
-                                      experience_nome2_wC + experience_nome2_wD)/4) %>% 
+                                      experience_nome2_wC + experience_nome2_wD)/n_socios) %>% 
   
     # years work experience 3
     mutate(years_work_experience_3 = (experience_nome3_wA + experience_nome3_wB +
-                                      experience_nome3_wC + experience_nome3_wD)/4) %>% 
+                                      experience_nome3_wC + experience_nome3_wD)/n_socios) %>% 
     
     # years work experience 4
     mutate(years_work_experience_4 = (experience_nome4_wA + experience_nome4_wB +
-                                      experience_nome4_wC + experience_nome4_wD)/4) %>% 
+                                      experience_nome4_wC + experience_nome4_wD)/n_socios) %>% 
     
     # years work experience 5
-    mutate(years_work_experience_5 = (years_known_name5_wA + years_known_name5_wB +
-                                      years_known_name5_wC + years_known_name5_wD)/4) %>% 
+    mutate(years_work_experience_5 = (experience_nome4_wA + experience_nome4_wB +
+                                      experience_nome4_wC + experience_nome4_wD)/n_socios) %>% 
     
     # years work experience 6
     mutate(years_work_experience_6 = (experience_nome6_wB + experience_nome6_wC +
-                                      experience_nome6_wD)/3) %>% 
+                                      experience_nome6_wD)/n_socios) %>% 
     
     # years work experience 7
+    mutate(years_work_experience_7 = (experience_nome7_wD)/n_socios) %>% 
     
     # years work experience 8
+    mutate(years_work_experience_8 = (experience_nome8_wD)/n_socios) %>% 
     
     # years work experience 9
+    mutate(years_work_experience_9 = (experience_nome9_wD)/n_socios) %>% 
     
     # years work experience 10
-  
+    mutate(years_work_experience_10 = (experience_nome10_wD)/n_socios) %>% 
+    
   # How many other businesses have helped to start as an own ----------------
     
-    # have helped start business 
+    # have helped start business
+    mutate(helped_start_business_1 = (businesses_have_helped_wA)/n_socios) %>%
+  
     # have helped start business 2
     mutate(helped_start_business_2 = (other_businesses_helped_nome2_wA + other_businesses_helped_nome2_wB +
-                                      other_businesses_helped_nome2_wC + other_businesses_helped_nome2_wD)/4) %>%
+                                      other_businesses_helped_nome2_wC + other_businesses_helped_nome2_wD)/n_socios) %>%
     # have helped start business 3 
     mutate(helped_start_business_3 = (other_businesses_helped_nome3_wA + other_businesses_helped_nome3_wB +
-                                      other_businesses_helped_nome3_wC + other_businesses_helped_nome3_wD)/4) %>%
+                                      other_businesses_helped_nome3_wC + other_businesses_helped_nome3_wD)/n_socios) %>%
     # have helped start business 4 
     mutate(helped_start_business_4 = (other_businesses_helped_nome4_wA + other_businesses_helped_nome4_wB +
-                                      other_businesses_helped_nome4_wC + other_businesses_helped_nome4_wD)/4) %>%
+                                      other_businesses_helped_nome4_wC + other_businesses_helped_nome4_wD)/n_socios) %>%
     # have helped start business 5
     mutate(helped_start_business_5 = (other_businesses_helped_nome5_wA + other_businesses_helped_nome5_wB +
-                                      other_businesses_helped_nome5_wC + other_businesses_helped_nome5_wD)/4) %>%
+                                      other_businesses_helped_nome5_wC + other_businesses_helped_nome5_wD)/n_socios) %>%
     # have helped start business 6
     mutate(helped_start_business_6 = (other_businesses_helped_nome6_wB + other_businesses_helped_nome6_wC +
-                                      other_businesses_helped_nome6_wD)/3) %>%
+                                      other_businesses_helped_nome6_wD)/n_socios) %>%
     # have helped start business 7 
-    
+    mutate(helped_start_business_7 = (other_businesses_helped_nome7_wD)/n_socios) %>%
+                                      
     # have helped start business 8 
+    mutate(helped_start_business_8 = (other_businesses_helped_nome8_wD)/n_socios) %>%
     
     # have helped start business 9
+    mutate(helped_start_business_9 = (other_businesses_helped_nome9_wD)/n_socios) %>%
     
     # have helped start business 10 
-  
+    mutate(helped_start_business_10 = (other_businesses_helped_nome10_wD)/n_socios) %>%
+    
   # What is the dollar amount provided --------------------------------------
     
     # personal investment 1
     mutate(personal_investment_1 = (personal_investment1_wA + personal_investment1_wB +
-                                    personal_investment1_wC + personal_investment1_wD)/4) %>%
+                                    personal_investment1_wC + personal_investment1_wD)) %>%
   
     # personal investment 2
     mutate(personal_investment_2 = (personal_investment2_wA + personal_investment2_wB +
-                                    personal_investment2_wC + personal_investment2_wD)/4) %>%
+                                    personal_investment2_wC + personal_investment2_wD)) %>%
     
     # personal investment 3
     mutate(personal_investment_3 = (personal_investment3_wA + personal_investment3_wB +
-                                    personal_investment3_wC + personal_investment3_wD)/4) %>%
+                                    personal_investment3_wC + personal_investment3_wD)) %>%
     
     # personal investment 4
     mutate(personal_investment_4 = (personal_investment4_wA + personal_investment4_wB +
-                                    personal_investment4_wC + personal_investment4_wD)/4) %>%
+                                    personal_investment4_wC + personal_investment4_wD)) %>%
     
     # personal investment 5
     mutate(personal_investment_5 = (personal_investment5_wA + personal_investment5_wB +
-                                    personal_investment5_wC + personal_investment5_wD)/4) %>%
+                                    personal_investment5_wC + personal_investment5_wD)) %>%
     
     # personal investment 6
     mutate(personal_investment_6 = (personal_investment6_wB + personal_investment6_wC + 
-                                    personal_investment6_wD)/3) %>%
+                                    personal_investment6_wD)) %>%
     # personal investment 7
+    mutate(personal_investment_7 = (personal_investment7_wD)) %>%
     
     # personal investment 8
+    mutate(personal_investment_8 = (personal_investment8_wD)) %>%
     
     # personal investment 9
+    mutate(personal_investment_9 = (personal_investment9_wD)) %>%
     
     # personal investment 10
+    mutate(personal_investment_10 = (personal_investment10_wD)) %>%
     
     # family loans 1
     mutate(family_loans_1 = (family_loans1_wA + family_loans1_wB + 
-                             family_loans1_wC + family_loans1_wD)/4) %>%
+                             family_loans1_wC + family_loans1_wD)) %>%
     
     # family loans 2
     mutate(family_loans_2 = (family_loans2_wA + family_loans2_wB + 
-                             family_loans2_wC + family_loans2_wD)/4) %>%
+                             family_loans2_wC + family_loans2_wD)) %>%
     
     # family loans 3
     mutate(family_loans_3 = (family_loans3_wA + family_loans3_wB + 
-                             family_loans3_wC + family_loans3_wD)/4) %>%
+                             family_loans3_wC + family_loans3_wD)) %>%
     
     # family loans 4
     mutate(family_loans_4 = (family_loans4_wA + family_loans4_wB + 
-                             family_loans4_wC + family_loans4_wD)/4) %>%
+                             family_loans4_wC + family_loans4_wD)) %>%
     
     # family loans 2
     mutate(family_loans_5 = (family_loans5_wA + family_loans5_wB + 
-                             family_loans5_wC + family_loans5_wD)/4) %>%
+                             family_loans5_wC + family_loans5_wD)) %>%
     
     # family loans 6
-    mutate(family_loans_6 = (family_loans6_wA + family_loans6_wB + 
-                             family_loans6_wC)/3) %>%
+    mutate(family_loans_6 = (family_loans6_wB + family_loans6_wC +
+                             family_loans6_wD)) %>%
     
     # family loans 7
-     
+    mutate(family_loans_7 = (family_loans7_wD)) %>%
+    
     # family loans 8
+    mutate(family_loans_8 = (family_loans8_wD)) %>%
     
     # family loans 9
+    mutate(family_loans_9 = (family_loans9_wD)) %>%
     
     # family loans 10
-      
+    mutate(family_loans_10 = (family_loans10_wD)) %>%
+    
   # Dollar amount of the debts ----------------------------------------------
     
     # personal loans debts
     mutate(personal_loans_debts = (personal_loans_debts_wA + personal_loans_debts_wB + 
-                                   personal_loans_debts_wC + personal_loans_debts_wD)/4) %>%
+                                   personal_loans_debts_wC + personal_loans_debts_wD)) %>%
     
     # credit card loans debts
     mutate(credit_card_loans_debts = (credit_card_loans_debts_wA + credit_card_loans_debts_wB + 
-                                      credit_card_loans_debts_wC + credit_card_loans_debts_wD)/4) %>% 
+                                      credit_card_loans_debts_wC + credit_card_loans_debts_wD)) %>% 
   
     # assets debts
     mutate(assets_debts = (assets_debts_wA + assets_debts_wB + 
-                           assets_debts_wC + assets_debts_wD)/4) %>%
+                           assets_debts_wC + assets_debts_wD)) %>%
     
     # bank credit debts
     mutate(bank_credit_debtS = (bank_credit_debts_wA + bank_credit_debts_wB + 
-                                bank_credit_debts_wC + bank_credit_debts_wD)/4) %>%
+                                bank_credit_debts_wC + bank_credit_debts_wD)) %>%
     
     # loans venture Capital firms debts
     mutate(loans_venture_capital_firms_debts = (loans_venture_capital_firms_debts_wA + loans_venture_capital_firms_debts_wB + 
-                                                loans_venture_capital_firms_debts_wC + loans_venture_capital_firms_debts_wD)/4) %>%
+                                                loans_venture_capital_firms_debts_wC + loans_venture_capital_firms_debts_wD)) %>%
     
     # government agencies debts
     mutate(government_agencies_debts = (government_agencies_debts_wA + government_agencies_debts_wB + 
-                                        government_agencies_debts_wC + government_agencies_debts_wD)/4) %>%
+                                        government_agencies_debts_wC + government_agencies_debts_wD)) %>%
     
     # bank loans debts
     mutate(bank_loans_debts = (bank_loans_debts_wA + bank_loans_debts_wB + 
-                               bank_loans_debts_wC + bank_loans_debts_wD)/4) %>%
+                               bank_loans_debts_wC + bank_loans_debts_wD)) %>%
     
   # For this same twelve-month period... ------------------------------------
     
     # total expenses paid
     mutate(total_expenses_paid = (total_expenses_paid_wB + total_expenses_paid_wC + 
-                                     total_expenses_paid_wD)/3) %>%
+                                     total_expenses_paid_wD)) %>%
     
     # salaries payments total
-    mutate(salaries_payments_total = (salaries_payments_total_wC + salaries_payments_total_wD)/2) %>%
+    mutate(salaries_payments_total = (salaries_payments_total_wC + salaries_payments_total_wD)) %>%
     
     # contract workers payments total 
-    mutate(contract_workers_payments_total = (contract_workers_payments_total_wC + contract_workers_payments_total_wD)/2) %>%
+    mutate(contract_workers_payments_total = (contract_workers_payments_total_wC + contract_workers_payments_total_wD)) %>%
     
     # total spent research
-    mutate(total_spent_research = (total_spent_research_wC + total_spent_research_wD)/2) %>%
+    mutate(total_spent_research = (total_spent_research_wC + total_spent_research_wD)) %>%
     
     # structures spent total 
-    mutate(structures_spent_total = (structures_spent_total_wC + structures_spent_total_wD)/2) %>%
+    mutate(structures_spent_total = (structures_spent_total_wC + structures_spent_total_wD)) %>%
     
     # total spent purchase land 
-    mutate(total_spent_purchase_land = (total_spent_purchase_land_wC + total_spent_purchase_land_wD)/2) %>%
+    mutate(total_spent_purchase_land = (total_spent_purchase_land_wC + total_spent_purchase_land_wD)) %>%
     
     # total spent equipment 
-    mutate(total_spent_equipment_wD = (total_spent_equipment_wC + total_spent_equipment_wD)/2) %>%
+    mutate(total_spent_equipment_wD = (total_spent_equipment_wC + total_spent_equipment_wD)) %>%
     
     # total payments loans 
-    mutate(total_payments_loans = (total_payments_loans_wC + total_payments_loans_wD)/2) %>%
+    mutate(total_payments_loans = (total_payments_loans_wC + total_payments_loans_wD)) %>%
     
     # total spent rental payments 
-    mutate(total_spent_rental_payments = (total_spent_rental_payments_wC + total_spent_rental_payments_wD)/2) %>%
+    mutate(total_spent_rental_payments = (total_spent_rental_payments_wC + total_spent_rental_payments_wD)) %>%
 
   # others ------------------------------------------------------------------
   
@@ -1035,7 +1077,7 @@ psed_renomeado <-
     
     # invested additional money
     mutate(invested_additional_money = (invested_additional_money_wA + invested_additional_money_wB +
-                                        invested_additional_money_wC + invested_additional_money_wD)/4) %>%
+                                        invested_additional_money_wC + invested_additional_money_wD)) %>%
     
     #research spending priority
     mutate(research_spending_priority = case_when(research_spending_priority_wA == 1 |
@@ -1044,5 +1086,47 @@ psed_renomeado <-
                                                   research_spending_priority_wD == 1 ~ 'gastos com P&D são prioridades',
                                                   TRUE ~ 'não são prioridades')) %>%
     
+    # achieve higher position society importance  
+    mutate(achieve_higher_position_society_importance = (achieve_higher_position_society_importance_wA)) %>% 
+  
+    # flexibility family life importance 
+    mutate(flexibility_family_life_importance = (flexibility_family_life_importance_wA)) %>% 
+  
+    # family tradition impotance 
+    mutate(family_tradition_impotance = (family_tradition_impotance_wA)) %>% 
+  
+    # respected friends 
+    mutate(respected_friends = (respected_friends_wA)) %>% 
+  
+    #  freedom importance 
+    mutate(freedom_importance = (freedom_importance_wA)) %>% 
+  
+    # yourself spouse children importance 
+    mutate(yourself_spouse_children_importance = (yourself_spouse_children_importance_wA)) %>% 
+  
+    # example person admire importance 
+    mutate(example_person_admire_importance = (example_person_admire_importance_wA)) %>% 
+  
+    # business children inherit importance    
+    mutate(business_children_inherit_importance = (business_children_inherit_importance_wA)) %>% 
+  
+    # larger personal income importance  
+    mutate(larger_personal_income_importance = (larger_personal_income_importance_wA)) %>% 
+  
+    # recognition importance  
+    mutate(recognition_importance = (recognition_importance_wA)) %>% 
+  
+    # develop idea product importance 
+    mutate(develop_idea_product_importance = (develop_idea_product_importance_wA)) %>% 
+  
+    # wealth importance 
+    mutate(wealth_importance = (wealth_importance_wA)) %>% 
+  
+    # personal_vision_importance   
+    mutate(personal_vision_importance = (personal_vision_importance_wA)) %>% 
+  
+    # power influence organization 
+    mutate(power_influence_organization = (power_influence_organization_wA))
+  
 #table(psed_tratado$mkt_efforts, psed_tratado$status)
   
