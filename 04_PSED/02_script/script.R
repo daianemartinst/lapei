@@ -2,6 +2,7 @@ library(magrittr) # needs to be run every time you start R and want to use %>%
 library(dplyr)    # alternatively, this also loads %>%
 library(tidyverse)
 library(haven)
+library(ggrepel)
 
 
 # lendo os dados ----------------------------------------------------------
@@ -1154,3 +1155,48 @@ psed_renomeado <-
   
 #table(psed_tratado$mkt_efforts, psed_tratado$status)
   
+
+# Análises exploratórias --------------------------------------------------
+
+psed_tratado %>% 
+    group_by(status) %>% 
+    count()
+  
+# fez plano de negócios
+psed_tratado %>% 
+    group_by(status, business_plan) %>% 
+    count() %>% 
+    group_by(status) %>% 
+    mutate(prop = round(prop.table(n),3)) %>% 
+    ggplot(aes(x = status, y = prop, fill = business_plan)) + 
+    geom_col(position = "dodge") + 
+    geom_label_repel(aes(label = prop), fill = 'white') +
+    theme_minimal() + theme(text = element_text(size = 25))  + 
+    ylab("Frequência")
+
+# modificou o plano de negócios
+psed_tratado %>% 
+  group_by(status, business_plan_mod) %>% 
+  count() %>% 
+  group_by(status) %>% 
+  mutate(prop = round(prop.table(n),3)) %>% 
+  ggplot(aes(x = status, y = prop, fill = business_plan_mod)) + 
+  geom_col(position = "dodge") + 
+  geom_label_repel(aes(label = prop), fill = 'white') +
+  theme_minimal() + theme(text = element_text(size = 25))  + 
+  ylab("Frequência")  
+
+# Financas pessoais 
+
+psed_tratado %>% 
+  ggplot(aes(x = status, y = log(personal_investment), fill = status)) + geom_boxplot() +
+  theme_minimal() + theme(text = element_text(size = 25))
+
+# emprestimos bancarios 
+
+psed_tratado %>% 
+  ggplot(aes(x = status, y = log(bank_loans_debts), fill = status)) + geom_boxplot() +
+  theme_minimal() + theme(text = element_text(size = 25))
+
+
+
