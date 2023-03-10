@@ -970,6 +970,19 @@ psed_renomeado <-
     # personal investment 10
     mutate(personal_investment_10 = (personal_investment10_wD)) %>%
     
+    # total personal investment
+    
+    mutate(personal_investment = personal_investment_1 +
+                                 personal_investment_2 +
+                                 personal_investment_3 + 
+                                 personal_investment_4 +
+                                 personal_investment_5 +
+                                 personal_investment_6 +
+                                 personal_investment_7 +
+                                 personal_investment_8 + 
+                                 personal_investment_9 + 
+                                 personal_investment_10) %>% 
+    
     # family loans 1
     mutate(family_loans_1 = (family_loans1_wA + family_loans1_wB + 
                              family_loans1_wC + family_loans1_wD)) %>%
@@ -1005,6 +1018,17 @@ psed_renomeado <-
     
     # family loans 10
     mutate(family_loans_10 = (family_loans10_wD)) %>%
+    
+    mutate(family_loans = family_loans_1 +
+                                 family_loans_2 +
+                                 family_loans_3 + 
+                                 family_loans_4 +
+                                 family_loans_5 +
+                                 family_loans_6 +
+                                 family_loans_7 +
+                                 family_loans_8 + 
+                                 family_loans_9 + 
+                                 family_loans_10) %>% 
     
   # Dollar amount of the debts ----------------------------------------------
     
