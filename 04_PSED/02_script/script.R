@@ -28,6 +28,22 @@ psed_selecionado <- psed %>%
          AD26,BD26,CD26,DD26, # financial projections
          BD30,CD30,DD30, #business modified or updated
 
+# Idade -------------------------------------------------------------------
+
+         AH2_1, # idade
+         AH2_2, # idade
+         AH2_3, # idade
+         AH2_4, # idade
+         AH2_5, # idade
+
+# Sexo --------------------------------------------------------------------
+
+         AH1_1, # sexo
+         AH1_2, # sexo
+         AH1_3, # sexo
+         AH1_4, # sexo
+         AH1_5, # sexo
+
 # Sócios ----------------------------------------------------
          AG2, #quantidade de sócios
 
@@ -178,7 +194,23 @@ psed_renomeado <-
          financial_proj_wA = AD26, financial_proj_wB = BD26, financial_proj_wC = CD26, financial_proj_wD = DD26,
          
          business_plan_modB = BD30, business_plan_modC = CD30, business_plan_modD = DD30,
+         
+# Idade -------------------------------------------------------------------
 
+         idade_1 = AH2_1, 
+         idade_2 = AH2_2, 
+         idade_3 = AH2_3, 
+         idade_4 = AH2_4, 
+         idade_5 = AH2_5, 
+
+# Sexo --------------------------------------------------------------------
+
+         sexo_1 = AH1_1, 
+         sexo_2 = AH1_2, 
+         sexo_3 = AH1_3, 
+         sexo_4 = AH1_4, 
+         sexo_5 = AH1_5, 
+        
 # Sócios ------------------------------------------------------------------
          
          n_socios = AG2,
@@ -398,6 +430,20 @@ psed_renomeado <-
 # Tratamento de bases -----------------------------------------------------
 
   # tratando algumas variáveis numéricas antes 
+
+    # idade     
+    psed_renomeado$idade_1[is.na(psed_renomeado$idade_1)] <- 0
+    psed_renomeado$idade_2[is.na(psed_renomeado$idade_2)] <- 0
+    psed_renomeado$idade_3[is.na(psed_renomeado$idade_3)] <- 0
+    psed_renomeado$idade_4[is.na(psed_renomeado$idade_4)] <- 0
+    psed_renomeado$idade_5[is.na(psed_renomeado$idade_5)] <- 0
+    
+    # sexo
+    psed_renomeado$sexo_1[is.na(psed_renomeado$sexo_1)] <- 0
+    psed_renomeado$sexo_2[is.na(psed_renomeado$sexo_2)] <- 0
+    psed_renomeado$sexo_3[is.na(psed_renomeado$sexo_3)] <- 0
+    psed_renomeado$sexo_4[is.na(psed_renomeado$sexo_4)] <- 0
+    psed_renomeado$sexo_5[is.na(psed_renomeado$sexo_5)] <- 0
 
     # mais que 35hrs
     psed_renomeado$employees_more35hours_wA[is.na(psed_renomeado$employees_more35hours_wA)] <- 0
@@ -808,7 +854,21 @@ psed_renomeado <-
                                                financial_proj_wC == 1 |
                                                financial_proj_wD == 1 ~ 'financial projections',
                                              TRUE ~ 'did not financial projections')) %>% 
-    
+
+  # Idade -------------------------------------------------------------------
+    mutate(idade = (idade_1 +
+                    idade_2 +
+                    idade_3 +
+                    idade_4 +
+                    idade_5)/n_socios) %>% 
+
+  # Sexo --------------------------------------------------------------------
+    mutate(sexo = (sexo_1 +
+                   sexo_2 +
+                   sexo_3 +
+                   sexo_4 +
+                   sexo_5)/n_socios) %>% 
+  
   # Employee ----------------------------------------------------------------
   
     # mais que 35hrs 
