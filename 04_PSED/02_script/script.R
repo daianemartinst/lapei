@@ -780,14 +780,14 @@ psed_renomeado <-
     #disengaged
     mutate(disengaged = case_when(disengaged_wB == 1 |
                                   disengaged_wC == 1 |
-                                  disengaged_wD == 1 ~ 'desengajado',
-                                  TRUE ~ 'engajado')) %>% 
+                                  disengaged_wD == 1 ~ 'Desengajado',
+                                  TRUE ~ 'Engajado')) %>% 
     
     # operando
     mutate(status = case_when(involved_wB == 5 | 
                               involved_wC == 5 | 
-                              involved_wD == 5 ~ 'saiu', 
-                              TRUE ~ 'operando')) %>% 
+                              involved_wD == 5 ~ 'Descontinuada', 
+                              TRUE ~ 'Operando')) %>% 
     
     # new firm (BA50)
   
@@ -796,14 +796,14 @@ psed_renomeado <-
     mutate(business_plan = case_when(business_plan_wA == 1 |
                                      business_plan_wB == 1 |
                                      business_plan_wC == 1 |
-                                     business_plan_wD == 1 ~ 'preparou BP',
-                                     TRUE ~ 'não preparou BP')) %>% 
+                                     business_plan_wD == 1 ~ 'Preparou BP',
+                                     TRUE ~ 'Não preparou BP')) %>% 
       
     # mkt efforts
     mutate(mkt_efforts = case_when(marketing_checkpoint_wA == 1 |
                                    marketing_checkpoint_wB == 1 |
                                    marketing_checkpoint_wC == 1 |
-                                   marketing_checkpoint_wD == 1 ~ 'mkt efforts',
+                                   marketing_checkpoint_wD == 1 ~ 'Mkt efforts',
                                    TRUE ~ 'nao fez mkt efforts')) %>% 
       
     # technology efforts
@@ -1218,10 +1218,11 @@ psed_renomeado <-
 
 # Análises exploratórias --------------------------------------------------
 
+# Atividade
 psed_tratado %>% 
     group_by(status) %>% 
     count()
-  
+
 # fez plano de negócios
 psed_tratado %>% 
     group_by(status, business_plan) %>% 
@@ -1259,4 +1260,117 @@ psed_tratado %>%
   theme_minimal() + theme(text = element_text(size = 25))
 
 
+# mkt
+psed_tratado %>% 
+  group_by(status, mkt_efforts) %>% 
+  count() %>% 
+  group_by(status) %>% 
+  mutate(prop = round(prop.table(n),3)) %>% 
+  ggplot(aes(x = status, y = prop, fill = mkt_efforts)) + 
+  geom_col(position = "dodge") + 
+  geom_label_repel(aes(label = prop), fill = 'white') +
+  theme_minimal() + theme(text = element_text(size = 25))  + 
+  ylab("Frequência")
 
+
+# Atividade
+psed_tratado %>% 
+  group_by(n_socios) %>% 
+  mean()
+
+# P&D research_spending_priority
+psed_tratado %>% 
+  group_by(status, research_spending_priority ) %>% 
+  count() %>% 
+  group_by(status) %>% 
+  mutate(prop = round(prop.table(n),3)) %>% 
+  ggplot(aes(x = status, y = prop, fill = research_spending_priority )) + 
+  geom_col(position = "dodge") + 
+  geom_label_repel(aes(label = prop), fill = 'white') +
+  theme_minimal() + theme(text = element_text(size = 25))  + 
+  ylab("Frequência")
+
+# educação level_education 
+
+
+# anos de experirência years_work_experience_1
+
+
+# sexo
+psed_tratado$sexo <- factor(psed_tratado$sexo, levels = c("1","2"), labels=c("Masculino", "Feminino"))
+table(psed_tratado$sexo)
+
+psed_tratado %>% 
+  group_by(status, sexo) %>% 
+  count() %>% 
+  group_by(status) %>% 
+  mutate(prop = round(prop.table(n),3)) %>% 
+  ggplot(aes(x = status, y = prop, fill = sexo )) + 
+  geom_col(position = "dodge") + 
+  geom_label_repel(aes(label = prop), fill = 'white') +
+  theme_minimal() + theme(text = element_text(size = 25))  + 
+  ylab("Frequência")
+
+
+s1 <- psed_tratado %>% count(sexo, status)
+s1 <- na.omit(s1)
+
+grafs1 <- ggplot(s1, aes(x=sexo, y=n, fill=status))
+
+  grafs1 +  
+  geom_bar(stat="identity", width = .3,position=position_dodge()) +
+  geom_text(aes(label=n), vjust=1.5, colour="black",position=position_dodge(.9), size=3) +
+  scale_fill_brewer(palette="Dark2") +
+  labs(title = "Gráfico de colunas: Sexo x Status", x = "Sexo", y = "Frequência")+ 
+  theme_minimal() + theme(text = element_text(size = 15))
+  
+  
+  
+# IDADE
+  #barplot(
+    #table(psed_tratado$idade, breaks = seq(0,81,by=10),right=FALSE,probability = T,plot=F),
+    #ylab="Frequência",
+    #cex.names=0.7,
+    #col="darkgrey",
+    #border=NA)
+  
+  
+  figidade<-hist(psed_tratado$idade, breaks = seq(0,81,by=9), right=FALSE, plot=F)
+  
+  aux<-with(figidade, 100 * density* diff(breaks)[1])
+  
+  labs <- paste(round(aux), "%", sep="")
+  plot(figidade, 
+       freq = FALSE, labels = labs, 
+       ylab="Densidade de Frequência",
+       xlab="Faixa etária",
+       col="black",
+       border="white",
+       xlim=c(0,81), xaxp=c(0,81,9),
+       ylim=c(0,.035))
+  
+  # concorrentes
+  psed_tratado %>% 
+    group_by(status, info_competitors) %>% 
+    count() %>% 
+    group_by(status) %>% 
+    mutate(prop = round(prop.table(n),3)) %>% 
+    ggplot(aes(x = status, y = prop, fill = info_competitors)) + 
+    geom_col(position = "dodge") + 
+    geom_label_repel(aes(label = prop), fill = 'white') +
+    theme_minimal() + theme(text = element_text(size = 25))  + 
+    ylab("Frequência")
+  
+  
+  #clientes
+  psed_tratado %>% 
+    group_by(status, talk_customers) %>% 
+    count() %>% 
+    group_by(status) %>% 
+    mutate(prop = round(prop.table(n),3)) %>% 
+    ggplot(aes(x = status, y = prop, fill = talk_customers)) + 
+    geom_col(position = "dodge") + 
+    geom_label_repel(aes(label = prop), fill = 'white') +
+    theme_minimal() + theme(text = element_text(size = 25))  + 
+    ylab("Frequência")
+  
