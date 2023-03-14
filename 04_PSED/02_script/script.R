@@ -1222,6 +1222,19 @@ psed_renomeado <-
 psed_tratado %>% 
     group_by(status) %>% 
     count()
+  
+# idade 
+
+psed_tratado %>% 
+  ggplot(aes(x = status, y = idade, fill = status)) + geom_boxplot() +
+  theme_minimal()
+
+
+# escolaridade
+psed_tratado %>% 
+  ggplot(aes(x = status, y = level_education, fill = status)) + geom_boxplot() +
+  theme_minimal()
+
 
 # fez plano de negócios
 psed_tratado %>% 
@@ -1259,7 +1272,6 @@ psed_tratado %>%
   ggplot(aes(x = status, y = log(bank_loans_debts), fill = status)) + geom_boxplot() +
   theme_minimal() + theme(text = element_text(size = 25))
 
-
 # mkt
 psed_tratado %>% 
   group_by(status, mkt_efforts) %>% 
@@ -1272,11 +1284,12 @@ psed_tratado %>%
   theme_minimal() + theme(text = element_text(size = 25))  + 
   ylab("Frequência")
 
-
-# Atividade
-psed_tratado %>% 
-  group_by(n_socios) %>% 
-  mean()
+# socios
+psed_tratado %>%
+  group_by(status) %>% 
+  summarise(media_socios = mean(n_socios)) %>%
+  ggplot(aes(x = status, y = media_socios, fill = status)) + geom_col() +
+  theme_minimal()
 
 # P&D research_spending_priority
 psed_tratado %>% 
@@ -1290,66 +1303,7 @@ psed_tratado %>%
   theme_minimal() + theme(text = element_text(size = 25))  + 
   ylab("Frequência")
 
-# educação level_education 
-
-
-# anos de experirência years_work_experience_1
-
-
-# sexo
-psed_tratado$sexo <- factor(psed_tratado$sexo, levels = c("1","2"), labels=c("Masculino", "Feminino"))
-table(psed_tratado$sexo)
-
-psed_tratado %>% 
-  group_by(status, sexo) %>% 
-  count() %>% 
-  group_by(status) %>% 
-  mutate(prop = round(prop.table(n),3)) %>% 
-  ggplot(aes(x = status, y = prop, fill = sexo )) + 
-  geom_col(position = "dodge") + 
-  geom_label_repel(aes(label = prop), fill = 'white') +
-  theme_minimal() + theme(text = element_text(size = 25))  + 
-  ylab("Frequência")
-
-
-s1 <- psed_tratado %>% count(sexo, status)
-s1 <- na.omit(s1)
-
-grafs1 <- ggplot(s1, aes(x=sexo, y=n, fill=status))
-
-  grafs1 +  
-  geom_bar(stat="identity", width = .3,position=position_dodge()) +
-  geom_text(aes(label=n), vjust=1.5, colour="black",position=position_dodge(.9), size=3) +
-  scale_fill_brewer(palette="Dark2") +
-  labs(title = "Gráfico de colunas: Sexo x Status", x = "Sexo", y = "Frequência")+ 
-  theme_minimal() + theme(text = element_text(size = 15))
-  
-  
-  
-# IDADE
-  #barplot(
-    #table(psed_tratado$idade, breaks = seq(0,81,by=10),right=FALSE,probability = T,plot=F),
-    #ylab="Frequência",
-    #cex.names=0.7,
-    #col="darkgrey",
-    #border=NA)
-  
-  
-  figidade<-hist(psed_tratado$idade, breaks = seq(0,81,by=9), right=FALSE, plot=F)
-  
-  aux<-with(figidade, 100 * density* diff(breaks)[1])
-  
-  labs <- paste(round(aux), "%", sep="")
-  plot(figidade, 
-       freq = FALSE, labels = labs, 
-       ylab="Densidade de Frequência",
-       xlab="Faixa etária",
-       col="black",
-       border="white",
-       xlim=c(0,81), xaxp=c(0,81,9),
-       ylim=c(0,.035))
-  
-  # concorrentes
+# concorrentes
   psed_tratado %>% 
     group_by(status, info_competitors) %>% 
     count() %>% 
@@ -1361,8 +1315,7 @@ grafs1 <- ggplot(s1, aes(x=sexo, y=n, fill=status))
     theme_minimal() + theme(text = element_text(size = 25))  + 
     ylab("Frequência")
   
-  
-  #clientes
+#clientes
   psed_tratado %>% 
     group_by(status, talk_customers) %>% 
     count() %>% 
