@@ -327,6 +327,13 @@ psed_renomeado <-
          
          total_spent_rental_payments_wC = CV46,
          
+         # Primary contribution ----------------------------------------------------
+         
+         primary_crontribution_wA1 = AM13_1, primary_crontribution_wB1 = BM13_1, primary_crontribution_wC1 = CM13_1,
+         
+         primary_crontribution_wA2 = AM13_2, primary_crontribution_wB2 = BM13_2, primary_crontribution_wC2 = CM13_2,
+         
+         primary_crontribution_wA3 = AM13_3, primary_crontribution_wB3 = BM13_3, primary_crontribution_wC3 = CM13_3,
          
          # others ----------------------------------------------------------
          
@@ -603,6 +610,21 @@ psed_renomeado$total_payments_loans_wC[is.na(psed_renomeado$total_payments_loans
 
 # total spent rental payments 
 psed_renomeado$total_spent_rental_payments_wC[is.na(psed_renomeado$total_spent_rental_payments_wC)] <- 0
+
+# primary contibution 1
+psed_renomeado$primary_crontribution_wA1[is.na(psed_renomeado$primary_crontribution_wA1)] <- 0
+psed_renomeado$primary_crontribution_wB1[is.na(psed_renomeado$primary_crontribution_wB1)] <- 0
+psed_renomeado$primary_crontribution_wC1[is.na(psed_renomeado$primary_crontribution_wC1)] <- 0
+
+# primary contibution 2
+psed_renomeado$primary_crontribution_wA2[is.na(psed_renomeado$primary_crontribution_wA2)] <- 0
+psed_renomeado$primary_crontribution_wB2[is.na(psed_renomeado$primary_crontribution_wB2)] <- 0
+psed_renomeado$primary_crontribution_wC2[is.na(psed_renomeado$primary_crontribution_wC2)] <- 0
+
+# primary contibution 3
+psed_renomeado$primary_crontribution_wA3[is.na(psed_renomeado$primary_crontribution_wA3)] <- 0
+psed_renomeado$primary_crontribution_wB3[is.na(psed_renomeado$primary_crontribution_wB3)] <- 0
+psed_renomeado$primary_crontribution_wC3[is.na(psed_renomeado$primary_crontribution_wC3)] <- 0
 
 # invested additional money
 psed_renomeado$invested_additional_money_wA[is.na(psed_renomeado$invested_additional_money_wA)] <- 0
