@@ -9,9 +9,9 @@ library(ggrepel)
 psed <- read_sav("01_dataframe/psedii_scrn_ABCDEF.sav")
 
 psed_selecionado <- psed %>%
-  select(BA15,CA15,DA15,#business effort
-         BA42,CA42,DA42, #actively involved
-         BA50,CA50,DA50,
+  select(BA15,CA15, # business effort
+         BA42,CA42, # actively involved
+         BA50,CA50,
          
          # startup activities ------------------------------------------------------
          
@@ -46,7 +46,6 @@ psed_selecionado <- psed %>%
          # employee ----------------------------------------------------------------
          AE9,BE9,CE9, # employees working 35h or more
          AE10,BE10,CE10, # employees working less than 35h
-         
          
          # Highest level of education ----------------------------------------------
          AH6_1,
@@ -381,6 +380,67 @@ psed_renomeado <-
 
 # tratando algumas variáveis numéricas antes 
 
+# business effort 
+psed_renomeado$disengaged_wB[is.na(psed_renomeado$disengaged_wB)] <- 0
+psed_renomeado$disengaged_wC[is.na(psed_renomeado$disengaged_wC)] <- 0
+
+# actively involved 
+psed_renomeado$involved_wB[is.na(psed_renomeado$involved_wB)] <- 0
+psed_renomeado$involved_wC[is.na(psed_renomeado$involved_wC)] <- 0
+
+# new firm checkpoint 
+psed_renomeado$new_firm_checkpoint_wB[is.na(psed_renomeado$new_firm_checkpoint_wB)] <- 0
+psed_renomeado$new_firm_checkpoint_wC[is.na(psed_renomeado$new_firm_checkpoint_wC)] <- 0
+
+# business plan  
+psed_renomeado$business_plan_wA[is.na(psed_renomeado$business_plan_wA)] <- 0
+psed_renomeado$business_plan_wB[is.na(psed_renomeado$business_plan_wB)] <- 0
+psed_renomeado$business_plan_wC[is.na(psed_renomeado$business_plan_wC)] <- 0
+
+# marketing
+psed_renomeado$marketing_checkpoint_wA[is.na(psed_renomeado$marketing_checkpoint_wA)] <- 0
+psed_renomeado$marketing_checkpoint_wB[is.na(psed_renomeado$marketing_checkpoint_wB)] <- 0
+psed_renomeado$marketing_checkpoint_wC[is.na(psed_renomeado$marketing_checkpoint_wC)] <- 0
+
+# own technology development
+psed_renomeado$technology_checkpoint_wA[is.na(psed_renomeado$technology_checkpoint_wA)] <- 0
+psed_renomeado$technology_checkpoint_wB[is.na(psed_renomeado$technology_checkpoint_wB)] <- 0
+psed_renomeado$technology_checkpoint_wC[is.na(psed_renomeado$technology_checkpoint_wC)] <- 0
+
+# patent application, copyright or trademark
+psed_renomeado$patent_checkpoint_wA[is.na(psed_renomeado$patent_checkpoint_wA)] <- 0
+psed_renomeado$patent_checkpoint_wB[is.na(psed_renomeado$patent_checkpoint_wB)] <- 0
+psed_renomeado$patent_checkpoint_wC[is.na(psed_renomeado$patent_checkpoint_wC)] <- 0
+
+# equipment, facilities, or property been purchased
+psed_renomeado$facilities_wA[is.na(psed_renomeado$facilities_wA)] <- 0
+psed_renomeado$facilities_wB[is.na(psed_renomeado$facilities_wB)] <- 0
+psed_renomeado$facilities_wC[is.na(psed_renomeado$facilities_wC)] <- 0
+
+# talk with potential customers 
+psed_renomeado$talk_customer_wA[is.na(psed_renomeado$talk_customer_wA)] <- 0
+psed_renomeado$talk_customer_wB[is.na(psed_renomeado$talk_customer_wB)] <- 0
+psed_renomeado$talk_customer_wC[is.na(psed_renomeado$talk_customer_wC)] <- 0
+
+# collect information about competitors
+psed_renomeado$competitors_wA[is.na(psed_renomeado$competitors_wA)] <- 0
+psed_renomeado$competitors_wB[is.na(psed_renomeado$competitors_wB)] <- 0
+psed_renomeado$competitors_wC[is.na(psed_renomeado$competitors_wC)] <- 0
+
+# define market opportunities 
+psed_renomeado$opportunities_market_wA[is.na(psed_renomeado$opportunities_market_wA)] <- 0
+psed_renomeado$opportunities_market_wB[is.na(psed_renomeado$opportunities_market_wB)] <- 0
+psed_renomeado$opportunities_market_wC[is.na(psed_renomeado$opportunities_market_wC)] <- 0
+
+# financial projections
+psed_renomeado$financial_proj_wA[is.na(psed_renomeado$financial_proj_wA)] <- 0
+psed_renomeado$financial_proj_wB[is.na(psed_renomeado$financial_proj_wB)] <- 0
+psed_renomeado$financial_proj_wC[is.na(psed_renomeado$financial_proj_wC)] <- 0
+
+# business modified or updated
+psed_renomeado$business_plan_modB[is.na(psed_renomeado$business_plan_modB)] <- 0
+psed_renomeado$business_plan_modC[is.na(psed_renomeado$business_plan_modC)] <- 0
+
 # idade     
 psed_renomeado$idade_1[is.na(psed_renomeado$idade_1)] <- 0
 psed_renomeado$idade_2[is.na(psed_renomeado$idade_2)] <- 0
@@ -626,10 +686,63 @@ psed_renomeado$primary_crontribution_wA3[is.na(psed_renomeado$primary_crontribut
 psed_renomeado$primary_crontribution_wB3[is.na(psed_renomeado$primary_crontribution_wB3)] <- 0
 psed_renomeado$primary_crontribution_wC3[is.na(psed_renomeado$primary_crontribution_wC3)] <- 0
 
+# bank account
+psed_renomeado$bank_account_AE[is.na(psed_renomeado$bank_account_AE)] <- 0
+psed_renomeado$bank_account_BE[is.na(psed_renomeado$bank_account_BE)] <- 0
+psed_renomeado$bank_account_CE[is.na(psed_renomeado$bank_account_CE)] <- 0
+
 # invested additional money
 psed_renomeado$invested_additional_money_wA[is.na(psed_renomeado$invested_additional_money_wA)] <- 0
 psed_renomeado$invested_additional_money_wB[is.na(psed_renomeado$invested_additional_money_wB)] <- 0
 psed_renomeado$invested_additional_money_wC[is.na(psed_renomeado$invested_additional_money_wC)] <- 0
+
+# priority spending on P&D
+psed_renomeado$research_spending_priority_wA[is.na(psed_renomeado$research_spending_priority_wA)] <- 0
+psed_renomeado$research_spending_priority_wB[is.na(psed_renomeado$research_spending_priority_wB)] <- 0
+psed_renomeado$research_spending_priority_wC[is.na(psed_renomeado$research_spending_priority_wC)] <- 0
+
+# achieve higher position society importance
+psed_renomeado$achieve_higher_position_society_importance_wA[is.na(psed_renomeado$achieve_higher_position_society_importance_wA)] <- 0
+
+# flexibility family life importance 
+psed_renomeado$flexibility_family_life_importance_wA[is.na(psed_renomeado$flexibility_family_life_importance_wA)] <- 0
+
+# family tradition impotance
+psed_renomeado$family_tradition_impotance_wA[is.na(psed_renomeado$family_tradition_impotance_wA)] <- 0
+
+# respected friends
+psed_renomeado$respected_friends_wA[is.na(psed_renomeado$respected_friends_wA)] <- 0
+
+# freedom importance
+psed_renomeado$freedom_importance_wA[is.na(psed_renomeado$freedom_importance_wA)] <- 0
+
+# yourself spouse children importance 
+psed_renomeado$yourself_spouse_children_importance_wA[is.na(psed_renomeado$yourself_spouse_children_importance_wA)] <- 0
+
+# example person admire importance 
+psed_renomeado$example_person_admire_importance_wA[is.na(psed_renomeado$example_person_admire_importance_wA)] <- 0
+
+# business children inherit importance
+psed_renomeado$business_children_inherit_importance_wA[is.na(psed_renomeado$business_children_inherit_importance_wA)] <- 0
+
+# larger personal income importance 
+psed_renomeado$larger_personal_income_importance_wA[is.na(psed_renomeado$larger_personal_income_importance_wA)] <- 0
+
+# recognition importance
+psed_renomeado$recognition_importance_wA[is.na(psed_renomeado$recognition_importance_wA)] <- 0
+
+# develop idea product importance 
+psed_renomeado$develop_idea_product_importance_wA[is.na(psed_renomeado$develop_idea_product_importance_wA)] <- 0
+
+# wealth importance
+psed_renomeado$wealth_importance_wA[is.na(psed_renomeado$wealth_importance_wA)] <- 0
+
+# personal vision importance
+psed_renomeado$personal_vision_importance_wA[is.na(psed_renomeado$personal_vision_importance_wA)] <- 0
+
+# power influence organization
+psed_renomeado$power_influence_organization_wA[is.na(psed_renomeado$power_influence_organization_wA)] <- 0
+
 
 # Tratando base como um todo
 
