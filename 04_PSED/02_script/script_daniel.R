@@ -9,23 +9,28 @@ library(ggrepel)
 psed <- read_sav("01_dataframe/psedii_scrn_ABCDEF.sav")
 
 psed_selecionado <- psed %>%
-  select(BA15,CA15,DA15,#business effort
-         BA42,CA42,DA42, #actively involved
-         BA50,CA50,DA50,
+  select(BA42,CA42, #actively involved
+         BA50,CA50, #new firm - 1, active involved - 2, quit - 3
          
+         AB1, # type of business 
+         
+# formally established 
 
+         AC2, BC2, # formally established
+
+         
 # startup activities ------------------------------------------------------
 
-         AD1,BD1,CD1,DD1, #business plan
-         AD9,BD9,CD9,DD9, #marketing
-         AD11,BD11,CD11,DD11, #own technology development
-         AD13,BD13,CD13,DD13, #patent application, copyright or trademark
-         AD16,BD16,CD16,DD16, # equipment, facilities, or property been purchased
-         AD20,BD20,CD20,DD20, # talk with potential customers
-         AD22,BD22,CD22,DD22, # collect information about competitors
-         AD24,BD24,CD24,DD24, # define market opportunities 
-         AD26,BD26,CD26,DD26, # financial projections
-         BD30,CD30,DD30, #business modified or updated
+         AD1,BD1, #business plan
+         AD9,BD9, #marketing
+         AD11,BD11, #own technology development
+         AD13,BD13, #patent application, copyright or trademark
+         AD16,BD16, # equipment, facilities, or property been purchased
+         AD20,BD20, # talk with potential customers
+         AD22,BD22, # collect information about competitors
+         AD24,BD24, # define market opportunities 
+         AD26,BD26, # financial projections
+         BD30, #business modified or updated
 
 # Idade -------------------------------------------------------------------
 
@@ -48,78 +53,59 @@ psed_selecionado <- psed %>%
 
 # employee ----------------------------------------------------------------
 
-         AE9,BE9,CE9,DE9, #employees working 35h or more
-         AE10,BE10,CE10,DE10, #employees working less than 35h
+         AE9,BE9,CE9, #employees working 35h or more
+         AE10,BE10,CE10, #employees working less than 35h
 
 
 # Highest level of education ----------------------------------------------
-         AH6_1,
-         AH6_2,#BH6_2,CH6_2,DH6_2, 
-         AH6_3,#BH6_3,CH6_3,DH6_3, 
-         AH6_4,#BH6_4,CH6_4,DH6_4, 
-         AH6_5,#BH6_5,CH6_5,DH6_5, 
-         #BH6_6,CH6_6,DH6_6, 
-         #DH6_7,
-         #DH6_8,
-         #DH6_9, 
-         #DH6_10, 
+         AH6_1, AH6_2,
+         AH6_3, AH6_4,
+         AH6_5,
 
-# How many years have you known? ------------------------------------------
-         AH7_2,BH7_2,CH7_2,DH7_2, 
-         AH7_3,BH7_3,CH7_3,DH7_3,  
-         AH7_4,BH7_4,CH7_4,DH7_4,  
-         AH7_5,BH7_5,CH7_5,DH7_5,  
-         BH7_6,CH7_6,DH7_6,
-         DH7_7,
-         DH7_8,
-         DH7_9,
-         DH7_10,  
 
 # Years of work experience ------------------------------------------------
-         AH11_1, 
-         AH11_2,BH11_2,CH11_2,DH11_2,
-         AH11_3,BH11_3,CH11_3,DH11_3, 
-         AH11_4,BH11_4,CH11_4,DH11_4,
-         AH11_5,BH11_5,CH11_5,DH11_5, 
-         BH11_6,CH11_6,DH11_6,
-         DH11_7,
-         DH11_8,
-         DH11_9,
-         DH11_10, 
+         AH11_1, AH11_2,
+         AH11_3, AH11_4,
+         AH11_5, 
 
 # How many other businesses have helped to start as an owner or part-owner?--------
-         AH12_1,
-         AH12_2,BH12_2,CH12_2,DH12_2,
-         AH12_3,BH12_3,CH12_3,DH12_3, 
-         AH12_4,BH12_4,CH12_4,DH12_4,
-         AH12_5,BH12_5,CH12_5,DH12_5, 
-         BH12_6,CH12_6,DH12_6,
-         DH12_7,
-         DH12_8,
-         DH12_9,
-         DH12_10, 
+         AH12_1,AH12_2,AH12_3,
+         AH12_4,AH12_5,
 
 # What is the dollar amount provided --------------------------------------
-         AQ4_1,BQ4_1,CQ4_1,DQ4_1,
-         AQ4_2,BQ4_2,CQ4_2,DQ4_2,
-         AQ4_3,BQ4_3,CQ4_3,DQ4_3,
-         AQ4_4,BQ4_4,CQ4_4,DQ4_4,
-         AQ4_5,BQ4_5,CQ4_5,DQ4_5,
-         BQ4_6,CQ4_6,DQ4_6, 
-         DQ4_7,
-         DQ4_8,
-         DQ4_9,
-         DQ4_10, 
-         AQ5_1,BQ5_1,CQ5_1,DQ5_1,
-         AQ5_2,BQ5_2,CQ5_2,DQ5_2,
-         AQ5_3,BQ5_3,CQ5_3,DQ5_3,
-         AQ5_4,BQ5_4,CQ5_4,DQ5_4,
-         AQ5_5,BQ5_5,CQ5_5,DQ5_5,
-         BQ5_6,CQ5_6,DQ5_6, 
-         DQ5_7,
-         DQ5_8,
-         DQ5_9,
-         DQ5_10, 
+
+# dollar that came from personal savings before business registered
+         AQ4_1,BQ4_1,AQ4_2,BQ4_2,
+         AQ4_3,BQ4_3,AQ4_4,BQ4_4,
+         AQ4_5,BQ4_5,BQ4_6,
+
+
+# personal loans received by family before business registered
+         AQ5_1,BQ5_1,AQ5_2,BQ5_2,
+         AQ5_3,BQ5_3,AQ5_4,BQ5_4,
+         AQ5_5,BQ5_5,BQ5_6,
+
+# personal loans received by friends, employers or work colleagues 
+
+         AQ6_1,BQ6_1,AQ6_2,BQ6_2,
+         AQ6_3,BQ6_3,AQ6_4,BQ6_4,
+         AQ6_5,BQ6_5,BQ6_6,
+
+# dollar that came from credit card loans
+
+          AQ7_1,BQ7_1,AQ7_2,BQ7_2,
+          AQ7_3,BQ7_3,AQ7_4,BQ7_4,
+          AQ7_5,BQ7_5,BQ7_6,
+
+# dollar that came from personal loans from a bank or financial institution
+
+          AQ8_1,BQ8_1,AQ8_2,BQ8_2,
+          AQ8_3,BQ8_3,AQ8_4,BQ8_4,
+          AQ8_5,BQ8_5,BQ8_6,
+
+# Secao R - depois que o negocio esta estabelecido
+
+          AR4, BR4, # additional money was invested as equity after business registered
 
 # Dollar amount of the debts ----------------------------------------------
          AR10,BR10,CR10,DR10, 
@@ -168,11 +154,7 @@ psed_selecionado <- psed %>%
 
 psed_renomeado <- 
   psed_selecionado %>% 
-  rename(disengaged_wB = BA15, disengaged_wC = CA15, disengaged_wD = DA15, 
-         
-         involved_wB = BA42, involved_wC = CA42, involved_wD = DA42,
-         
-         new_firm_checkpoint_wB = BA50, new_firm_checkpoint_wC = CA50,new_firm_checkpoint_wD = DA50,
+  rename(new_firm_checkpoint_wB = BA50, new_firm_checkpoint_wC = CA50,new_firm_checkpoint_wD = DA50,
          
          business_plan_wA = AD1,business_plan_wB = BD1, business_plan_wC = CD1, business_plan_wD = DD1,
          
@@ -242,25 +224,6 @@ psed_renomeado <-
        
        #education_name10_wD = DH6_10,
     
-# How many years have you known? ----------------------------------
-       
-       years_known_name2_wA = AH7_2,years_known_name2_wB = BH7_2,years_known_name2_wC = CH7_2,years_known_name2_wD = DH7_2,
-
-       years_known_name3_wA = AH7_3,years_known_name3_wB = BH7_3,years_known_name3_wC = CH7_3,years_known_name3_wD = DH7_3,
-
-       years_known_name4_wA = AH7_4,years_known_name4_wB = BH7_4,years_known_name4_wC = CH7_4,years_known_name4_wD = DH7_4,
-
-       years_known_name5_wA = AH7_5,years_known_name5_wB = BH7_5,years_known_name5_wC = CH7_5,years_known_name5_wD = DH7_5,
-
-       years_known_name6_wB = BH7_6, years_known_name6_wC = CH7_6, years_known_name6_wD = DH7_6,
-
-       years_known_name7_wD = DH7_7,
-
-       years_known_name8_wD = DH7_8,
-
-       years_known_name9_wD = DH7_9,
-
-       years_known_name10_wD = DH7_10,
        
 # Years of work experience ----------------------------------------
        
@@ -775,17 +738,16 @@ psed_renomeado <-
   
   psed_tratado <- 
     psed_renomeado %>%
-    
+
     #disengaged
-    mutate(disengaged = case_when(disengaged_wB == 1 |
-                                  disengaged_wC == 1 |
-                                  disengaged_wD == 1 ~ 'Desengajado',
-                                  TRUE ~ 'Engajado')) %>% 
+    mutate(disengaged = case_when(new_firm_checkpoint_wB == 1 |
+                                  new_firm_checkpoint_wC == 1 | new_firm_checkpoint_wD == 1 ~ 'New Firm',
+                                  new_firm_checkpoint_wB == 3 |
+                                  new_firm_checkpoint_wC == 3 | new_firm_checkpoint_wD == 3 ~ 'Quit',
+                                  TRUE ~ 'Active Startup')) %>% 
     
     # operando
-    mutate(status = case_when(involved_wB == 5 | 
-                              involved_wC == 5 | 
-                              involved_wD == 5 ~ 'Descontinuada', 
+    mutate(status = case_when(disengaged == 'Quit' ~ 'Descontinuada', 
                               TRUE ~ 'Operando')) %>% 
     
     # new firm (BA50)
