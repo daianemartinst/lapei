@@ -1,0 +1,48 @@
+---
+title: "Bases para Formação em Pesquisa"
+format: html
+editor: visual
+---
+
+## Objetivo
+
+O objetivo deste documento é publicizar os procedimentos de tratamento de uma bases de dados construída a partir de múltiplas fontes, sendo elas:
+
+-   [Tempo de abertura de empresa](https://www.receita.fazenda.df.gov.br/)
+
+
+Preparando o ambiente do R
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(tidyverse)
+library(readxl)
+
+```
+
+
+## Carregamento e tratamento de base sobre violência
+
+Esses dados foram extraídos do Atlas da Violência do IPEA. 
+
+```{r}
+
+homicidios <- read_delim("homicidios.csv", 
+    delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+# padronizando a variável código do município para o formato texto
+homicidios$cod <- as.character(homicidios$cod)
+
+# 1) pegando apenas o último ano disponível 
+# 2) a base de homicídios tinha registros duplicados. Por isso, usamos a função distinct
+# 3) retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito
+
+homicidios_2019 <- homicidios %>% 
+                  filter(período == 2019) %>% 
+                  distinct(cod, nome, período, valor, keep_all = TRUE) %>% 
+                  mutate(cod = substr(cod, 1, 6))
+
+```
+
