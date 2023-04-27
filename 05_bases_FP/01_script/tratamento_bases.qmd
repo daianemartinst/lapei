@@ -10,18 +10,19 @@ O objetivo deste documento é publicizar os procedimentos de tratamento de uma b
 
 -   [Tempo de abertura de empresa](https://www.receita.fazenda.df.gov.br/)
 
-Além de criar e disponibilizar a base tratada, disponibilizamos todos os procedimentos executados para chegar nela, conforme o script abaixo. 
+Além de criar e disponibilizar a base tratada, disponibilizamos todos os procedimentos executados para chegar nela, conforme o script abaixo.
 
-Preparando o ambiente do R com os pacotes que precisaremos. Caso não tenha instalado o pacote ainda, use a função `install.packages("pacote")` 
+Preparando o ambiente do R com os pacotes que precisaremos. Caso não tenha instalado o pacote ainda, use a função `install.packages("pacote")`
 
 ```{r}
 #| warning: false
 
 #install.packages("tidyverse")
 
-library(tidyverse)
+library(dplyr)
 library(readxl)
-
+library(readr)
+library(stringi)
 ```
 
 ## Carregamento e tratamento de dados
@@ -52,11 +53,31 @@ DT::datatable(homicidios_2019)
 
 ```
 
+## SEBRAE
+
+Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE)
+
+```{r}
+#| warning: false
+
+hierarquia_municipios <- read_csv("00_bases/hierarquia_municipios.csv")
+sebrae <- read_excel("00_bases/sebrae.xlsx")
+
+sebrae$Municipio_pad = stri_trans_general(str = sebrae$Município,
+                                          id = "Latin-ASCII")
+
+sebrae_hieraquia <- sebrae %>%
+                        left_join(hierarquia_municipios,
+                                  by = c("Municipio_pad"="municipio_pad",
+                                         "UF"="uf_sigla")) %>%
+                        select(cod_municipio, cod_municipiodv,
+                               municipio, Tipo, CEP, Endereço)
+
+```
 
 
 # Autoria
 
-Adaleny Paiva e Daniel Pagotto
+Adaleny Paiva, Henrique Silveira e Daniel Pagotto
 
-Como citar 
-Paiva, A.D.S; Pagotto, D. P. Bases para pesquisas em ciências sociais.
+Como citar Paiva, A.D.S; Pagotto, D. P. Bases para pesquisas em ciências sociais.
