@@ -53,9 +53,11 @@ DT::datatable(homicidios_2019)
 
 ```
 
-## SEBRAE
+### 2) SEBRAE
 
-Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE)
+Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE).
+
+Os dados de unidades do SEBRAE foram acessados [aqui](https://transparencia.sebrae.com.br/infraestrutura?unidade=)
 
 ```{r}
 #| warning: false
@@ -74,6 +76,122 @@ sebrae_hieraquia <- sebrae %>%
                                municipio, Tipo, CEP, Endereço)
 
 ```
+### 3) Munic
+
+A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios. 
+
+1) Selecionamos as variáveis `CodMun` (código do município), `MREH0116` (quadro de pessoal da adminsitração direta) e `MREH0316` (quadro de pessoal da adminsitração indireta).
+2) Convertemos o tipo das varáveis.
+3) O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.
+4) Renomeamos as variáveis.
+
+```{r}
+#| warning: false
+
+Munic_RH <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos humanos") %>% 
+                  select(CodMun, MREH0316, MREH0116) %>% 
+                  mutate(CodMun = as.character(CodMun), 
+                         MREH0316 = as.numeric(MREH0316),
+                         MREH0116 = as.numeric(MREH0116),
+                         CodMun = substr(CodMun, 1, 6)) %>% 
+                  filter(CodMun != "NA") %>% 
+                  rename(RH_adm_dir = MREH0116,
+                         RH_adm_indir = MREH0316)
+
+
+Munic_TIC <- read_excel("00_bases/Munic.xlsx", sheet = "Comunicção e informática") %>% 
+                  select(CodMun, MTIC02, MTIC03, MTIC04,
+                         MTIC06, MTIC071, MTIC072, MTIC073,
+                         MTIC074, MTIC075, MTIC076, MTIC121,
+                         MTIC122, MTIC123, MTIC124,	MTIC125,	
+                         MTIC126,	MTIC127, MTIC128,	MTIC129,	
+                         MTIC1210, MTIC1211, MTIC1212, MTIC1213,	
+                         MTIC1214, MTIC1215, MTIC1216, MTIC1217,	
+                         MTIC1218) %>% 
+                  mutate(CodMun = as.character(CodMun)) %>%
+                  filter(CodMun != "NA") %>% 
+                  rename(Possui_computador = MTIC02,
+                         Ligados_rede = MTIC03, 
+                         Tipo_conexão = MTIC04,
+                         Estrutura_org = MTIC06, 
+                         Funcionários_efetivos = MTIC071, 
+                         Servidores_cedidos = MTIC072, 
+                         Estagiários = MTIC073,
+                         Cargo_comissionado = MTIC074, 
+                         Tercerizados = MTIC075, 
+                         Consultores = MTIC076, 
+                         Serviços_info = MTIC121,
+                         Acessos_docs = MTIC122, 
+                         Infos_gerais_licitações = MTIC123, 
+                         Ouvidoria = MTIC124,	
+                         Download_docs = MTIC125,	
+                         Consulta_processos = MTIC126,	
+                         Consulta_prévia = MTIC127, 
+                         Diário_oficial = MTIC128,	
+                         Concurso_púb = MTIC129,	
+                         Cadastro_fornecedores = MTIC1210, 
+                         Emissão_certidão = MTIC1211, 
+                         Emissão_alvará = MTIC1212, 
+                         Emissão_nf = MTIC1213,	
+                         Matrícula_escolar = MTIC1214, 
+                         Agendamento_consulta = MTIC1215, 
+                         Emissão_guia = MTIC1216, 
+                         Emissão_docs = MTIC1217,	
+                         Pesquisa_satisfação = MTIC1218)
+
+Munic_Gestao <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos para gestão") %>%
+                     select(CodMun, MREG07, MREG081, MREG082,	
+                            MREG083, MREG084, MREG085, MREG086,	
+                            MREG087, MREG088, MREG091, MREG092,	
+                            MREG093, MREG094, MREG095, MREG101,	
+                            MREG102, MREG103, MREG104, MREG105,
+                            MREG106, MREG11, MREG121, MREG122,
+                            MREG123, MREG131, MREG132, MREG133,
+                            MREG134, MREG135, MREG136, MREG141,
+                            MREG142, MREG143, MREG144, MREG145,
+                            MREG146, MREG147) %>% 
+                     mutate(CodMun = as.character(CodMun)) %>%
+                     filter(CodMun != "NA") %>% 
+                     rename(Mecanismos_incentivo = MREG07, 
+                            Redução_IPTU = MREG081, 
+                            Isenção_IPTU = MREG082,	
+                            Redução_ISSQN = MREG083, 
+                            Isenção_ISSQN = MREG084, 
+                            Isenção_Tx = MREG085,
+                            Cessão_terrenos = MREG086,	
+                            Doação_terrenos = MREG087, 
+                            Outros_mecanismos = MREG088, 
+                            Industrial = MREG091, 
+                            Comercial_serviços = MREG092,	
+                            Turismo_esporte_lazer = MREG093, 
+                            Agro = MREG094, 
+                            Outros_beneficiados = MREG095, 
+                            Industrial_18 = MREG101,	
+                            Comercial_serviços_18 = MREG102, 
+                            Turismo_esporte_lazer_18 = MREG103, 
+                            Agro_18 = MREG104, 
+                            Outros_beneficiados_18 = MREG105,
+                            Nenhum_beneficiado_18 = MREG106, 
+                            Mecanismos_restrição = MREG11, 
+                            Legislação = MREG121,
+                            Tributação = MREG122,
+                            Outros_restrição = MREG123, 
+                            Indústria_res = MREG131, 
+                            Indústria_extrativa_res = MREG132, 
+                            Comercial_serviços_res = MREG133,
+                            Turismo_esporte_lazer_res = MREG134, 
+                            Ambiental_res = MREG135, 
+                            Outros_res = MREG136, 
+                            Indústria_18_res = MREG141,
+                            Indústria_extrativa_18_res = MREG142, 
+                            Comercial_serviços_18_res = MREG143, 
+                            Turismo_esporte_lazer_18_res = MREG144, 
+                            Ambiental_18_res = MREG145,
+                            Outros_18_res = MREG146, 
+                            Nenhum_18_res = MREG147)
+                  
+```
+
 
 
 # Autoria
