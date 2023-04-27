@@ -10,6 +10,8 @@ O objetivo deste documento é publicizar os procedimentos de tratamento de uma b
 
 -   [Tempo de abertura de empresa](https://www.receita.fazenda.df.gov.br/)
 
+Além de criar e disponibilizar a base tratada, disponibilizamos todos os procedimentos executados para chegar nela, conforme o script abaixo. 
+
 Preparando o ambiente do R com os pacotes que precisaremos. Caso não tenha instalado o pacote ainda, use a função `install.packages("pacote")` 
 
 ```{r}
@@ -22,7 +24,9 @@ library(readxl)
 
 ```
 
-### Dados de violência
+## Carregamento e tratamento de dados
+
+### 1) Dados de violência
 
 Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.
 
@@ -47,6 +51,8 @@ homicidios_2019 <- homicidios %>%
 DT::datatable(homicidios_2019)
 
 ```
+
+
 
 # Autoria
 
