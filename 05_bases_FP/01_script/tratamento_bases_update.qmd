@@ -23,6 +23,7 @@ library(dplyr)
 library(readxl)
 library(readr)
 library(stringi)
+
 ```
 
 ## Carregamento e tratamento de dados
@@ -39,8 +40,7 @@ Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.
 ```{r}
 #| warning: false
 
-homicidios <- read_delim("00_bases/homicidios.csv", 
-    delim = ";", escape_double = FALSE, trim_ws = TRUE)
+homicidios <- read_delim("00_bases/homicidios.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
 homicidios$cod <- as.character(homicidios$cod)
 
@@ -50,6 +50,28 @@ homicidios_2019 <- homicidios %>%
                   mutate(cod = substr(cod, 1, 6))
 
 DT::datatable(homicidios_2019)
+
+
+
+mortes_violentas <- read_delim("00_bases/mortes-violentas.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+Mortes_Violentas_2019 <- mortes_violentas %>% 
+                         filter(período == 2019) %>% 
+                         distinct(cod, nome, período, valor) %>% 
+                         mutate(cod = substr(cod, 1, 6))
+
+DT::datatable(Mortes_Violentas_2019)
+
+
+
+acidentes_de_transporte <- read_delim("00_bases/bitos-em-acidentes-de-transporte.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+Acidentes_transp_2019 <- acidentes_de_transporte %>% 
+                         filter(período == 2019) %>% 
+                         distinct(cod, nome, período,valor) %>% 
+                         mutate(cod = substr(cod, 1, 6))
+
+DT::datatable(Acidentes_transp_2019)
 
 ```
 
@@ -210,6 +232,29 @@ Munic_TIC <- read_excel("00_bases/Munic.xlsx", sheet = "Comunicção e informát
 
 ```
 
+### 4) ANA
+
+Os dados de saneamento foram extraídos da ANA (Agência Nacional de Águas e Saneamento Básico).  
+
+```{r}
+#| warning: false
+
+Atlas_Esgotos_ETE_2020 <- read_csv("00_bases/Atlas_Esgotos_ETE_2020.csv")
+
+
+
+
+indice_seguranca_hidrica_out_2022 <- read_csv("00_bases/8Dndice_de_SeguranA7a_HADdrica_Urbano_-_ISH-U_(Atlas_de_Abastecimento_outubro_2022).csv")
+
+Indice_segur_hidrica_10_2022 <- indice_seguranca_hidrica_out_2022 %>% 
+                                select(CDMUN, NMMUN, SGUF, ISH,
+                                       TPMAN, CSMAN, TPSIS, TPOPE,
+                                       SHAPE_Length, SHAPE_Area) %>% 
+                                mutate(CDMUN = as.character(CDMUN)) %>% 
+                                filter(CDMUN != "NA")
+
+
+```
 
 
 # Autoria
