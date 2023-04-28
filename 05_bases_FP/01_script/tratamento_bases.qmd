@@ -49,8 +49,6 @@ homicidios_2019 <- homicidios %>%
                   distinct(cod, nome, período, valor) %>% 
                   mutate(cod = substr(cod, 1, 6))
 
-DT::datatable(homicidios_2019)
-
 ```
 
 ### 2) SEBRAE
@@ -76,6 +74,7 @@ sebrae_hieraquia <- sebrae %>%
                                municipio, Tipo, CEP, Endereço)
 
 ```
+
 ### 3) Munic
 
 A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios. 
@@ -185,7 +184,7 @@ Munic_Gestao <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos para gestão
                             Indústria_18_res = MREG141,
                             Indústria_extrativa_18_res = MREG142, 
                             Comercial_serviços_18_res = MREG143, 
-                            Turismo_esporte_lazer_18_res = MREG144, 
+                            Turismo_esporte_lazer_18_res = MREG144,
                             Ambiental_18_res = MREG145,
                             Outros_18_res = MREG146, 
                             Nenhum_18_res = MREG147)
@@ -194,8 +193,11 @@ Munic_Gestao <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos para gestão
 
 
 
+
+
+
 # Autoria
 
 Adaleny Paiva, Henrique Silveira e Daniel Pagotto
 
-Como citar Paiva, A.D.S; Pagotto, D. P. Bases para pesquisas em ciências sociais.
+Como citar Paiva, Silveira, H.; A.D.S; Pagotto, D. P. Bases para pesquisas em ciências sociais.
