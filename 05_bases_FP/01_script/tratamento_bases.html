@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.335">
@@ -98,12 +98,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="tratamento_bases_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -122,7 +124,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
 
 </header>
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#lapei" id="toc-lapei">Lapei</a></li>
+  <li><a href="#objetivo" id="toc-objetivo">Objetivo</a></li>
+  <li><a href="#carregamento-e-tratamento-de-dados" id="toc-carregamento-e-tratamento-de-dados">Carregamento e tratamento de dados</a>
+  <ul>
+  <li><a href="#dados-de-violência" id="toc-dados-de-violência">1) Dados de violência</a></li>
+  <li><a href="#sebrae" id="toc-sebrae">2) SEBRAE</a></li>
+  <li><a href="#munic" id="toc-munic">3) Munic</a></li>
+  </ul></li>
+  <li><a href="#autoria" id="toc-autoria">Autoria</a></li>
+  <li><a href="#como-citar" id="toc-como-citar">Como citar</a></li>
+  </ul>
+</nav>
+<div class="cell">
 
+</div>
+<section id="lapei" class="level2">
+<h2 class="anchored" data-anchor-id="lapei"><a href="https://lapei.face.ufg.br/">Lapei</a></h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Imagens/lapei-horizontal-laboratório.png" class="img-fluid figure-img" style="width:25.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).</p>
+<p>O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.</p>
+</section>
 <section id="objetivo" class="level2">
 <h2 class="anchored" data-anchor-id="objetivo">Objetivo</h2>
 <p>O objetivo deste documento é publicizar os procedimentos de tratamento de uma bases de dados construída a partir de múltiplas fontes, sendo elas:</p>
@@ -137,13 +171,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringi)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="carregamento-e-tratamento-de-dados" class="level2">
 <h2 class="anchored" data-anchor-id="carregamento-e-tratamento-de-dados">Carregamento e tratamento de dados</h2>
 <section id="dados-de-violência" class="level3">
-<h3 class="anchored" data-anchor-id="dados-de-violência">1) Dados de violência</h3>
+<h3 class="anchored" data-anchor-id="dados-de-violência">1) <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/homicidios.csv">Dados de violência</a></h3>
 <p>Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.</p>
 <ol type="1">
 <li>padronizamos a variável código do município para o formato texto</li>
@@ -160,11 +194,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>homicidios_2019 <span class="ot">&lt;-</span> homicidios <span class="sc">%&gt;%</span> </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">filter</span>(período <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">distinct</span>(cod, nome, período, valor) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">cod =</span> <span class="fu">substr</span>(cod, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">cod =</span> <span class="fu">substr</span>(cod, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sebrae" class="level3">
-<h3 class="anchored" data-anchor-id="sebrae">2) SEBRAE</h3>
+<h3 class="anchored" data-anchor-id="sebrae">2) <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/sebrae.xlsx">SEBRAE</a></h3>
 <p>Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE).</p>
 <p>Os dados de unidades do SEBRAE foram acessados <a href="https://transparencia.sebrae.com.br/infraestrutura?unidade=">aqui</a></p>
 <div class="cell">
@@ -179,11 +213,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Municipio_pad"</span><span class="ot">=</span><span class="st">"municipio_pad"</span>,</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"UF"</span><span class="ot">=</span><span class="st">"uf_sigla"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">select</span>(cod_municipio, cod_municipiodv,</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                               municipio, Tipo, CEP, Endereço)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                               municipio, Tipo, CEP, Endereço)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="munic" class="level3">
-<h3 class="anchored" data-anchor-id="munic">3) Munic</h3>
+<h3 class="anchored" data-anchor-id="munic">3) <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/Munic.xlsx">Munic</a></h3>
 <p>A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios.</p>
 <ol type="1">
 <li>Selecionamos as variáveis <code>CodMun</code> (código do município), <code>MREH0116</code> (quadro de pessoal da adminsitração direta) e <code>MREH0316</code> (quadro de pessoal da adminsitração indireta).</li>
@@ -289,17 +323,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>                            Indústria<span class="at">_18_res =</span> MREG141,</span>
 <span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>                            Indústria<span class="at">_extrativa_18_res =</span> MREG142, </span>
 <span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>                            Comercial_serviços<span class="at">_18_res =</span> MREG143, </span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer_18_res =</span> MREG144, </span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer_18_res =</span> MREG144,</span>
 <span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Ambiental_18_res =</span> MREG145,</span>
 <span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_18_res =</span> MREG146, </span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Nenhum_18_res =</span> MREG147)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Nenhum_18_res =</span> MREG147)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="autoria" class="level1">
 <h1>Autoria</h1>
-<p>Adaleny Paiva, Henrique Silveira e Daniel Pagotto</p>
-<p>Como citar Paiva, Silveira, H.; A.D.S; Pagotto, D. P. Bases para pesquisas em ciências sociais.</p>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="Imagens/adalenypaiva.JPG" class="img-fluid figure-img" style="width:25.0%"></p>
+<p></p><figcaption class="figure-caption">Adaleny Paiva, Título: Bacharela (Mestranda - PPGS/UFG), E-mail: adalenypaiva@discente.ufg.br</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="Imagens/Henrique_Administração.jpeg" class="img-fluid figure-img" style="width:25.0%"></p>
+<p></p><figcaption class="figure-caption">Henrique Silveira, Título: Graduando (FACE/UFG), E-mail: henriqueribeiro@discente.ufg.br</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="Imagens/Daniel_Pagotto.jpg" class="img-fluid figure-img" style="width:25.0%"></p>
+<p></p><figcaption class="figure-caption">Daniel Pagotto, Título: Mestre (Doutorando PPGA/ UnB), E-mail: danielppagotto@ufg.br</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="como-citar" class="level1">
+<h1>Como citar</h1>
+<p>Paiva, Silveira, H.; A.D.S; Pagotto, D. P. Bases para pesquisas em ciências sociais.</p>
 </section>
 
 </main>
@@ -344,12 +410,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiada");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
+      button.setAttribute("data-bs-title", "Copiada");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",
