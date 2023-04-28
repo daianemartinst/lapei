@@ -1,8 +1,41 @@
 ---
 title: "Bases para Pesquisa em Ciências Sociais"
-format: html
+format: 
+  html:
+    toc: true
+    toc-expand: 3
+    toc-location: body
+    html-math-method: katex
+    css: styles.css
 editor: visual
+lang: pt
+anchor-sections: true
 ---
+
+```{r}
+#| echo: false
+#| eval: false
+
+install.packages("here")
+library(here)
+here::here()
+here::here("styles.css")
+
+```
+
+## [Lapei](https://lapei.face.ufg.br/)
+
+```{r, out.width= "25%", fig.align='center',echo=FALSE}
+
+
+knitr::include_graphics(here::here("01_script/imagens/lapei-horizontal-laboratório.png"))
+
+
+```
+
+O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).
+
+O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.
 
 ## Objetivo
 
@@ -27,7 +60,7 @@ library(stringi)
 
 ## Carregamento e tratamento de dados
 
-### 1) Dados de violência
+### 1) [Dados de violência](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/homicidios.csv)
 
 Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.
 
@@ -51,7 +84,7 @@ homicidios_2019 <- homicidios %>%
 
 ```
 
-### 2) SEBRAE
+### 2) [SEBRAE](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/sebrae.xlsx)
 
 Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE).
 
@@ -75,14 +108,14 @@ sebrae_hieraquia <- sebrae %>%
 
 ```
 
-### 3) Munic
+### 3) [Munic](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/Munic.xlsx)
 
-A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios. 
+A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios.
 
-1) Selecionamos as variáveis `CodMun` (código do município), `MREH0116` (quadro de pessoal da adminsitração direta) e `MREH0316` (quadro de pessoal da adminsitração indireta).
-2) Convertemos o tipo das varáveis.
-3) O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.
-4) Renomeamos as variáveis.
+1)  Selecionamos as variáveis `CodMun` (código do município), `MREH0116` (quadro de pessoal da adminsitração direta) e `MREH0316` (quadro de pessoal da adminsitração indireta).
+2)  Convertemos o tipo das varáveis.
+3)  O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.
+4)  Renomeamos as variáveis.
 
 ```{r}
 #| warning: false
@@ -191,13 +224,27 @@ Munic_Gestao <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos para gestão
                   
 ```
 
-
-
-
-
-
 # Autoria
 
-Adaleny Paiva, Henrique Silveira e Daniel Pagotto
+```{r, out.width= "25%", fig.align='left',echo=FALSE,fig.cap="Adaleny Paiva, Título: Bacharela (Mestranda - PPGS/UFG), E-mail: adalenypaiva@discente.ufg.br"}
 
-Como citar Paiva, Silveira, H.; A.D.S; Pagotto, D. P. Bases para pesquisas em ciências sociais.
+knitr::include_graphics(here::here("01_script/imagens/adalenypaiva.JPG"))
+
+```
+
+
+```{r, out.width= "25%", fig.align='left',echo=FALSE, fig.cap="Henrique Silveira, Título: Graduando (FACE/UFG), E-mail: henriqueribeiro@discente.ufg.br"}
+
+knitr::include_graphics(here::here("01_script/imagens/Henrique_Administração.jpeg"))
+
+```
+
+```{r, out.width= "25%", fig.align='left',echo=FALSE, fig.cap= "Daniel Pagotto, Título: Mestre (Doutorando PPGA/ UnB), E-mail: danielppagotto@ufg.br" }
+
+knitr::include_graphics(here::here("01_script/imagens/Daniel_Pagotto.jpg"))
+
+```
+
+# Como citar 
+
+Paiva, Silveira, H.; A.D.S; Pagotto, D. P. Bases para pesquisas em ciências sociais.
