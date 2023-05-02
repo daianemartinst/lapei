@@ -23,6 +23,7 @@ library(dplyr)
 library(readxl)
 library(readr)
 library(stringi)
+
 ```
 
 ## Carregamento e tratamento de dados
@@ -31,16 +32,15 @@ library(stringi)
 
 Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.
 
-1)  padronizamos a variável código do município para o formato texto
-2)  pegamos apenas o último ano disponível (2019)
-3)  a base de homicídios tinha registros duplicados. Por isso, usamos a função `distinct`
-4)  retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito
+1)  Padronizamos a variável código do município para o formato texto.
+2)  Pegamos apenas o último ano disponível (2019).
+3)  A base de homicídios tinha registros duplicados. Por isso, usamos a função `distinct`.
+4)  Retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito.
 
 ```{r}
 #| warning: false
 
-homicidios <- read_delim("00_bases/homicidios.csv", 
-    delim = ";", escape_double = FALSE, trim_ws = TRUE)
+homicidios <- read_delim("00_bases/homicidios.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
 homicidios$cod <- as.character(homicidios$cod)
 
@@ -50,6 +50,28 @@ homicidios_2019 <- homicidios %>%
                   mutate(cod = substr(cod, 1, 6))
 
 DT::datatable(homicidios_2019)
+
+
+
+mortes_violentas <- read_delim("00_bases/mortes-violentas.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+Mortes_Violentas_2019 <- mortes_violentas %>% 
+                         filter(período == 2019) %>% 
+                         distinct(cod, nome, período, valor) %>% 
+                         mutate(cod = substr(cod, 1, 6))
+
+DT::datatable(Mortes_Violentas_2019)
+
+
+
+acidentes_de_transporte <- read_delim("00_bases/bitos-em-acidentes-de-transporte.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+Acidentes_transp_2019 <- acidentes_de_transporte %>% 
+                         filter(período == 2019) %>% 
+                         distinct(cod, nome, período,valor) %>% 
+                         mutate(cod = substr(cod, 1, 6))
+
+DT::datatable(Acidentes_transp_2019)
 
 ```
 
@@ -76,11 +98,14 @@ sebrae_hieraquia <- sebrae %>%
                                municipio, Tipo, CEP, Endereço)
 
 ```
+
 ### 3) Munic
 
 A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios. 
 
-1) Selecionamos as variáveis `CodMun` (código do município), `MREH0116` (quadro de pessoal da adminsitração direta) e `MREH0316` (quadro de pessoal da adminsitração indireta).
+Pegamos na Base Munic as variáveis dos temas RH, gestão e comunicação, e para cada um desses temas tratamos os dados da seguinte maneira:
+
+1) Selecionamos as variáveis.
 2) Convertemos o tipo das varáveis.
 3) O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.
 4) Renomeamos as variáveis.
@@ -97,47 +122,6 @@ Munic_RH <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos humanos") %>%
                   filter(CodMun != "NA") %>% 
                   rename(RH_adm_dir = MREH0116,
                          RH_adm_indir = MREH0316)
-
-
-Munic_TIC <- read_excel("00_bases/Munic.xlsx", sheet = "Comunicção e informática") %>% 
-                  select(CodMun, MTIC02, MTIC03, MTIC04,
-                         MTIC06, MTIC071, MTIC072, MTIC073,
-                         MTIC074, MTIC075, MTIC076, MTIC121,
-                         MTIC122, MTIC123, MTIC124,	MTIC125,	
-                         MTIC126,	MTIC127, MTIC128,	MTIC129,	
-                         MTIC1210, MTIC1211, MTIC1212, MTIC1213,	
-                         MTIC1214, MTIC1215, MTIC1216, MTIC1217,	
-                         MTIC1218) %>% 
-                  mutate(CodMun = as.character(CodMun)) %>%
-                  filter(CodMun != "NA") %>% 
-                  rename(Possui_computador = MTIC02,
-                         Ligados_rede = MTIC03, 
-                         Tipo_conexão = MTIC04,
-                         Estrutura_org = MTIC06, 
-                         Funcionários_efetivos = MTIC071, 
-                         Servidores_cedidos = MTIC072, 
-                         Estagiários = MTIC073,
-                         Cargo_comissionado = MTIC074, 
-                         Tercerizados = MTIC075, 
-                         Consultores = MTIC076, 
-                         Serviços_info = MTIC121,
-                         Acessos_docs = MTIC122, 
-                         Infos_gerais_licitações = MTIC123, 
-                         Ouvidoria = MTIC124,	
-                         Download_docs = MTIC125,	
-                         Consulta_processos = MTIC126,	
-                         Consulta_prévia = MTIC127, 
-                         Diário_oficial = MTIC128,	
-                         Concurso_púb = MTIC129,	
-                         Cadastro_fornecedores = MTIC1210, 
-                         Emissão_certidão = MTIC1211, 
-                         Emissão_alvará = MTIC1212, 
-                         Emissão_nf = MTIC1213,	
-                         Matrícula_escolar = MTIC1214, 
-                         Agendamento_consulta = MTIC1215, 
-                         Emissão_guia = MTIC1216, 
-                         Emissão_docs = MTIC1217,	
-                         Pesquisa_satisfação = MTIC1218)
 
 Munic_Gestao <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos para gestão") %>%
                      select(CodMun, MREG07, MREG081, MREG082,	
@@ -189,9 +173,88 @@ Munic_Gestao <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos para gestão
                             Ambiental_18_res = MREG145,
                             Outros_18_res = MREG146, 
                             Nenhum_18_res = MREG147)
-                  
+
+Munic_TIC <- read_excel("00_bases/Munic.xlsx", sheet = "Comunicção e informática") %>% 
+                  select(CodMun, MTIC02, MTIC03, MTIC04,
+                         MTIC06, MTIC071, MTIC072, MTIC073,
+                         MTIC074, MTIC075, MTIC076, MTIC121,
+                         MTIC122, MTIC123, MTIC124,	MTIC125,	
+                         MTIC126,	MTIC127, MTIC128,	MTIC129,	
+                         MTIC1210, MTIC1211, MTIC1212, MTIC1213,	
+                         MTIC1214, MTIC1215, MTIC1216, MTIC1217,	
+                         MTIC1218, MTIC161, MTIC162, MTIC163,
+                         MTIC164, MTIC165, MTIC166, MTIC167,
+                         MTIC261, MTIC262, MTIC263, MTIC264,
+                         MTIC265, MTIC266) %>% 
+                  mutate(CodMun = as.character(CodMun)) %>%
+                  filter(CodMun != "NA") %>% 
+                  rename(Possui_computador = MTIC02,
+                         Ligados_rede = MTIC03, 
+                         Tipo_conexão = MTIC04,
+                         Estrutura_org = MTIC06, 
+                         Funcionários_efetivos = MTIC071, 
+                         Servidores_cedidos = MTIC072, 
+                         Estagiários = MTIC073,
+                         Cargo_comissionado = MTIC074, 
+                         Tercerizados = MTIC075, 
+                         Consultores = MTIC076, 
+                         Serviços_info = MTIC121,
+                         Acessos_docs = MTIC122, 
+                         Infos_gerais_licitações = MTIC123, 
+                         Ouvidoria = MTIC124,	
+                         Download_docs = MTIC125,	
+                         Consulta_processos = MTIC126,	
+                         Consulta_prévia = MTIC127, 
+                         Diário_oficial = MTIC128,	
+                         Concurso_púb = MTIC129,	
+                         Cadastro_fornecedores = MTIC1210, 
+                         Emissão_certidão = MTIC1211, 
+                         Emissão_alvará = MTIC1212, 
+                         Emissão_nf = MTIC1213,	
+                         Matrícula_escolar = MTIC1214, 
+                         Agendamento_consulta = MTIC1215, 
+                         Emissão_guia = MTIC1216, 
+                         Emissão_docs = MTIC1217,	
+                         Pesquisa_satisfação = MTIC1218,
+                         Envio_SMS = MTIC161,
+                         Recibo_SMS = MTIC162,
+                         APPs_prefeitura = MTIC163,
+                         APPs_outros = MTIC164,
+                         Website_mobile = MTIC165,
+                         Boletos = MTIC166,
+                         Não_disponibilizou = MTIC167,
+                         Bilhete_eletrônico = MTIC261,
+                         Ônibus_GPS = MTIC262,
+                         Centro_controle = MTIC263,
+                         Iluminação_inteligente = MTIC264,
+                         Semáforos_inteligentes = MTIC265,
+                         Sensores_monitoria = MTIC266)
+
 ```
 
+### 4) ANA
+
+Os dados de saneamento foram extraídos da ANA (Agência Nacional de Águas e Saneamento Básico).  
+
+```{r}
+#| warning: false
+
+Atlas_Esgotos_ETE_2020 <- read_csv("00_bases/Atlas_Esgotos_ETE_2020.csv")
+
+
+
+
+indice_seguranca_hidrica_out_2022 <- read_csv("00_bases/8Dndice_de_SeguranA7a_HADdrica_Urbano_-_ISH-U_(Atlas_de_Abastecimento_outubro_2022).csv")
+
+Indice_segur_hidrica_10_2022 <- indice_seguranca_hidrica_out_2022 %>% 
+                                select(CDMUN, NMMUN, SGUF, ISH,
+                                       TPMAN, CSMAN, TPSIS, TPOPE,
+                                       SHAPE_Length, SHAPE_Area) %>% 
+                                mutate(CDMUN = as.character(CDMUN)) %>% 
+                                filter(CDMUN != "NA")
+
+
+```
 
 
 # Autoria
