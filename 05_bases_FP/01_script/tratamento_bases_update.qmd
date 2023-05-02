@@ -40,6 +40,8 @@ Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.
 ```{r}
 #| warning: false
 
+# Abaixo serão tratados dados de homicídios da IPEA:
+
 homicidios <- read_delim("00_bases/homicidios.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
 homicidios$cod <- as.character(homicidios$cod)
@@ -52,6 +54,7 @@ homicidios_2019 <- homicidios %>%
 DT::datatable(homicidios_2019)
 
 
+# Abaixo serão tratados dados de mortes violentas da IPEA:
 
 mortes_violentas <- read_delim("00_bases/mortes-violentas.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
@@ -63,6 +66,7 @@ Mortes_Violentas_2019 <- mortes_violentas %>%
 DT::datatable(Mortes_Violentas_2019)
 
 
+# Abaixo serão tratados dados de acidentes de transporte da IPEA:
 
 acidentes_de_transporte <- read_delim("00_bases/bitos-em-acidentes-de-transporte.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
@@ -113,6 +117,8 @@ Pegamos na Base Munic as variáveis dos temas RH, gestão e comunicação, e par
 ```{r}
 #| warning: false
 
+# Abaixo serão tratados dados da força de trabalho do município:
+
 Munic_RH <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos humanos") %>% 
                   select(CodMun, MREH0316, MREH0116) %>% 
                   mutate(CodMun = as.character(CodMun), 
@@ -122,6 +128,9 @@ Munic_RH <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos humanos") %>%
                   filter(CodMun != "NA") %>% 
                   rename(RH_adm_dir = MREH0116,
                          RH_adm_indir = MREH0316)
+
+
+# Abaixo serão tratados dados de mecanismos de incentivo e de restrição à implantação de empreendedimentos:
 
 Munic_Gestao <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos para gestão") %>%
                      select(CodMun, MREG07, MREG081, MREG082,	
@@ -137,42 +146,45 @@ Munic_Gestao <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos para gestão
                      mutate(CodMun = as.character(CodMun)) %>%
                      filter(CodMun != "NA") %>% 
                      rename(Mecanismos_incentivo = MREG07, 
-                            Redução_IPTU = MREG081, 
-                            Isenção_IPTU = MREG082,	
-                            Redução_ISSQN = MREG083, 
-                            Isenção_ISSQN = MREG084, 
-                            Isenção_Tx = MREG085,
-                            Cessão_terrenos = MREG086,	
-                            Doação_terrenos = MREG087, 
+                            Reducao_IPTU = MREG081, 
+                            Isencao_IPTU = MREG082,	
+                            Reducao_ISSQN = MREG083, 
+                            Isencao_ISSQN = MREG084, 
+                            Isencao_Tx = MREG085,
+                            Cessao_terrenos = MREG086,	
+                            Doacao_terrenos = MREG087, 
                             Outros_mecanismos = MREG088, 
-                            Industrial = MREG091, 
-                            Comercial_serviços = MREG092,	
-                            Turismo_esporte_lazer = MREG093, 
-                            Agro = MREG094, 
+                            Industria_beneficiada = MREG091, 
+                            Comercio_servicos_beneficiados = MREG092,	
+                            Turismo_esporte_lazer_beneficiados = MREG093, 
+                            Agropecuario_beneficiado = MREG094, 
                             Outros_beneficiados = MREG095, 
-                            Industrial_18 = MREG101,	
-                            Comercial_serviços_18 = MREG102, 
-                            Turismo_esporte_lazer_18 = MREG103, 
-                            Agro_18 = MREG104, 
-                            Outros_beneficiados_18 = MREG105,
-                            Nenhum_beneficiado_18 = MREG106, 
-                            Mecanismos_restrição = MREG11, 
-                            Legislação = MREG121,
-                            Tributação = MREG122,
-                            Outros_restrição = MREG123, 
-                            Indústria_res = MREG131, 
-                            Indústria_extrativa_res = MREG132, 
-                            Comercial_serviços_res = MREG133,
-                            Turismo_esporte_lazer_res = MREG134, 
-                            Ambiental_res = MREG135, 
-                            Outros_res = MREG136, 
-                            Indústria_18_res = MREG141,
-                            Indústria_extrativa_18_res = MREG142, 
-                            Comercial_serviços_18_res = MREG143, 
-                            Turismo_esporte_lazer_18_res = MREG144, 
-                            Ambiental_18_res = MREG145,
-                            Outros_18_res = MREG146, 
-                            Nenhum_18_res = MREG147)
+                            Industria_beneficiada_2018 = MREG101,	
+                            Comercio_servicos_beneficiados_2018 = MREG102, 
+                            Turismo_esporte_lazer_beneficiados_2018 = MREG103, 
+                            Agropecuario_beneficiado_2018 = MREG104, 
+                            Outros_beneficiados_2018 = MREG105,
+                            Nenhum_beneficiado_2018 = MREG106, 
+                            Mecanismos_restricao = MREG11, 
+                            Legislacao = MREG121,
+                            Tributacao = MREG122,
+                            Outros_restricao = MREG123, 
+                            Industria_restricao = MREG131, 
+                            Industria_extrativa_restricao = MREG132, 
+                            Comercio_servicos_restricao = MREG133,
+                            Turismo_esporte_lazer_restricao = MREG134, 
+                            Ambiental_restricao = MREG135, 
+                            Outras_empresas_restricao = MREG136, 
+                            Industria_restricao_2018 = MREG141,
+                            Industria_extrativa_restricao_2018 = MREG142, 
+                            Comercial_servicos_restricao_2018 = MREG143, 
+                            Turismo_esporte_lazer_restricao_2018 = MREG144, 
+                            Ambiental_restricao_2018 = MREG145,
+                            Outros_restricao_2018 = MREG146, 
+                            Nenhum_restricao_2018 = MREG147)
+
+
+# Abaixo serão tratados dados sobre Comunicação e Informática do município:
 
 Munic_TIC <- read_excel("00_bases/Munic.xlsx", sheet = "Comunicção e informática") %>% 
                   select(CodMun, MTIC02, MTIC03, MTIC04,
@@ -189,46 +201,46 @@ Munic_TIC <- read_excel("00_bases/Munic.xlsx", sheet = "Comunicção e informát
                   mutate(CodMun = as.character(CodMun)) %>%
                   filter(CodMun != "NA") %>% 
                   rename(Possui_computador = MTIC02,
-                         Ligados_rede = MTIC03, 
-                         Tipo_conexão = MTIC04,
-                         Estrutura_org = MTIC06, 
-                         Funcionários_efetivos = MTIC071, 
-                         Servidores_cedidos = MTIC072, 
-                         Estagiários = MTIC073,
-                         Cargo_comissionado = MTIC074, 
-                         Tercerizados = MTIC075, 
-                         Consultores = MTIC076, 
-                         Serviços_info = MTIC121,
-                         Acessos_docs = MTIC122, 
-                         Infos_gerais_licitações = MTIC123, 
+                         Computador_ligado_rede = MTIC03, 
+                         Tipo_conexao_internet = MTIC04,
+                         Estrutura_organizacional_TI = MTIC06, 
+                         Funcionarios_efetivos_TI = MTIC071, 
+                         Servidores_cedidos_TI = MTIC072, 
+                         Estagiarios_TI = MTIC073,
+                         Cargo_comissionado_TI = MTIC074, 
+                         Tercerizados_TI = MTIC075, 
+                         Consultores_TI = MTIC076, 
+                         Servicos_informativos = MTIC121,
+                         Acessos_docs_ = MTIC122, 
+                         Infos_gerais_licitacoes = MTIC123, 
                          Ouvidoria = MTIC124,	
                          Download_docs = MTIC125,	
                          Consulta_processos = MTIC126,	
-                         Consulta_prévia = MTIC127, 
-                         Diário_oficial = MTIC128,	
-                         Concurso_púb = MTIC129,	
+                         Consulta_previa = MTIC127, 
+                         Diario_oficial = MTIC128,	
+                         Concurso_publico = MTIC129,	
                          Cadastro_fornecedores = MTIC1210, 
-                         Emissão_certidão = MTIC1211, 
-                         Emissão_alvará = MTIC1212, 
-                         Emissão_nf = MTIC1213,	
-                         Matrícula_escolar = MTIC1214, 
-                         Agendamento_consulta = MTIC1215, 
-                         Emissão_guia = MTIC1216, 
-                         Emissão_docs = MTIC1217,	
-                         Pesquisa_satisfação = MTIC1218,
+                         Emissao_certidao_negativa_debito = MTIC1211, 
+                         Emissao_alvara = MTIC1212, 
+                         Emissao_NF = MTIC1213,	
+                         Matricula_escolar = MTIC1214, 
+                         Agendamento_consulta_saude = MTIC1215, 
+                         Emissao_guia_pagamento_tributos = MTIC1216, 
+                         Emissao_docs = MTIC1217,	
+                         Pesquisa_satisfacao = MTIC1218,
                          Envio_SMS = MTIC161,
                          Recibo_SMS = MTIC162,
                          APPs_prefeitura = MTIC163,
-                         APPs_outros = MTIC164,
+                         APPs_outros_orgaos = MTIC164,
                          Website_mobile = MTIC165,
-                         Boletos = MTIC166,
-                         Não_disponibilizou = MTIC167,
-                         Bilhete_eletrônico = MTIC261,
-                         Ônibus_GPS = MTIC262,
-                         Centro_controle = MTIC263,
-                         Iluminação_inteligente = MTIC264,
-                         Semáforos_inteligentes = MTIC265,
-                         Sensores_monitoria = MTIC266)
+                         Emissao_boletos_mobile = MTIC166,
+                         Nao_disponibilizou = MTIC167,
+                         Bilhete_eletronico_transporte = MTIC261,
+                         Onibus_GPS = MTIC262,
+                         Centro_controle_operacoes = MTIC263,
+                         Iluminacao_inteligente = MTIC264,
+                         Semaforos_inteligentes = MTIC265,
+                         Sensores_monitoria_area_risco = MTIC266)
 
 ```
 
@@ -239,19 +251,46 @@ Os dados de saneamento foram extraídos da ANA (Agência Nacional de Águas e Sa
 ```{r}
 #| warning: false
 
+# Abaixo serão tratados os dados de esgotos da ANA:
+
 Atlas_Esgotos_ETE_2020 <- read_csv("00_bases/Atlas_Esgotos_ETE_2020.csv")
 
 
-
+# Abaixo serão tratados os dados de segurança hídrica da ANA:
 
 indice_seguranca_hidrica_out_2022 <- read_csv("00_bases/8Dndice_de_SeguranA7a_HADdrica_Urbano_-_ISH-U_(Atlas_de_Abastecimento_outubro_2022).csv")
 
-Indice_segur_hidrica_10_2022 <- indice_seguranca_hidrica_out_2022 %>% 
+seguranca_hidrica_out_2022 <- indice_seguranca_hidrica_out_2022 %>% 
                                 select(CDMUN, NMMUN, SGUF, ISH,
                                        TPMAN, CSMAN, TPSIS, TPOPE,
                                        SHAPE_Length, SHAPE_Area) %>% 
                                 mutate(CDMUN = as.character(CDMUN)) %>% 
                                 filter(CDMUN != "NA")
+
+```
+
+### 5) IDEB
+
+Os dados do IDEB (Índice de Desenvolvimento da Educação Básica) foram criados pelo governo federal para medir a qualidade do ensino nas escolas públicas.
+
+```{r}
+#| warning: false
+
+# Abaixo 
+
+divulgacao_anos_finais_municipios_2021 <- read_excel("00_bases/divulgacao_anos_finais_municipios_2021.xlsx")
+
+IDEB_rede_publica_2021 <- divulgacao_anos_finais_municipios_2021 %>% 
+                          filter(Rede_ensino == "Pública") %>% 
+                          mutate(Cod_municipio = as.character(Cod_municipio),
+                                 IDEB_2021 = as.numeric(IDEB_2021))
+  
+# Abaixo
+
+divulgacao_ensino_medio_municipios_2021 <- read_excel("00_bases/divulgacao_ensino_medio_municipios_2021.xlsx")
+
+IDEB_EM_rede_publica_2021 <- divulgacao_ensino_medio_municipios_2021 %>% 
+                             filter()
 
 
 ```
