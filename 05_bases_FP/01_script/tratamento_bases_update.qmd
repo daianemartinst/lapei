@@ -23,6 +23,7 @@ library(dplyr)
 library(readxl)
 library(readr)
 library(stringi)
+library(tidyr)
 
 ```
 
@@ -47,9 +48,9 @@ homicidios <- read_delim("00_bases/homicidios.csv", delim = ";", escape_double =
 homicidios$cod <- as.character(homicidios$cod)
 
 homicidios_2019 <- homicidios %>% 
-                  filter(período == 2019) %>% 
-                  distinct(cod, nome, período, valor) %>% 
-                  mutate(cod = substr(cod, 1, 6))
+                   filter(período == 2019) %>% 
+                   distinct(cod, nome, período, valor) %>% 
+                   mutate(cod = substr(cod, 1, 6))
 
 DT::datatable(homicidios_2019)
 
@@ -87,6 +88,8 @@ Os dados de unidades do SEBRAE foram acessados [aqui](https://transparencia.sebr
 
 ```{r}
 #| warning: false
+
+# Abaixo serão tratados os dados do SEBRAE
 
 hierarquia_municipios <- read_csv("00_bases/hierarquia_municipios.csv")
 sebrae <- read_excel("00_bases/sebrae.xlsx")
@@ -276,7 +279,7 @@ Os dados do IDEB (Índice de Desenvolvimento da Educação Básica) foram criado
 ```{r}
 #| warning: false
 
-# Abaixo 
+# Abaixo serão tratados os dados de ensino fundamental do IDEB:
 
 divulgacao_anos_finais_municipios_2021 <- read_excel("00_bases/divulgacao_anos_finais_municipios_2021.xlsx")
 
@@ -285,13 +288,29 @@ IDEB_rede_publica_2021 <- divulgacao_anos_finais_municipios_2021 %>%
                           mutate(Cod_municipio = as.character(Cod_municipio),
                                  IDEB_2021 = as.numeric(IDEB_2021))
   
-# Abaixo
+# Abaixo serão tratados os dados de ensino médio do IDEB:
 
 divulgacao_ensino_medio_municipios_2021 <- read_excel("00_bases/divulgacao_ensino_medio_municipios_2021.xlsx")
 
 IDEB_EM_rede_publica_2021 <- divulgacao_ensino_medio_municipios_2021 %>% 
-                             filter()
+                             filter(Rede_ensino == "Pública") %>% 
+                             mutate(Cod_municipio = as.character(Cod_municipio),
+                                    IDEB_2021 = as.numeric(IDEB_2021))
 
+```
+
+### 6) ANATEL
+
+Os dados da ANATEL...
+
+```{r}
+
+bandalarga_Meu_Municipio_Acessos <- read_delim("00_bases/bandalarga_Meu_Municipio_Acessos.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+Banda_larga_municipio_2022 <- bandalarga_Meu_Municipio_Acessos %>% 
+                              select(Serviço, Densidade, `Código IBGE`) %>% 
+                              mutate(`Código IBGE` = as.character(`Código IBGE`)) %>% 
+                              spread(Serviço, Densidade)
 
 ```
 
