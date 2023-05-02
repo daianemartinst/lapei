@@ -160,10 +160,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="lapei---ufg" class="level2">
 <h2 class="anchored" data-anchor-id="lapei---ufg">Lapei - UFG</h2>
-<img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left">
+<p><img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left"></p>
 <p style="text-align:justify">
-O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.
-</p>
+</p><p>O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.</p>
+<p></p>
 <p><a href="https://lapei.face.ufg.br/"><strong>Saiba mais…</strong></a></p>
 </section>
 <section id="carregamento-e-tratamento-de-dados" class="level2">
@@ -173,10 +173,10 @@ O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Fede
 <p style="text-align:justify">
 </p><p>Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.</p>
 <ol type="1">
-<li>padronizamos a variável código do município para o formato texto</li>
-<li>pegamos apenas o último ano disponível (2019)</li>
-<li>a base de homicídios tinha registros duplicados. Por isso, usamos a função <code>distinct</code></li>
-<li>retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito
+<li><p>padronizamos a variável código do município para o formato texto</p></li>
+<li><p>pegamos apenas o último ano disponível (2019)</p></li>
+<li><p>a base de homicídios tinha registros duplicados. Por isso, usamos a função <code>distinct</code></p></li>
+<li><p>retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito</p>
 <p></p></li>
 </ol>
 <div class="cell">
@@ -196,7 +196,7 @@ O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Fede
 <h3 class="anchored" data-anchor-id="sebrae">2) SEBRAE</h3>
 <p style="text-align:justify">
 </p><p>Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE).</p>
-Os dados de unidades do SEBRAE foram acessados <a href="https://transparencia.sebrae.com.br/infraestrutura?unidade="><strong>aqui</strong></a>
+<p>Os dados de unidades do SEBRAE foram acessados <a href="https://transparencia.sebrae.com.br/infraestrutura?unidade="><strong>aqui</strong></a></p>
 <p></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hierarquia_municipios <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/hierarquia_municipios.csv"</span>)</span>
@@ -219,10 +219,10 @@ Os dados de unidades do SEBRAE foram acessados <a href="https://transparencia.se
 <p style="text-align:justify">
 </p><p>A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios.</p>
 <ol type="1">
-<li>Selecionamos as variáveis <code>CodMun</code> (código do município), <code>MREH0116</code> (quadro de pessoal da adminsitração direta) e <code>MREH0316</code> (quadro de pessoal da adminsitração indireta).</li>
-<li>Convertemos o tipo das varáveis.</li>
-<li>O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.</li>
-<li>Renomeamos as variáveis.
+<li><p>Selecionamos as variáveis <code>CodMun</code> (código do município), <code>MREH0116</code> (quadro de pessoal da adminsitração direta) e <code>MREH0316</code> (quadro de pessoal da adminsitração indireta).</p></li>
+<li><p>Convertemos o tipo das varáveis.</p></li>
+<li><p>O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.</p></li>
+<li><p>Renomeamos as variáveis.</p>
 <p></p></li>
 </ol>
 <div class="cell">
@@ -334,21 +334,21 @@ Os dados de unidades do SEBRAE foram acessados <a href="https://transparencia.se
 <section id="autoria" class="level1">
 <h1>Autoria</h1>
 <figure class="figure">
-<p><img src="imagens/adalenypaiva.JPG" width="200" height="200" align="left" class="figure-img"></p>
+<img src="imagens/adalenypaiva.JPG" width="200" height="200" align="left" class="figure-img">
 <figcaption style="text-align:center" class="figure-caption">
-Adaleny Paiva,Título: Bacharela(Mestranda - PPGS/UFG),E-mail: adalenypaiva@discente.ufg.br
+<p>Adaleny Paiva,Título: Bacharela(Mestranda - PPGS/UFG),E-mail: adalenypaiva@discente.ufg.br</p>
 </figcaption>
 </figure>
 <figure class="figure">
-<p><img src="imagens/Henrique_Administração.jpeg" width="200" height="200" align="left" class="figure-img"></p>
+<img src="imagens/Henrique_Silveira.jpg" width="200" height="200" align="left" class="figure-img">
 <figcaption style="text-align:center" class="figure-caption">
-Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro@discente.ufg.br
+<p>Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro@discente.ufg.br</p>
 </figcaption>
 </figure>
 <figure class="figure">
-<p><img src="imagens/Daniel_Pagotto.jpg" width="200" height="200" align="left" class="figure-img"></p>
+<img src="imagens/Daniel_Pagotto.jpg" width="200" height="200" align="left" class="figure-img">
 <figcaption style="text-align:center" class="figure-caption">
-Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB),E-mail: danielppagotto@ufg.br
+<p>Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB),E-mail: danielppagotto@ufg.br</p>
 </figcaption>
 </figure>
 </section>
