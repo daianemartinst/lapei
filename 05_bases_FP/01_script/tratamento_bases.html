@@ -105,6 +105,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#objetivo" id="toc-objetivo" class="nav-link active" data-scroll-target="#objetivo">Objetivo</a></li>
+  <li><a href="#lapei---ufg" id="toc-lapei---ufg" class="nav-link" data-scroll-target="#lapei---ufg">Lapei - UFG</a></li>
+  <li><a href="#carregamento-e-tratamento-de-dados" id="toc-carregamento-e-tratamento-de-dados" class="nav-link" data-scroll-target="#carregamento-e-tratamento-de-dados">Carregamento e tratamento de dados</a>
+  <ul class="collapse">
+  <li><a href="#dados-de-violência" id="toc-dados-de-violência" class="nav-link" data-scroll-target="#dados-de-violência">1) Dados de violência</a></li>
+  <li><a href="#sebrae" id="toc-sebrae" class="nav-link" data-scroll-target="#sebrae">2) SEBRAE</a></li>
+  <li><a href="#munic" id="toc-munic" class="nav-link" data-scroll-target="#munic">3) Munic</a></li>
+  </ul></li>
+  <li><a href="#autoria" id="toc-autoria" class="nav-link" data-scroll-target="#autoria">Autoria</a></li>
+  <li><a href="#como-citar" id="toc-como-citar" class="nav-link" data-scroll-target="#como-citar">Como citar</a></li>
+  </ul>
+</nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -124,45 +140,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
 
 </header>
-<nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Índice</h2>
-   
-  <ul>
-  <li><a href="#lapei" id="toc-lapei">Lapei</a></li>
-  <li><a href="#objetivo" id="toc-objetivo">Objetivo</a></li>
-  <li><a href="#carregamento-e-tratamento-de-dados" id="toc-carregamento-e-tratamento-de-dados">Carregamento e tratamento de dados</a>
-  <ul>
-  <li><a href="#dados-de-violência" id="toc-dados-de-violência">1) Dados de violência</a></li>
-  <li><a href="#sebrae" id="toc-sebrae">2) SEBRAE</a></li>
-  <li><a href="#munic" id="toc-munic">3) Munic</a></li>
-  </ul></li>
-  <li><a href="#autoria" id="toc-autoria">Autoria</a></li>
-  <li><a href="#como-citar" id="toc-como-citar">Como citar</a></li>
-  </ul>
-</nav>
+
 <div class="cell">
 
 </div>
-<section id="lapei" class="level2">
-<h2 class="anchored" data-anchor-id="lapei"><a href="https://lapei.face.ufg.br/">Lapei</a></h2>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="Imagens/lapei-horizontal-laboratório.png" class="img-fluid figure-img" style="width:25.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).</p>
-<p>O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.</p>
-</section>
 <section id="objetivo" class="level2">
 <h2 class="anchored" data-anchor-id="objetivo">Objetivo</h2>
-<p>O objetivo deste documento é publicizar os procedimentos de tratamento de uma bases de dados construída a partir de múltiplas fontes, sendo elas:</p>
-<ul>
-<li><a href="https://www.receita.fazenda.df.gov.br/">Tempo de abertura de empresa</a></li>
-</ul>
+<p>O objetivo deste documento é publicizar os procedimentos de tratamento de uma bases de dados construída a partir de múltiplas fontes.</p>
 <p>Além de criar e disponibilizar a base tratada, disponibilizamos todos os procedimentos executados para chegar nela, conforme o script abaixo.</p>
 <p>Preparando o ambiente do R com os pacotes que precisaremos. Caso não tenha instalado o pacote ainda, use a função <code>install.packages("pacote")</code></p>
 <div class="cell">
@@ -174,16 +158,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringi)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
+<section id="lapei---ufg" class="level2">
+<h2 class="anchored" data-anchor-id="lapei---ufg">Lapei - UFG</h2>
+<img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left">
+<p style="text-align:justify">
+O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.
+</p>
+<p><a href="https://lapei.face.ufg.br/"><strong>Saiba mais…</strong></a></p>
+</section>
 <section id="carregamento-e-tratamento-de-dados" class="level2">
 <h2 class="anchored" data-anchor-id="carregamento-e-tratamento-de-dados">Carregamento e tratamento de dados</h2>
 <section id="dados-de-violência" class="level3">
-<h3 class="anchored" data-anchor-id="dados-de-violência">1) <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/homicidios.csv">Dados de violência</a></h3>
-<p>Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.</p>
+<h3 class="anchored" data-anchor-id="dados-de-violência">1) Dados de violência</h3>
+<p style="text-align:justify">
+</p><p>Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.</p>
 <ol type="1">
 <li>padronizamos a variável código do município para o formato texto</li>
 <li>pegamos apenas o último ano disponível (2019)</li>
 <li>a base de homicídios tinha registros duplicados. Por isso, usamos a função <code>distinct</code></li>
-<li>retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito</li>
+<li>retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito
+<p></p></li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>homicidios <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"00_bases/homicidios.csv"</span>, </span>
@@ -196,11 +190,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">distinct</span>(cod, nome, período, valor) <span class="sc">%&gt;%</span> </span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">cod =</span> <span class="fu">substr</span>(cod, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/homicidios.csv"><strong>aqui</strong></a></p>
 </section>
 <section id="sebrae" class="level3">
-<h3 class="anchored" data-anchor-id="sebrae">2) <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/sebrae.xlsx">SEBRAE</a></h3>
-<p>Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE).</p>
-<p>Os dados de unidades do SEBRAE foram acessados <a href="https://transparencia.sebrae.com.br/infraestrutura?unidade=">aqui</a></p>
+<h3 class="anchored" data-anchor-id="sebrae">2) SEBRAE</h3>
+<p style="text-align:justify">
+</p><p>Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE).</p>
+Os dados de unidades do SEBRAE foram acessados <a href="https://transparencia.sebrae.com.br/infraestrutura?unidade="><strong>aqui</strong></a>
+<p></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hierarquia_municipios <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/hierarquia_municipios.csv"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sebrae <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/sebrae.xlsx"</span>)</span>
@@ -215,15 +212,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">select</span>(cod_municipio, cod_municipiodv,</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                               municipio, Tipo, CEP, Endereço)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/sebrae.xlsx"><strong>aqui</strong></a></p>
 </section>
 <section id="munic" class="level3">
-<h3 class="anchored" data-anchor-id="munic">3) <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/Munic.xlsx">Munic</a></h3>
-<p>A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios.</p>
+<h3 class="anchored" data-anchor-id="munic">3) Munic</h3>
+<p style="text-align:justify">
+</p><p>A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios.</p>
 <ol type="1">
 <li>Selecionamos as variáveis <code>CodMun</code> (código do município), <code>MREH0116</code> (quadro de pessoal da adminsitração direta) e <code>MREH0316</code> (quadro de pessoal da adminsitração indireta).</li>
 <li>Convertemos o tipo das varáveis.</li>
 <li>O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.</li>
-<li>Renomeamos as variáveis.</li>
+<li>Renomeamos as variáveis.
+<p></p></li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Munic_RH <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/Munic.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Recursos humanos"</span>) <span class="sc">%&gt;%</span> </span>
@@ -328,44 +328,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_18_res =</span> MREG146, </span>
 <span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Nenhum_18_res =</span> MREG147)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/Munic.xlsx"><strong>aqui</strong></a></p>
 </section>
 </section>
 <section id="autoria" class="level1">
 <h1>Autoria</h1>
-<div class="cell" data-layout-align="left">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="Imagens/adalenypaiva.JPG" class="img-fluid figure-img" style="width:25.0%"></p>
-<p></p><figcaption class="figure-caption">Adaleny Paiva, Título: Bacharela (Mestranda - PPGS/UFG), E-mail: adalenypaiva@discente.ufg.br</figcaption><p></p>
+<p><img src="imagens/adalenypaiva.JPG" width="200" height="200" align="left" class="figure-img"></p>
+<figcaption style="text-align:center" class="figure-caption">
+Adaleny Paiva,Título: Bacharela(Mestranda - PPGS/UFG),E-mail: adalenypaiva@discente.ufg.br
+</figcaption>
 </figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="left">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="Imagens/Henrique_Administração.jpeg" class="img-fluid figure-img" style="width:25.0%"></p>
-<p></p><figcaption class="figure-caption">Henrique Silveira, Título: Graduando (FACE/UFG), E-mail: henriqueribeiro@discente.ufg.br</figcaption><p></p>
+<p><img src="imagens/Henrique_Administração.jpeg" width="200" height="200" align="left" class="figure-img"></p>
+<figcaption style="text-align:center" class="figure-caption">
+Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro@discente.ufg.br
+</figcaption>
 </figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="left">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="Imagens/Daniel_Pagotto.jpg" class="img-fluid figure-img" style="width:25.0%"></p>
-<p></p><figcaption class="figure-caption">Daniel Pagotto, Título: Mestre (Doutorando PPGA/ UnB), E-mail: danielppagotto@ufg.br</figcaption><p></p>
+<p><img src="imagens/Daniel_Pagotto.jpg" width="200" height="200" align="left" class="figure-img"></p>
+<figcaption style="text-align:center" class="figure-caption">
+Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB),E-mail: danielppagotto@ufg.br
+</figcaption>
 </figure>
-</div>
-</div>
-</div>
 </section>
 <section id="como-citar" class="level1">
 <h1>Como citar</h1>
-<p>Paiva, Silveira, H.; A.D.S; Pagotto, D. P. Bases para pesquisas em ciências sociais.</p>
+<p>Paiva, A.D.S; Silveira, H.; Pagotto, D. P. Bases para pesquisas em ciências sociais.</p>
 </section>
 
 </main>
@@ -501,6 +490,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
 });
 </script>
 </div> <!-- /content -->
