@@ -4,12 +4,13 @@ format:
   html:
     toc: true
     toc-expand: 3
-    toc-location: body
     html-math-method: katex
     css: styles.css
 editor: visual
 lang: pt
 anchor-sections: true
+link-external-newwindow: true
+
 ---
 
 ```{r}
@@ -23,25 +24,9 @@ here::here("styles.css")
 
 ```
 
-## [Lapei](https://lapei.face.ufg.br/)
-
-```{r, out.width= "25%", fig.align='center',echo=FALSE}
-
-
-knitr::include_graphics(here::here("01_script/imagens/lapei-horizontal-laboratório.png"))
-
-
-```
-
-O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).
-
-O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.
-
 ## Objetivo
 
-O objetivo deste documento é publicizar os procedimentos de tratamento de uma bases de dados construída a partir de múltiplas fontes, sendo elas:
-
--   [Tempo de abertura de empresa](https://www.receita.fazenda.df.gov.br/)
+O objetivo deste documento é publicizar os procedimentos de tratamento de uma bases de dados construída a partir de múltiplas fontes.
 
 Além de criar e disponibilizar a base tratada, disponibilizamos todos os procedimentos executados para chegar nela, conforme o script abaixo.
 
@@ -58,16 +43,23 @@ library(readr)
 library(stringi)
 ```
 
+## Lapei - UFG
+
+<img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left"> <p style='text-align:justify'> O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.</p>
+
+[**Saiba mais...**](https://lapei.face.ufg.br/)
+
 ## Carregamento e tratamento de dados
 
-### 1) [Dados de violência](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/homicidios.csv)
+### 1) Dados de violência
 
-Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.
+<p style='text-align:justify'>Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.
 
 1)  padronizamos a variável código do município para o formato texto
 2)  pegamos apenas o último ano disponível (2019)
 3)  a base de homicídios tinha registros duplicados. Por isso, usamos a função `distinct`
-4)  retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito
+4)  retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito </p>
+
 
 ```{r}
 #| warning: false
@@ -83,12 +75,14 @@ homicidios_2019 <- homicidios %>%
                   mutate(cod = substr(cod, 1, 6))
 
 ```
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/homicidios.csv)
 
-### 2) [SEBRAE](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/sebrae.xlsx)
 
-Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE).
+### 2) SEBRAE
 
-Os dados de unidades do SEBRAE foram acessados [aqui](https://transparencia.sebrae.com.br/infraestrutura?unidade=)
+<p style='text-align:justify'> Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE).
+
+Os dados de unidades do SEBRAE foram acessados [**aqui**](https://transparencia.sebrae.com.br/infraestrutura?unidade=)</p>
 
 ```{r}
 #| warning: false
@@ -107,15 +101,17 @@ sebrae_hieraquia <- sebrae %>%
                                municipio, Tipo, CEP, Endereço)
 
 ```
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/sebrae.xlsx)
 
-### 3) [Munic](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/Munic.xlsx)
 
-A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios.
+### 3) Munic
+
+<p style='text-align:justify'> A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios.
 
 1)  Selecionamos as variáveis `CodMun` (código do município), `MREH0116` (quadro de pessoal da adminsitração direta) e `MREH0316` (quadro de pessoal da adminsitração indireta).
 2)  Convertemos o tipo das varáveis.
 3)  O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.
-4)  Renomeamos as variáveis.
+4)  Renomeamos as variáveis.</p>
 
 ```{r}
 #| warning: false
@@ -224,27 +220,44 @@ Munic_Gestao <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos para gestão
                   
 ```
 
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/Munic.xlsx)
+
+
 # Autoria
 
-```{r, out.width= "25%", fig.align='left',echo=FALSE,fig.cap="Adaleny Paiva, Título: Bacharela (Mestranda - PPGS/UFG), E-mail: adalenypaiva@discente.ufg.br"}
 
-knitr::include_graphics(here::here("01_script/imagens/adalenypaiva.JPG"))
+<figure>
+  <img src="imagens/adalenypaiva.JPG" 
+    width="200" 
+    height="200"
+    align="left">
 
-```
+ <figcaption style='text-align:center'> Adaleny Paiva,Título: Bacharela(Mestranda - PPGS/UFG),E-mail: adalenypaiva@discente.ufg.br</figcaption>
+  
+</figure>
 
+<figure>
+  <img src="imagens/Henrique_Administração.jpeg" 
+    width="200" 
+    height="200"
+    align="left">
 
-```{r, out.width= "25%", fig.align='left',echo=FALSE, fig.cap="Henrique Silveira, Título: Graduando (FACE/UFG), E-mail: henriqueribeiro@discente.ufg.br"}
+ <figcaption style='text-align:center'> Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro@discente.ufg.br</figcaption>
+  
+</figure>
 
-knitr::include_graphics(here::here("01_script/imagens/Henrique_Administração.jpeg"))
+<figure>
+  <img src="imagens/Daniel_Pagotto.jpg" 
+    width="200" 
+    height="200"
+    align="left">
 
-```
+ <figcaption style='text-align:center'> Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB),E-mail:
+danielppagotto@ufg.br</figcaption>
+  
+</figure>
 
-```{r, out.width= "25%", fig.align='left',echo=FALSE, fig.cap= "Daniel Pagotto, Título: Mestre (Doutorando PPGA/ UnB), E-mail: danielppagotto@ufg.br" }
-
-knitr::include_graphics(here::here("01_script/imagens/Daniel_Pagotto.jpg"))
-
-```
 
 # Como citar 
 
-Paiva, Silveira, H.; A.D.S; Pagotto, D. P. Bases para pesquisas em ciências sociais.
+Paiva, A.D.S; Silveira, H.; Pagotto, D. P. Bases para pesquisas em ciências sociais.
