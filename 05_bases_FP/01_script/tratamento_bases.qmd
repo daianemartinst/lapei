@@ -10,7 +10,6 @@ editor: visual
 lang: pt
 anchor-sections: true
 link-external-newwindow: true
-
 ---
 
 ```{r}
@@ -45,7 +44,13 @@ library(stringi)
 
 ## Lapei - UFG
 
-<img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left"> <p style='text-align:justify'> O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.</p>
+<img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left"/>
+
+<p style="text-align:justify">
+
+O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.
+
+</p>
 
 [**Saiba mais...**](https://lapei.face.ufg.br/)
 
@@ -53,13 +58,19 @@ library(stringi)
 
 ### 1) Dados de violência
 
-<p style='text-align:justify'>Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.
+<p style='text-align:justify'>
+
+Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.
 
 1)  padronizamos a variável código do município para o formato texto
-2)  pegamos apenas o último ano disponível (2019)
-3)  a base de homicídios tinha registros duplicados. Por isso, usamos a função `distinct`
-4)  retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito </p>
 
+2)  pegamos apenas o último ano disponível (2019)
+
+3)  a base de homicídios tinha registros duplicados. Por isso, usamos a função `distinct`
+
+4)  retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito
+
+    </p>
 
 ```{r}
 #| warning: false
@@ -75,14 +86,18 @@ homicidios_2019 <- homicidios %>%
                   mutate(cod = substr(cod, 1, 6))
 
 ```
-Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/homicidios.csv)
 
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/homicidios.csv)
 
 ### 2) SEBRAE
 
-<p style='text-align:justify'> Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE).
+<p style="text-align:justify">
 
-Os dados de unidades do SEBRAE foram acessados [**aqui**](https://transparencia.sebrae.com.br/infraestrutura?unidade=)</p>
+Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE).
+
+Os dados de unidades do SEBRAE foram acessados [**aqui**](https://transparencia.sebrae.com.br/infraestrutura?unidade=)
+
+</p>
 
 ```{r}
 #| warning: false
@@ -101,17 +116,24 @@ sebrae_hieraquia <- sebrae %>%
                                municipio, Tipo, CEP, Endereço)
 
 ```
-Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/sebrae.xlsx)
 
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/sebrae.xlsx)
 
 ### 3) Munic
 
-<p style='text-align:justify'> A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios.
+<p style='text-align:justify'>
+
+A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios.
 
 1)  Selecionamos as variáveis `CodMun` (código do município), `MREH0116` (quadro de pessoal da adminsitração direta) e `MREH0316` (quadro de pessoal da adminsitração indireta).
+
 2)  Convertemos o tipo das varáveis.
+
 3)  O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.
-4)  Renomeamos as variáveis.</p>
+
+4)  Renomeamos as variáveis.
+
+    </p>
 
 ```{r}
 #| warning: false
@@ -222,42 +244,56 @@ Munic_Gestao <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos para gestão
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/Munic.xlsx)
 
-
 # Autoria
 
-
 <figure>
-  <img src="imagens/adalenypaiva.JPG" 
+
+```{=html}
+<img src="imagens/adalenypaiva.JPG" 
     width="200" 
     height="200"
     align="left">
+```
+<figcaption style="text-align:center">
 
- <figcaption style='text-align:center'> Adaleny Paiva,Título: Bacharela(Mestranda - PPGS/UFG),E-mail: adalenypaiva@discente.ufg.br</figcaption>
-  
+Adaleny Paiva,Título: Bacharela(Mestranda - PPGS/UFG),E-mail: adalenypaiva\@discente.ufg.br
+
+</figcaption>
+
 </figure>
 
 <figure>
-  <img src="imagens/Henrique_Administração.jpeg" 
+
+```{=html}
+<img src="imagens/Henrique_Silveira.jpg" 
     width="200" 
     height="200"
     align="left">
+```
+<figcaption style="text-align:center">
 
- <figcaption style='text-align:center'> Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro@discente.ufg.br</figcaption>
-  
+Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro\@discente.ufg.br
+
+</figcaption>
+
 </figure>
 
 <figure>
-  <img src="imagens/Daniel_Pagotto.jpg" 
+
+```{=html}
+<img src="imagens/Daniel_Pagotto.jpg" 
     width="200" 
     height="200"
     align="left">
+```
+<figcaption style="text-align:center">
 
- <figcaption style='text-align:center'> Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB),E-mail:
-danielppagotto@ufg.br</figcaption>
-  
+Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB),E-mail: danielppagotto\@ufg.br
+
+</figcaption>
+
 </figure>
 
-
-# Como citar 
+# Como citar
 
 Paiva, A.D.S; Silveira, H.; Pagotto, D. P. Bases para pesquisas em ciências sociais.
