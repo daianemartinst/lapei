@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Bases para Pesquisa em Ciências Sociais</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="tratamento_bases_files/libs/clipboard/clipboard.min.js"></script>
+<script src="tratamento_bases_files/libs/quarto-html/quarto.js"></script>
+<script src="tratamento_bases_files/libs/quarto-html/popper.min.js"></script>
+<script src="tratamento_bases_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="tratamento_bases_files/libs/quarto-html/anchor.min.js"></script>
+<link href="tratamento_bases_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="tratamento_bases_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="tratamento_bases_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="tratamento_bases_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="tratamento_bases_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#objetivo" id="toc-objetivo" class="nav-link active" data-scroll-target="#objetivo">Objetivo</a></li>
+  <li><a href="#lapei---ufg" id="toc-lapei---ufg" class="nav-link" data-scroll-target="#lapei---ufg">Lapei - UFG</a></li>
+  <li><a href="#carregamento-e-tratamento-de-dados" id="toc-carregamento-e-tratamento-de-dados" class="nav-link" data-scroll-target="#carregamento-e-tratamento-de-dados">Carregamento e tratamento de dados</a>
+  <ul class="collapse">
+  <li><a href="#dados-de-violência" id="toc-dados-de-violência" class="nav-link" data-scroll-target="#dados-de-violência">1) Dados de violência</a></li>
+  <li><a href="#sebrae" id="toc-sebrae" class="nav-link" data-scroll-target="#sebrae">2) SEBRAE</a></li>
+  <li><a href="#munic" id="toc-munic" class="nav-link" data-scroll-target="#munic">3) Munic</a></li>
+  </ul></li>
+  <li><a href="#autoria" id="toc-autoria" class="nav-link" data-scroll-target="#autoria">Autoria</a></li>
+  <li><a href="#como-citar" id="toc-como-citar" class="nav-link" data-scroll-target="#como-citar">Como citar</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Bases para Pesquisa em Ciências Sociais</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<section id="objetivo" class="level2">
+<h2 class="anchored" data-anchor-id="objetivo">Objetivo</h2>
+<p>O objetivo deste documento é publicizar os procedimentos de tratamento de uma bases de dados construída a partir de múltiplas fontes.</p>
+<p>Além de criar e disponibilizar a base tratada, disponibilizamos todos os procedimentos executados para chegar nela, conforme o script abaixo.</p>
+<p>Preparando o ambiente do R com os pacotes que precisaremos. Caso não tenha instalado o pacote ainda, use a função <code>install.packages("pacote")</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidyverse")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringi)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="lapei---ufg" class="level2">
+<h2 class="anchored" data-anchor-id="lapei---ufg">Lapei - UFG</h2>
+<p><img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left"></p>
+<p style="text-align:justify">
+</p><p>O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.</p>
+<p></p>
+<p><a href="https://lapei.face.ufg.br/"><strong>Saiba mais…</strong></a></p>
+</section>
+<section id="carregamento-e-tratamento-de-dados" class="level2">
+<h2 class="anchored" data-anchor-id="carregamento-e-tratamento-de-dados">Carregamento e tratamento de dados</h2>
+<section id="dados-de-violência" class="level3">
+<h3 class="anchored" data-anchor-id="dados-de-violência">1) Dados de violência</h3>
+<p style="text-align:justify">
+</p><p>Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.</p>
+<ol type="1">
+<li><p>padronizamos a variável código do município para o formato texto</p></li>
+<li><p>pegamos apenas o último ano disponível (2019)</p></li>
+<li><p>a base de homicídios tinha registros duplicados. Por isso, usamos a função <code>distinct</code></p></li>
+<li><p>retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito</p>
+<p></p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>homicidios <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"00_bases/homicidios.csv"</span>, </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>homicidios<span class="sc">$</span>cod <span class="ot">&lt;-</span> <span class="fu">as.character</span>(homicidios<span class="sc">$</span>cod)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>homicidios_2019 <span class="ot">&lt;-</span> homicidios <span class="sc">%&gt;%</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">filter</span>(período <span class="sc">==</span> <span class="dv">2019</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">distinct</span>(cod, nome, período, valor) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">cod =</span> <span class="fu">substr</span>(cod, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/homicidios.csv"><strong>aqui</strong></a></p>
+</section>
+<section id="sebrae" class="level3">
+<h3 class="anchored" data-anchor-id="sebrae">2) SEBRAE</h3>
+<p style="text-align:justify">
+</p><p>Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE).</p>
+<p>Os dados de unidades do SEBRAE foram acessados <a href="https://transparencia.sebrae.com.br/infraestrutura?unidade="><strong>aqui</strong></a></p>
+<p></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hierarquia_municipios <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/hierarquia_municipios.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sebrae <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/sebrae.xlsx"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>sebrae<span class="sc">$</span>Municipio_pad <span class="ot">=</span> <span class="fu">stri_trans_general</span>(<span class="at">str =</span> sebrae<span class="sc">$</span>Município,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">id =</span> <span class="st">"Latin-ASCII"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>sebrae_hieraquia <span class="ot">&lt;-</span> sebrae <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">left_join</span>(hierarquia_municipios,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Municipio_pad"</span><span class="ot">=</span><span class="st">"municipio_pad"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"UF"</span><span class="ot">=</span><span class="st">"uf_sigla"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">select</span>(cod_municipio, cod_municipiodv,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                               municipio, Tipo, CEP, Endereço)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/sebrae.xlsx"><strong>aqui</strong></a></p>
+</section>
+<section id="munic" class="level3">
+<h3 class="anchored" data-anchor-id="munic">3) Munic</h3>
+<p style="text-align:justify">
+</p><p>A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios.</p>
+<ol type="1">
+<li><p>Selecionamos as variáveis <code>CodMun</code> (código do município), <code>MREH0116</code> (quadro de pessoal da adminsitração direta) e <code>MREH0316</code> (quadro de pessoal da adminsitração indireta).</p></li>
+<li><p>Convertemos o tipo das varáveis.</p></li>
+<li><p>O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.</p></li>
+<li><p>Renomeamos as variáveis.</p>
+<p></p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Munic_RH <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/Munic.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Recursos humanos"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">select</span>(CodMun, MREH0316, MREH0116) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">CodMun =</span> <span class="fu">as.character</span>(CodMun), </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">MREH0316 =</span> <span class="fu">as.numeric</span>(MREH0316),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">MREH0116 =</span> <span class="fu">as.numeric</span>(MREH0116),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">CodMun =</span> <span class="fu">substr</span>(CodMun, <span class="dv">1</span>, <span class="dv">6</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">filter</span>(CodMun <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">rename</span>(<span class="at">RH_adm_dir =</span> MREH0116,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">RH_adm_indir =</span> MREH0316)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>Munic_TIC <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/Munic.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Comunicção e informática"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">select</span>(CodMun, MTIC02, MTIC03, MTIC04,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                         MTIC06, MTIC071, MTIC072, MTIC073,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                         MTIC074, MTIC075, MTIC076, MTIC121,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>                         MTIC122, MTIC123, MTIC124, MTIC125,    </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                         MTIC126,   MTIC127, MTIC128,   MTIC129,    </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                         MTIC1210, MTIC1211, MTIC1212, MTIC1213,    </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                         MTIC1214, MTIC1215, MTIC1216, MTIC1217,    </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                         MTIC1218) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">CodMun =</span> <span class="fu">as.character</span>(CodMun)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">filter</span>(CodMun <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">rename</span>(<span class="at">Possui_computador =</span> MTIC02,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Ligados_rede =</span> MTIC03, </span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>                         Tipo_conexão <span class="ot">=</span> MTIC04,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Estrutura_org =</span> MTIC06, </span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>                         Funcionários<span class="at">_efetivos =</span> MTIC071, </span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Servidores_cedidos =</span> MTIC072, </span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>                         Estagiários <span class="ot">=</span> MTIC073,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Cargo_comissionado =</span> MTIC074, </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Tercerizados =</span> MTIC075, </span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Consultores =</span> MTIC076, </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>                         Serviços<span class="at">_info =</span> MTIC121,</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Acessos_docs =</span> MTIC122, </span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>                         Infos_gerais_licitações <span class="ot">=</span> MTIC123, </span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Ouvidoria =</span> MTIC124,   </span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Download_docs =</span> MTIC125,   </span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Consulta_processos =</span> MTIC126,  </span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>                         Consulta_prévia <span class="ot">=</span> MTIC127, </span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>                         Diário<span class="at">_oficial =</span> MTIC128,  </span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>                         Concurso_púb <span class="ot">=</span> MTIC129,    </span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Cadastro_fornecedores =</span> MTIC1210, </span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>                         Emissão_certidão <span class="ot">=</span> MTIC1211, </span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>                         Emissão_alvará <span class="ot">=</span> MTIC1212, </span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>                         Emissão<span class="at">_nf =</span> MTIC1213, </span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>                         Matrícula<span class="at">_escolar =</span> MTIC1214, </span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Agendamento_consulta =</span> MTIC1215, </span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>                         Emissão<span class="at">_guia =</span> MTIC1216, </span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>                         Emissão<span class="at">_docs =</span> MTIC1217,   </span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>                         Pesquisa_satisfação <span class="ot">=</span> MTIC1218)</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>Munic_Gestao <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/Munic.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Recursos para gestão"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">select</span>(CodMun, MREG07, MREG081, MREG082,   </span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>                            MREG083, MREG084, MREG085, MREG086, </span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>                            MREG087, MREG088, MREG091, MREG092, </span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>                            MREG093, MREG094, MREG095, MREG101, </span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>                            MREG102, MREG103, MREG104, MREG105,</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>                            MREG106, MREG11, MREG121, MREG122,</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>                            MREG123, MREG131, MREG132, MREG133,</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>                            MREG134, MREG135, MREG136, MREG141,</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>                            MREG142, MREG143, MREG144, MREG145,</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>                            MREG146, MREG147) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">mutate</span>(<span class="at">CodMun =</span> <span class="fu">as.character</span>(CodMun)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">filter</span>(CodMun <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">rename</span>(<span class="at">Mecanismos_incentivo =</span> MREG07, </span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>                            Redução<span class="at">_IPTU =</span> MREG081, </span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>                            Isenção<span class="at">_IPTU =</span> MREG082, </span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>                            Redução<span class="at">_ISSQN =</span> MREG083, </span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>                            Isenção<span class="at">_ISSQN =</span> MREG084, </span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>                            Isenção<span class="at">_Tx =</span> MREG085,</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>                            Cessão<span class="at">_terrenos =</span> MREG086,  </span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>                            Doação<span class="at">_terrenos =</span> MREG087, </span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_mecanismos =</span> MREG088, </span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industrial =</span> MREG091, </span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>                            Comercial_serviços <span class="ot">=</span> MREG092,   </span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer =</span> MREG093, </span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Agro =</span> MREG094, </span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_beneficiados =</span> MREG095, </span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industrial_18 =</span> MREG101,    </span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>                            Comercial_serviços<span class="at">_18 =</span> MREG102, </span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer_18 =</span> MREG103, </span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Agro_18 =</span> MREG104, </span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_beneficiados_18 =</span> MREG105,</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Nenhum_beneficiado_18 =</span> MREG106, </span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>                            Mecanismos_restrição <span class="ot">=</span> MREG11, </span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>                            Legislação <span class="ot">=</span> MREG121,</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>                            Tributação <span class="ot">=</span> MREG122,</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>                            Outros_restrição <span class="ot">=</span> MREG123, </span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>                            Indústria<span class="at">_res =</span> MREG131, </span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>                            Indústria<span class="at">_extrativa_res =</span> MREG132, </span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>                            Comercial_serviços<span class="at">_res =</span> MREG133,</span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer_res =</span> MREG134, </span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Ambiental_res =</span> MREG135, </span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_res =</span> MREG136, </span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>                            Indústria<span class="at">_18_res =</span> MREG141,</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>                            Indústria<span class="at">_extrativa_18_res =</span> MREG142, </span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>                            Comercial_serviços<span class="at">_18_res =</span> MREG143, </span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer_18_res =</span> MREG144,</span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Ambiental_18_res =</span> MREG145,</span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_18_res =</span> MREG146, </span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Nenhum_18_res =</span> MREG147)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/Munic.xlsx"><strong>aqui</strong></a></p>
+</section>
+</section>
+<section id="autoria" class="level1">
+<h1>Autoria</h1>
+<figure class="figure">
+<img src="imagens/adalenypaiva.JPG" width="200" height="200" align="left" class="figure-img">
+<figcaption style="text-align:center" class="figure-caption">
+<p>Adaleny Paiva,Título: Bacharela(Mestranda - PPGS/UFG),E-mail: adalenypaiva@discente.ufg.br</p>
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="imagens/Henrique_Silveira.jpg" width="200" height="200" align="left" class="figure-img">
+<figcaption style="text-align:center" class="figure-caption">
+<p>Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro@discente.ufg.br</p>
+</figcaption>
+</figure>
+<figure class="figure">
+<img src="imagens/Daniel_Pagotto.jpg" width="200" height="200" align="left" class="figure-img">
+<figcaption style="text-align:center" class="figure-caption">
+<p>Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB),E-mail: danielppagotto@ufg.br</p>
+</figcaption>
+</figure>
+</section>
+<section id="como-citar" class="level1">
+<h1>Como citar</h1>
+<p>Paiva, A.D.S; Silveira, H.; Pagotto, D. P. Bases para pesquisas em ciências sociais.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

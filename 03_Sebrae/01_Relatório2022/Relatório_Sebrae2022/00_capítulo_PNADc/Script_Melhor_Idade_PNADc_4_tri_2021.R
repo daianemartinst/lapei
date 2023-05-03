@@ -25,10 +25,10 @@ library (readr)
 
 #dados da PNADc de modo automatico
 
-variaveis_selecionadas_PNADc <-c("VD2002", "VD2003", "V2007", "V2009", 
-                                 "V2010", "VD3004", "VD4007", "VD4010", "UF", 
-                                 "V4013", "V4016", "V4019", "V4020", "VD4016", 
-                                 "VD4036", "VD4017", "V1023","VD4031","VD4032","V4040", "V4022")
+variaveis_selecionadas_PNADc <-c("UF", "V2007", "VD4007", "V1023", 
+                                 "V2009", "V2010", "VD3004", "VD4017", "VD4016", 
+                                 "V4019", "V4016", "V4017", "V40171", "V4022", 
+                                 "V4040", "V4072", "V1023","VD4031","VD4032")
 
 dados_pnadc21 <- get_pnadc(year=2021, quarter=1, vars=variaveis_selecionadas_PNADc)
 
@@ -46,19 +46,29 @@ class(dados_pnadc21_4tri)
 pnadc_goias21_4tri <- subset(dados_pnadc21_4tri, UF == "Goiás")
 pnadc_goias21_4tri
 
+#<<<<<<< HEAD
 pnadc60_goias21_4tri <- subset(pnadc_goias21_4tri, V2009 >=60)
 pnadc60_goias21_4tri
 
 pnadc_mulherGO21_4tri <- subset(pnadc60_goias21_4tri , V2007 == "Mulher")
+#=======
+pnadc_goias21_idade_4tri <- subset(pnadc_goias21_4tri, V2009 >=60)
+pnadc_goias21_idade_4tri
+
+pnadc_mulherGO21_4tri <- subset(pnadc_goias21_idade_4tri , V2007 == "Mulher")
+#>>>>>>> e739061b08e536286a3410ea64e8b122f50315ad
 pnadc_mulherGO21_4tri
 
-melhor_idade_M <- subset(pnadc_mulherGO21_4tri, V2009 >=60 )
 
 
+#<<<<<<< HEAD
 pnadc_homemGO21_4tri <- subset(pnadc60_goias21_4tri , V2007 == "Homem")
+#=======
+pnadc_homemGO21_4tri <- subset(pnadc_goias21_idade_4tri , V2007 == "Homem")
+#>>>>>>> e739061b08e536286a3410ea64e8b122f50315ad
 pnadc_homemGO21_4tri
 
-melhor_idade_H <-subset(pnadc_homemGO21_4tri , V2009 >=60 )
+
 
 
 ###########################################################################
@@ -181,7 +191,11 @@ localtrabalho_empregado_homem21_4tri
 localtrabalho_empregador_homem21_4tri <- svytotal(~V4022, subset (pnadc_homemGO21_4tri, VD4007 == "Empregador"), na.rm = T)
 localtrabalho_empregador_homem21_4tri
 
+#<<<<<<< HEAD
 localtrabalho_cpropria_homem21_4tri <- svytotal(~V4022, subset (pnadc_homemGO21_4tri, VD4007 == "Conta própria"), na.rm = T)
+#=======
+localtrabalho_cpropria_homem21_4tri <- svytotal(~V4022, subset (pnadc_homemGO21_4tri, VD4007 == "Conta pr?pria"), na.rm = T)
+#>>>>>>> e739061b08e536286a3410ea64e8b122f50315ad
 localtrabalho_cpropria_homem21_4tri
 
 
@@ -227,7 +241,11 @@ qtdEMPREGADOS_cpropria_mulher21_4tri
 qtdEMPREGADOS_empregador_homem21_4tri <- svytotal(~V4016, subset (pnadc_homemGO21_4tri, VD4007 == "Empregador"), na.rm = T)
 qtdEMPREGADOS_empregador_homem21_4tri
 
+#<<<<<<< HEAD
 qtdEMPREGADOS_cpropria_homem21_4tri <- svytotal(~V4016, subset (pnadc_homemGO21_4tri, VD4007 == "Conta pr?pria"), na.rm = T)
+#=======
+qtdEMPREGADOS_cpropria_homem21_4tri <- svytotal(~V4016, subset (pnadc_homemGO21_4tri, VD4007 == "Conta própria"), na.rm = T)
+#>>>>>>> e739061b08e536286a3410ea64e8b122f50315ad
 qtdEMPREGADOS_cpropria_homem21_4tri
 
 
@@ -280,7 +298,11 @@ tempotrabalho_cpropria_mulher21_4tri
 tempotrabalho_empregador_homem21_4tri <- svytotal(~V4040, subset (pnadc_homemGO21_4tri, VD4007 == "Empregador"), na.rm = T)
 tempotrabalho_empregador_homem21_4tri
 
+#<<<<<<< HEAD
 tempotrabalho_cpropria_homem21_4tri <- svytotal(~V4040, subset (pnadc_homemGO21_4tri, VD4007 == "Conta própria"), na.rm = T)
+#=======
+tempotrabalho_cpropria_homem21_4tri <- svytotal(~V4040, subset (pnadc_homemGO21_4tri, VD4007 == "Conta pr?pria"), na.rm = T)
+#>>>>>>> e739061b08e536286a3410ea64e8b122f50315ad
 tempotrabalho_cpropria_homem21_4tri
 
 
@@ -291,7 +313,11 @@ tempotrabalho_cpropria_homem21_4tri
 PROVtrabalho_empregador_mulher21_4tri <- svytotal(~V4072, subset (pnadc_mulherGO21_4tri, VD4007 == "Empregador"), na.rm = T)
 PROVtrabalho_empregador_mulher21_4tri
 
+#<<<<<<< HEAD
 PROVtrabalho_cpropria_mulher21_4tri <- svytotal(~V4072, subset (pnadc_mulherGO21_4tri, VD4007 == "Conta própria"), na.rm = T)
+#=======
+PROVtrabalho_cpropria_mulher21_4tri <- svytotal(~V4072, subset (pnadc_mulherGO21_4tri, VD4007 == "Conta pr?pria"), na.rm = T)
+#>>>>>>> e739061b08e536286a3410ea64e8b122f50315ad
 PROVtrabalho_cpropria_mulher21_4tri
 
 #-------Homem--------
