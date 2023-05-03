@@ -251,6 +251,12 @@ Munic_TIC <- read_excel("00_bases/Munic.xlsx", sheet = "Comunicção e informát
 
 Os dados de saneamento foram extraídos da ANA (Agência Nacional de Águas e Saneamento Básico).  
 
+Foi realizado o seguinte trataemendo nos dados da ANA:
+
+1) Selecionamos as variáveis;
+2) Convertemos a variável `CDMUN` em categórica;
+3) O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.
+
 ```{r}
 #| warning: false
 
@@ -261,14 +267,12 @@ Atlas_Esgotos_ETE_2020 <- read_csv("00_bases/Atlas_Esgotos_ETE_2020.csv")
 
 # Abaixo serão tratados os dados de segurança hídrica da ANA:
 
-indice_seguranca_hidrica_out_2022 <- read_csv("00_bases/8Dndice_de_SeguranA7a_HADdrica_Urbano_-_ISH-U_(Atlas_de_Abastecimento_outubro_2022).csv")
-
-seguranca_hidrica_out_2022 <- indice_seguranca_hidrica_out_2022 %>% 
-                                select(CDMUN, NMMUN, SGUF, ISH,
+Seguranca_hidrica_out_2022 <- read_csv("00_bases/8Dndice_de_SeguranA7a_HADdrica_Urbano_-_ISH-U_(Atlas_de_Abastecimento_outubro_2022).csv")
+                              select(CDMUN, NMMUN, SGUF, ISH,
                                        TPMAN, CSMAN, TPSIS, TPOPE,
                                        SHAPE_Length, SHAPE_Area) %>% 
-                                mutate(CDMUN = as.character(CDMUN)) %>% 
-                                filter(CDMUN != "NA")
+                              mutate(CDMUN = as.character(CDMUN)) %>% 
+                              filter(CDMUN != "NA")
 
 ```
 
@@ -276,23 +280,25 @@ seguranca_hidrica_out_2022 <- indice_seguranca_hidrica_out_2022 %>%
 
 Os dados do IDEB (Índice de Desenvolvimento da Educação Básica) foram criados pelo governo federal para medir a qualidade do ensino nas escolas públicas.
 
+Tanto os dados de ensino fundamental quanto os do ensino médio foram tratados da seguinte forma:
+
+1) Filtramos o tipo de rede de ensino para Pública;
+2) Convertemos a variável `Cod_munucipio` em categórica e a `IDEB_2021` em numérica.
+
 ```{r}
 #| warning: false
 
-# Abaixo serão tratados os dados de ensino fundamental do IDEB:
+# Abaixo serão tratados os dados de ensino fundamental do IDEB e depois sendo tratados:
 
-divulgacao_anos_finais_municipios_2021 <- read_excel("00_bases/divulgacao_anos_finais_municipios_2021.xlsx")
-
-IDEB_rede_publica_2021 <- divulgacao_anos_finais_municipios_2021 %>% 
+IDEB_rede_publica_2021 <- read_excel("00_bases/divulgacao_anos_finais_municipios_2021.xlsx")
                           filter(Rede_ensino == "Pública") %>% 
                           mutate(Cod_municipio = as.character(Cod_municipio),
                                  IDEB_2021 = as.numeric(IDEB_2021))
   
-# Abaixo serão tratados os dados de ensino médio do IDEB:
+                          
+# Abaixo serão tratados os dados de ensino médio do IDEBe depois sendo tratados:
 
-divulgacao_ensino_medio_municipios_2021 <- read_excel("00_bases/divulgacao_ensino_medio_municipios_2021.xlsx")
-
-IDEB_EM_rede_publica_2021 <- divulgacao_ensino_medio_municipios_2021 %>% 
+IDEB_EM_rede_publica_2021 <- read_excel("00_bases/divulgacao_ensino_medio_municipios_2021.xlsx")
                              filter(Rede_ensino == "Pública") %>% 
                              mutate(Cod_municipio = as.character(Cod_municipio),
                                     IDEB_2021 = as.numeric(IDEB_2021))
@@ -301,16 +307,28 @@ IDEB_EM_rede_publica_2021 <- divulgacao_ensino_medio_municipios_2021 %>%
 
 ### 6) ANATEL
 
-Os dados da ANATEL...
+Os dados de acessos da ANATEL mostram a densidade de acessos de assinantes dos serviços de Banda Larga Fixa, Telefonia Móvel, TV por Assinatura e Telefonia Fixa. 
+
+Os dados froam tratados da seguinte maneira:
+
+1) Filtramos para o ano de 2022;
+2) Selecionamos as variáveis `Serviço`, `Densidade` e `Código IBGE`;
+3) Convertemos a variável `Código IBGE` em categórica;
+4) Renomeamos algumas variáveis;
+5) Convertemos as observações de `Servico` em colunas ao invés de linhas.  
 
 ```{r}
+#| warning: false
 
-bandalarga_Meu_Municipio_Acessos <- read_delim("00_bases/bandalarga_Meu_Municipio_Acessos.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+# Abaixo está sendo puxado os dados da ANATEL e depois sendo tratados:
 
-Banda_larga_municipio_2022 <- bandalarga_Meu_Municipio_Acessos %>% 
-                              select(Serviço, Densidade, `Código IBGE`) %>% 
-                              mutate(`Código IBGE` = as.character(`Código IBGE`)) %>% 
-                              spread(Serviço, Densidade)
+Banda_larga_municipio_2022 <- read_delim("00_bases/bandalarga_Meu_Municipio_Acessos.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE) %>% 
+                                    filter(Ano == 2022) %>% 
+                                    select(Serviço, Densidade, `Código IBGE`) %>% 
+                                    mutate(`Código IBGE` = as.character(`Código IBGE`)) %>% 
+                                    rename(Codigo_IBGE = `Código IBGE`,
+                                           Servico = Serviço) %>% 
+                                    spread(key = Servico, value = Densidade)
 
 ```
 
