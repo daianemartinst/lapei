@@ -1,0 +1,407 @@
+---
+title: "Bases para Pesquisa em Ciências Sociais"
+format: 
+  html:
+    toc: true
+    toc-expand: 3
+    html-math-method: katex
+    css: styles.css
+editor: visual
+lang: pt
+anchor-sections: true
+link-external-newwindow: true
+---
+
+```{r}
+#| echo: false
+#| eval: false
+
+install.packages("here")
+library(here)
+here::here()
+here::here("styles.css")
+
+```
+
+
+## Objetivo
+
+O objetivo deste documento é publicizar os procedimentos de tratamento de uma bases de dados construída a partir de múltiplas fontes.
+
+Além de criar e disponibilizar a base tratada, disponibilizamos todos os procedimentos executados para chegar nela, conforme o script abaixo.
+
+Preparando o ambiente do R com os pacotes que precisaremos. Caso não tenha instalado o pacote ainda, use a função `install.packages("pacote")`
+
+
+```{r}
+#| warning: false
+
+#install.packages("tidyverse")
+
+library(dplyr)
+library(readxl)
+library(readr)
+library(stringi)
+library(tidyr)
+
+```
+
+
+## Lapei - UFG
+
+<img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left"/>
+
+<p style="text-align:justify">
+
+O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.
+
+</p>
+
+[**Saiba mais...**](https://lapei.face.ufg.br/)
+
+## Carregamento e tratamento de dados
+
+### 1) Dados de violência
+
+<p style='text-align:justify'>
+
+Os dados de homicídio foram extraídos do Atlas da Violência do IPEA.
+
+1)  padronizamos a variável código do município para o formato texto
+
+2)  pegamos apenas o último ano disponível (2019)
+
+3)  a base de homicídios tinha registros duplicados. Por isso, usamos a função `distinct`
+
+4)  retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito
+
+    </p>
+
+
+```{r}
+#| warning: false
+
+homicidios <- read_delim("00_bases/homicidios.csv", 
+    delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+homicidios$cod <- as.character(homicidios$cod)
+
+homicidios_2019 <- homicidios %>% 
+                  filter(período == 2019) %>% 
+                  distinct(cod, nome, período, valor) %>% 
+                  mutate(cod = substr(cod, 1, 6))
+
+```
+
+
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/homicidios.csv)
+
+### 2) SEBRAE
+
+<p style="text-align:justify">
+
+Aqui estamos tratando a base do SEBRAE, pois ela não possui um código de identificação de município (ex.: código IBGE).
+
+Os dados de unidades do SEBRAE foram acessados [**aqui**](https://transparencia.sebrae.com.br/infraestrutura?unidade=)
+
+</p>
+
+
+```{r}
+#| warning: false
+
+hierarquia_municipios <- read_csv("00_bases/hierarquia_municipios.csv")
+sebrae <- read_excel("00_bases/sebrae.xlsx")
+
+sebrae$Municipio_pad = stri_trans_general(str = sebrae$Município,
+                                          id = "Latin-ASCII")
+
+sebrae_hieraquia <- sebrae %>%
+                        left_join(hierarquia_municipios,
+                                  by = c("Municipio_pad"="municipio_pad",
+                                         "UF"="uf_sigla")) %>%
+                        select(cod_municipio, cod_municipiodv,
+                               municipio, Tipo, CEP, Endereço)
+
+```
+
+
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/00_bases/sebrae.xlsx)
+
+### 3) Munic
+
+A MUNIC é uma base do IBGE que traz informações sobre características dos 5570 municípios.
+
+Pegamos na Base Munic as variáveis dos temas RH, gestão e comunicação, e para cada um desses temas tratamos os dados da seguinte maneira:
+
+1)  Selecionamos as variáveis.
+2)  Convertemos o tipo das varáveis.
+3)  O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.
+4)  Renomeamos as variáveis.
+
+
+```{r}
+#| warning: false
+
+# Abaixo serão tratados dados da força de trabalho do município:
+
+Munic_RH <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos humanos") %>% 
+                  select(CodMun, MREH0316, MREH0116) %>% 
+                  mutate(CodMun = as.character(CodMun), 
+                         MREH0316 = as.numeric(MREH0316),
+                         MREH0116 = as.numeric(MREH0116),
+                         CodMun = substr(CodMun, 1, 6)) %>% 
+                  filter(CodMun != "NA") %>% 
+                  rename(RH_adm_dir = MREH0116,
+                         RH_adm_indir = MREH0316)
+
+
+# Abaixo serão tratados dados de mecanismos de incentivo e de restrição à implantação de empreendedimentos:
+
+Munic_Gestao <- read_excel("00_bases/Munic.xlsx", sheet = "Recursos para gestão") %>%
+                     select(CodMun, MREG07, MREG081, MREG082,	
+                            MREG083, MREG084, MREG085, MREG086,	
+                            MREG087, MREG088, MREG091, MREG092,	
+                            MREG093, MREG094, MREG095, MREG101,	
+                            MREG102, MREG103, MREG104, MREG105,
+                            MREG106, MREG11, MREG121, MREG122,
+                            MREG123, MREG131, MREG132, MREG133,
+                            MREG134, MREG135, MREG136, MREG141,
+                            MREG142, MREG143, MREG144, MREG145,
+                            MREG146, MREG147) %>% 
+                     mutate(CodMun = as.character(CodMun)) %>%
+                     filter(CodMun != "NA") %>% 
+                     rename(Mecanismos_incentivo = MREG07, 
+                            Reducao_IPTU = MREG081, 
+                            Isencao_IPTU = MREG082,	
+                            Reducao_ISSQN = MREG083, 
+                            Isencao_ISSQN = MREG084, 
+                            Isencao_Tx = MREG085,
+                            Cessao_terrenos = MREG086,	
+                            Doacao_terrenos = MREG087, 
+                            Outros_mecanismos = MREG088, 
+                            Industria_beneficiada = MREG091, 
+                            Comercio_servicos_beneficiados = MREG092,	
+                            Turismo_esporte_lazer_beneficiados = MREG093, 
+                            Agropecuario_beneficiado = MREG094, 
+                            Outros_beneficiados = MREG095, 
+                            Industria_beneficiada_2018 = MREG101,	
+                            Comercio_servicos_beneficiados_2018 = MREG102, 
+                            Turismo_esporte_lazer_beneficiados_2018 = MREG103, 
+                            Agropecuario_beneficiado_2018 = MREG104, 
+                            Outros_beneficiados_2018 = MREG105,
+                            Nenhum_beneficiado_2018 = MREG106, 
+                            Mecanismos_restricao = MREG11, 
+                            Legislacao = MREG121,
+                            Tributacao = MREG122,
+                            Outros_restricao = MREG123, 
+                            Industria_restricao = MREG131, 
+                            Industria_extrativa_restricao = MREG132, 
+                            Comercio_servicos_restricao = MREG133,
+                            Turismo_esporte_lazer_restricao = MREG134, 
+                            Ambiental_restricao = MREG135, 
+                            Outras_empresas_restricao = MREG136, 
+                            Industria_restricao_2018 = MREG141,
+                            Industria_extrativa_restricao_2018 = MREG142, 
+                            Comercial_servicos_restricao_2018 = MREG143, 
+                            Turismo_esporte_lazer_restricao_2018 = MREG144, 
+                            Ambiental_restricao_2018 = MREG145,
+                            Outros_restricao_2018 = MREG146, 
+                            Nenhum_restricao_2018 = MREG147)
+
+
+# Abaixo serão tratados dados sobre Comunicação e Informática do município:
+
+Munic_TIC <- read_excel("00_bases/Munic.xlsx", sheet = "Comunicção e informática") %>% 
+                  select(CodMun, MTIC02, MTIC03, MTIC04,
+                         MTIC06, MTIC071, MTIC072, MTIC073,
+                         MTIC074, MTIC075, MTIC076, MTIC121,
+                         MTIC122, MTIC123, MTIC124,	MTIC125,	
+                         MTIC126,	MTIC127, MTIC128,	MTIC129,	
+                         MTIC1210, MTIC1211, MTIC1212, MTIC1213,	
+                         MTIC1214, MTIC1215, MTIC1216, MTIC1217,	
+                         MTIC1218, MTIC161, MTIC162, MTIC163,
+                         MTIC164, MTIC165, MTIC166, MTIC167,
+                         MTIC261, MTIC262, MTIC263, MTIC264,
+                         MTIC265, MTIC266) %>% 
+                  mutate(CodMun = as.character(CodMun)) %>%
+                  filter(CodMun != "NA") %>% 
+                  rename(Possui_computador = MTIC02,
+                         Computador_ligado_rede = MTIC03, 
+                         Tipo_conexao_internet = MTIC04,
+                         Estrutura_organizacional_TI = MTIC06, 
+                         Funcionarios_efetivos_TI = MTIC071, 
+                         Servidores_cedidos_TI = MTIC072, 
+                         Estagiarios_TI = MTIC073,
+                         Cargo_comissionado_TI = MTIC074, 
+                         Tercerizados_TI = MTIC075, 
+                         Consultores_TI = MTIC076, 
+                         Servicos_informativos = MTIC121,
+                         Acessos_docs_ = MTIC122, 
+                         Infos_gerais_licitacoes = MTIC123, 
+                         Ouvidoria = MTIC124,	
+                         Download_docs = MTIC125,	
+                         Consulta_processos = MTIC126,	
+                         Consulta_previa = MTIC127, 
+                         Diario_oficial = MTIC128,	
+                         Concurso_publico = MTIC129,	
+                         Cadastro_fornecedores = MTIC1210, 
+                         Emissao_certidao_negativa_debito = MTIC1211, 
+                         Emissao_alvara = MTIC1212, 
+                         Emissao_NF = MTIC1213,	
+                         Matricula_escolar = MTIC1214, 
+                         Agendamento_consulta_saude = MTIC1215, 
+                         Emissao_guia_pagamento_tributos = MTIC1216, 
+                         Emissao_docs = MTIC1217,	
+                         Pesquisa_satisfacao = MTIC1218,
+                         Envio_SMS = MTIC161,
+                         Recibo_SMS = MTIC162,
+                         APPs_prefeitura = MTIC163,
+                         APPs_outros_orgaos = MTIC164,
+                         Website_mobile = MTIC165,
+                         Emissao_boletos_mobile = MTIC166,
+                         Nao_disponibilizou = MTIC167,
+                         Bilhete_eletronico_transporte = MTIC261,
+                         Onibus_GPS = MTIC262,
+                         Centro_controle_operacoes = MTIC263,
+                         Iluminacao_inteligente = MTIC264,
+                         Semaforos_inteligentes = MTIC265,
+                         Sensores_monitoria_area_risco = MTIC266)
+
+```
+
+
+### 4) ANA
+
+Os dados de saneamento foram extraídos da ANA (Agência Nacional de Águas e Saneamento Básico).
+
+
+```{r}
+#| warning: false
+
+# Abaixo serão tratados os dados de esgotos da ANA:
+
+Atlas_Esgotos_ETE_2020 <- read_csv("00_bases/Atlas_Esgotos_ETE_2020.csv")
+
+
+# Abaixo serão tratados os dados de segurança hídrica da ANA:
+
+indice_seguranca_hidrica_out_2022 <- read_csv("00_bases/8Dndice_de_SeguranA7a_HADdrica_Urbano_-_ISH-U_(Atlas_de_Abastecimento_outubro_2022).csv")
+
+seguranca_hidrica_out_2022 <- indice_seguranca_hidrica_out_2022 %>% 
+                                select(CDMUN, NMMUN, SGUF, ISH,
+                                       TPMAN, CSMAN, TPSIS, TPOPE,
+                                       SHAPE_Length, SHAPE_Area) %>% 
+                                mutate(CDMUN = as.character(CDMUN)) %>% 
+                                filter(CDMUN != "NA")
+
+```
+
+
+### 5) IDEB
+
+Os dados do IDEB (Índice de Desenvolvimento da Educação Básica) foram criados pelo governo federal para medir a qualidade do ensino nas escolas públicas.
+
+
+```{r}
+#| warning: false
+
+# Abaixo serão tratados os dados de ensino fundamental do IDEB:
+
+divulgacao_anos_finais_municipios_2021 <- read_excel("00_bases/divulgacao_anos_finais_municipios_2021.xlsx")
+
+IDEB_rede_publica_2021 <- divulgacao_anos_finais_municipios_2021 %>% 
+                          filter(Rede_ensino == "Pública") %>% 
+                          mutate(Cod_municipio = as.character(Cod_municipio),
+                                 IDEB_2021 = as.numeric(IDEB_2021))
+  
+# Abaixo serão tratados os dados de ensino médio do IDEB:
+
+divulgacao_ensino_medio_municipios_2021 <- read_excel("00_bases/divulgacao_ensino_medio_municipios_2021.xlsx")
+
+IDEB_EM_rede_publica_2021 <- divulgacao_ensino_medio_municipios_2021 %>% 
+                             filter(Rede_ensino == "Pública") %>% 
+                             mutate(Cod_municipio = as.character(Cod_municipio),
+                                    IDEB_2021 = as.numeric(IDEB_2021))
+
+```
+
+
+### 6) ANATEL
+
+Os dados da ANATEL...
+
+
+```{r}
+
+bandalarga_Meu_Municipio_Acessos <- read_delim("00_bases/bandalarga_Meu_Municipio_Acessos.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+Banda_larga_municipio_2022 <- bandalarga_Meu_Municipio_Acessos %>% 
+                              select(Serviço, Densidade, `Código IBGE`) %>% 
+                              mutate(`Código IBGE` = as.character(`Código IBGE`)) %>% 
+                              spread(Serviço, Densidade)
+
+```
+
+
+
+# Autoria
+
+<figure>
+
+
+```{=html}
+<img src="imagens/adalenypaiva.JPG" 
+    width="200" 
+    height="200"
+    align="left">
+```
+
+<figcaption style="text-align:center">
+
+Adaleny Paiva,Título: Bacharela(Mestranda - PPGS/UFG),E-mail: adalenypaiva\@discente.ufg.br
+
+</figcaption>
+
+</figure>
+
+<figure>
+
+
+```{=html}
+<img src="imagens/Henrique_Silveira.jpg" 
+    width="200" 
+    height="200"
+    align="left">
+```
+
+<figcaption style="text-align:center">
+
+Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro\@discente.ufg.br
+
+</figcaption>
+
+</figure>
+
+<figure>
+
+
+```{=html}
+<img src="imagens/Daniel_Pagotto.jpg" 
+    width="200" 
+    height="200"
+    align="left">
+```
+
+<figcaption style="text-align:center">
+
+Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB),E-mail: danielppagotto\@ufg.br
+
+</figcaption>
+
+</figure>
+
+# Como citar
+
+Paiva, A.D.S; Silveira, H.; Pagotto, D. P. Bases para pesquisas em ciências sociais.
+
