@@ -267,12 +267,13 @@ Atlas_Esgotos_ETE_2020 <- read_csv("00_bases/Atlas_Esgotos_ETE_2020.csv")
 
 # Abaixo serão tratados os dados de segurança hídrica da ANA:
 
-Seguranca_hidrica_out_2022 <- read_csv("00_bases/8Dndice_de_SeguranA7a_HADdrica_Urbano_-_ISH-U_(Atlas_de_Abastecimento_outubro_2022).csv")
+Seguranca_hidrica_out_2022 <- read_csv("00_bases/8Dndice_de_SeguranA7a_HADdrica_Urbano_-_ISH-U_(Atlas_de_Abastecimento_outubro_2022).csv") %>% 
                               select(CDMUN, NMMUN, SGUF, ISH,
                                        TPMAN, CSMAN, TPSIS, TPOPE,
                                        SHAPE_Length, SHAPE_Area) %>% 
                               mutate(CDMUN = as.character(CDMUN)) %>% 
-                              filter(CDMUN != "NA")
+                              filter(CDMUN != "NA") %>% 
+                              rename()
 
 ```
 
@@ -290,7 +291,7 @@ Tanto os dados de ensino fundamental quanto os do ensino médio foram tratados d
 
 # Abaixo serão tratados os dados de ensino fundamental do IDEB e depois sendo tratados:
 
-IDEB_rede_publica_2021 <- read_excel("00_bases/divulgacao_anos_finais_municipios_2021.xlsx")
+IDEB_rede_publica_2021 <- read_excel("00_bases/divulgacao_anos_finais_municipios_2021.xlsx") %>% 
                           filter(Rede_ensino == "Pública") %>% 
                           mutate(Cod_municipio = as.character(Cod_municipio),
                                  IDEB_2021 = as.numeric(IDEB_2021))
@@ -298,7 +299,7 @@ IDEB_rede_publica_2021 <- read_excel("00_bases/divulgacao_anos_finais_municipios
                           
 # Abaixo serão tratados os dados de ensino médio do IDEBe depois sendo tratados:
 
-IDEB_EM_rede_publica_2021 <- read_excel("00_bases/divulgacao_ensino_medio_municipios_2021.xlsx")
+IDEB_EM_rede_publica_2021 <- read_excel("00_bases/divulgacao_ensino_medio_municipios_2021.xlsx") %>% 
                              filter(Rede_ensino == "Pública") %>% 
                              mutate(Cod_municipio = as.character(Cod_municipio),
                                     IDEB_2021 = as.numeric(IDEB_2021))
@@ -329,6 +330,7 @@ Banda_larga_municipio_2022 <- read_delim("00_bases/bandalarga_Meu_Municipio_Aces
                                     rename(Codigo_IBGE = `Código IBGE`,
                                            Servico = Serviço) %>% 
                                     spread(key = Servico, value = Densidade)
+                                    
 
 ```
 
