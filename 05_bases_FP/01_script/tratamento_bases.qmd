@@ -313,13 +313,14 @@ IDEB_EM_rede_publica_2021 <- divulgacao_ensino_medio_municipios_2021 %>%
 Os dados da ANATEL...
 
 ```{r}
-
-bandalarga_Meu_Municipio_Acessos <- read_delim("00_bases/bandalarga_Meu_Municipio_Acessos.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE)
-
-Banda_larga_municipio_2022 <- bandalarga_Meu_Municipio_Acessos %>% 
-                              select(Serviço, Densidade, `Código IBGE`) %>% 
-                              mutate(`Código IBGE` = as.character(`Código IBGE`)) %>% 
-                              spread(Serviço, Densidade)
+#| warning: false
+Banda_larga_municipio_2022 <- read_delim("00_bases/bandalarga_Meu_Municipio_Acessos.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE) %>% 
+                                    filter(Ano == 2022) %>% 
+                                    select(Serviço, Densidade, `Código IBGE`) %>% 
+                                    mutate(`Código IBGE` = as.character(`Código IBGE`)) %>% 
+                                    rename(Codigo_IBGE = `Código IBGE`,
+                                           Servico = Serviço) %>% 
+                                    spread(key = Servico, value = Densidade)
 
 ```
 
@@ -329,7 +330,7 @@ Banda_larga_municipio_2022 <- bandalarga_Meu_Municipio_Acessos %>%
 
 ```{=html}
 <img src="imagens/adalenypaiva.JPG" 
-    width="200" 
+    width="175" 
     height="200"
     align="left">
 ```
@@ -345,7 +346,7 @@ Adaleny Paiva,Título: Bacharela(Mestranda - PPGS/UFG),E-mail: adalenypaiva\@dis
 
 ```{=html}
 <img src="imagens/Henrique_Silveira.jpg" 
-    width="200" 
+    width="175" 
     height="200"
     align="left">
 ```
@@ -360,8 +361,8 @@ Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro\@discente
 <figure>
 
 ```{=html}
-<img src="imagens/Daniel_Pagotto.jpg" 
-    width="200" 
+<img src="imagens/Daniel_Pagotto.jpeg" 
+    width="175" 
     height="200"
     align="left">
 ```
