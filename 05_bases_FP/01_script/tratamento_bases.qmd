@@ -324,6 +324,68 @@ Banda_larga_municipio_2022 <- read_delim("00_bases/bandalarga_Meu_Municipio_Aces
 
 ```
 
+### 7) CENSO EDUCAÇÃO SUPERIOR
+
+Os Dados foram retirados do censo da educação superior:
+
+Sobre a Base *MICRODADOS_CADASTRO_IES_2021*
+
+1)  Selecionamos as váriaveis necessária através da função `select`
+
+2)  Realizamos a contagem de categoria administrativa. Para isso, usamos a função `group_by`conjuntamente com a função `count`
+
+3)  Alteramos as categorias administrativas, que eram identificadas por números, para suas respectivas identificações do dicionário através da função `mutate` e `case_when`
+
+4)  Utilizamos a função `spred` para transformar as categorias em múltiplas colunas
+
+5)  Por intermédio da função `replace` trocamos os valores vazios `NA` por 0
+
+```{r}
+
+#Exportando a base (MICRODADOS_CADASTRO_IES_2021) para tratamento:
+
+censo_edu_superior_IES <- read_delim("00_bases/MICRODADOS_CADASTRO_IES_2021.CSV", delim = ";", escape_double = FALSE, trim_ws = TRUE, locale = locale(encoding = "latin1"))
+
+#Selecionando as variáveis (select), realizando contagem da categoria administrativa por município (count), renomeando a categoria administrativa (mutate e case_when), multiplicando as colunas das categorias (spread)
+
+censo_edu_sup_IES_2021 <- censo_edu_superior_IES%>%
+                      select(CO_MUNICIPIO_IES,TP_CATEGORIA_ADMINISTRATIVA)%>%
+                      group_by(CO_MUNICIPIO_IES,TP_CATEGORIA_ADMINISTRATIVA)%>%
+                      count()%>%
+                      mutate(TP_CATEGORIA_ADMINISTRATIVA = case_when( 
+                             TP_CATEGORIA_ADMINISTRATIVA == 1 ~ "Pública Federal",
+                             TP_CATEGORIA_ADMINISTRATIVA == 2 ~ "Pública Estadual",
+                             TP_CATEGORIA_ADMINISTRATIVA == 3 ~ "Pública Municipal",
+                             TP_CATEGORIA_ADMINISTRATIVA == 4 ~ "Privada com fins lucrativos",
+                             TP_CATEGORIA_ADMINISTRATIVA == 5 ~  "Privada sem fins lucrativos",
+                             TP_CATEGORIA_ADMINISTRATIVA == 6 ~ "Privada - Particular em sentido estrito",
+                             TP_CATEGORIA_ADMINISTRATIVA == 7 ~ "Especial",
+                             TP_CATEGORIA_ADMINISTRATIVA == 8 ~ "Privada comunitária",
+                             TP_CATEGORIA_ADMINISTRATIVA == 9 ~ "Privada confessional"))%>%
+                      spread(TP_CATEGORIA_ADMINISTRATIVA, n)
+                      
+
+# Trocando os valores NA por 0
+
+censo_edu_sup_IES_2021 <- replace(x = censo_edu_sup_IES_2021, list = is.na(censo_edu_sup_IES_2021), values = 0)
+
+#Exportando a base (MICRODADOS_CADASTRO_CURSOS_2021) para tratamento: 
+
+censo_edu_superior_cursos <- read_delim("00_bases/MICRODADOS_CADASTRO_CURSOS_2021_reduzida.CSV", delim = ";", escape_double = FALSE, trim_ws = TRUE, locale = locale(encoding = "latin1"))               
+                    
+censo_edu_sup_cursos_2021 <- censo_edu_superior_cursos%>%
+                      select(CO_MUNICIPIO, NO_CINE_AREA_GERAL, QT_CONC)%>%
+                      group_by(CO_MUNICIPIO, NO_CINE_AREA_GERAL)%>%
+                      summarise(total = sum(QT_CONC))%>%
+                      spread(NO_CINE_AREA_GERAL, total) 
+
+
+censo_edu_sup_cursos_2021 <- replace(x = censo_edu_sup_cursos_2021, list = is.na(censo_edu_sup_cursos_2021), values = 0)
+ 
+
+```
+
+
 # Autoria
 
 <figure>
@@ -361,7 +423,7 @@ Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro\@discente
 <figure>
 
 ```{=html}
-<img src="imagens/Daniel_Pagotto.jpeg" 
+<img src="imagens/Daniel_Pagotto_2.jpg" 
     width="175" 
     height="200"
     align="left">
