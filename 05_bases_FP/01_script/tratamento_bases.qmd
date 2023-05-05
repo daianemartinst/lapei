@@ -59,7 +59,7 @@ O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Fede
 
 ## Carregamento e tratamento de dados
 
-### 1) Dados de violência
+### 1) IPEA
 
 Os dados de homicídio foram extraídos do [**Atlas da Violência do IPEA**](https://www.ipea.gov.br/atlasviolencia/)
 
@@ -469,7 +469,7 @@ enem_2021 <- enem%>%
 Você pode baixar o dado tratado clicando [**aqui**]https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/enem_tratado.csv
 
 
-### 10) Abertura de Empresas
+### 10) MAPA DE EMPRESAS
 
 O [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas)...
 
@@ -489,7 +489,7 @@ O [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empr
 
 Você pode baixar o dado tratado clicando [**aqui**]
 
-### 11) Juntando as Bases
+### 11) BASE COMPLETA
 
 ```{r}
 
