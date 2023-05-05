@@ -114,7 +114,7 @@ sebrae_hieraquia <- sebrae %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/sebrae_tratado.csv)
 
-### 3) Munic
+### 3) MUNIC
 
 A [**MUNIC**](https://www.ibge.gov.br/estatisticas/sociais/saude/10586-pesquisa-de-informacoes-basicas-municipais.html?=&t=downloads) é uma base do IBGE que traz informações sobre características dos 5570 municípios.
 
