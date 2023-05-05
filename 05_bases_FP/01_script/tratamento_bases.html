@@ -121,6 +121,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#anatel" id="toc-anatel" class="nav-link" data-scroll-target="#anatel">6) ANATEL</a></li>
   <li><a href="#censo-educação-superior" id="toc-censo-educação-superior" class="nav-link" data-scroll-target="#censo-educação-superior">7) CENSO EDUCAÇÃO SUPERIOR</a></li>
   <li><a href="#tse" id="toc-tse" class="nav-link" data-scroll-target="#tse">8) TSE</a></li>
+  <li><a href="#enem" id="toc-enem" class="nav-link" data-scroll-target="#enem">9) ENEM</a></li>
   </ul></li>
   <li><a href="#autoria" id="toc-autoria" class="nav-link" data-scroll-target="#autoria">Autoria</a></li>
   <li><a href="#como-citar" id="toc-como-citar" class="nav-link" data-scroll-target="#como-citar">Como citar</a></li>
@@ -161,15 +162,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringi)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="lapei---ufg" class="level2">
 <h2 class="anchored" data-anchor-id="lapei---ufg">Lapei - UFG</h2>
-<img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left">
+<p><img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left"></p>
 <p style="text-align:justify">
-O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.
-</p>
+</p><p>O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.</p>
+<p></p>
 <p><a href="https://lapei.face.ufg.br/"><strong>Saiba mais…</strong></a></p>
 </section>
 <section id="carregamento-e-tratamento-de-dados" class="level2">
@@ -257,104 +259,106 @@ O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Fede
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>                            MREG134, MREG135, MREG136, MREG141,</span>
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>                            MREG142, MREG143, MREG144, MREG145,</span>
 <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>                            MREG146, MREG147) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">mutate</span>(<span class="at">CodMun =</span> <span class="fu">as.character</span>(CodMun)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">filter</span>(CodMun <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">rename</span>(<span class="at">Mecanismos_incentivo =</span> MREG07, </span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Reducao_IPTU =</span> MREG081, </span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Isencao_IPTU =</span> MREG082, </span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Reducao_ISSQN =</span> MREG083, </span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Isencao_ISSQN =</span> MREG084, </span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Isencao_Tx =</span> MREG085,</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Cessao_terrenos =</span> MREG086,  </span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Doacao_terrenos =</span> MREG087, </span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_mecanismos =</span> MREG088, </span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industria_beneficiada =</span> MREG091, </span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Comercio_servicos_beneficiados =</span> MREG092,   </span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer_beneficiados =</span> MREG093, </span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Agropecuario_beneficiado =</span> MREG094, </span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_beneficiados =</span> MREG095, </span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industria_beneficiada_2018 =</span> MREG101,   </span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Comercio_servicos_beneficiados_2018 =</span> MREG102, </span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer_beneficiados_2018 =</span> MREG103, </span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Agropecuario_beneficiado_2018 =</span> MREG104, </span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_beneficiados_2018 =</span> MREG105,</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Nenhum_beneficiado_2018 =</span> MREG106, </span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Mecanismos_restricao =</span> MREG11, </span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Legislacao =</span> MREG121,</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Tributacao =</span> MREG122,</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_restricao =</span> MREG123, </span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industria_restricao =</span> MREG131, </span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industria_extrativa_restricao =</span> MREG132, </span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Comercio_servicos_restricao =</span> MREG133,</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer_restricao =</span> MREG134, </span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Ambiental_restricao =</span> MREG135, </span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outras_empresas_restricao =</span> MREG136, </span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industria_restricao_2018 =</span> MREG141,</span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industria_extrativa_restricao_2018 =</span> MREG142, </span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Comercial_servicos_restricao_2018 =</span> MREG143, </span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer_restricao_2018 =</span> MREG144, </span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Ambiental_restricao_2018 =</span> MREG145,</span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_restricao_2018 =</span> MREG146, </span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Nenhum_restricao_2018 =</span> MREG147)</span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">mutate</span>(<span class="at">CodMun =</span> <span class="fu">as.character</span>(CodMun),</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>                            <span class="at">CodMun =</span> <span class="fu">substr</span>(CodMun, <span class="dv">1</span>, <span class="dv">6</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">filter</span>(CodMun <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">rename</span>(<span class="at">Mecanismos_incentivo =</span> MREG07, </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Reducao_IPTU =</span> MREG081, </span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Isencao_IPTU =</span> MREG082, </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Reducao_ISSQN =</span> MREG083, </span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Isencao_ISSQN =</span> MREG084, </span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Isencao_Tx =</span> MREG085,</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Cessao_terrenos =</span> MREG086,  </span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Doacao_terrenos =</span> MREG087, </span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_mecanismos =</span> MREG088, </span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industria_beneficiada =</span> MREG091, </span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Comercio_servicos_beneficiados =</span> MREG092,   </span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer_beneficiados =</span> MREG093, </span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Agropecuario_beneficiado =</span> MREG094, </span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_beneficiados =</span> MREG095, </span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industria_beneficiada_2018 =</span> MREG101,   </span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Comercio_servicos_beneficiados_2018 =</span> MREG102, </span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer_beneficiados_2018 =</span> MREG103, </span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Agropecuario_beneficiado_2018 =</span> MREG104, </span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_beneficiados_2018 =</span> MREG105,</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Nenhum_beneficiado_2018 =</span> MREG106, </span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Mecanismos_restricao =</span> MREG11, </span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Legislacao =</span> MREG121,</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Tributacao =</span> MREG122,</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_restricao =</span> MREG123, </span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industria_restricao =</span> MREG131, </span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industria_extrativa_restricao =</span> MREG132, </span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Comercio_servicos_restricao =</span> MREG133,</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer_restricao =</span> MREG134, </span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Ambiental_restricao =</span> MREG135, </span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outras_empresas_restricao =</span> MREG136, </span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industria_restricao_2018 =</span> MREG141,</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Industria_extrativa_restricao_2018 =</span> MREG142, </span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Comercial_servicos_restricao_2018 =</span> MREG143, </span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Turismo_esporte_lazer_restricao_2018 =</span> MREG144, </span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Ambiental_restricao_2018 =</span> MREG145,</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Outros_restricao_2018 =</span> MREG146, </span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>                            <span class="at">Nenhum_restricao_2018 =</span> MREG147)</span>
 <span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Abaixo serão tratados dados sobre Comunicação e Informática do município:</span></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>Munic_TIC <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/Munic.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Comunicção e informática"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">select</span>(CodMun, MTIC02, MTIC03, MTIC04,</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>                         MTIC06, MTIC071, MTIC072, MTIC073,</span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>                         MTIC074, MTIC075, MTIC076, MTIC121,</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>                         MTIC122, MTIC123, MTIC124, MTIC125,    </span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>                         MTIC126,   MTIC127, MTIC128,   MTIC129,    </span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>                         MTIC1210, MTIC1211, MTIC1212, MTIC1213,    </span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>                         MTIC1214, MTIC1215, MTIC1216, MTIC1217,    </span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>                         MTIC1218, MTIC161, MTIC162, MTIC163,</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>                         MTIC164, MTIC165, MTIC166, MTIC167,</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>                         MTIC261, MTIC262, MTIC263, MTIC264,</span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>                         MTIC265, MTIC266) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">CodMun =</span> <span class="fu">as.character</span>(CodMun)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">filter</span>(CodMun <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">rename</span>(<span class="at">Possui_computador =</span> MTIC02,</span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Computador_ligado_rede =</span> MTIC03, </span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Tipo_conexao_internet =</span> MTIC04,</span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Estrutura_organizacional_TI =</span> MTIC06, </span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Funcionarios_efetivos_TI =</span> MTIC071, </span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Servidores_cedidos_TI =</span> MTIC072, </span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Estagiarios_TI =</span> MTIC073,</span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Cargo_comissionado_TI =</span> MTIC074, </span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Tercerizados_TI =</span> MTIC075, </span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Consultores_TI =</span> MTIC076, </span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Servicos_informativos =</span> MTIC121,</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Acessos_docs_ =</span> MTIC122, </span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Infos_gerais_licitacoes =</span> MTIC123, </span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Ouvidoria =</span> MTIC124,   </span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Download_docs =</span> MTIC125,   </span>
-<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Consulta_processos =</span> MTIC126,  </span>
-<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Consulta_previa =</span> MTIC127, </span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Diario_oficial =</span> MTIC128,  </span>
-<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Concurso_publico =</span> MTIC129,    </span>
-<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Cadastro_fornecedores =</span> MTIC1210, </span>
-<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Emissao_certidao_negativa_debito =</span> MTIC1211, </span>
-<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Emissao_alvara =</span> MTIC1212, </span>
-<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Emissao_NF =</span> MTIC1213, </span>
-<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Matricula_escolar =</span> MTIC1214, </span>
-<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Agendamento_consulta_saude =</span> MTIC1215, </span>
-<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Emissao_guia_pagamento_tributos =</span> MTIC1216, </span>
-<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Emissao_docs =</span> MTIC1217,   </span>
-<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Pesquisa_satisfacao =</span> MTIC1218,</span>
-<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Envio_SMS =</span> MTIC161,</span>
-<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Recibo_SMS =</span> MTIC162,</span>
-<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>                         <span class="at">APPs_prefeitura =</span> MTIC163,</span>
-<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>                         <span class="at">APPs_outros_orgaos =</span> MTIC164,</span>
-<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Website_mobile =</span> MTIC165,</span>
-<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Emissao_boletos_mobile =</span> MTIC166,</span>
-<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Nao_disponibilizou =</span> MTIC167,</span>
-<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Bilhete_eletronico_transporte =</span> MTIC261,</span>
-<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Onibus_GPS =</span> MTIC262,</span>
-<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Centro_controle_operacoes =</span> MTIC263,</span>
-<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Iluminacao_inteligente =</span> MTIC264,</span>
-<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Semaforos_inteligentes =</span> MTIC265,</span>
-<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Sensores_monitoria_area_risco =</span> MTIC266)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Abaixo serão tratados dados sobre Comunicação e Informática do município:</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>Munic_TIC <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/Munic.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Comunicção e informática"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">select</span>(CodMun, MTIC02, MTIC03, MTIC04,</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>                         MTIC06, MTIC071, MTIC072, MTIC073,</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>                         MTIC074, MTIC075, MTIC076, MTIC121,</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>                         MTIC122, MTIC123, MTIC124, MTIC125,    </span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>                         MTIC126,   MTIC127, MTIC128,   MTIC129,    </span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>                         MTIC1210, MTIC1211, MTIC1212, MTIC1213,    </span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>                         MTIC1214, MTIC1215, MTIC1216, MTIC1217,    </span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>                         MTIC1218, MTIC161, MTIC162, MTIC163,</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>                         MTIC164, MTIC165, MTIC166, MTIC167,</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>                         MTIC261, MTIC262, MTIC263, MTIC264,</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>                         MTIC265, MTIC266) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">CodMun =</span> <span class="fu">as.character</span>(CodMun),</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>                          <span class="at">CodMun =</span> <span class="fu">substr</span>(CodMun, <span class="dv">1</span>, <span class="dv">6</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">filter</span>(CodMun <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">rename</span>(<span class="at">Possui_computador =</span> MTIC02,</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Computador_ligado_rede =</span> MTIC03, </span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Tipo_conexao_internet =</span> MTIC04,</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Estrutura_organizacional_TI =</span> MTIC06, </span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Funcionarios_efetivos_TI =</span> MTIC071, </span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Servidores_cedidos_TI =</span> MTIC072, </span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Estagiarios_TI =</span> MTIC073,</span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Cargo_comissionado_TI =</span> MTIC074, </span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Tercerizados_TI =</span> MTIC075, </span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Consultores_TI =</span> MTIC076, </span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Servicos_informativos =</span> MTIC121,</span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Acessos_docs_ =</span> MTIC122, </span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Infos_gerais_licitacoes =</span> MTIC123, </span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Ouvidoria =</span> MTIC124,   </span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Download_docs =</span> MTIC125,   </span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Consulta_processos =</span> MTIC126,  </span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Consulta_previa =</span> MTIC127, </span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Diario_oficial =</span> MTIC128,  </span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Concurso_publico =</span> MTIC129,    </span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Cadastro_fornecedores =</span> MTIC1210, </span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Emissao_certidao_negativa_debito =</span> MTIC1211, </span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Emissao_alvara =</span> MTIC1212, </span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Emissao_NF =</span> MTIC1213, </span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Matricula_escolar =</span> MTIC1214, </span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Agendamento_consulta_saude =</span> MTIC1215, </span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Emissao_guia_pagamento_tributos =</span> MTIC1216, </span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Emissao_docs =</span> MTIC1217,   </span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Pesquisa_satisfacao =</span> MTIC1218,</span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Envio_SMS =</span> MTIC161,</span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Recibo_SMS =</span> MTIC162,</span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a>                         <span class="at">APPs_prefeitura =</span> MTIC163,</span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a>                         <span class="at">APPs_outros_orgaos =</span> MTIC164,</span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Website_mobile =</span> MTIC165,</span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Emissao_boletos_mobile =</span> MTIC166,</span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Nao_disponibilizou =</span> MTIC167,</span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Bilhete_eletronico_transporte =</span> MTIC261,</span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Onibus_GPS =</span> MTIC262,</span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Centro_controle_operacoes =</span> MTIC263,</span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Iluminacao_inteligente =</span> MTIC264,</span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Semaforos_inteligentes =</span> MTIC265,</span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Sensores_monitoria_area_risco =</span> MTIC266)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="ana" class="level3">
@@ -423,8 +427,9 @@ O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Fede
 <li><p>Realizamos a contagem de categoria administrativa. Para isso, usamos a função <code>group_by</code>conjuntamente com a função <code>count</code></p></li>
 <li><p>Alteramos as categorias administrativas, que eram identificadas por números, para suas respectivas identificações do dicionário através da função <code>mutate</code> e <code>case_when</code></p></li>
 <li><p>Utilizamos a função <code>spred</code> para transformar as categorias em múltiplas colunas</p></li>
-<li><p>Por intermédio da função <code>replace</code> trocamos os valores vazios <code>NA</code> por 0</p></li>
+<li><p>Por intermédio do parametro <code>fill</code>, na função <code>spred</code> trocamos os valores vazios <code>NA</code> por 0</p></li>
 </ol>
+<p>Sobre a Base <em>MICRODADOS_CADASTRO_CURSOS_2021_reduzida</em></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportando a base (MICRODADOS_CADASTRO_IES_2021) para tratamento:</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -437,59 +442,68 @@ O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Fede
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">group_by</span>(CO_MUNICIPIO_IES,TP_CATEGORIA_ADMINISTRATIVA)<span class="sc">%&gt;%</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">count</span>()<span class="sc">%&gt;%</span></span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">TP_CATEGORIA_ADMINISTRATIVA =</span> <span class="fu">case_when</span>( </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                             TP_CATEGORIA_ADMINISTRATIVA <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Pública Federal"</span>,</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                             TP_CATEGORIA_ADMINISTRATIVA <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Pública Estadual"</span>,</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                             TP_CATEGORIA_ADMINISTRATIVA <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Pública Municipal"</span>,</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                             TP_CATEGORIA_ADMINISTRATIVA <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Privada com fins lucrativos"</span>,</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                             TP_CATEGORIA_ADMINISTRATIVA <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span>  <span class="st">"Privada sem fins lucrativos"</span>,</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                             TP_CATEGORIA_ADMINISTRATIVA <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> <span class="st">"Privada - Particular em sentido estrito"</span>,</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>                             TP_CATEGORIA_ADMINISTRATIVA <span class="sc">==</span> <span class="dv">7</span> <span class="sc">~</span> <span class="st">"Especial"</span>,</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>                             TP_CATEGORIA_ADMINISTRATIVA <span class="sc">==</span> <span class="dv">8</span> <span class="sc">~</span> <span class="st">"Privada comunitária"</span>,</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>                             TP_CATEGORIA_ADMINISTRATIVA <span class="sc">==</span> <span class="dv">9</span> <span class="sc">~</span> <span class="st">"Privada confessional"</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">spread</span>(TP_CATEGORIA_ADMINISTRATIVA, n)</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>                      </span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Trocando os valores NA por 0</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>censo_edu_sup_IES_2021 <span class="ot">&lt;-</span> <span class="fu">replace</span>(<span class="at">x =</span> censo_edu_sup_IES_2021, <span class="at">list =</span> <span class="fu">is.na</span>(censo_edu_sup_IES_2021), <span class="at">values =</span> <span class="dv">0</span>)</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportando a base (MICRODADOS_CADASTRO_CURSOS_2021) para tratamento: </span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>censo_edu_superior_cursos <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"00_bases/MICRODADOS_CADASTRO_CURSOS_2021_reduzida.CSV"</span>, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"latin1"</span>))               </span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>censo_edu_sup_cursos_2021 <span class="ot">&lt;-</span> censo_edu_superior_cursos<span class="sc">%&gt;%</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">select</span>(CO_MUNICIPIO, NO_CINE_AREA_GERAL, QT_CONC)<span class="sc">%&gt;%</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">group_by</span>(CO_MUNICIPIO,NO_CINE_AREA_GERAL)<span class="sc">%&gt;%</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(QT_CONC))<span class="sc">%&gt;%</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">spread</span>(NO_CINE_AREA_GERAL, total) </span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>censo_edu_sup_cursos_2021 <span class="ot">&lt;-</span> <span class="fu">replace</span>(<span class="at">x =</span> censo_edu_sup_cursos_2021, <span class="at">list =</span> <span class="fu">is.na</span>(censo_edu_sup_cursos_2021), <span class="at">values =</span> <span class="dv">0</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                             TP_CATEGORIA_ADMINISTRATIVA <span class="sc">&lt;=</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Pública"</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                             TP_CATEGORIA_ADMINISTRATIVA <span class="sc">&gt;</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Privada"</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(n), <span class="at">.groups=</span> <span class="st">'drop'</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">spread</span>(TP_CATEGORIA_ADMINISTRATIVA, total, <span class="at">fill =</span> <span class="st">"0"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">rename</span>(<span class="at">CO_MUNICIPIO =</span> CO_MUNICIPIO_IES)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportando a base (MICRODADOS_CADASTRO_CURSOS_2021) para tratamento: </span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>censo_edu_superior_cursos <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"00_bases/MICRODADOS_CADASTRO_CURSOS_2021_reduzida.CSV"</span>, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"latin1"</span>))               </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>censo_edu_sup_cursos_2021 <span class="ot">&lt;-</span> censo_edu_superior_cursos<span class="sc">%&gt;%</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">select</span>(CO_MUNICIPIO, NO_CINE_AREA_GERAL, QT_CONC)<span class="sc">%&gt;%</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">group_by</span>(CO_MUNICIPIO,NO_CINE_AREA_GERAL)<span class="sc">%&gt;%</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(QT_CONC), <span class="at">.groups=</span> <span class="st">'drop'</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">spread</span>(NO_CINE_AREA_GERAL, total,  <span class="at">fill =</span> <span class="st">"0"</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="tse" class="level3">
 <h3 class="anchored" data-anchor-id="tse">8) TSE</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tratamento Base Presidente</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>tse_presid <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/tse_reduzida.csv"</span>) </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>tse_presid_2022 <span class="ot">&lt;-</span> tse_presid<span class="sc">%&gt;%</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">group_by</span>(SG_UF,CD_MUNICIPIO,NM_MUNICIPIO,NR_TURNO,NM_VOTAVEL)<span class="sc">%&gt;%</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">summarise</span>(<span class="at">total_votos =</span> <span class="fu">sum</span>(QT_VOTOS), <span class="at">.groups =</span> <span class="st">'drop'</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">spread</span>(NM_VOTAVEL, total_votos,  <span class="at">fill =</span> <span class="st">"0"</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="enem" class="level3">
+<h3 class="anchored" data-anchor-id="enem">9) ENEM</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>enem <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/enem_reduzida.csv"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>enem_2021 <span class="ot">&lt;-</span> enem<span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">group_by</span>(CO_MUNICIPIO_ESC,CO_UF_ESC,SG_UF_ESC)<span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">summarise</span>(<span class="at">media_notas_CN=</span> <span class="fu">mean</span>(NU_NOTA_CN, <span class="at">na.rm =</span> T),<span class="at">media_notas_CH =</span> <span class="fu">mean</span>(NU_NOTA_CH, <span class="at">na.rm =</span> T),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">media_NU_NOTA_LC =</span> <span class="fu">mean</span>(NU_NOTA_LC, <span class="at">na.rm =</span> T),<span class="at">media_NU_NOTA_MT =</span> <span class="fu">mean</span>(NU_NOTA_MT, <span class="at">na.rm =</span> T),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">media_NU_NOTA_REDACAO =</span> <span class="fu">mean</span>(NU_NOTA_REDACAO, <span class="at">na.rm =</span> T), <span class="at">.groups =</span> <span class="st">'drop'</span>)    </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
 <section id="autoria" class="level1">
 <h1>Autoria</h1>
 <figure class="figure">
-<img src="Imagens/adalenypaiva.JPG" width="175" height="200" align="left" class="figure-img">
+<img src="Imagens/adalenypaiva.JPG" width="160" height="160" align="left" class="figure-img">
 <figcaption style="text-align:center" class="figure-caption">
 <p>Adaleny Paiva,Título: Bacharela(Mestranda - PPGS/UFG),E-mail: adalenypaiva@discente.ufg.br</p>
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="Imagens/Henrique_Silveira.jpg" width="175" height="200" align="left" class="figure-img">
+<img src="Imagens/Henrique_Silveira.jpg" width="160" height="160" align="left" class="figure-img">
 <figcaption style="text-align:center" class="figure-caption">
 <p>Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro@discente.ufg.br</p>
 </figcaption>
 </figure>
 <figure class="figure">
-<img src="Imagens/Daniel_Pagotto_2.jpg" width="175" height="200" align="left" class="figure-img">
+<img src="Imagens/Daniel_Pagotto_2.jpg" width="160" height="160" align="left" class="figure-img">
 <figcaption style="text-align:center" class="figure-caption">
 <p>Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB),E-mail: danielppagotto@ufg.br</p>
 </figcaption>
