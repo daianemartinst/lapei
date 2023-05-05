@@ -23,7 +23,7 @@ here::here("styles.css")
 
 ```
 
-## Objetivo
+## OBJETIVO
 
 O objetivo deste documento é publicizar os procedimentos de tratamento de uma bases de dados construída a partir de múltiplas fontes.
 
@@ -45,7 +45,7 @@ library(rio)
 
 ```
 
-## Lapei - UFG
+## LAPEI - UFG
 
 <img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left"/>
 
@@ -57,7 +57,7 @@ O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Fede
 
 [**Saiba mais...**](https://lapei.face.ufg.br/)
 
-## Carregamento e tratamento de dados
+## CARREGAMENTO E TRATAMENTO DE DADOS 
 
 ### 1) IPEA
 
@@ -499,7 +499,7 @@ Você pode baixar o dado tratado clicando [**aqui**]
 ```
 
 
-# Autoria
+## AUTORIA
 
 <figure>
 
@@ -549,6 +549,6 @@ Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB),E-mail: danielppagotto\@ufg
 
 </figure>
 
-# Como citar
+## COMO CITAR
 
 Paiva, A.D.S; Silveira, H.; Pagotto, D. P. Bases para pesquisas em ciências sociais.
