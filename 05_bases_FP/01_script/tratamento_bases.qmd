@@ -365,7 +365,7 @@ Sobre a Base *MICRODADOS_CADASTRO_CURSOS_2021_reduzida*:
 
 3)  Utilizamos a função `spred` para transformar as categorias em múltiplas colunas;
 
-4)  Por intermédio do parametro `fill`, na função `spred` trocamos os valores vazios `NA` por 0.
+4)  Por intermédio do parâmetro `fill`, na função `spred` trocamos os valores vazios `NA` por 0.
 
 ```{r}
 #| warning: false
