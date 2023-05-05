@@ -489,7 +489,7 @@ O [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empr
 
 Você pode baixar o dado tratado clicando [**aqui**]
 
-### 11) Juntando todas as bases
+### 11) Juntando as Bases
 
 ```{r}
 
