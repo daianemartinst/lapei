@@ -489,20 +489,19 @@ enem_2021 <- enem%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/enem_tratado.csv)
 
-### 10) MAPA DE EMPRESAS
+### 10) Empresas - Receita Federal
 
-O [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas)...
+Na presente subseção temos dados a nível município sobre empresas ativas em 2023, empresas criadas em 2022 e a média do tempo de criação de empresas. Todas as bases foram acessadas por meio da ferramenta  [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas) do Governo Federal. A fonte original dos dados é a Receita Federal do Brasil. 
+
+Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [script](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/script_receita.R).
+
+Abaixo só faremos a leitura da base tratada para juntarmos com as demais bases.
 
 ```{r}
 #| warning: false
 
-
-
-
-
-
-
-
+dados_receita <- read_csv("00_bases/dados_receita.csv") %>% 
+                        select(-`...1`)
 
 ```
 

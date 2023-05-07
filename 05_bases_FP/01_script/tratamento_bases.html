@@ -122,7 +122,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#censo-educação-superior" id="toc-censo-educação-superior" class="nav-link" data-scroll-target="#censo-educação-superior">7) CENSO EDUCAÇÃO SUPERIOR</a></li>
   <li><a href="#tse" id="toc-tse" class="nav-link" data-scroll-target="#tse">8) TSE</a></li>
   <li><a href="#enem" id="toc-enem" class="nav-link" data-scroll-target="#enem">9) ENEM</a></li>
-  <li><a href="#mapa-de-empresas" id="toc-mapa-de-empresas" class="nav-link" data-scroll-target="#mapa-de-empresas">10) MAPA DE EMPRESAS</a></li>
+  <li><a href="#empresas---receita-federal" id="toc-empresas---receita-federal" class="nav-link" data-scroll-target="#empresas---receita-federal">10) Empresas - Receita Federal</a></li>
   <li><a href="#base-completa" id="toc-base-completa" class="nav-link" data-scroll-target="#base-completa">11) BASE COMPLETA</a></li>
   </ul></li>
   <li><a href="#autoria" id="toc-autoria" class="nav-link" data-scroll-target="#autoria">AUTORIA</a></li>
@@ -533,11 +533,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/enem_tratado.csv"><strong>aqui</strong></a></p>
 </section>
-<section id="mapa-de-empresas" class="level3">
-<h3 class="anchored" data-anchor-id="mapa-de-empresas">10) MAPA DE EMPRESAS</h3>
-<p>O <a href="https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas"><strong>Painel de Dados de Tempo de Abertura de Empresas</strong></a>…</p>
+<section id="empresas---receita-federal" class="level3">
+<h3 class="anchored" data-anchor-id="empresas---receita-federal">10) Empresas - Receita Federal</h3>
+<p>Na presente subseção temos dados a nível município sobre empresas ativas em 2023, empresas criadas em 2022 e a média do tempo de criação de empresas. Todas as bases foram acessadas por meio da ferramenta <a href="https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas"><strong>Painel de Dados de Tempo de Abertura de Empresas</strong></a> do Governo Federal. A fonte original dos dados é a Receita Federal do Brasil.</p>
+<p>Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/script_receita.R">script</a>.</p>
+<p>Abaixo só faremos a leitura da base tratada para juntarmos com as demais bases.</p>
 <div class="cell">
-
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dados_receita <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/dados_receita.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">...1</span><span class="st">`</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando [<strong>aqui</strong>]</p>
 </section>
