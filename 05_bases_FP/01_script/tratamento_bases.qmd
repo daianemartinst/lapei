@@ -25,16 +25,35 @@ here::here("styles.css")
 
 ## OBJETIVO
 
-O objetivo deste documento é publicizar os procedimentos de tratamento de uma bases de dados construída a partir de múltiplas fontes.
+O objetivo deste documento é publicizar os procedimentos de tratamento de bases de dados públicas que levou à construção de um repositório único, a nível município, sobre variáveis sociais, econômicas, infraestrura, dentre outras. 
 
-Além de criar e disponibilizar a base tratada, disponibilizamos todos os procedimentos executados para chegar nela, conforme o script abaixo.
+Além de disponibilizar a base tratada, apresentamos as bases, suas fontes e os  procedimentos executados para tal finalidade. 
 
-Preparando o ambiente do R com os pacotes que precisaremos. Caso não tenha instalado o pacote ainda, use a função `install.packages("pacote")`
+Ao final de cada seção de código, é possível baixar o dado já tratado.
+
+
+## LAPEI - UFG
+
+<img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left"/>
+
+<p style="text-align:justify">
+
+Esse produto é resultado de um esforço do Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (LAPEI/UFG). 
+
+O LAPEI-UFG é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.
+
+</p>
+
+[**Saiba mais sobre o LAPEI**](https://lapei.face.ufg.br/)
+
+## CARREGAMENTO E TRATAMENTO DE DADOS
+
+Antes de iniciar, vamos preparar o ambiente do R com os pacotes que precisaremos. Caso não tenha instalado o pacote ainda, use a função `install.packages("pacote")`
 
 ```{r}
 #| warning: false
 
-#install.packages("tidyverse")
+#install.packages("dplyr")
 
 library(dplyr)
 library(readxl)
@@ -45,23 +64,9 @@ library(rio)
 
 ```
 
-## LAPEI - UFG
-
-<img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left"/>
-
-<p style="text-align:justify">
-
-O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.
-
-</p>
-
-[**Saiba mais...**](https://lapei.face.ufg.br/)
-
-## CARREGAMENTO E TRATAMENTO DE DADOS 
-
 ### 1) IPEA
 
-Os dados de homicídio foram extraídos do [**Atlas da Violência do IPEA**](https://www.ipea.gov.br/atlasviolencia/)
+Os dados de homicídio foram extraídos do [**Atlas da Violência do IPEA**](https://www.ipea.gov.br/atlasviolencia/). A base contém um índice de homicídios para cada um dos municípios brasileiros. 
 
 1)  padronizamos a variável código do município para o formato texto
 
@@ -70,7 +75,6 @@ Os dados de homicídio foram extraídos do [**Atlas da Violência do IPEA**](htt
 3)  a base de homicídios tinha registros duplicados. Por isso, usamos a função `distinct`
 
 4)  retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito
-
 
 ```{r}
 #| warning: false
@@ -91,7 +95,13 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 2) SEBRAE
 
-Aqui estamos tratando a base do [**SEBRAE**](https://transparencia.sebrae.com.br/infraestrutura?unidade=), pois ela não possui um código de identificação de município (ex.: código IBGE).
+Aqui estamos tratando a base do [**SEBRAE**](https://transparencia.sebrae.com.br/infraestrutura?unidade=), que traz se o município possui infraestrutura do Sebrae (seja própria ou alugada) ou sala do empreendedor em parceria com a prefeitura. 
+
+1) O primeiro passo foi a criação de um código de identificação de município (ex.: código IBGE), pois não está presente na base original e isso é importante para juntar com outras bases.
+
+2) Além disso, usamos a função `spread`, para criar duas colunas com os tipos de estrutura. 
+
+obs.: não há identificação do ano na base. Acessamos diretamente do link do Sebrae. 
 
 ```{r}
 #| warning: false
@@ -107,10 +117,14 @@ sebrae_hieraquia <- sebrae %>%
                                   by = c("Municipio_pad"="municipio_pad",
                                          "UF"="uf_sigla")) %>%
                         select(cod_municipio, cod_municipiodv,
-                               municipio, Tipo, CEP, Endereço)
+                               municipio, Tipo) %>% 
+                        mutate(Tipo = if_else(Tipo == "Estrutura de atendimento do Sebrae/UF (própria ou alugada)", "Estrutura Sebrae", "Sala do Empreendedor")) %>% 
+                        group_by(cod_municipio, cod_municipiodv,
+                                 municipio, Tipo) %>% 
+                        count() %>% 
+                        spread(Tipo, n) 
 
 ```
-
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/sebrae_tratado.csv)
 
@@ -118,12 +132,15 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 A [**MUNIC**](https://www.ibge.gov.br/estatisticas/sociais/saude/10586-pesquisa-de-informacoes-basicas-municipais.html?=&t=downloads) é uma base do IBGE que traz informações sobre características dos 5570 municípios.
 
-Pegamos na Base Munic as variáveis dos temas RH, gestão e comunicação, e para cada um desses temas tratamos os dados da seguinte maneira:
+Acessamos na Base Munic as variáveis dos temas recursos humanos do executivo municipal, gestão e comunicação. Para cada um desses temas tratamos os dados da seguinte maneira:
 
-1)  Selecionamos as variáveis.
-2)  Convertemos o tipo das varáveis.
-3)  O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.
-4)  Renomeamos as variáveis.
+1) Selecionamos as variáveis
+2) Convertemos o tipo das varáveis
+3) O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo
+4) Renomeamos as variáveis
+5) Juntamos tudo em um só dataframe
+
+obs.: os dados são referentes 
 
 ```{r}
 #| warning: false
@@ -256,40 +273,46 @@ Munic_TIC <- read_excel("00_bases/Munic.xlsx", sheet = "Comunicção e informát
                          Sensores_monitoria_area_risco = MTIC266)
 
 
+munic_tratada <- Munic_Gestao %>% 
+                      left_join(Munic_RH, by = "CodMun") %>% 
+                      left_join(Munic_TIC, by = "CodMun")
+
 ```
 
 Você pode baixar o dado tratado clicando [**aqui**] (https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/munic_tratada.csv)
 
-
 ### 4) ANA
 
-Os dados de saneamento foram extraídos da [**ANA**](https://dadosabertos.ana.gov.br/datasets/4e403e4b10ad49f996539c1ea198e0a8_0/explore?location=-13.481668%2C-51.419000%2C4.31) (Agência Nacional de Águas e Saneamento Básico).
+Acessamos os dados do Índice de Segurança Hídrica (ISH) criado pela Agência Nacional de Águas e Saneamento Básico (ANA). O índice geral - que pode variar entre as categorias mínima, baixa, média, alta, máxima - "é calculado a partir da eficiência da produção de água (combinação de indicadores de vulnerabilidade dos mananciais e de sistemas produtores de água) e da eficiência da distribuição de água (combinação de indicadores de cobertura de rede de distribuição e de infraestrutura para o gerenciamento de perdas)".
+
+Os dados podem ser acessados [**aqui**](https://dadosabertos.ana.gov.br/datasets/4e403e4b10ad49f996539c1ea198e0a8_0/explore?location=-13.481668%2C-51.419000%2C4.31). 
+
+obs.: os dados são referentes ao ano de 2022. 
 
 ```{r}
 #| warning: false
 
-# Abaixo serão tratados os dados de esgotos da ANA:
-
-Atlas_Esgotos_ETE_2020 <- read_csv("00_bases/Atlas_Esgotos_ETE_2020.csv")
-
-
-# Abaixo serão tratados os dados de segurança hídrica da ANA:
-
 indice_seguranca_hidrica_out_2022 <- read_csv("00_bases/8Dndice_de_SeguranA7a_HADdrica_Urbano_-_ISH-U_(Atlas_de_Abastecimento_outubro_2022).csv")
 
 seguranca_hidrica_out_2022 <- indice_seguranca_hidrica_out_2022 %>% 
-                                select(CDMUN, NMMUN, SGUF, ISH,
-                                       TPMAN, CSMAN, TPSIS, TPOPE,
-                                       SHAPE_Length, SHAPE_Area) %>% 
+                                select(CDMUN, NMMUN, SGUF, ISH) %>% 
                                 mutate(CDMUN = as.character(CDMUN)) %>% 
                                 filter(CDMUN != "NA")
 
 
 ```
 
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/ish_ana.csv)
+
 ### 5) IDEB
 
 Os dados do [**IDEB**](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados) (Índice de Desenvolvimento da Educação Básica) foram criados pelo governo federal para medir a qualidade do ensino nas escolas públicas.
+
+1) Filtragem para acessar os dados da rede de ensino pública - seja estadual ou municipal
+
+2) Tratamento para deixar as variáveis nos tipos adequados
+
+obs.: os dados são referentes ao ano de 2021
 
 ```{r}
 #| warning: false
@@ -317,10 +340,11 @@ IDEB_EM_rede_publica_2021 <- divulgacao_ensino_medio_municipios_2021 %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/ideb_tratado.csv)
 
-
 ### 6) ANATEL
 
-A [**ANATEL**](https://informacoes.anatel.gov.br/paineis/meu-municipio/acessos-banda-larga-fixa) disponibiliza determinados dados referentes aos serviços de banda larga presentes nos municípios brasileiros. 
+A [**ANATEL**](https://informacoes.anatel.gov.br/paineis/meu-municipio/acessos-banda-larga-fixa) disponibiliza determinados dados referentes aos serviços de banda larga presentes nos municípios brasileiros.
+
+obs.: os dados são referentes ao ano de 2022. 
 
 ```{r}
 #| warning: false
@@ -336,11 +360,9 @@ Banda_larga_municipio_2022 <- read_delim("00_bases/bandalarga_Meu_Municipio_Aces
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/anatel_tratada.csv)
 
-
 ### 7) CENSO EDUCAÇÃO SUPERIOR
 
-O [**Censo da Educação Superior**](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-da-educacao-superior
-) fornece informações sobre o ensino fundamental e médio no território nacional.
+O [**Censo da Educação Superior**](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-da-educacao-superior) fornece informações sobre o ensino fundamental e médio no território nacional.
 
 Sobre a Base *MICRODADOS_CADASTRO_IES_2021*:
 
@@ -350,12 +372,11 @@ Sobre a Base *MICRODADOS_CADASTRO_IES_2021*:
 
 3)  Alteramos as categorias administrativas, que eram identificadas por números, para "publico" e "privado" obedecendo as suas identifcações no dicionário através da função `mutate` e `case_when`;
 
-4)  Utilizamos a função `summarise`e o parâmentro `sum` para realizar a quantidade de tipos de instituições por município; 
+4)  Utilizamos a função `summarise`e o parâmentro `sum` para realizar a quantidade de tipos de instituições por município;
 
-5)  Utilizamos a função `spred` para transformar as categorias em múltiplas colunas;
+5)  Utilizamos a função `spread` para transformar as categorias em múltiplas colunas;
 
-6)  Por intermédio do parametro `fill`, na função `spred` trocamos os valores vazios `NA` por 0.
-
+6)  Por intermédio do parametro `fill`, na função `spread` trocamos os valores vazios `NA` por 0.
 
 Sobre a Base *MICRODADOS_CADASTRO_CURSOS_2021_reduzida*:
 
@@ -367,25 +388,26 @@ Sobre a Base *MICRODADOS_CADASTRO_CURSOS_2021_reduzida*:
 
 4)  Por intermédio do parâmetro `fill`, na função `spred` trocamos os valores vazios `NA` por 0.
 
+obs.: os dados são referentes ao ano de 2021. 
+
 ```{r}
 #| warning: false
-
-#Exportando a base (MICRODADOS_CADASTRO_IES_2021) para tratamento:
 
 censo_edu_superior_IES <- read_delim("00_bases/MICRODADOS_CADASTRO_IES_2021.CSV", delim = ";", escape_double = FALSE, trim_ws = TRUE, locale = locale(encoding = "latin1"))
 
 #Selecionando as variáveis (select), realizando contagem da categoria administrativa por município (count), renomeando a categoria administrativa (mutate e case_when), multiplicando as colunas das categorias (spread)
 
-censo_edu_sup_IES_2021 <- censo_edu_superior_IES%>%
-                      select(CO_MUNICIPIO_IES,TP_CATEGORIA_ADMINISTRATIVA)%>%
-                      group_by(CO_MUNICIPIO_IES,TP_CATEGORIA_ADMINISTRATIVA)%>%
-                      count()%>%
-                      mutate(TP_CATEGORIA_ADMINISTRATIVA = case_when( 
-                             TP_CATEGORIA_ADMINISTRATIVA <= 3 ~ "Pública",
-                             TP_CATEGORIA_ADMINISTRATIVA > 3 ~ "Privada"))%>%
-                      summarise(total = sum(n), .groups= 'drop')%>%
-                      spread(TP_CATEGORIA_ADMINISTRATIVA, total, fill = "0")%>%
-                      rename(CO_MUNICIPIO = CO_MUNICIPIO_IES)
+censo_edu_sup_IES_2021 <- 
+  censo_edu_superior_IES%>%
+        select(CO_MUNICIPIO_IES,TP_CATEGORIA_ADMINISTRATIVA)%>%
+        group_by(CO_MUNICIPIO_IES,TP_CATEGORIA_ADMINISTRATIVA)%>%
+        count()%>%
+        mutate(TP_CATEGORIA_ADMINISTRATIVA = 
+                 case_when(TP_CATEGORIA_ADMINISTRATIVA <= 3 ~ "Pública",
+                           TP_CATEGORIA_ADMINISTRATIVA > 3 ~ "Privada")) %>%
+        summarise(total = sum(n), .groups= 'drop')%>%
+        spread(TP_CATEGORIA_ADMINISTRATIVA, total, fill = "0")%>%
+        rename(CO_MUNICIPIO = CO_MUNICIPIO_IES)
 
 
 #Exportando a base (MICRODADOS_CADASTRO_CURSOS_2021) para tratamento: 
@@ -400,24 +422,23 @@ censo_edu_sup_cursos_2021 <- censo_edu_superior_cursos%>%
 
 ```
 
-
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/censo_educacao_superior_tratado.csv)
-
 
 ### 8) TSE
 
-No [**Portal de transparência do TSE**](https://dadosabertos.tse.jus.br/dataset/) encontramos algumas bases de dados sobre as eleições no Brasil.Nossa intenção foi extrair apenas os dados referentes as eleições presidenciais de 2022. 
+No [**Portal de transparência do TSE**](https://dadosabertos.tse.jus.br/dataset/) encontramos algumas bases de dados sobre as eleições no Brasil.Nossa intenção foi extrair apenas os dados referentes as eleições presidenciais de 2022.
 
 Sobre o tratamento dos dados:
 
-1)  Houve um tratamento previo, dimiuindo a quantidade de colunas, extraindo somente as colunas necessárias, resultando na base "tse_reduzida". Nela estão somete os dados do segundo turno de 2022.
+1)  Houve um tratamento prévio, dimiuindo a quantidade de colunas, extraindo somente as colunas necessárias, resultando na base "tse_reduzida". Nela estão somete os dados do segundo turno de 2022.
 
 2)  Realizamos a soma da quantidade de votos por município. Para isso, usamos a função `group_by`conjuntamente com a função `summarise` e o parâmetro`sum` para fazer a soma;
 
-3)  Utilizamos a função `spred` para transformar as categorias em múltiplas colunas;
+3)  Utilizamos a função `spread` para transformar as categorias em múltiplas colunas;
 
-4)  Por intermédio do parâmetro `fill`, na função `spred` trocamos os valores vazios `NA` por 0.
+4)  Por intermédio do parâmetro `fill`, na função `spread` trocamos os valores vazios `NA` por 0.
 
+obs.: os dados são referentes às últimos eleições presidenciais, 2022. 
 
 ```{r}
 #| warning: false
@@ -436,8 +457,7 @@ tse_presid_2022 <- tse_presid%>%
 
 ```
 
-Você pode baixar o dado tratado clicando [**aqui**]https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/tse_tratado.csv
-
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/tse_tratado.csv)
 
 ### 9) ENEM
 
@@ -445,10 +465,9 @@ O INEP disponibiliza algumas bases de dados sobre as provas do ENEM. Nós utiliz
 
 Sobre o tratamento dos dados:
 
-1) Houve um tratamento previo, dimiuindo a quantidade de colunas, extraindo somente as colunas necessárias, resultando na base "enem_reduzida". Nela estão os dados referentes as notas por área de conhecimento.
+1)  Houve um tratamento prévio, dimiuindo a quantidade de colunas, extraindo somente as colunas necessárias, resultando na base "enem_reduzida". Nela estão os dados referentes as notas por área de conhecimento.
 
 2)  Realizamos a média de notas por área de conhecimento em cada município. Para isso, usamos a função `group_by`conjuntamente com a função `summarise` e o parâmetro`mead` para fazer a média. O parêmetro `na.rm = T`foi utilizado para considerar os valores vazios;
-
 
 ```{r}
 #| warning: false
@@ -458,21 +477,21 @@ enem <- read_csv("00_bases/enem_reduzida.csv")
 
 
 enem_2021 <- enem%>%
-          group_by(CO_MUNICIPIO_ESC,CO_UF_ESC,SG_UF_ESC)%>%
-          summarise(media_notas_CN= mean(NU_NOTA_CN, na.rm = T),media_notas_CH = mean(NU_NOTA_CH, na.rm = T),
-          media_NU_NOTA_LC = mean(NU_NOTA_LC, na.rm = T),media_NU_NOTA_MT = mean(NU_NOTA_MT, na.rm = T),
-          media_NU_NOTA_REDACAO = mean(NU_NOTA_REDACAO, na.rm = T), .groups = 'drop')    
+                group_by(CO_MUNICIPIO_ESC,CO_UF_ESC,SG_UF_ESC)%>%
+                summarise(media_notas_CN= mean(NU_NOTA_CN, na.rm = T),
+                          media_notas_CH = mean(NU_NOTA_CH, na.rm = T),
+                          media_NU_NOTA_LC = mean(NU_NOTA_LC, na.rm = T),
+                          media_NU_NOTA_MT = mean(NU_NOTA_MT, na.rm = T),
+                          media_NU_NOTA_REDACAO = mean(NU_NOTA_REDACAO, na.rm = T),                             .groups = 'drop')    
 
 
 ```
 
-Você pode baixar o dado tratado clicando [**aqui**]https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/enem_tratado.csv
-
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/enem_tratado.csv)
 
 ### 10) MAPA DE EMPRESAS
 
 O [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas)...
-
 
 ```{r}
 #| warning: false
@@ -487,7 +506,7 @@ O [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empr
 
 ```
 
-Você pode baixar o dado tratado clicando [**aqui**]
+Você pode baixar o dado tratado clicando \[**aqui**\]
 
 ### 11) BASE COMPLETA
 
@@ -495,9 +514,7 @@ Você pode baixar o dado tratado clicando [**aqui**]
 
 
 
-
 ```
-
 
 ## AUTORIA
 

@@ -154,11 +154,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <section id="objetivo" class="level2">
 <h2 class="anchored" data-anchor-id="objetivo">OBJETIVO</h2>
-<p>O objetivo deste documento é publicizar os procedimentos de tratamento de uma bases de dados construída a partir de múltiplas fontes.</p>
-<p>Além de criar e disponibilizar a base tratada, disponibilizamos todos os procedimentos executados para chegar nela, conforme o script abaixo.</p>
-<p>Preparando o ambiente do R com os pacotes que precisaremos. Caso não tenha instalado o pacote ainda, use a função <code>install.packages("pacote")</code></p>
+<p>O objetivo deste documento é publicizar os procedimentos de tratamento de bases de dados públicas que levou à construção de um repositório único, a nível município, sobre variáveis sociais, econômicas, infraestrura, dentre outras.</p>
+<p>Além de disponibilizar a base tratada, apresentamos as bases, suas fontes e os procedimentos executados para tal finalidade.</p>
+<p>Ao final de cada seção de código, é possível baixar o dado já tratado.</p>
+</section>
+<section id="lapei---ufg" class="level2">
+<h2 class="anchored" data-anchor-id="lapei---ufg">LAPEI - UFG</h2>
+<p><img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left"></p>
+<p style="text-align:justify">
+</p><p>Esse produto é resultado de um esforço do Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (LAPEI/UFG).</p>
+<p>O LAPEI-UFG é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.</p>
+<p></p>
+<p><a href="https://lapei.face.ufg.br/"><strong>Saiba mais sobre o LAPEI</strong></a></p>
+</section>
+<section id="carregamento-e-tratamento-de-dados" class="level2">
+<h2 class="anchored" data-anchor-id="carregamento-e-tratamento-de-dados">CARREGAMENTO E TRATAMENTO DE DADOS</h2>
+<p>Antes de iniciar, vamos preparar o ambiente do R com os pacotes que precisaremos. Caso não tenha instalado o pacote ainda, use a função <code>install.packages("pacote")</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidyverse")</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("dplyr")</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
@@ -167,20 +180,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="lapei---ufg" class="level2">
-<h2 class="anchored" data-anchor-id="lapei---ufg">LAPEI - UFG</h2>
-<p><img src="imagens/lapei-horizontal-laboratório.png" width="300" height="300" align="left"></p>
-<p style="text-align:justify">
-</p><p>O Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (Lapei/UFG) é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.</p>
-<p></p>
-<p><a href="https://lapei.face.ufg.br/"><strong>Saiba mais…</strong></a></p>
-</section>
-<section id="carregamento-e-tratamento-de-dados" class="level2">
-<h2 class="anchored" data-anchor-id="carregamento-e-tratamento-de-dados">CARREGAMENTO E TRATAMENTO DE DADOS</h2>
 <section id="ipea" class="level3">
 <h3 class="anchored" data-anchor-id="ipea">1) IPEA</h3>
-<p>Os dados de homicídio foram extraídos do <a href="https://www.ipea.gov.br/atlasviolencia/"><strong>Atlas da Violência do IPEA</strong></a></p>
+<p>Os dados de homicídio foram extraídos do <a href="https://www.ipea.gov.br/atlasviolencia/"><strong>Atlas da Violência do IPEA</strong></a>. A base contém um índice de homicídios para cada um dos municípios brasileiros.</p>
 <ol type="1">
 <li><p>padronizamos a variável código do município para o formato texto</p></li>
 <li><p>pegamos apenas o último ano disponível (2019)</p></li>
@@ -202,7 +204,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="sebrae" class="level3">
 <h3 class="anchored" data-anchor-id="sebrae">2) SEBRAE</h3>
-<p>Aqui estamos tratando a base do <a href="https://transparencia.sebrae.com.br/infraestrutura?unidade="><strong>SEBRAE</strong></a>, pois ela não possui um código de identificação de município (ex.: código IBGE).</p>
+<p>Aqui estamos tratando a base do <a href="https://transparencia.sebrae.com.br/infraestrutura?unidade="><strong>SEBRAE</strong></a>, que traz se o município possui infraestrutura do Sebrae (seja própria ou alugada) ou sala do empreendedor em parceria com a prefeitura.</p>
+<ol type="1">
+<li><p>O primeiro passo foi a criação de um código de identificação de município (ex.: código IBGE), pois não está presente na base original e isso é importante para juntar com outras bases.</p></li>
+<li><p>Além disso, usamos a função <code>spread</code>, para criar duas colunas com os tipos de estrutura.</p></li>
+</ol>
+<p>obs.: não há identificação do ano na base. Acessamos diretamente do link do Sebrae.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hierarquia_municipios <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/hierarquia_municipios.csv"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sebrae <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/sebrae.xlsx"</span>)</span>
@@ -215,20 +222,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Municipio_pad"</span><span class="ot">=</span><span class="st">"municipio_pad"</span>,</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"UF"</span><span class="ot">=</span><span class="st">"uf_sigla"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">select</span>(cod_municipio, cod_municipiodv,</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                               municipio, Tipo, CEP, Endereço)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                               municipio, Tipo) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">mutate</span>(<span class="at">Tipo =</span> <span class="fu">if_else</span>(Tipo <span class="sc">==</span> <span class="st">"Estrutura de atendimento do Sebrae/UF (própria ou alugada)"</span>, <span class="st">"Estrutura Sebrae"</span>, <span class="st">"Sala do Empreendedor"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">group_by</span>(cod_municipio, cod_municipiodv,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                                 municipio, Tipo) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">count</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">spread</span>(Tipo, n) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/sebrae_tratado.csv"><strong>aqui</strong></a></p>
 </section>
 <section id="munic" class="level3">
 <h3 class="anchored" data-anchor-id="munic">3) MUNIC</h3>
 <p>A <a href="https://www.ibge.gov.br/estatisticas/sociais/saude/10586-pesquisa-de-informacoes-basicas-municipais.html?=&amp;t=downloads"><strong>MUNIC</strong></a> é uma base do IBGE que traz informações sobre características dos 5570 municípios.</p>
-<p>Pegamos na Base Munic as variáveis dos temas RH, gestão e comunicação, e para cada um desses temas tratamos os dados da seguinte maneira:</p>
+<p>Acessamos na Base Munic as variáveis dos temas recursos humanos do executivo municipal, gestão e comunicação. Para cada um desses temas tratamos os dados da seguinte maneira:</p>
 <ol type="1">
-<li>Selecionamos as variáveis.</li>
-<li>Convertemos o tipo das varáveis.</li>
-<li>O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo.</li>
-<li>Renomeamos as variáveis.</li>
+<li>Selecionamos as variáveis</li>
+<li>Convertemos o tipo das varáveis</li>
+<li>O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo</li>
+<li>Renomeamos as variáveis</li>
+<li>Juntamos tudo em um só dataframe</li>
 </ol>
+<p>obs.: os dados são referentes</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Abaixo serão tratados dados da força de trabalho do município:</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -355,34 +369,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Centro_controle_operacoes =</span> MTIC263,</span>
 <span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Iluminacao_inteligente =</span> MTIC264,</span>
 <span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Semaforos_inteligentes =</span> MTIC265,</span>
-<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Sensores_monitoria_area_risco =</span> MTIC266)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Sensores_monitoria_area_risco =</span> MTIC266)</span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>munic_tratada <span class="ot">&lt;-</span> Munic_Gestao <span class="sc">%&gt;%</span> </span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">left_join</span>(Munic_RH, <span class="at">by =</span> <span class="st">"CodMun"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">left_join</span>(Munic_TIC, <span class="at">by =</span> <span class="st">"CodMun"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando [<strong>aqui</strong>] (https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/munic_tratada.csv)</p>
 </section>
 <section id="ana" class="level3">
 <h3 class="anchored" data-anchor-id="ana">4) ANA</h3>
-<p>Os dados de saneamento foram extraídos da <a href="https://dadosabertos.ana.gov.br/datasets/4e403e4b10ad49f996539c1ea198e0a8_0/explore?location=-13.481668%2C-51.419000%2C4.31"><strong>ANA</strong></a> (Agência Nacional de Águas e Saneamento Básico).</p>
+<p>Acessamos os dados do Índice de Segurança Hídrica (ISH) criado pela Agência Nacional de Águas e Saneamento Básico (ANA). O índice geral - que pode variar entre as categorias mínima, baixa, média, alta, máxima - “é calculado a partir da eficiência da produção de água (combinação de indicadores de vulnerabilidade dos mananciais e de sistemas produtores de água) e da eficiência da distribuição de água (combinação de indicadores de cobertura de rede de distribuição e de infraestrutura para o gerenciamento de perdas)”.</p>
+<p>Os dados podem ser acessados <a href="https://dadosabertos.ana.gov.br/datasets/4e403e4b10ad49f996539c1ea198e0a8_0/explore?location=-13.481668%2C-51.419000%2C4.31"><strong>aqui</strong></a>.</p>
+<p>obs.: os dados são referentes ao ano de 2022.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Abaixo serão tratados os dados de esgotos da ANA:</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>indice_seguranca_hidrica_out_2022 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/8Dndice_de_SeguranA7a_HADdrica_Urbano_-_ISH-U_(Atlas_de_Abastecimento_outubro_2022).csv"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Atlas_Esgotos_ETE_2020 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/Atlas_Esgotos_ETE_2020.csv"</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Abaixo serão tratados os dados de segurança hídrica da ANA:</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>indice_seguranca_hidrica_out_2022 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/8Dndice_de_SeguranA7a_HADdrica_Urbano_-_ISH-U_(Atlas_de_Abastecimento_outubro_2022).csv"</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>seguranca_hidrica_out_2022 <span class="ot">&lt;-</span> indice_seguranca_hidrica_out_2022 <span class="sc">%&gt;%</span> </span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">select</span>(CDMUN, NMMUN, SGUF, ISH,</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                                       TPMAN, CSMAN, TPSIS, TPOPE,</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                                       SHAPE_Length, SHAPE_Area) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">mutate</span>(<span class="at">CDMUN =</span> <span class="fu">as.character</span>(CDMUN)) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">filter</span>(CDMUN <span class="sc">!=</span> <span class="st">"NA"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>seguranca_hidrica_out_2022 <span class="ot">&lt;-</span> indice_seguranca_hidrica_out_2022 <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">select</span>(CDMUN, NMMUN, SGUF, ISH) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">mutate</span>(<span class="at">CDMUN =</span> <span class="fu">as.character</span>(CDMUN)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">filter</span>(CDMUN <span class="sc">!=</span> <span class="st">"NA"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/ish_ana.csv"><strong>aqui</strong></a></p>
 </section>
 <section id="ideb" class="level3">
 <h3 class="anchored" data-anchor-id="ideb">5) IDEB</h3>
 <p>Os dados do <a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados"><strong>IDEB</strong></a> (Índice de Desenvolvimento da Educação Básica) foram criados pelo governo federal para medir a qualidade do ensino nas escolas públicas.</p>
+<ol type="1">
+<li><p>Filtragem para acessar os dados da rede de ensino pública - seja estadual ou municipal</p></li>
+<li><p>Tratamento para deixar as variáveis nos tipos adequados</p></li>
+</ol>
+<p>obs.: os dados são referentes ao ano de 2021</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Abaixo serão tratados os dados de ensino fundamental do IDEB:</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -407,6 +425,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="anatel" class="level3">
 <h3 class="anchored" data-anchor-id="anatel">6) ANATEL</h3>
 <p>A <a href="https://informacoes.anatel.gov.br/paineis/meu-municipio/acessos-banda-larga-fixa"><strong>ANATEL</strong></a> disponibiliza determinados dados referentes aos serviços de banda larga presentes nos municípios brasileiros.</p>
+<p>obs.: os dados são referentes ao ano de 2022.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Banda_larga_municipio_2022 <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"00_bases/bandalarga_Meu_Municipio_Acessos.csv"</span>, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">filter</span>(Ano <span class="sc">==</span> <span class="dv">2022</span>) <span class="sc">%&gt;%</span> </span>
@@ -427,8 +446,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Realizamos a contagem de categoria administrativa. Para isso, usamos a função <code>group_by</code>conjuntamente com a função <code>count</code>;</p></li>
 <li><p>Alteramos as categorias administrativas, que eram identificadas por números, para “publico” e “privado” obedecendo as suas identifcações no dicionário através da função <code>mutate</code> e <code>case_when</code>;</p></li>
 <li><p>Utilizamos a função <code>summarise</code>e o parâmentro <code>sum</code> para realizar a quantidade de tipos de instituições por município;</p></li>
-<li><p>Utilizamos a função <code>spred</code> para transformar as categorias em múltiplas colunas;</p></li>
-<li><p>Por intermédio do parametro <code>fill</code>, na função <code>spred</code> trocamos os valores vazios <code>NA</code> por 0.</p></li>
+<li><p>Utilizamos a função <code>spread</code> para transformar as categorias em múltiplas colunas;</p></li>
+<li><p>Por intermédio do parametro <code>fill</code>, na função <code>spread</code> trocamos os valores vazios <code>NA</code> por 0.</p></li>
 </ol>
 <p>Sobre a Base <em>MICRODADOS_CADASTRO_CURSOS_2021_reduzida</em>:</p>
 <ol type="1">
@@ -437,34 +456,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Utilizamos a função <code>spred</code> para transformar as categorias em múltiplas colunas;</p></li>
 <li><p>Por intermédio do parâmetro <code>fill</code>, na função <code>spred</code> trocamos os valores vazios <code>NA</code> por 0.</p></li>
 </ol>
+<p>obs.: os dados são referentes ao ano de 2021.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportando a base (MICRODADOS_CADASTRO_IES_2021) para tratamento:</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>censo_edu_superior_IES <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"00_bases/MICRODADOS_CADASTRO_IES_2021.CSV"</span>, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"latin1"</span>))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>censo_edu_superior_IES <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"00_bases/MICRODADOS_CADASTRO_IES_2021.CSV"</span>, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"latin1"</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Selecionando as variáveis (select), realizando contagem da categoria administrativa por município (count), renomeando a categoria administrativa (mutate e case_when), multiplicando as colunas das categorias (spread)</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Selecionando as variáveis (select), realizando contagem da categoria administrativa por município (count), renomeando a categoria administrativa (mutate e case_when), multiplicando as colunas das categorias (spread)</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>censo_edu_sup_IES_2021 <span class="ot">&lt;-</span> censo_edu_superior_IES<span class="sc">%&gt;%</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">select</span>(CO_MUNICIPIO_IES,TP_CATEGORIA_ADMINISTRATIVA)<span class="sc">%&gt;%</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">group_by</span>(CO_MUNICIPIO_IES,TP_CATEGORIA_ADMINISTRATIVA)<span class="sc">%&gt;%</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">count</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">TP_CATEGORIA_ADMINISTRATIVA =</span> <span class="fu">case_when</span>( </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                             TP_CATEGORIA_ADMINISTRATIVA <span class="sc">&lt;=</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Pública"</span>,</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                             TP_CATEGORIA_ADMINISTRATIVA <span class="sc">&gt;</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Privada"</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(n), <span class="at">.groups=</span> <span class="st">'drop'</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">spread</span>(TP_CATEGORIA_ADMINISTRATIVA, total, <span class="at">fill =</span> <span class="st">"0"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">rename</span>(<span class="at">CO_MUNICIPIO =</span> CO_MUNICIPIO_IES)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>censo_edu_sup_IES_2021 <span class="ot">&lt;-</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  censo_edu_superior_IES<span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(CO_MUNICIPIO_IES,TP_CATEGORIA_ADMINISTRATIVA)<span class="sc">%&gt;%</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(CO_MUNICIPIO_IES,TP_CATEGORIA_ADMINISTRATIVA)<span class="sc">%&gt;%</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">count</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">TP_CATEGORIA_ADMINISTRATIVA =</span> </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">case_when</span>(TP_CATEGORIA_ADMINISTRATIVA <span class="sc">&lt;=</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Pública"</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                           TP_CATEGORIA_ADMINISTRATIVA <span class="sc">&gt;</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Privada"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(n), <span class="at">.groups=</span> <span class="st">'drop'</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">spread</span>(TP_CATEGORIA_ADMINISTRATIVA, total, <span class="at">fill =</span> <span class="st">"0"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rename</span>(<span class="at">CO_MUNICIPIO =</span> CO_MUNICIPIO_IES)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportando a base (MICRODADOS_CADASTRO_CURSOS_2021) para tratamento: </span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>censo_edu_superior_cursos <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"00_bases/MICRODADOS_CADASTRO_CURSOS_2021_reduzida.CSV"</span>, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"latin1"</span>))               </span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>censo_edu_sup_cursos_2021 <span class="ot">&lt;-</span> censo_edu_superior_cursos<span class="sc">%&gt;%</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">select</span>(CO_MUNICIPIO, NO_CINE_AREA_GERAL, QT_CONC)<span class="sc">%&gt;%</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">group_by</span>(CO_MUNICIPIO,NO_CINE_AREA_GERAL)<span class="sc">%&gt;%</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(QT_CONC), <span class="at">.groups=</span> <span class="st">'drop'</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">spread</span>(NO_CINE_AREA_GERAL, total,  <span class="at">fill =</span> <span class="st">"0"</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportando a base (MICRODADOS_CADASTRO_CURSOS_2021) para tratamento: </span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>censo_edu_superior_cursos <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"00_bases/MICRODADOS_CADASTRO_CURSOS_2021_reduzida.CSV"</span>, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"latin1"</span>))               </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>censo_edu_sup_cursos_2021 <span class="ot">&lt;-</span> censo_edu_superior_cursos<span class="sc">%&gt;%</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">select</span>(CO_MUNICIPIO, NO_CINE_AREA_GERAL, QT_CONC)<span class="sc">%&gt;%</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">group_by</span>(CO_MUNICIPIO,NO_CINE_AREA_GERAL)<span class="sc">%&gt;%</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(QT_CONC), <span class="at">.groups=</span> <span class="st">'drop'</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">spread</span>(NO_CINE_AREA_GERAL, total,  <span class="at">fill =</span> <span class="st">"0"</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/censo_educacao_superior_tratado.csv"><strong>aqui</strong></a></p>
 </section>
@@ -473,11 +492,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>No <a href="https://dadosabertos.tse.jus.br/dataset/"><strong>Portal de transparência do TSE</strong></a> encontramos algumas bases de dados sobre as eleições no Brasil.Nossa intenção foi extrair apenas os dados referentes as eleições presidenciais de 2022.</p>
 <p>Sobre o tratamento dos dados:</p>
 <ol type="1">
-<li><p>Houve um tratamento previo, dimiuindo a quantidade de colunas, extraindo somente as colunas necessárias, resultando na base “tse_reduzida”. Nela estão somete os dados do segundo turno de 2022.</p></li>
+<li><p>Houve um tratamento prévio, dimiuindo a quantidade de colunas, extraindo somente as colunas necessárias, resultando na base “tse_reduzida”. Nela estão somete os dados do segundo turno de 2022.</p></li>
 <li><p>Realizamos a soma da quantidade de votos por município. Para isso, usamos a função <code>group_by</code>conjuntamente com a função <code>summarise</code> e o parâmetro<code>sum</code> para fazer a soma;</p></li>
-<li><p>Utilizamos a função <code>spred</code> para transformar as categorias em múltiplas colunas;</p></li>
-<li><p>Por intermédio do parâmetro <code>fill</code>, na função <code>spred</code> trocamos os valores vazios <code>NA</code> por 0.</p></li>
+<li><p>Utilizamos a função <code>spread</code> para transformar as categorias em múltiplas colunas;</p></li>
+<li><p>Por intermédio do parâmetro <code>fill</code>, na função <code>spread</code> trocamos os valores vazios <code>NA</code> por 0.</p></li>
 </ol>
+<p>obs.: os dados são referentes às últimos eleições presidenciais, 2022.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tratamento Base Presidente</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -489,14 +509,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">summarise</span>(<span class="at">total_votos =</span> <span class="fu">sum</span>(QT_VOTOS), <span class="at">.groups =</span> <span class="st">'drop'</span>)<span class="sc">%&gt;%</span></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">spread</span>(NM_VOTAVEL, total_votos,  <span class="at">fill =</span> <span class="st">"0"</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Você pode baixar o dado tratado clicando [<strong>aqui</strong>]https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/tse_tratado.csv</p>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/tse_tratado.csv"><strong>aqui</strong></a></p>
 </section>
 <section id="enem" class="level3">
 <h3 class="anchored" data-anchor-id="enem">9) ENEM</h3>
 <p>O INEP disponibiliza algumas bases de dados sobre as provas do ENEM. Nós utilizamos as informações referente ao <a href="https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/enem"><strong>ENEM 2021</strong></a></p>
 <p>Sobre o tratamento dos dados:</p>
 <ol type="1">
-<li><p>Houve um tratamento previo, dimiuindo a quantidade de colunas, extraindo somente as colunas necessárias, resultando na base “enem_reduzida”. Nela estão os dados referentes as notas por área de conhecimento.</p></li>
+<li><p>Houve um tratamento prévio, dimiuindo a quantidade de colunas, extraindo somente as colunas necessárias, resultando na base “enem_reduzida”. Nela estão os dados referentes as notas por área de conhecimento.</p></li>
 <li><p>Realizamos a média de notas por área de conhecimento em cada município. Para isso, usamos a função <code>group_by</code>conjuntamente com a função <code>summarise</code> e o parâmetro<code>mead</code> para fazer a média. O parêmetro <code>na.rm = T</code>foi utilizado para considerar os valores vazios;</p></li>
 </ol>
 <div class="cell">
@@ -504,12 +524,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>enem_2021 <span class="ot">&lt;-</span> enem<span class="sc">%&gt;%</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>          <span class="fu">group_by</span>(CO_MUNICIPIO_ESC,CO_UF_ESC,SG_UF_ESC)<span class="sc">%&gt;%</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">summarise</span>(<span class="at">media_notas_CN=</span> <span class="fu">mean</span>(NU_NOTA_CN, <span class="at">na.rm =</span> T),<span class="at">media_notas_CH =</span> <span class="fu">mean</span>(NU_NOTA_CH, <span class="at">na.rm =</span> T),</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">media_NU_NOTA_LC =</span> <span class="fu">mean</span>(NU_NOTA_LC, <span class="at">na.rm =</span> T),<span class="at">media_NU_NOTA_MT =</span> <span class="fu">mean</span>(NU_NOTA_MT, <span class="at">na.rm =</span> T),</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">media_NU_NOTA_REDACAO =</span> <span class="fu">mean</span>(NU_NOTA_REDACAO, <span class="at">na.rm =</span> T), <span class="at">.groups =</span> <span class="st">'drop'</span>)    </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">group_by</span>(CO_MUNICIPIO_ESC,CO_UF_ESC,SG_UF_ESC)<span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">summarise</span>(<span class="at">media_notas_CN=</span> <span class="fu">mean</span>(NU_NOTA_CN, <span class="at">na.rm =</span> T),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">media_notas_CH =</span> <span class="fu">mean</span>(NU_NOTA_CH, <span class="at">na.rm =</span> T),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">media_NU_NOTA_LC =</span> <span class="fu">mean</span>(NU_NOTA_LC, <span class="at">na.rm =</span> T),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">media_NU_NOTA_MT =</span> <span class="fu">mean</span>(NU_NOTA_MT, <span class="at">na.rm =</span> T),</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">media_NU_NOTA_REDACAO =</span> <span class="fu">mean</span>(NU_NOTA_REDACAO, <span class="at">na.rm =</span> T),                             <span class="at">.groups =</span> <span class="st">'drop'</span>)    </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Você pode baixar o dado tratado clicando [<strong>aqui</strong>]https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/enem_tratado.csv</p>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/enem_tratado.csv"><strong>aqui</strong></a></p>
 </section>
 <section id="mapa-de-empresas" class="level3">
 <h3 class="anchored" data-anchor-id="mapa-de-empresas">10) MAPA DE EMPRESAS</h3>
