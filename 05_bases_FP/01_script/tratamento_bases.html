@@ -178,7 +178,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringi)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="ipea" class="level3">
 <h3 class="anchored" data-anchor-id="ipea">1) IPEA</h3>
@@ -531,15 +532,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>obs.: os dados são referentes às últimos eleições presidenciais, 2022.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tratamento Base Presidente</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>tse_presid <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/tse_reduzida.csv"</span>) </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>uf <span class="ot">&lt;-</span> hierarquia_municipios <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">select</span>(cod_uf, uf_sigla) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">cod_uf =</span> <span class="fu">as.character</span>(cod_uf)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">unique</span>()</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>tse_presid_2022 <span class="ot">&lt;-</span> tse_presid<span class="sc">%&gt;%</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">group_by</span>(SG_UF,CD_MUNICIPIO,NM_MUNICIPIO,NR_TURNO,NM_VOTAVEL)<span class="sc">%&gt;%</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">summarise</span>(<span class="at">total_votos =</span> <span class="fu">sum</span>(QT_VOTOS), <span class="at">.groups =</span> <span class="st">'drop'</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">spread</span>(NM_VOTAVEL, total_votos,  <span class="at">fill =</span> <span class="st">"0"</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>tse_reduzida <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/tse_reduzida.csv"</span>, </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="at">CD_MUNICIPIO =</span> <span class="fu">col_character</span>())) </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>tse_presid_2022 <span class="ot">&lt;-</span> tse_reduzida <span class="sc">%&gt;%</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">filter</span>(SG_UF <span class="sc">!=</span> <span class="st">"ZZ"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">group_by</span>(SG_UF,CD_MUNICIPIO,NM_MUNICIPIO,NM_VOTAVEL) <span class="sc">%&gt;%</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">summarise</span>(<span class="at">total_votos =</span> <span class="fu">sum</span>(QT_VOTOS), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">spread</span>(NM_VOTAVEL, total_votos,  <span class="at">fill =</span> <span class="st">"0"</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">rename</span>(<span class="at">bolsonaro =</span> <span class="st">`</span><span class="at">JAIR MESSIAS BOLSONARO</span><span class="st">`</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>                          <span class="at">lula =</span> <span class="st">`</span><span class="at">LUIZ INÁCIO LULA DA SILVA</span><span class="st">`</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>                          <span class="at">branco =</span> <span class="st">`</span><span class="at">VOTO BRANCO</span><span class="st">`</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>                          <span class="at">nulo =</span> <span class="st">`</span><span class="at">VOTO NULO</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">lula =</span> <span class="fu">as.numeric</span>(lula),</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>                          <span class="at">bolsonaro =</span> <span class="fu">as.numeric</span>(bolsonaro),</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>                          <span class="at">branco =</span> <span class="fu">as.numeric</span>(branco),</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>                          <span class="at">nulo =</span> <span class="fu">as.numeric</span>(nulo)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">bolsonaro_perc =</span> bolsonaro<span class="sc">/</span>(lula <span class="sc">+</span> bolsonaro <span class="sc">+</span> nulo <span class="sc">+</span> branco),</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>                          <span class="at">lula_perc =</span> lula<span class="sc">/</span>(lula <span class="sc">+</span> bolsonaro <span class="sc">+</span> nulo <span class="sc">+</span> branco)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">codigo_ibge =</span> <span class="fu">str_pad</span>(CD_MUNICIPIO, <span class="dv">5</span>, <span class="at">pad =</span> <span class="st">"0"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">left_join</span>(uf, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"SG_UF"</span><span class="ot">=</span><span class="st">"uf_sigla"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">codigo_ibge_dv =</span> <span class="fu">substr</span>(<span class="fu">str_c</span>(cod_uf,codigo_ibge),<span class="dv">1</span>,<span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/tse_tratado.csv"><strong>aqui</strong></a></p>
 </section>
