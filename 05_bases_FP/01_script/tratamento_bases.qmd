@@ -347,6 +347,13 @@ IDEB_EM_rede_publica_2021 <- divulgacao_ensino_medio_municipios_2021 %>%
                              mutate(Cod_municipio = substr(Cod_municipio, 1, 6)) %>% 
                              select(-Rede_ensino)
 
+ideb_tratado <- IDEB_EM_rede_publica_2021%>%
+                left_join(IDEB_rede_publica_2021, by= "Cod_municipio")%>%
+                transmute(UF.x, Cod_municipio, Nome_municipio.x, IDEB_2021_medio, IDEB_2021_fund)%>%
+                rename(UF = UF.x,Nome_municipio = Nome_municipio.x)
+
+
+
 
 ```
 
@@ -371,7 +378,9 @@ Banda_larga_municipio_2022 <- read_delim("00_bases/bandalarga_Meu_Municipio_Aces
                              rename(densidade_banda_larga = `Banda Larga Fixa`,
                                     densidade_telefonia_fixa = `Telefonia Fixa`,
                                     densidade_telefonia_movel = `Telefonia Móvel`,
-                                    densidade_tv_assinatura = `TV por Assinatura`)
+                                    densidade_tv_assinatura = `TV por Assinatura`,
+                                    codigo_IBGE_dv = `Código IBGE`)
+
 
 ```
 
@@ -454,6 +463,13 @@ censo_edu_sup_cursos_2021 <- censo_edu_superior_cursos%>%
                              qtd_cursos_saude = `Saúde e bem-estar`,
                              qtd_cursos_servicos = Serviços)
 
+
+
+censo_educacao_superior_tratado <- censo_edu_sup_cursos_2021%>%
+                                   left_join(censo_edu_sup_IES_2021, by = "CO_MUNICIPIO")
+
+
+
 ```
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/censo_educacao_superior_tratado.csv)
@@ -503,6 +519,7 @@ tse_presid_2022 <- tse_reduzida %>%
                    mutate(codigo_ibge = str_pad(CD_MUNICIPIO, 5, pad = "0")) %>% 
                    left_join(uf, by = c("SG_UF"="uf_sigla")) %>% 
                    mutate(codigo_ibge_dv = substr(str_c(cod_uf,codigo_ibge),1,6))
+
 
 
 ```
