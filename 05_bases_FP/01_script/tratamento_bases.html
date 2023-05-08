@@ -389,7 +389,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>seguranca_hidrica_out_2022 <span class="ot">&lt;-</span> indice_seguranca_hidrica_out_2022 <span class="sc">%&gt;%</span> </span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">select</span>(CDMUN, NMMUN, SGUF, ISH) <span class="sc">%&gt;%</span> </span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">mutate</span>(<span class="at">CDMUN =</span> <span class="fu">as.character</span>(CDMUN)) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">filter</span>(CDMUN <span class="sc">!=</span> <span class="st">"NA"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">filter</span>(CDMUN <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">mutate</span>(<span class="at">CDMUN =</span> <span class="fu">substr</span>(CDMUN, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/ish_ana.csv"><strong>aqui</strong></a></p>
 </section>
@@ -409,16 +410,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>IDEB_rede_publica_2021 <span class="ot">&lt;-</span> divulgacao_anos_finais_municipios_2021 <span class="sc">%&gt;%</span> </span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">filter</span>(Rede_ensino <span class="sc">==</span> <span class="st">"Pública"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">mutate</span>(<span class="at">Cod_municipio =</span> <span class="fu">as.character</span>(Cod_municipio),</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">IDEB_2021 =</span> <span class="fu">as.numeric</span>(IDEB_2021))</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Abaixo serão tratados os dados de ensino médio do IDEB:</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>divulgacao_ensino_medio_municipios_2021 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/divulgacao_ensino_medio_municipios_2021.xlsx"</span>)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>IDEB_EM_rede_publica_2021 <span class="ot">&lt;-</span> divulgacao_ensino_medio_municipios_2021 <span class="sc">%&gt;%</span> </span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">filter</span>(Rede_ensino <span class="sc">==</span> <span class="st">"Pública"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">mutate</span>(<span class="at">Cod_municipio =</span> <span class="fu">as.character</span>(Cod_municipio),</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">IDEB_2021 =</span> <span class="fu">as.numeric</span>(IDEB_2021))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">IDEB_2021 =</span> <span class="fu">as.numeric</span>(IDEB_2021)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">mutate</span>(<span class="at">Cod_municipio =</span> <span class="fu">substr</span>(Cod_municipio, <span class="dv">1</span>, <span class="dv">6</span>))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Abaixo serão tratados os dados de ensino médio do IDEB:</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>divulgacao_ensino_medio_municipios_2021 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/divulgacao_ensino_medio_municipios_2021.xlsx"</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>IDEB_EM_rede_publica_2021 <span class="ot">&lt;-</span> divulgacao_ensino_medio_municipios_2021 <span class="sc">%&gt;%</span> </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">filter</span>(Rede_ensino <span class="sc">==</span> <span class="st">"Pública"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">mutate</span>(<span class="at">Cod_municipio =</span> <span class="fu">as.character</span>(Cod_municipio),</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">IDEB_2021 =</span> <span class="fu">as.numeric</span>(IDEB_2021)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">mutate</span>(<span class="at">Cod_municipio =</span> <span class="fu">substr</span>(Cod_municipio, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/ideb_tratado.csv"><strong>aqui</strong></a></p>
 </section>
@@ -433,7 +436,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">mutate</span>(<span class="st">`</span><span class="at">Código IBGE</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.character</span>(<span class="st">`</span><span class="at">Código IBGE</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">rename</span>(<span class="at">Codigo_IBGE =</span> <span class="st">`</span><span class="at">Código IBGE</span><span class="st">`</span>,</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">Servico =</span> Serviço) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">spread</span>(<span class="at">key =</span> Servico, <span class="at">value =</span> Densidade)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">spread</span>(<span class="at">key =</span> Servico, <span class="at">value =</span> Densidade) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="fu">mutate</span>(<span class="at">Codigo_IBGE =</span> <span class="fu">substr</span>(Codigo_IBGE, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/anatel_tratada.csv"><strong>aqui</strong></a></p>
 </section>
@@ -453,8 +457,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol type="1">
 <li><p>Selecionamos as váriaveis necessária através da função <code>select</code>;</p></li>
 <li><p>Realizamos a soma da quantidade de cusos por área geral por município. Para isso, usamos a função <code>group_by</code>conjuntamente com a função <code>summarise</code> e o parâmetro<code>sum</code> para fazer a soma;</p></li>
-<li><p>Utilizamos a função <code>spred</code> para transformar as categorias em múltiplas colunas;</p></li>
-<li><p>Por intermédio do parâmetro <code>fill</code>, na função <code>spred</code> trocamos os valores vazios <code>NA</code> por 0.</p></li>
+<li><p>Utilizamos a função <code>spread</code> para transformar as categorias em múltiplas colunas;</p></li>
+<li><p>Por intermédio do parâmetro <code>fill</code>, na função <code>spread</code> trocamos os valores vazios <code>NA</code> por 0.</p></li>
 </ol>
 <p>obs.: os dados são referentes ao ano de 2021.</p>
 <div class="cell">
@@ -472,18 +476,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                           TP_CATEGORIA_ADMINISTRATIVA <span class="sc">&gt;</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">"Privada"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(n), <span class="at">.groups=</span> <span class="st">'drop'</span>)<span class="sc">%&gt;%</span></span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="fu">spread</span>(TP_CATEGORIA_ADMINISTRATIVA, total, <span class="at">fill =</span> <span class="st">"0"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rename</span>(<span class="at">CO_MUNICIPIO =</span> CO_MUNICIPIO_IES)</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportando a base (MICRODADOS_CADASTRO_CURSOS_2021) para tratamento: </span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rename</span>(<span class="at">CO_MUNICIPIO =</span> CO_MUNICIPIO_IES) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">CO_MUNICIPIO =</span> <span class="fu">as.character</span>(CO_MUNICIPIO)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">CO_MUNICIPIO =</span> <span class="fu">substr</span>(CO_MUNICIPIO, <span class="dv">1</span>, <span class="dv">6</span>))</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>censo_edu_superior_cursos <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"00_bases/MICRODADOS_CADASTRO_CURSOS_2021_reduzida.CSV"</span>, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"latin1"</span>))               </span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>                    </span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>censo_edu_sup_cursos_2021 <span class="ot">&lt;-</span> censo_edu_superior_cursos<span class="sc">%&gt;%</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">select</span>(CO_MUNICIPIO, NO_CINE_AREA_GERAL, QT_CONC)<span class="sc">%&gt;%</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">group_by</span>(CO_MUNICIPIO,NO_CINE_AREA_GERAL)<span class="sc">%&gt;%</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(QT_CONC), <span class="at">.groups=</span> <span class="st">'drop'</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">spread</span>(NO_CINE_AREA_GERAL, total,  <span class="at">fill =</span> <span class="st">"0"</span>) </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportando a base (MICRODADOS_CADASTRO_CURSOS_2021) para tratamento: </span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>censo_edu_superior_cursos <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"00_bases/MICRODADOS_CADASTRO_CURSOS_2021_reduzida.CSV"</span>, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"latin1"</span>))               </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>                    </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>censo_edu_sup_cursos_2021 <span class="ot">&lt;-</span> censo_edu_superior_cursos<span class="sc">%&gt;%</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">select</span>(CO_MUNICIPIO, NO_CINE_AREA_GERAL, QT_CONC)<span class="sc">%&gt;%</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">group_by</span>(CO_MUNICIPIO,NO_CINE_AREA_GERAL)<span class="sc">%&gt;%</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(QT_CONC), <span class="at">.groups=</span> <span class="st">'drop'</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">spread</span>(NO_CINE_AREA_GERAL, total,  <span class="at">fill =</span> <span class="st">"0"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">CO_MUNICIPIO =</span> <span class="fu">as.character</span>(CO_MUNICIPIO)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">CO_MUNICIPIO =</span> <span class="fu">substr</span>(CO_MUNICIPIO, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/censo_educacao_superior_tratado.csv"><strong>aqui</strong></a></p>
 </section>
@@ -523,13 +531,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>enem <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/enem_reduzida.csv"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>enem_2021 <span class="ot">&lt;-</span> enem<span class="sc">%&gt;%</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">group_by</span>(CO_MUNICIPIO_ESC,CO_UF_ESC,SG_UF_ESC)<span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>enem_2021 <span class="ot">&lt;-</span> enem <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">group_by</span>(CO_MUNICIPIO_ESC,CO_UF_ESC,SG_UF_ESC) <span class="sc">%&gt;%</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">summarise</span>(<span class="at">media_notas_CN=</span> <span class="fu">mean</span>(NU_NOTA_CN, <span class="at">na.rm =</span> T),</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">media_notas_CH =</span> <span class="fu">mean</span>(NU_NOTA_CH, <span class="at">na.rm =</span> T),</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">media_NU_NOTA_LC =</span> <span class="fu">mean</span>(NU_NOTA_LC, <span class="at">na.rm =</span> T),</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">media_NU_NOTA_MT =</span> <span class="fu">mean</span>(NU_NOTA_MT, <span class="at">na.rm =</span> T),</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">media_NU_NOTA_REDACAO =</span> <span class="fu">mean</span>(NU_NOTA_REDACAO, <span class="at">na.rm =</span> T),                             <span class="at">.groups =</span> <span class="st">'drop'</span>)    </span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">media_NU_NOTA_REDACAO =</span> <span class="fu">mean</span>(NU_NOTA_REDACAO, <span class="at">na.rm =</span> T),                             <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                <span class="fu">mutate</span>(<span class="at">CO_MUNICIPIO_ESC =</span> <span class="fu">as.character</span>(CO_MUNICIPIO_ESC)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                <span class="fu">mutate</span>(<span class="at">CO_MUNICIPIO_ESC =</span> <span class="fu">substr</span>(CO_MUNICIPIO_ESC, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/enem_tratado.csv"><strong>aqui</strong></a></p>
 </section>
@@ -540,7 +550,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Abaixo só faremos a leitura da base tratada para juntarmos com as demais bases.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dados_receita <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/dados_receita.csv"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">...1</span><span class="st">`</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">...1</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">mutate</span>(<span class="at">cod_municipio_ibge =</span> <span class="fu">as.character</span>(cod_municipio_ibge)) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">mutate</span>(<span class="at">cod_municipio_ibge =</span> <span class="fu">substr</span>(cod_municipio_ibge, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando [<strong>aqui</strong>]</p>
 </section>
