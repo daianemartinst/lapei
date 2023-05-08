@@ -122,7 +122,10 @@ sebrae_hieraquia <- sebrae %>%
                         group_by(cod_municipio, cod_municipiodv,
                                  municipio, Tipo) %>% 
                         count() %>% 
-                        spread(Tipo, n) 
+                        spread(Tipo, n) %>% 
+                        mutate(cod_municipio = as.character(cod_municipio)) %>% 
+                        rename(estrutura_sebrae = `Estrutura Sebrae`,
+                               sala_empreendedor = `Sala do Empreendedor`)
 
 ```
 
@@ -336,7 +339,7 @@ IDEB_EM_rede_publica_2021 <- divulgacao_ensino_medio_municipios_2021 %>%
                              filter(Rede_ensino == "Pública") %>% 
                              mutate(Cod_municipio = as.character(Cod_municipio),
                                     IDEB_2021 = as.numeric(IDEB_2021)) %>% 
-                             mutate(Cod_municipio = substr(Cod_municipio, 1, 6))
+                             mutate(Cod_municipio = substr(Cod_municipio, 1, 6)) 
 
 
 ```
@@ -358,7 +361,11 @@ Banda_larga_municipio_2022 <- read_delim("00_bases/bandalarga_Meu_Municipio_Aces
                                     rename(Codigo_IBGE = `Código IBGE`,
                                            Servico = Serviço) %>% 
                                     spread(key = Servico, value = Densidade) %>% 
-                                    mutate(Codigo_IBGE = substr(Codigo_IBGE, 1, 6))
+                                    mutate(Codigo_IBGE = substr(Codigo_IBGE, 1, 6)) %>% 
+                             rename(densidade_banda_larga = `Banda Larga Fixa`,
+                                    densidade_telefonia_fixa = `Telefonia Fixa`,
+                                    densidade_telefonia_movel = `Telefonia Móvel`,
+                                    densidade_tv_assinatura = `TV por Assinatura`)
 
 ```
 
@@ -513,7 +520,11 @@ Abaixo só faremos a leitura da base tratada para juntarmos com as demais bases.
 dados_receita <- read_csv("00_bases/dados_receita.csv") %>% 
                         select(-`...1`) %>% 
                         mutate(cod_municipio_ibge = as.character(cod_municipio_ibge)) %>% 
-                        mutate(cod_municipio_ibge = substr(cod_municipio_ibge, 1, 6))
+                        mutate(cod_municipio_ibge = substr(cod_municipio_ibge, 1, 6)) %>% 
+                        rename(total_empresas = total,
+                               total_empresas_abertas = total_abertas,
+                               media_tempo_abertura = media_tempo_horas,
+                               media_dias_abertura = dias)
 
 ```
 
@@ -521,10 +532,27 @@ Você pode baixar o dado tratado clicando \[**aqui**\]
 
 ### 11) BASE COMPLETA
 
+Juntando todas as bases, temos o seguinte resultado. É possível acessar ao dicionário de dados dessa base que criamos clicando aqui. 
+
 ```{r}
 
+base_completa <- 
+  dados_receita %>% 
+  left_join(homicidios_2019, by = c("cod_municipio_ibge"="cod")) %>% 
+  left_join(sebrae_hieraquia, by = c("cod_municipio_ibge" = "cod_municipio")) %>% 
+  left_join(munic_tratada, by = c("cod_municipio_ibge" = "CodMun")) %>% 
+  left_join(seguranca_hidrica_out_2022, by = c("cod_municipio_ibge" = "CDMUN")) %>% 
+  left_join(IDEB_EM_rede_publica_2021, by = c("cod_municipio_ibge"="Cod_municipio")) %>% 
+  left_join(IDEB_rede_publica_2021, by = c("cod_municipio_ibge" = "Cod_municipio")) %>% 
+  left_join(Banda_larga_municipio_2022, by = c("cod_municipio_ibge"="Codigo_IBGE")) %>% 
+  left_join(censo_edu_sup_IES_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO")) %>% 
+  left_join(censo_edu_sup_cursos_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO")) %>% 
+  left_join(enem_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO_ESC")) %>% 
+  select(-cod_municipiodv, -NMMUN, -UF.x,
+         -UF.y, -Nome_municipio.y, -CO_UF_ESC,
+         -SG_UF_ESC)
 
-
+glimpse(base_completa)
 
 ```
 
