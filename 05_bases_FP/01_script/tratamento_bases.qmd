@@ -87,7 +87,9 @@ homicidios$cod <- as.character(homicidios$cod)
 homicidios_2019 <- homicidios %>% 
                   filter(período == 2019) %>% 
                   distinct(cod, nome, período, valor) %>% 
-                  mutate(cod = substr(cod, 1, 6))
+                  mutate(cod = substr(cod, 1, 6)) %>% 
+                  select(-período) %>% 
+                  rename(taxa_homicidio = valor)
 
 ```
 
@@ -433,7 +435,18 @@ censo_edu_sup_cursos_2021 <- censo_edu_superior_cursos%>%
                       summarise(total = sum(QT_CONC), .groups= 'drop')%>%
                       spread(NO_CINE_AREA_GERAL, total,  fill = "0") %>% 
                       mutate(CO_MUNICIPIO = as.character(CO_MUNICIPIO)) %>% 
-                      mutate(CO_MUNICIPIO = substr(CO_MUNICIPIO, 1, 6))
+                      mutate(CO_MUNICIPIO = substr(CO_MUNICIPIO, 1, 6)) %>% 
+                      rename(qtd_cursos_agro = `Agricultura, silvicultura, pesca e veterinária`,
+                             qtd_cursos_artes = `Artes e humanidades`,
+                             qtd_cursos_cn = `Ciências naturais, matemática e estatística`,
+                             qtd_cursos_cs = `Ciências sociais, comunicação e informação`,
+                             qtd_cursos_tic = `Computação e Tecnologias da Informação e Comunicação (TIC)`,
+                             qtd_cursos_educ = Educação,
+                             qtd_cursos_engenharias = `Engenharia, produção e construção`,
+                             qtd_cursos_negocios_direito = `Negócios, administração e direito`,
+                             qtd_cursos_programas_basicos = `Programas básicos`,
+                             qtd_cursos_saude = `Saúde e bem-estar`,
+                             qtd_cursos_servicos = Serviços)
 
 ```
 
@@ -548,9 +561,10 @@ base_completa <-
   left_join(censo_edu_sup_IES_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO")) %>% 
   left_join(censo_edu_sup_cursos_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO")) %>% 
   left_join(enem_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO_ESC")) %>% 
-  select(-cod_municipiodv, -NMMUN, -UF.x,
+  select(-cod_municipiodv, -nome, -NMMUN, -UF.x,
          -UF.y, -Nome_municipio.y, -CO_UF_ESC,
-         -SG_UF_ESC)
+         -SG_UF_ESC) %>% 
+  filter(cod_municipio_ibge != "NA")
 
 glimpse(base_completa)
 
