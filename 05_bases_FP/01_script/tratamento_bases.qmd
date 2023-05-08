@@ -475,16 +475,28 @@ obs.: os dados são referentes às últimos eleições presidenciais, 2022.
 ```{r}
 #| warning: false
 
+uf <- hierarquia_municipios %>% 
+            select(cod_uf, uf_sigla)
 
-# Tratamento Base Presidente
+tse_reduzida <- read_csv("00_bases/tse_reduzida.csv", 
+    col_types = cols(CD_MUNICIPIO = col_character())) 
 
-tse_presid <- read_csv("00_bases/tse_reduzida.csv") 
-
-
-tse_presid_2022 <- tse_presid%>%
-                   group_by(SG_UF,CD_MUNICIPIO,NM_MUNICIPIO,NR_TURNO,NM_VOTAVEL)%>%
-                   summarise(total_votos = sum(QT_VOTOS), .groups = 'drop')%>%
-                   spread(NM_VOTAVEL, total_votos,  fill = "0") 
+tse_presid_2022 <- tse_presid %>%
+                   filter(SG_UF != "ZZ") %>% 
+                   group_by(SG_UF,CD_MUNICIPIO,NM_MUNICIPIO,NR_TURNO,NM_VOTAVEL) %>%
+                   summarise(total_votos = sum(QT_VOTOS), .groups = 'drop') %>% 
+                   spread(NM_VOTAVEL, total_votos,  fill = "0")  %>% 
+                   left_join(uf, by = c("SG_UF"="uf_sigla")) %>% 
+                   rename(bolsonaro = `JAIR MESSIAS BOLSONARO`,
+                          lula = `LUIZ INÁCIO LULA DA SILVA`,
+                          branco = `VOTO BRANCO`,
+                          nulo = `VOTO NULO`) %>% 
+                   mutate(lula = as.numeric(lula),
+                          bolsonaro = as.numeric(bolsonaro),
+                          branco = as.numeric(branco),
+                          nulo = as.numeric(nulo)) %>% 
+                   mutate(bolsonaro_perc = bolsonaro/(lula + bolsonaro + nulo + branco),
+                          lula_perc = lula/(lula + bolsonaro + nulo + branco))
 
 
 ```
