@@ -44,6 +44,7 @@ O LAPEI-UFG é uma organização vinculada à Faculdade de Administração, Ciê
 
 </p>
 
+
 [**Saiba mais sobre o LAPEI**](https://lapei.face.ufg.br/)
 
 ## CARREGAMENTO E TRATAMENTO DE DADOS
@@ -146,7 +147,7 @@ Acessamos na Base Munic as variáveis dos temas recursos humanos do executivo mu
 4) Renomeamos as variáveis
 5) Juntamos tudo em um só dataframe
 
-obs.: os dados são referentes 
+obs.: os dados são referentes a 2019
 
 ```{r}
 #| warning: false
@@ -285,7 +286,7 @@ munic_tratada <- Munic_Gestao %>%
 
 ```
 
-Você pode baixar o dado tratado clicando [**aqui**] (https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/munic_tratada.csv)
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/munic_tratada.csv)
 
 ### 4) ANA
 
@@ -411,7 +412,7 @@ obs.: os dados são referentes ao ano de 2021.
 
 censo_edu_superior_IES <- read_delim("00_bases/MICRODADOS_CADASTRO_IES_2021.CSV", delim = ";", escape_double = FALSE, trim_ws = TRUE, locale = locale(encoding = "latin1"))
 
-#Selecionando as variáveis (select), realizando contagem da categoria administrativa por município (count), renomeando a categoria administrativa (mutate e case_when), multiplicando as colunas das categorias (spread)
+#Exportando a base (MICRODADOS_CADASTRO_IES_2021) para tratamento: 
 
 censo_edu_sup_IES_2021 <- 
   censo_edu_superior_IES%>%
@@ -560,6 +561,8 @@ dados_receita <- read_csv("00_bases/dados_receita.csv") %>%
                                media_tempo_abertura = media_tempo_horas,
                                media_dias_abertura = dias)
 
+
+
 ```
 
 Você pode baixar o dado tratado clicando \[**aqui**\]
@@ -569,6 +572,7 @@ Você pode baixar o dado tratado clicando \[**aqui**\]
 Juntando todas as bases, temos o seguinte resultado. É possível acessar ao dicionário de dados dessa base que criamos clicando aqui. 
 
 ```{r}
+#| warning: false
 
 base_completa <- 
   dados_receita %>% 
@@ -593,6 +597,9 @@ base_completa <-
 glimpse(base_completa)
 
 ```
+
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/base_completa_tratada.xlsx)
+
 
 ## AUTORIA
 
