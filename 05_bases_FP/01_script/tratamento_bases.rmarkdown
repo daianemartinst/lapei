@@ -342,8 +342,9 @@ divulgacao_anos_finais_municipios_2021 <- read_excel("00_bases/divulgacao_anos_f
 IDEB_rede_publica_2021 <- divulgacao_anos_finais_municipios_2021 %>% 
                           filter(Rede_ensino == "Pública") %>% 
                           mutate(Cod_municipio = as.character(Cod_municipio),
-                                 IDEB_2021 = as.numeric(IDEB_2021)) %>% 
-                          mutate(Cod_municipio = substr(Cod_municipio, 1, 6))
+                                 IDEB_2021_fund = as.numeric(IDEB_2021)) %>% 
+                          mutate(Cod_municipio = substr(Cod_municipio, 1, 6)) %>% 
+                          select(-Rede_ensino)
   
 # Abaixo serão tratados os dados de ensino médio do IDEB:
 
@@ -352,8 +353,9 @@ divulgacao_ensino_medio_municipios_2021 <- read_excel("00_bases/divulgacao_ensin
 IDEB_EM_rede_publica_2021 <- divulgacao_ensino_medio_municipios_2021 %>% 
                              filter(Rede_ensino == "Pública") %>% 
                              mutate(Cod_municipio = as.character(Cod_municipio),
-                                    IDEB_2021 = as.numeric(IDEB_2021)) %>% 
-                             mutate(Cod_municipio = substr(Cod_municipio, 1, 6)) 
+                                    IDEB_2021_medio = as.numeric(IDEB_2021)) %>% 
+                             mutate(Cod_municipio = substr(Cod_municipio, 1, 6)) %>% 
+                             select(-Rede_ensino)
 
 
 ```
@@ -370,12 +372,12 @@ obs.: os dados são referentes ao ano de 2022.
 
 ```{r}
 #| warning: false
-Banda_larga_municipio_2022 <- read_delim("00_bases/bandalarga_Meu_Municipio_Acessos.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE) %>% 
+Banda_larga_municipio_2022 <- read_delim("00_bases/bandalarga_Meu_Municipio_Acessos.csv", 
+                                          delim = ";", escape_double = FALSE, locale = locale(decimal_mark = ","), trim_ws = TRUE) %>% 
                                     filter(Ano == 2022) %>% 
                                     select(Serviço, Densidade, `Código IBGE`) %>% 
-                                    mutate(`Código IBGE` = as.character(`Código IBGE`)) %>% 
-                                    rename(Codigo_IBGE = `Código IBGE`,
-                                           Servico = Serviço) %>% 
+                                    mutate(Codigo_IBGE = as.character(`Código IBGE`)) %>%
+                                    rename(Servico = Serviço) %>% 
                                     spread(key = Servico, value = Densidade) %>% 
                                     mutate(Codigo_IBGE = substr(Codigo_IBGE, 1, 6)) %>% 
                              rename(densidade_banda_larga = `Banda Larga Fixa`,
@@ -438,7 +440,9 @@ censo_edu_sup_IES_2021 <-
         spread(TP_CATEGORIA_ADMINISTRATIVA, total, fill = "0")%>%
         rename(CO_MUNICIPIO = CO_MUNICIPIO_IES) %>% 
         mutate(CO_MUNICIPIO = as.character(CO_MUNICIPIO)) %>% 
-        mutate(CO_MUNICIPIO = substr(CO_MUNICIPIO, 1, 6))
+        mutate(CO_MUNICIPIO = substr(CO_MUNICIPIO, 1, 6)) %>% 
+        rename(IES_privadas = Privada,
+               IES_publicas = Pública)
 
 
 #Exportando a base (MICRODADOS_CADASTRO_CURSOS_2021) para tratamento: 
@@ -585,10 +589,13 @@ base_completa <-
   left_join(censo_edu_sup_IES_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO")) %>% 
   left_join(censo_edu_sup_cursos_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO")) %>% 
   left_join(enem_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO_ESC")) %>% 
+  relocate(SGUF, .after = cod_municipio_ibge) %>% 
+  relocate(municipio, .after = SGUF) %>% 
   select(-cod_municipiodv, -nome, -NMMUN, -UF.x,
          -UF.y, -Nome_municipio.y, -CO_UF_ESC,
-         -SG_UF_ESC) %>% 
-  filter(cod_municipio_ibge != "NA")
+         -SG_UF_ESC, -`Código IBGE`, -Nome_municipio.x,
+         -IDEB_2021.x, -IDEB_2021.y) %>% 
+  mutate(densidade_banda_larga = as.double(as.character(densidade_banda_larga)))
 
 glimpse(base_completa)
 
