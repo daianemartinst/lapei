@@ -582,7 +582,7 @@ dados_receita <- read_csv("00_bases/dados_receita.csv") %>%
 
 ```
 
-Você pode baixar o dado tratado clicando \[**aqui**\]
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/dados_receita_tratada.csv)
 
 ### 11) BASE COMPLETA
 
@@ -607,7 +607,7 @@ base_completa <-
   relocate(NMMUN, .after = SGUF) %>% 
   select(-cod_municipiodv, -nome, -municipio, -UF.x,
          -UF.y, -Nome_municipio.y, -CO_UF_ESC,
-         -SG_UF_ESC, -`Código IBGE`, -Nome_municipio.x,
+         -SG_UF_ESC, -`codigo_IBGE_dv`, -Nome_municipio.x,
          -IDEB_2021.x, -IDEB_2021.y) %>% 
   mutate(densidade_banda_larga = as.double(as.character(densidade_banda_larga)))
 
