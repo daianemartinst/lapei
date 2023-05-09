@@ -109,7 +109,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#objetivo" id="toc-objetivo" class="nav-link active" data-scroll-target="#objetivo">OBJETIVO</a></li>
+  <li><a href="#contextualização-e-objetivo" id="toc-contextualização-e-objetivo" class="nav-link active" data-scroll-target="#contextualização-e-objetivo">CONTEXTUALIZAÇÃO E OBJETIVO</a></li>
   <li><a href="#lapei---ufg" id="toc-lapei---ufg" class="nav-link" data-scroll-target="#lapei---ufg">LAPEI - UFG</a></li>
   <li><a href="#carregamento-e-tratamento-de-dados" id="toc-carregamento-e-tratamento-de-dados" class="nav-link" data-scroll-target="#carregamento-e-tratamento-de-dados">CARREGAMENTO E TRATAMENTO DE DADOS</a>
   <ul class="collapse">
@@ -152,8 +152,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 
 </div>
-<section id="objetivo" class="level2">
-<h2 class="anchored" data-anchor-id="objetivo">OBJETIVO</h2>
+<section id="contextualização-e-objetivo" class="level2">
+<h2 class="anchored" data-anchor-id="contextualização-e-objetivo">CONTEXTUALIZAÇÃO E OBJETIVO</h2>
 <p>O objetivo deste documento é publicizar os procedimentos de tratamento de bases de dados públicas que levou à construção de um repositório único, a nível município, sobre variáveis sociais, econômicas, infraestrura, dentre outras.</p>
 <p>Além de disponibilizar a base tratada, apresentamos as bases, suas fontes e os procedimentos executados para tal finalidade.</p>
 <p>Ao final de cada seção de código, é possível baixar o dado já tratado.</p>
@@ -429,7 +429,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">mutate</span>(<span class="at">Cod_municipio =</span> <span class="fu">as.character</span>(Cod_municipio),</span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">IDEB_2021_medio =</span> <span class="fu">as.numeric</span>(IDEB_2021)) <span class="sc">%&gt;%</span> </span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">mutate</span>(<span class="at">Cod_municipio =</span> <span class="fu">substr</span>(Cod_municipio, <span class="dv">1</span>, <span class="dv">6</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">select</span>(<span class="sc">-</span>Rede_ensino)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">select</span>(<span class="sc">-</span>Rede_ensino)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>ideb_tratado <span class="ot">&lt;-</span> IDEB_EM_rede_publica_2021<span class="sc">%&gt;%</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>                <span class="fu">left_join</span>(IDEB_rede_publica_2021, <span class="at">by=</span> <span class="st">"Cod_municipio"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>                <span class="fu">transmute</span>(UF.x, Cod_municipio, Nome_municipio.x, IDEB_2021_medio, IDEB_2021_fund)<span class="sc">%&gt;%</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rename</span>(<span class="at">UF =</span> UF.x,<span class="at">Nome_municipio =</span> Nome_municipio.x)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/ideb_tratado.csv"><strong>aqui</strong></a></p>
 </section>
@@ -449,7 +454,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">rename</span>(<span class="at">densidade_banda_larga =</span> <span class="st">`</span><span class="at">Banda Larga Fixa</span><span class="st">`</span>,</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">densidade_telefonia_fixa =</span> <span class="st">`</span><span class="at">Telefonia Fixa</span><span class="st">`</span>,</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">densidade_telefonia_movel =</span> <span class="st">`</span><span class="at">Telefonia Móvel</span><span class="st">`</span>,</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">densidade_tv_assinatura =</span> <span class="st">`</span><span class="at">TV por Assinatura</span><span class="st">`</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">densidade_tv_assinatura =</span> <span class="st">`</span><span class="at">TV por Assinatura</span><span class="st">`</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">codigo_IBGE_dv =</span> <span class="st">`</span><span class="at">Código IBGE</span><span class="st">`</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/anatel_tratada.csv"><strong>aqui</strong></a></p>
 </section>
@@ -516,7 +522,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>                             <span class="at">qtd_cursos_negocios_direito =</span> <span class="st">`</span><span class="at">Negócios, administração e direito</span><span class="st">`</span>,</span>
 <span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>                             <span class="at">qtd_cursos_programas_basicos =</span> <span class="st">`</span><span class="at">Programas básicos</span><span class="st">`</span>,</span>
 <span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>                             <span class="at">qtd_cursos_saude =</span> <span class="st">`</span><span class="at">Saúde e bem-estar</span><span class="st">`</span>,</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>                             <span class="at">qtd_cursos_servicos =</span> Serviços)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>                             <span class="at">qtd_cursos_servicos =</span> Serviços)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>censo_educacao_superior_tratado <span class="ot">&lt;-</span> censo_edu_sup_cursos_2021<span class="sc">%&gt;%</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>                                   <span class="fu">left_join</span>(censo_edu_sup_IES_2021, <span class="at">by =</span> <span class="st">"CO_MUNICIPIO"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/censo_educacao_superior_tratado.csv"><strong>aqui</strong></a></p>
 </section>
@@ -622,7 +633,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(NMMUN, <span class="at">.after =</span> SGUF) <span class="sc">%&gt;%</span> </span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>cod_municipiodv, <span class="sc">-</span>nome, <span class="sc">-</span>municipio, <span class="sc">-</span>UF.x,</span>
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span>UF.y, <span class="sc">-</span>Nome_municipio.y, <span class="sc">-</span>CO_UF_ESC,</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span>SG_UF_ESC, <span class="sc">-</span><span class="st">`</span><span class="at">Código IBGE</span><span class="st">`</span>, <span class="sc">-</span>Nome_municipio.x,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span>SG_UF_ESC, <span class="sc">-</span><span class="st">`</span><span class="at">codigo_IBGE_dv</span><span class="st">`</span>, <span class="sc">-</span>Nome_municipio.x,</span>
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span>IDEB_2021.x, <span class="sc">-</span>IDEB_2021.y) <span class="sc">%&gt;%</span> </span>
 <span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">densidade_banda_larga =</span> <span class="fu">as.double</span>(<span class="fu">as.character</span>(densidade_banda_larga)))</span>
 <span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
