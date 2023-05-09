@@ -1,5 +1,5 @@
 ---
-title: "Bases para Pesquisa em Ciências Sociais"
+title: "Bases de dados para apoio à pesquisa em empreendedorismo a nível municipal"
 format: 
   html:
     toc: true
@@ -23,7 +23,7 @@ here::here("styles.css")
 
 ```
 
-## OBJETIVO
+## CONTEXTUALIZAÇÃO E OBJETIVO
 
 O objetivo deste documento é publicizar os procedimentos de tratamento de bases de dados públicas que levou à construção de um repositório único, a nível município, sobre variáveis sociais, econômicas, infraestrura, dentre outras. 
 
@@ -587,8 +587,8 @@ base_completa <-
   left_join(censo_edu_sup_cursos_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO")) %>% 
   left_join(enem_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO_ESC")) %>% 
   relocate(SGUF, .after = cod_municipio_ibge) %>% 
-  relocate(municipio, .after = SGUF) %>% 
-  select(-cod_municipiodv, -nome, -NMMUN, -UF.x,
+  relocate(NMMUN, .after = SGUF) %>% 
+  select(-cod_municipiodv, -nome, -municipio, -UF.x,
          -UF.y, -Nome_municipio.y, -CO_UF_ESC,
          -SG_UF_ESC, -`Código IBGE`, -Nome_municipio.x,
          -IDEB_2021.x, -IDEB_2021.y) %>% 

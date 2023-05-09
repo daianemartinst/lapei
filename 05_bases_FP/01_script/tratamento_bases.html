@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bases para Pesquisa em Ciências Sociais</title>
+<title>Bases de dados para apoio à pesquisa em empreendedorismo a nível municipal</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Bases para Pesquisa em Ciências Sociais</h1>
+<h1 class="title">Bases de dados para apoio à pesquisa em empreendedorismo a nível municipal</h1>
 </div>
 
 
@@ -476,7 +476,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>censo_edu_superior_IES <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"00_bases/MICRODADOS_CADASTRO_IES_2021.CSV"</span>, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">escape_double =</span> <span class="cn">FALSE</span>, <span class="at">trim_ws =</span> <span class="cn">TRUE</span>, <span class="at">locale =</span> <span class="fu">locale</span>(<span class="at">encoding =</span> <span class="st">"latin1"</span>))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Selecionando as variáveis (select), realizando contagem da categoria administrativa por município (count), renomeando a categoria administrativa (mutate e case_when), multiplicando as colunas das categorias (spread)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Exportando a base (MICRODADOS_CADASTRO_IES_2021) para tratamento: </span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>censo_edu_sup_IES_2021 <span class="ot">&lt;-</span> </span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  censo_edu_superior_IES<span class="sc">%&gt;%</span></span>
@@ -619,8 +619,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(censo_edu_sup_cursos_2021, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"cod_municipio_ibge"</span> <span class="ot">=</span> <span class="st">"CO_MUNICIPIO"</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(enem_2021, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"cod_municipio_ibge"</span> <span class="ot">=</span> <span class="st">"CO_MUNICIPIO_ESC"</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(SGUF, <span class="at">.after =</span> cod_municipio_ibge) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(municipio, <span class="at">.after =</span> SGUF) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>cod_municipiodv, <span class="sc">-</span>nome, <span class="sc">-</span>NMMUN, <span class="sc">-</span>UF.x,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(NMMUN, <span class="at">.after =</span> SGUF) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>cod_municipiodv, <span class="sc">-</span>nome, <span class="sc">-</span>municipio, <span class="sc">-</span>UF.x,</span>
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span>UF.y, <span class="sc">-</span>Nome_municipio.y, <span class="sc">-</span>CO_UF_ESC,</span>
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span>SG_UF_ESC, <span class="sc">-</span><span class="st">`</span><span class="at">Código IBGE</span><span class="st">`</span>, <span class="sc">-</span>Nome_municipio.x,</span>
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span>IDEB_2021.x, <span class="sc">-</span>IDEB_2021.y) <span class="sc">%&gt;%</span> </span>
@@ -632,7 +632,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Columns: 115
 $ cod_municipio_ibge                      &lt;chr&gt; "110001", "110002", "110003", …
 $ SGUF                                    &lt;chr&gt; "RO", "RO", "RO", "RO", "RO", …
-$ municipio                               &lt;chr&gt; "Alta Floresta D'Oeste", "Ariq…
+$ NMMUN                                   &lt;chr&gt; "Alta Floresta D'Oeste", "Ariq…
 $ total_empresas                          &lt;dbl&gt; 1567, 9231, 384, 8615, 1618, 1…
 $ total_empresas_abertas                  &lt;dbl&gt; 233, 1659, 58, 1624, 316, 203,…
 $ media_tempo_abertura                    &lt;dbl&gt; 47.94148, 98.59167, 32.90625, …
