@@ -10,6 +10,9 @@ editor: visual
 lang: pt
 anchor-sections: true
 link-external-newwindow: true
+citations-hover: true
+footnotes-hover: true 
+
 ---
 
 ```{r}
@@ -30,6 +33,7 @@ O objetivo deste documento é publicizar os procedimentos de tratamento de bases
 Além de disponibilizar a base tratada, apresentamos as bases, suas fontes e os  procedimentos executados para tal finalidade. 
 
 Ao final de cada seção de código, é possível baixar o dado já tratado.
+
 
 
 ## LAPEI - UFG
@@ -588,6 +592,8 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 Juntando todas as bases, temos o seguinte resultado. É possível acessar ao dicionário de dados dessa base que criamos clicando aqui. 
 
+ 
+
 ```{r}
 #| warning: false
 
@@ -670,4 +676,4 @@ Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB),E-mail: danielppagotto\@ufg
 
 ## COMO CITAR
 
-Paiva, A.D.S; Silveira, H.; Pagotto, D. P. Bases para pesquisas em ciências sociais. Laboratório de Pesquisa em Empreendedorismo e Inovação - Universidade Federal de Goiás. 
+Paiva, A.D.S; Silveira, H.; Pagotto, D. P. Bases para pesquisas em ciências sociais. Laboratório de Pesquisa em Empreendedorismo e Inovação - Universidade Federal de Goiás.
