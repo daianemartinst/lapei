@@ -11,7 +11,9 @@ lang: pt
 anchor-sections: true
 link-external-newwindow: true
 citations-hover: true
-footnotes-hover: true 
+footnotes-hover: true
+bibliography: referencias.bib
+csl: APA.csl
 ---
 
 ```{r}
@@ -27,9 +29,7 @@ here::here("styles.css")
 
 ## CONTEXTUALIZAÇÃO E OBJETIVO
 
-
-Conforme Silva e Bastos (2022), algumas variáveis de natureza ambiental contribuem para explicar o fenômeno empreendedores, a exemplo dos contextos econômico e social nos quais os indivíduos estão inseridos.
-Tendo em vista do contexto, pesquisadores testaram o efeito de outras variáveis - como, violência (Shahriar & Shepherd, 2019), educação (Lofstrom, Bates & Parker, 2014), infraestrutura (Woolley, 2014), gênero (Zwan, Verheul & Thurik, 2012), leis e ambiente econômico (Coomes, Fernandez & Ghomann, 2013) sobre a emergência de empresas.
+Conforme @MonteirodaSilva2022, algumas variáveis de natureza ambiental contribuem para explicar o fenômeno empreendedores, a exemplo dos contextos econômico e social nos quais os indivíduos estão inseridos. Tendo em vista do contexto, pesquisadores testaram o efeito de outras variáveis - como, violência (Shahriar & Shepherd, 2019), educação (Lofstrom, Bates & Parker, 2014), infraestrutura (Woolley, 2014), gênero (Zwan, Verheul & Thurik, 2012), leis e ambiente econômico (Coomes, Fernandez & Ghomann, 2013) sobre a emergência de empresas.
 
 O **objetivo** deste documento é publicizar os procedimentos de tratamento de bases de dados públicas que levou à construção de um repositório único, a nível município, sobre variáveis sociais, econômicas, infraestrura, dentre outras.
 
@@ -621,9 +621,9 @@ glimpse(base_completa)
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/base_completa_tratada.xlsx)
 
-## REFERÊNCIAS 
+## REFERÊNCIAS
 
-Henrique, colocar as referências aqui 
+Henrique, colocar as referências aqui
 
 ## AUTORIA
 
