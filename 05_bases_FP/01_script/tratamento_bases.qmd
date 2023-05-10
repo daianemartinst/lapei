@@ -12,7 +12,6 @@ anchor-sections: true
 link-external-newwindow: true
 citations-hover: true
 footnotes-hover: true 
-
 ---
 
 ```{r}
@@ -28,13 +27,15 @@ here::here("styles.css")
 
 ## CONTEXTUALIZAÇÃO E OBJETIVO
 
-O objetivo deste documento é publicizar os procedimentos de tratamento de bases de dados públicas que levou à construção de um repositório único, a nível município, sobre variáveis sociais, econômicas, infraestrura, dentre outras. 
 
-Além de disponibilizar a base tratada, apresentamos as bases, suas fontes e os  procedimentos executados para tal finalidade. 
+Conforme Silva e Bastos (2022), algumas variáveis de natureza ambiental contribuem para explicar o fenômeno empreendedores, a exemplo dos contextos econômico e social nos quais os indivíduos estão inseridos.
+Tendo em vista do contexto, pesquisadores testaram o efeito de outras variáveis - como, violência (Shahriar & Shepherd, 2019), educação (Lofstrom, Bates & Parker, 2014), infraestrutura (Woolley, 2014), gênero (Zwan, Verheul & Thurik, 2012), leis e ambiente econômico (Coomes, Fernandez & Ghomann, 2013) sobre a emergência de empresas.
+
+O objetivo deste documento é publicizar os procedimentos de tratamento de bases de dados públicas que levou à construção de um repositório único, a nível município, sobre variáveis sociais, econômicas, infraestrura, dentre outras.
+
+Além de disponibilizar a base tratada, apresentamos as bases, suas fontes e os procedimentos executados para tal finalidade.
 
 Ao final de cada seção de código, é possível baixar o dado já tratado.
-
-
 
 ## LAPEI - UFG
 
@@ -42,12 +43,11 @@ Ao final de cada seção de código, é possível baixar o dado já tratado.
 
 <p style="text-align:justify">
 
-Esse produto é resultado de um esforço do Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (LAPEI/UFG). 
+Esse produto é resultado de um esforço do Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (LAPEI/UFG).
 
 O LAPEI-UFG é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.
 
 </p>
-
 
 [**Saiba mais sobre o LAPEI**](https://lapei.face.ufg.br/)
 
@@ -72,7 +72,7 @@ library(stringr)
 
 ### 1) IPEA
 
-Os dados de homicídio foram extraídos do [**Atlas da Violência do IPEA**](https://www.ipea.gov.br/atlasviolencia/). A base contém um índice de homicídios para cada um dos municípios brasileiros. 
+Os dados de homicídio foram extraídos do [**Atlas da Violência do IPEA**](https://www.ipea.gov.br/atlasviolencia/). A base contém um índice de homicídios para cada um dos municípios brasileiros.
 
 1)  padronizamos a variável código do município para o formato texto
 
@@ -103,13 +103,13 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 2) SEBRAE
 
-Aqui estamos tratando a base do [**SEBRAE**](https://transparencia.sebrae.com.br/infraestrutura?unidade=), que traz se o município possui infraestrutura do Sebrae (seja própria ou alugada) ou sala do empreendedor em parceria com a prefeitura. 
+Aqui estamos tratando a base do [**SEBRAE**](https://transparencia.sebrae.com.br/infraestrutura?unidade=), que traz se o município possui infraestrutura do Sebrae (seja própria ou alugada) ou sala do empreendedor em parceria com a prefeitura.
 
-1) O primeiro passo foi a criação de um código de identificação de município (ex.: código IBGE), pois não está presente na base original e isso é importante para juntar com outras bases.
+1)  O primeiro passo foi a criação de um código de identificação de município (ex.: código IBGE), pois não está presente na base original e isso é importante para juntar com outras bases.
 
-2) Além disso, usamos a função `spread`, para criar duas colunas com os tipos de estrutura. 
+2)  Além disso, usamos a função `spread`, para criar duas colunas com os tipos de estrutura.
 
-obs.: não há identificação do ano na base. Acessamos diretamente do link do Sebrae. 
+obs.: não há identificação do ano na base. Acessamos diretamente do link do Sebrae.
 
 ```{r}
 #| warning: false
@@ -145,11 +145,11 @@ A [**MUNIC**](https://www.ibge.gov.br/estatisticas/sociais/saude/10586-pesquisa-
 
 Acessamos na Base Munic as variáveis dos temas recursos humanos do executivo municipal, gestão e comunicação. Para cada um desses temas tratamos os dados da seguinte maneira:
 
-1) Selecionamos as variáveis
-2) Convertemos o tipo das varáveis
-3) O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo
-4) Renomeamos as variáveis
-5) Juntamos tudo em um só dataframe
+1)  Selecionamos as variáveis
+2)  Convertemos o tipo das varáveis
+3)  O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo
+4)  Renomeamos as variáveis
+5)  Juntamos tudo em um só dataframe
 
 obs.: os dados são referentes a 2019
 
@@ -296,9 +296,9 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 Acessamos os dados do Índice de Segurança Hídrica (ISH) criado pela Agência Nacional de Águas e Saneamento Básico (ANA). O índice geral - que pode variar entre as categorias mínima, baixa, média, alta, máxima - "é calculado a partir da eficiência da produção de água (combinação de indicadores de vulnerabilidade dos mananciais e de sistemas produtores de água) e da eficiência da distribuição de água (combinação de indicadores de cobertura de rede de distribuição e de infraestrutura para o gerenciamento de perdas)".
 
-Os dados podem ser acessados [**aqui**](https://dadosabertos.ana.gov.br/datasets/4e403e4b10ad49f996539c1ea198e0a8_0/explore?location=-13.481668%2C-51.419000%2C4.31). 
+Os dados podem ser acessados [**aqui**](https://dadosabertos.ana.gov.br/datasets/4e403e4b10ad49f996539c1ea198e0a8_0/explore?location=-13.481668%2C-51.419000%2C4.31).
 
-obs.: os dados são referentes ao ano de 2022. 
+obs.: os dados são referentes ao ano de 2022.
 
 ```{r}
 #| warning: false
@@ -320,9 +320,9 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 Os dados do [**IDEB**](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados) (Índice de Desenvolvimento da Educação Básica) foram criados pelo governo federal para medir a qualidade do ensino nas escolas públicas.
 
-1) Filtragem para acessar os dados da rede de ensino pública - seja estadual ou municipal
+1)  Filtragem para acessar os dados da rede de ensino pública - seja estadual ou municipal
 
-2) Tratamento para deixar as variáveis nos tipos adequados
+2)  Tratamento para deixar as variáveis nos tipos adequados
 
 obs.: os dados são referentes ao ano de 2021
 
@@ -367,7 +367,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 A [**ANATEL**](https://informacoes.anatel.gov.br/paineis/meu-municipio/acessos-banda-larga-fixa) disponibiliza determinados dados referentes aos serviços de banda larga presentes nos municípios brasileiros.
 
-obs.: os dados são referentes ao ano de 2022. 
+obs.: os dados são referentes ao ano de 2022.
 
 ```{r}
 #| warning: false
@@ -418,7 +418,7 @@ Sobre a Base *MICRODADOS_CADASTRO_CURSOS_2021_reduzida*:
 
 4)  Por intermédio do parâmetro `fill`, na função `spread` trocamos os valores vazios `NA` por 0.
 
-obs.: os dados são referentes ao ano de 2021. 
+obs.: os dados são referentes ao ano de 2021.
 
 ```{r}
 #| warning: false
@@ -492,7 +492,7 @@ Sobre o tratamento dos dados:
 
 4)  Por intermédio do parâmetro `fill`, na função `spread` trocamos os valores vazios `NA` por 0.
 
-obs.: os dados são referentes às últimos eleições presidenciais, 2022. 
+obs.: os dados são referentes às últimos eleições presidenciais, 2022.
 
 ```{r}
 #| warning: false
@@ -564,7 +564,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 10) Empresas - Receita Federal
 
-Na presente subseção temos dados a nível município sobre empresas ativas em 2023, empresas criadas em 2022 e a média do tempo de criação de empresas. Todas as bases foram acessadas por meio da ferramenta  [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas) do Governo Federal. A fonte original dos dados é a Receita Federal do Brasil. 
+Na presente subseção temos dados a nível município sobre empresas ativas em 2023, empresas criadas em 2022 e a média do tempo de criação de empresas. Todas as bases foram acessadas por meio da ferramenta [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas) do Governo Federal. A fonte original dos dados é a Receita Federal do Brasil.
 
 Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [script](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/script_receita.R).
 
@@ -590,9 +590,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 11) BASE COMPLETA
 
-Juntando todas as bases, temos o seguinte resultado. É possível acessar ao dicionário de dados dessa base que criamos clicando aqui. 
-
- 
+Juntando todas as bases, temos o seguinte resultado. É possível acessar ao dicionário de dados dessa base que criamos clicando aqui.
 
 ```{r}
 #| warning: false
@@ -623,6 +621,9 @@ glimpse(base_completa)
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/base_completa_tratada.xlsx)
 
+## REFERÊNCIAS 
+
+Henrique, colocar as referências aqui 
 
 ## AUTORIA
 
