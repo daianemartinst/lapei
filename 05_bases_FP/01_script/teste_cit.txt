@@ -1,0 +1,13 @@
+@article{monitor2017empreendedorismo,
+  title={Empreendedorismo no Brasil: 2016},
+  author={Monitor, Global Entrepreneurship},
+  journal={Curitiba: IBQP},
+  pages={1--208},
+  year={2017}
+}
+ @article{monitor2012empreendedorismo,
+  title={empreendedorismo no Brasil},
+  author={Monitor, Global Entrepreneurship},
+  journal={Relat{\'o}rio Executivo},
+  year={2012}
+}
