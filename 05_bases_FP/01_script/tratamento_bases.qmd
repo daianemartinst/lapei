@@ -610,8 +610,6 @@ auxilio_br <- auxilio_brasil_2022%>%
                          valor_medio_recebido_familia = `Benefício médio recebido pelas famílias do Auxílio Brasil`)
 
 
-export(auxilio_br, "auxilio_brasil_tratada.csv")
-
 
 ```
 
@@ -634,7 +632,7 @@ pib_munic <- pib_municipio%>%
              mutate(codigo_municipio_ibge = substr(codigo_municipio_ibge, 1, 6))
 
 
-export(pib_munic, "pib_munic_tratado.csv")
+
 
 ```
 
@@ -652,7 +650,6 @@ geoses_reduzida <- read_excel("00_bases/geoses_reduzida.xlsx")%>%
                    mutate(v0002_codigo_do_municipio = substr(v0002_codigo_do_municipio, 1, 6))
 
 
-export(geoses_reduzida, "geoses_reduzida_tratada.csv")
 
 ```
 
