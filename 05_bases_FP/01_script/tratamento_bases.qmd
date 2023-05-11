@@ -736,7 +736,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 ```
 <figcaption style="text-align:center">
 
-Adaleny Paiva,Título: Bacharela(Mestranda - PPGS/UFG),E-mail: adalenypaiva\@discente.ufg.br
+Adaleny Paiva, Título: Bacharela (Mestranda - PPGS/UFG), E-mail: adalenypaiva\@discente.ufg.br
 
 </figcaption>
 
@@ -752,7 +752,7 @@ Adaleny Paiva,Título: Bacharela(Mestranda - PPGS/UFG),E-mail: adalenypaiva\@dis
 ```
 <figcaption style="text-align:center">
 
-Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro\@discente.ufg.br
+Henrique Silveira, Título: Graduando (FACE/UFG), E-mail: henriqueribeiro\@discente.ufg.br
 
 </figcaption>
 
@@ -768,7 +768,7 @@ Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro\@discente
 ```
 <figcaption style="text-align:center">
 
-Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB), E-mail: danielppagotto\@ufg.br
+Daniel Pagotto, Título: Mestre (Doutorando PPGA/UnB), E-mail: danielppagotto\@ufg.br
 
 </figcaption>
 
@@ -776,4 +776,4 @@ Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB), E-mail: danielppagotto\@uf
 
 ## COMO CITAR
 
-Paiva, A.D.S; Silveira, H.; Pagotto, D. P. Bases para pesquisas em ciências sociais. Laboratório de Pesquisa em Empreendedorismo e Inovação - Universidade Federal de Goiás.2023.
+Paiva, A. D. S., Silveira, H. R., & Pagotto, D. P. (2023). *Bases de dados para apoio à pesquisa em empreendedorismo a nível municipal.* Laboratório de Pesquisa em Empreendedorismo e Inovação - Universidade Federal de Goiás, Goiânia, GO.
