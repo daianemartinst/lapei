@@ -14,7 +14,6 @@ citations-hover: true
 footnotes-hover: true
 bibliography: referencias.bib
 csl: APA.csl
-
 ---
 
 ```{r}
@@ -591,7 +590,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 11) AUXÍLIO BRASIL - SAGICAD
 
-O [**SAGICAD**](https://aplicacoes.cidadania.gov.br/vis/data3/v.php?q[]=oNOhlMHqwJOsuqSe9Wp%2BhrNe09Gv17llja1%2BYW15YmqqdH9%2BaWCEkWWXbWTZ8X5kc3xwoNqlwLNyocnWmKV4mb7nwJl3g6iv5lzDf2lfiJyZy6mmwrazlai7mnW0n666qpKSnKbfqlbTrH1rcYOprO6eiMKporycbtCen9DgiG%2BvvaJd9Fqwr6qSd9ibz6tTnfF%2BZm55c2qZrbWzpU3J0KjYoVuFu8NlbH9qdLOnwrucn8DEXJl9qY6tf2Voel5a3qXAs1ebzM2fiqKhwZzKb6Kpoa3edLOvo6C8nG7Qnp%2FQ4Ihvr72itr%2BauhHkmcDCpo2DlMo%2B%2BqClqahayXqPbqXw%2BtBT3bKmzeC7p527WJDapbzAV4HG1ZTWXYXC666nr6mZqZmdvG54os8k4Namon29v5WvsaFdu567s53wBMSc2V2gICSxnatop5%2Fcnq%2B3m5x30ZjWnqZ94a6h%2F%2FWho9qsbbKmTZjWqy3qn8bqbXauqaij5bW9iQ%3D%3D&ag=m&dt1=2022-01-01&dt2=2022-12-01)(Secretaria de Avaliação, Gestão da Informação e Cadastro Único)
+O [**SAGICAD**](https://aplicacoes.cidadania.gov.br/vis/data3/v.php?q%5B%5D=oNOhlMHqwJOsuqSe9Wp%2BhrNe09Gv17llja1%2BYW15YmqqdH9%2BaWCEkWWXbWTZ8X5kc3xwoNqlwLNyocnWmKV4mb7nwJl3g6iv5lzDf2lfiJyZy6mmwrazlai7mnW0n666qpKSnKbfqlbTrH1rcYOprO6eiMKporycbtCen9DgiG%2BvvaJd9Fqwr6qSd9ibz6tTnfF%2BZm55c2qZrbWzpU3J0KjYoVuFu8NlbH9qdLOnwrucn8DEXJl9qY6tf2Voel5a3qXAs1ebzM2fiqKhwZzKb6Kpoa3edLOvo6C8nG7Qnp%2FQ4Ihvr72itr%2BauhHkmcDCpo2DlMo%2B%2BqClqahayXqPbqXw%2BtBT3bKmzeC7p527WJDapbzAV4HG1ZTWXYXC666nr6mZqZmdvG54os8k4Namon29v5WvsaFdu567s53wBMSc2V2gICSxnatop5%2Fcnq%2B3m5x30ZjWnqZ94a6h%2F%2FWho9qsbbKmTZjWqy3qn8bqbXauqaij5bW9iQ%3D%3D&ag=m&dt1=2022-01-01&dt2=2022-12-01)(Secretaria de Avaliação, Gestão da Informação e Cadastro Único)
 
 obs.: os dados são referentes ao ano de 2022.
 
@@ -616,11 +615,9 @@ auxilio_br <- auxilio_brasil_2022%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/auxilio_brasil_tratada.csv)
 
-
 ### 12) PIB MUNICÍPIO - IBGE
 
 O [Produto Interno Bruto dos Municípios](https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&t=downloads)
-
 
 obs.: os dados são referentes ao ano de 2020.
 
@@ -641,7 +638,6 @@ pib_munic <- pib_municipio%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/pib_munic_tratado.csv)
 
-
 ### 13) GEOSES
 
 [GEOSES](https://legado.dados.gov.br/dataset/geoses)
@@ -657,7 +653,6 @@ geoses_reduzida <- read_excel("00_bases/geoses_reduzida.xlsx")%>%
 ```
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/geoses_reduzida_tratada.csv)
-
 
 ### 14) POPULAÇÃO RESIDENTE
 
@@ -696,11 +691,9 @@ pop_sex_fx_et <- pop_fx_etaria%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/populacao_residente_tratada.csv)
 
-
 ### 15) BASE COMPLETA
 
 Juntando todas as bases, temos o seguinte resultado. É possível acessar ao dicionário de dados dessa base que criamos clicando aqui.
-
 
 ```{r}
 #| warning: false
