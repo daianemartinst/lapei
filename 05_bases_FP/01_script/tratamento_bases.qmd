@@ -692,16 +692,12 @@ pop_sex_fx_et <- pop_fx_etaria%>%
                  mutate(municipio.y = NULL)%>%
                  rename(municipio = municipio.x)
 
-
-
-
-
 ```
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/populacao_residente_tratada.csv)
 
 
-### 1) BASE COMPLETA
+### 15) BASE COMPLETA
 
 Juntando todas as bases, temos o seguinte resultado. É possível acessar ao dicionário de dados dessa base que criamos clicando aqui.
 
