@@ -610,9 +610,12 @@ auxilio_br <- auxilio_brasil_2022%>%
                          valor_medio_recebido_familia = `Benefício médio recebido pelas famílias do Auxílio Brasil`)
 
 
+export(auxilio_br, "auxilio_brasil_tratada.csv")
+
+
 ```
 
-Você pode baixar o dado tratado clicando [**aqui**]
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/auxilio_brasil_tratada.csv)
 
 
 ### 12) PIB MUNICÍPIO - IBGE
@@ -627,12 +630,15 @@ pib_municipio <- read_excel("00_bases/pib_municipio_reduzida.xlsx")
 
 
 pib_munic <- pib_municipio%>%
-             select(codigo_municipio_ibge,nome_municipio,pib_preco_corrente,atividade_maior_valor_ad_bruto)
+             select(codigo_municipio_ibge,nome_municipio,pib_preco_corrente,atividade_maior_valor_ad_bruto)%>%
+             mutate(codigo_municipio_ibge = substr(codigo_municipio_ibge, 1, 6))
 
+
+export(pib_munic, "pib_munic_tratado.csv")
 
 ```
 
-Você pode baixar o dado tratado clicando [**aqui**]
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/pib_munic_tratado.csv)
 
 
 ### 13) GEOSES
@@ -642,13 +648,15 @@ Você pode baixar o dado tratado clicando [**aqui**]
 ```{r}
 #| warning: false
 
-geoses_reduzida <- read_excel("00_bases/geoses_reduzida.xlsx")
+geoses_reduzida <- read_excel("00_bases/geoses_reduzida.xlsx")%>%
+                   mutate(v0002_codigo_do_municipio = substr(v0002_codigo_do_municipio, 1, 6))
 
 
+export(geoses_reduzida, "geoses_reduzida_tratada.csv")
 
 ```
 
-Você pode baixar o dado tratado clicando [**aqui**]
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/geoses_reduzida_tratada.csv)
 
 
 ### 14) POPULAÇÃO RESIDENTE
@@ -673,12 +681,24 @@ populacao_sexo <- read_delim("00_bases/População por faixa etaria (SVS - MS) S
 
 
 pop_sexo <- populacao_sexo%>%
-                   select(ibge, municipio,perc_masc,perc_feminino)
+                   select(ibge, municipio,perc_masc,perc_feminino)%>%
+                   rename(perc_masculino = perc_masc)
+
+
+#juntando as bases
+
+pop_sex_fx_et <- pop_fx_etaria%>%
+                 left_join(pop_sexo, by = "ibge")%>%
+                 mutate(municipio.y = NULL)%>%
+                 rename(municipio = municipio.x)
+
+
+
 
 
 ```
 
-Você pode baixar o dado tratado clicando [**aqui**]
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/populacao_residente_tratada.csv)
 
 
 ### 1) BASE COMPLETA
@@ -759,7 +779,7 @@ Henrique Silveira,Título: Graduando(FACE/UFG),E-mail: henriqueribeiro\@discente
 ```
 <figcaption style="text-align:center">
 
-Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB),E-mail: danielppagotto\@ufg.br
+Daniel Pagotto,Título: Mestre (Doutorando PPGA/UnB), E-mail: danielppagotto\@ufg.br
 
 </figcaption>
 
