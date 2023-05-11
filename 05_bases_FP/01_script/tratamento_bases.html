@@ -651,9 +651,12 @@ div.csl-indent {
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">rename</span>(<span class="at">codigo_municipio_ibge =</span> Código,</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">municipio =</span><span class="st">`</span><span class="at">Unidade Territorial</span><span class="st">`</span>,</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                         <span class="at">mes_referencia =</span> <span class="st">`</span><span class="at">Referência</span><span class="st">`</span>,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">valor_medio_recebido_familia =</span> <span class="st">`</span><span class="at">Benefício médio recebido pelas famílias do Auxílio Brasil</span><span class="st">`</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">valor_medio_recebido_familia =</span> <span class="st">`</span><span class="at">Benefício médio recebido pelas famílias do Auxílio Brasil</span><span class="st">`</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="fu">export</span>(auxilio_br, <span class="st">"auxilio_brasil_tratada.csv"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Você pode baixar o dado tratado clicando [<strong>aqui</strong>]</p>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/auxilio_brasil_tratada.csv"><strong>aqui</strong></a></p>
 </section>
 <section id="pib-município---ibge" class="level3">
 <h3 class="anchored" data-anchor-id="pib-município---ibge">12) PIB MUNICÍPIO - IBGE</h3>
@@ -663,17 +666,25 @@ div.csl-indent {
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>pib_munic <span class="ot">&lt;-</span> pib_municipio<span class="sc">%&gt;%</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">select</span>(codigo_municipio_ibge,nome_municipio,pib_preco_corrente,atividade_maior_valor_ad_bruto)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">select</span>(codigo_municipio_ibge,nome_municipio,pib_preco_corrente,atividade_maior_valor_ad_bruto)<span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>             <span class="fu">mutate</span>(<span class="at">codigo_municipio_ibge =</span> <span class="fu">substr</span>(codigo_municipio_ibge, <span class="dv">1</span>, <span class="dv">6</span>))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">export</span>(pib_munic, <span class="st">"pib_munic_tratado.csv"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Você pode baixar o dado tratado clicando [<strong>aqui</strong>]</p>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/pib_munic_tratado.csv"><strong>aqui</strong></a></p>
 </section>
 <section id="geoses" class="level3">
 <h3 class="anchored" data-anchor-id="geoses">13) GEOSES</h3>
 <p><a href="https://legado.dados.gov.br/dataset/geoses">GEOSES</a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>geoses_reduzida <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/geoses_reduzida.xlsx"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>geoses_reduzida <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/geoses_reduzida.xlsx"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">v0002_codigo_do_municipio =</span> <span class="fu">substr</span>(v0002_codigo_do_municipio, <span class="dv">1</span>, <span class="dv">6</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">export</span>(geoses_reduzida, <span class="st">"geoses_reduzida_tratada.csv"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Você pode baixar o dado tratado clicando [<strong>aqui</strong>]</p>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/geoses_reduzida_tratada.csv"><strong>aqui</strong></a></p>
 </section>
 <section id="população-residente" class="level3">
 <h3 class="anchored" data-anchor-id="população-residente">14) POPULAÇÃO RESIDENTE</h3>
@@ -694,9 +705,18 @@ div.csl-indent {
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>pop_sexo <span class="ot">&lt;-</span> populacao_sexo<span class="sc">%&gt;%</span></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">select</span>(ibge, municipio,perc_masc,perc_feminino)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">select</span>(ibge, municipio,perc_masc,perc_feminino)<span class="sc">%&gt;%</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">rename</span>(<span class="at">perc_masculino =</span> perc_masc)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co">#juntando as bases</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>pop_sex_fx_et <span class="ot">&lt;-</span> pop_fx_etaria<span class="sc">%&gt;%</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">left_join</span>(pop_sexo, <span class="at">by =</span> <span class="st">"ibge"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">mutate</span>(<span class="at">municipio.y =</span> <span class="cn">NULL</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">rename</span>(<span class="at">municipio =</span> municipio.x)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Você pode baixar o dado tratado clicando [<strong>aqui</strong>]</p>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/populacao_residente_tratada.csv"><strong>aqui</strong></a></p>
 </section>
 <section id="base-completa" class="level3">
 <h3 class="anchored" data-anchor-id="base-completa">1) BASE COMPLETA</h3>
