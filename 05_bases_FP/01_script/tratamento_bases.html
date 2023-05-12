@@ -643,6 +643,11 @@ div.csl-indent {
 <section id="auxílio-brasil---sagicad" class="level3">
 <h3 class="anchored" data-anchor-id="auxílio-brasil---sagicad">11) AUXÍLIO BRASIL - SAGICAD</h3>
 <p>O <a href="https://aplicacoes.cidadania.gov.br/vis/data3/v.php?q%5B%5D=oNOhlMHqwJOsuqSe9Wp%2BhrNe09Gv17llja1%2BYW15YmqqdH9%2BaWCEkWWXbWTZ8X5kc3xwoNqlwLNyocnWmKV4mb7nwJl3g6iv5lzDf2lfiJyZy6mmwrazlai7mnW0n666qpKSnKbfqlbTrH1rcYOprO6eiMKporycbtCen9DgiG%2BvvaJd9Fqwr6qSd9ibz6tTnfF%2BZm55c2qZrbWzpU3J0KjYoVuFu8NlbH9qdLOnwrucn8DEXJl9qY6tf2Voel5a3qXAs1ebzM2fiqKhwZzKb6Kpoa3edLOvo6C8nG7Qnp%2FQ4Ihvr72itr%2BauhHkmcDCpo2DlMo%2B%2BqClqahayXqPbqXw%2BtBT3bKmzeC7p527WJDapbzAV4HG1ZTWXYXC666nr6mZqZmdvG54os8k4Namon29v5WvsaFdu567s53wBMSc2V2gICSxnatop5%2Fcnq%2B3m5x30ZjWnqZ94a6h%2F%2FWho9qsbbKmTZjWqy3qn8bqbXauqaij5bW9iQ%3D%3D&amp;ag=m&amp;dt1=2022-01-01&amp;dt2=2022-12-01"><strong>SAGICAD</strong></a>(Secretaria de Avaliação, Gestão da Informação e Cadastro Único)</p>
+<p>Sobre o tratamento dos dados:</p>
+<ol type="1">
+<li><p>Selecionamos as variáveis que desejamos utilizar através da função <code>select</code>;</p></li>
+<li><p>Fizemos a renomeação dessas variáveis por intermedio da função <code>rename</code>.</p></li>
+</ol>
 <p>obs.: os dados são referentes ao ano de 2022.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>auxilio_brasil_2022 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/auxilio_brasil_2022.csv"</span>, </span>
@@ -661,8 +666,13 @@ div.csl-indent {
 </section>
 <section id="pib-município---ibge" class="level3">
 <h3 class="anchored" data-anchor-id="pib-município---ibge">12) PIB MUNICÍPIO - IBGE</h3>
-<p>Na base de <a href="https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&amp;t=o-que-e">Produto Interno Bruto dos Municípios</a> são apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica – Agropecuária, Indústria e Serviços – bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita. Destaca-se o valor adicionado bruto da Administração, saúde e educação públicas e seguridade social, devido à relevância deste segmento na economia municipal.</p>
+<p>Na base de <a href="https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&amp;t=o-que-e">Produto Interno Bruto dos Municípios</a> são apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica – Agropecuária, Indústria e Serviços – bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita.</p>
 <p>Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R">script</a>.</p>
+<p>Nos códigos abaixo fizemos:</p>
+<ol type="1">
+<li><p>A seleção das variáveis que desejamos utilizar através da função <code>select</code>;</p></li>
+<li><p>A retirada do dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito.</p></li>
+</ol>
 <p>obs.: os dados são referentes ao ano de 2020.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pib_municipio <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/pib_municipio_reduzida.xlsx"</span>) </span>
@@ -678,6 +688,10 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="geoses">13) GEOSES</h3>
 <p>Neste contexto, o <a href="https://legado.dados.gov.br/dataset/geoses">Índice Socioeconômico do Contexto Geográfico para Estudos em Saúde (GeoSES)</a> resume as principais dimensões socioeconômicas para fins de pesquisa, avaliação e monitoramento das desigualdades em saúde no Brasil.</p>
 <p>Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R">script</a></p>
+<p>Nos códigos abaixo fizemos:</p>
+<ol type="1">
+<li>A retirada do dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito.</li>
+</ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>geoses_reduzida <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/geoses_reduzida.xlsx"</span>)<span class="sc">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">v0002_codigo_do_municipio =</span> <span class="fu">substr</span>(v0002_codigo_do_municipio, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -687,6 +701,13 @@ div.csl-indent {
 <section id="população-residente" class="level3">
 <h3 class="anchored" data-anchor-id="população-residente">14) POPULAÇÃO RESIDENTE</h3>
 <p>A <a href="http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvsbr.def">População Residente</a> é elaborada pelo Ministerio da Saúde, fornecendo estimativas preliminares sobre a população brasileira.</p>
+<p>Sobre o tratamento dos dados:</p>
+<ol type="1">
+<li><p>Selecionamos as variáveis que desejamos utilizar através da função <code>select</code>;</p></li>
+<li><p>Fizemos a renomeação dessas variáveis por intermedio da função <code>rename</code>;</p></li>
+<li><p>Juntamos as duas bases: faixa etaria e sexo;</p></li>
+<li><p>Retiramos a coluna duplicada através da função <code>mutate</code>.</p></li>
+</ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#população por faixa etaria</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
