@@ -572,7 +572,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 Na presente subseção temos dados a nível município sobre empresas ativas em 2023, empresas criadas em 2022 e a média do tempo de criação de empresas. Todas as bases foram acessadas por meio da ferramenta [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas) do Governo Federal. A fonte original dos dados é a Receita Federal do Brasil.
 
-Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [script](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/script_receita.R).
+Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [**script**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/script_receita.R).
 
 Abaixo só faremos a leitura da base tratada para juntarmos com as demais bases.
 
@@ -631,9 +631,9 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 12) PIB MUNICÍPIO - IBGE
 
-Na base de [Produto Interno Bruto dos Municípios](https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&t=o-que-e) são apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica – Agropecuária, Indústria e Serviços – bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita.  
+Na base de [**Produto Interno Bruto dos Municípios**](https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&t=o-que-e) são apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica – Agropecuária, Indústria e Serviços – bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita.  
 
-Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [script](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R).
+Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [**script**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R).
 
 Nos códigos abaixo fizemos:
 
@@ -662,9 +662,9 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 13) GEOSES
 
-Neste contexto, o [Índice Socioeconômico do Contexto Geográfico para Estudos em Saúde (GeoSES)](https://legado.dados.gov.br/dataset/geoses) resume as principais dimensões socioeconômicas para fins de pesquisa, avaliação e monitoramento das desigualdades em saúde no Brasil.
+Neste contexto, o [**Índice Socioeconômico do Contexto Geográfico para Estudos em Saúde (GeoSES)**](https://legado.dados.gov.br/dataset/geoses) resume as principais dimensões socioeconômicas para fins de pesquisa, avaliação e monitoramento das desigualdades em saúde no Brasil.
 
-Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [script](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R)
+Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [**script**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R)
 
 Nos códigos abaixo fizemos:
 
@@ -685,7 +685,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 14) POPULAÇÃO RESIDENTE
 
-A [População Residente](http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvsbr.def) é elaborada pelo Ministerio da Saúde, fornecendo estimativas preliminares sobre a população brasileira. 
+A [**População Residente**](http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvsbr.def) é elaborada pelo Ministerio da Saúde, fornecendo estimativas preliminares sobre a população brasileira. 
 
 
 Sobre o tratamento dos dados:
