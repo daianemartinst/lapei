@@ -623,7 +623,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 12) PIB MUNICÍPIO - IBGE
 
-Na base de [Produto Interno Bruto dos Municípios](https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&t=o-que-e) são apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica – Agropecuária, Indústria e Serviços – bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita. Destaca-se o valor adicionado bruto da Administração, saúde e educação públicas e seguridade social, devido à relevância deste segmento na economia municipal. 
+Na base de [Produto Interno Bruto dos Municípios](https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&t=o-que-e) são apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica – Agropecuária, Indústria e Serviços – bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita.  
 
 Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [script](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R).
 
@@ -747,7 +747,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 ```
 <figcaption style="text-align:center">
 
-Adaleny Paiva, Título: Bacharela (Mestranda - PPGS/UFG), E-mail: adalenypaiva\@discente.ufg.br
+ Adaleny Paiva, Título: Bacharela (Mestranda - PPGS/UFG), E-mail: adalenypaiva\@discente.ufg.br
 
 </figcaption>
 
@@ -763,7 +763,7 @@ Adaleny Paiva, Título: Bacharela (Mestranda - PPGS/UFG), E-mail: adalenypaiva\@
 ```
 <figcaption style="text-align:center">
 
-Henrique Silveira, Título: Graduando (FACE/UFG), E-mail: henriqueribeiro\@discente.ufg.br
+ Henrique Silveira, Título: Graduando (FACE/UFG), E-mail: henriqueribeiro\@discente.ufg.br
 
 </figcaption>
 
@@ -779,7 +779,7 @@ Henrique Silveira, Título: Graduando (FACE/UFG), E-mail: henriqueribeiro\@disce
 ```
 <figcaption style="text-align:center">
 
-Daniel Pagotto, Título: Mestre (Doutorando PPGA/UnB), E-mail: danielppagotto\@ufg.br
+ Daniel Pagotto, Título: Mestre (Doutorando PPGA/UnB), E-mail: danielppagotto\@ufg.br
 
 </figcaption>
 
