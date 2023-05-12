@@ -626,7 +626,7 @@ div.csl-indent {
 <section id="empresas---receita-federal" class="level3">
 <h3 class="anchored" data-anchor-id="empresas---receita-federal">10) EMPRESAS - RECEITA FEDERAL</h3>
 <p>Na presente subseção temos dados a nível município sobre empresas ativas em 2023, empresas criadas em 2022 e a média do tempo de criação de empresas. Todas as bases foram acessadas por meio da ferramenta <a href="https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas"><strong>Painel de Dados de Tempo de Abertura de Empresas</strong></a> do Governo Federal. A fonte original dos dados é a Receita Federal do Brasil.</p>
-<p>Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/script_receita.R">script</a>.</p>
+<p>Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/script_receita.R"><strong>script</strong></a>.</p>
 <p>Abaixo só faremos a leitura da base tratada para juntarmos com as demais bases.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dados_receita <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"00_bases/dados_receita.csv"</span>) <span class="sc">%&gt;%</span> </span>
@@ -666,8 +666,8 @@ div.csl-indent {
 </section>
 <section id="pib-município---ibge" class="level3">
 <h3 class="anchored" data-anchor-id="pib-município---ibge">12) PIB MUNICÍPIO - IBGE</h3>
-<p>Na base de <a href="https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&amp;t=o-que-e">Produto Interno Bruto dos Municípios</a> são apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica – Agropecuária, Indústria e Serviços – bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita.</p>
-<p>Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R">script</a>.</p>
+<p>Na base de <a href="https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&amp;t=o-que-e"><strong>Produto Interno Bruto dos Municípios</strong></a> são apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica – Agropecuária, Indústria e Serviços – bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita.</p>
+<p>Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R"><strong>script</strong></a>.</p>
 <p>Nos códigos abaixo fizemos:</p>
 <ol type="1">
 <li><p>A seleção das variáveis que desejamos utilizar através da função <code>select</code>;</p></li>
@@ -686,8 +686,8 @@ div.csl-indent {
 </section>
 <section id="geoses" class="level3">
 <h3 class="anchored" data-anchor-id="geoses">13) GEOSES</h3>
-<p>Neste contexto, o <a href="https://legado.dados.gov.br/dataset/geoses">Índice Socioeconômico do Contexto Geográfico para Estudos em Saúde (GeoSES)</a> resume as principais dimensões socioeconômicas para fins de pesquisa, avaliação e monitoramento das desigualdades em saúde no Brasil.</p>
-<p>Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R">script</a></p>
+<p>Neste contexto, o <a href="https://legado.dados.gov.br/dataset/geoses"><strong>Índice Socioeconômico do Contexto Geográfico para Estudos em Saúde (GeoSES)</strong></a> resume as principais dimensões socioeconômicas para fins de pesquisa, avaliação e monitoramento das desigualdades em saúde no Brasil.</p>
+<p>Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R"><strong>script</strong></a></p>
 <p>Nos códigos abaixo fizemos:</p>
 <ol type="1">
 <li>A retirada do dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito.</li>
@@ -700,7 +700,7 @@ div.csl-indent {
 </section>
 <section id="população-residente" class="level3">
 <h3 class="anchored" data-anchor-id="população-residente">14) POPULAÇÃO RESIDENTE</h3>
-<p>A <a href="http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvsbr.def">População Residente</a> é elaborada pelo Ministerio da Saúde, fornecendo estimativas preliminares sobre a população brasileira.</p>
+<p>A <a href="http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvsbr.def"><strong>População Residente</strong></a> é elaborada pelo Ministerio da Saúde, fornecendo estimativas preliminares sobre a população brasileira.</p>
 <p>Sobre o tratamento dos dados:</p>
 <ol type="1">
 <li><p>Selecionamos as variáveis que desejamos utilizar através da função <code>select</code>;</p></li>
