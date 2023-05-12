@@ -35,6 +35,9 @@ O **objetivo** deste documento é publicizar os procedimentos de tratamento de b
 
 Além de disponibilizar a base tratada, apresentamos as bases, suas fontes e os procedimentos executados para tal finalidade.
 
+<iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVMKP_Pzg=/?moveToViewport=-1474,-871,10760,5206&embedId=518244954751" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
+
+
 Ao final de cada seção de código, é possível baixar o dado já tratado.
 
 ## LAPEI - UFG
