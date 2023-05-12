@@ -661,7 +661,8 @@ div.csl-indent {
 </section>
 <section id="pib-município---ibge" class="level3">
 <h3 class="anchored" data-anchor-id="pib-município---ibge">12) PIB MUNICÍPIO - IBGE</h3>
-<p>O <a href="https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&amp;t=downloads">Produto Interno Bruto dos Municípios</a></p>
+<p>Na base de <a href="https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&amp;t=o-que-e">Produto Interno Bruto dos Municípios</a> são apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica – Agropecuária, Indústria e Serviços – bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita. Destaca-se o valor adicionado bruto da Administração, saúde e educação públicas e seguridade social, devido à relevância deste segmento na economia municipal.</p>
+<p>Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R">script</a>.</p>
 <p>obs.: os dados são referentes ao ano de 2020.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pib_municipio <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/pib_municipio_reduzida.xlsx"</span>) </span>
@@ -675,7 +676,8 @@ div.csl-indent {
 </section>
 <section id="geoses" class="level3">
 <h3 class="anchored" data-anchor-id="geoses">13) GEOSES</h3>
-<p><a href="https://legado.dados.gov.br/dataset/geoses">GEOSES</a></p>
+<p>Neste contexto, o <a href="https://legado.dados.gov.br/dataset/geoses">Índice Socioeconômico do Contexto Geográfico para Estudos em Saúde (GeoSES)</a> resume as principais dimensões socioeconômicas para fins de pesquisa, avaliação e monitoramento das desigualdades em saúde no Brasil.</p>
+<p>Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R">script</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>geoses_reduzida <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/geoses_reduzida.xlsx"</span>)<span class="sc">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">v0002_codigo_do_municipio =</span> <span class="fu">substr</span>(v0002_codigo_do_municipio, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -684,7 +686,7 @@ div.csl-indent {
 </section>
 <section id="população-residente" class="level3">
 <h3 class="anchored" data-anchor-id="população-residente">14) POPULAÇÃO RESIDENTE</h3>
-<p><a href="http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvsbr.def">População Residente</a></p>
+<p>A <a href="http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvsbr.def">População Residente</a> é elaborada pelo Ministerio da Saúde, fornecendo estimativas preliminares sobre a população brasileira.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#população por faixa etaria</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
