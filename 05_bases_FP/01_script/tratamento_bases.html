@@ -637,7 +637,7 @@ O LAPEI-UFG é uma organização vinculada à Faculdade de Administração, Ciê
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">mutate</span>(<span class="at">cod_municipio_ibge =</span> <span class="fu">as.character</span>(cod_municipio_ibge)) <span class="sc">%&gt;%</span> </span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">mutate</span>(<span class="at">cod_municipio_ibge =</span> <span class="fu">substr</span>(cod_municipio_ibge, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/dados_receita_tratada.csv"><strong>aqui</strong></a></p>
+<p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/dados_receita_tratados.csv"><strong>aqui</strong></a></p>
 </section>
 <section id="bolsa-família---sagicad" class="level3">
 <h3 class="anchored" data-anchor-id="bolsa-família---sagicad">11) BOLSA FAMÍLIA - SAGICAD</h3>
@@ -683,7 +683,7 @@ O LAPEI-UFG é uma organização vinculada à Faculdade de Administração, Ciê
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>pib_munic <span class="ot">&lt;-</span> pib_municipio<span class="sc">%&gt;%</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">select</span>(codigo_municipio_ibge,pib_preco_corrente,atividade_maior_valor_ad_bruto)<span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">select</span>(codigo_municipio_ibge,pib_per_capita_preco_corrente,atividade_maior_valor_ad_bruto)<span class="sc">%&gt;%</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>             <span class="fu">mutate</span>(<span class="at">codigo_municipio_ibge =</span> <span class="fu">substr</span>(codigo_municipio_ibge, <span class="dv">1</span>, <span class="dv">6</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/pib_munic_tratado.csv"><strong>aqui</strong></a></p>
@@ -744,7 +744,7 @@ O LAPEI-UFG é uma organização vinculada à Faculdade de Administração, Ciê
 </section>
 <section id="base-completa" class="level3">
 <h3 class="anchored" data-anchor-id="base-completa">15) BASE COMPLETA</h3>
-<p>Juntando todas as bases, temos o seguinte resultado. É possível acessar ao dicionário de dados dessa base que criamos clicando aqui.</p>
+<p>Juntando todas as bases, temos o seguinte resultado. É possível acessar ao dicionário de dados dessa base que criamos clicando [<strong>aqui</strong>]</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>base_completa <span class="ot">&lt;-</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  dados_receita <span class="sc">%&gt;%</span> </span>
@@ -769,7 +769,8 @@ O LAPEI-UFG é uma organização vinculada à Faculdade de Administração, Ciê
 <span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span>IDEB_2021.x, <span class="sc">-</span>IDEB_2021.y) <span class="sc">%&gt;%</span> </span>
 <span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">densidade_banda_larga =</span> <span class="fu">as.double</span>(<span class="fu">as.character</span>(densidade_banda_larga)))</span>
 <span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(base_completa)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(base_completa)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 5,570
 Columns: 166
@@ -933,7 +934,7 @@ $ media_NU_NOTA_REDACAO                                                         
 $ valor_medio_recebido_familia                                                              &lt;dbl&gt; …
 $ familias                                                                                  &lt;dbl&gt; …
 $ valor_repassado                                                                           &lt;dbl&gt; …
-$ pib_preco_corrente                                                                        &lt;dbl&gt; …
+$ pib_per_capita_preco_corrente                                                             &lt;dbl&gt; …
 $ atividade_maior_valor_ad_bruto                                                            &lt;chr&gt; …
 $ perc_20_59_anos                                                                           &lt;dbl&gt; …
 $ perc_idosa                                                                                &lt;dbl&gt; …
