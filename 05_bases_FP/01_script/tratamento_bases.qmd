@@ -47,12 +47,9 @@ Ao final de cada seção de código, é possível baixar o dado já tratado.
 
 <img src="imagens/lapei-horizontal-laboratorio.png" width="300" height="300" align="left"/>
 
-<p style="text-align:justify">
+<p style="text-align:justify">Esse produto é resultado de um esforço do Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (LAPEI/UFG).</p>
 
-Esse produto é resultado de um esforço do Laboratório de Pesquisa em Empreendedorismo e Inovação da Universidade Federal de Goiás (LAPEI/UFG).
-
-O LAPEI-UFG é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.
-
+<p style="text-align:justify">O LAPEI-UFG é uma organização vinculada à Faculdade de Administração, Ciências Contábeis e Ciências Econômicas da UFG (FACE).O Lapei atua na dimensão da pesquisa, ao trabalhar com investigações relacionadas ao empreendedorismo e à inovação. A exemplo dos trabalhos, destacam-se pesquisas acerca das temáticas empreendedorismo em condições de vulnerabilidade social e empreendedorismo por mulheres. Na perspectiva da extensão, o laboratório tem promovido cursos, treinamentos e competições universitárias.
 </p>
 
 [**Saiba mais sobre o LAPEI**](https://lapei.face.ufg.br/)
@@ -776,11 +773,11 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 ```
 <figcaption style="text-align:center">
 
- Adaleny Paiva, Título: Bacharela (Mestranda - PPGS/UFG), E-mail: adalenypaiva\@discente.ufg.br
+Adaleny Paiva, Título: Bacharela (Mestranda - PPGS/UFG), E-mail: adalenypaiva\@discente.ufg.br
 
 </figcaption>
-
 </figure>
+
 
 <figure>
 
@@ -792,11 +789,11 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 ```
 <figcaption style="text-align:center">
 
- Henrique Silveira, Título: Graduando (FACE/UFG), E-mail: henriqueribeiro\@discente.ufg.br
+Henrique Silveira, Título: Graduando (FACE/UFG), E-mail: henriqueribeiro\@discente.ufg.br
 
 </figcaption>
-
 </figure>
+
 
 <figure>
 
@@ -808,10 +805,9 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 ```
 <figcaption style="text-align:center">
 
- Daniel Pagotto, Título: Mestre (Doutorando PPGA/UnB), E-mail: danielppagotto\@ufg.br
+Daniel Pagotto, Título: Mestre (Doutorando PPGA/UnB), E-mail: danielppagotto\@ufg.br
 
 </figcaption>
-
 </figure>
 
 ## COMO CITAR
