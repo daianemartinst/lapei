@@ -29,13 +29,13 @@ here::here("styles.css")
 
 ## CONTEXTUALIZAÇÃO E OBJETIVO
 
-Conforme @MonteirodaSilva2022, algumas variáveis de natureza ambiental contribuem para explicar o fenômeno empreendedores, a exemplo dos contextos econômico e social nos quais os indivíduos estão inseridos. Tendo em vista do contexto, pesquisadores testaram o efeito de outras variáveis - como, violência [@Shahriar2019], educação [@Lofstrom2014], infraestrutura [@Woolley2014], gênero [@VanderZwan2012], leis e ambiente econômico [@Coomes2013] sobre a emergência de empresas.
+<p style="text-align:justify">Conforme @MonteirodaSilva2022, algumas variáveis de natureza ambiental contribuem para explicar o fenômeno empreendedores, a exemplo dos contextos econômico e social nos quais os indivíduos estão inseridos. Tendo em vista do contexto, pesquisadores testaram o efeito de outras variáveis - como, violência [@Shahriar2019], educação [@Lofstrom2014], infraestrutura [@Woolley2014], gênero [@VanderZwan2012], leis e ambiente econômico [@Coomes2013] sobre a emergência de empresas.</p>
 
-O **objetivo** deste documento é publicizar os procedimentos de tratamento de bases de dados públicas que levou à construção de um repositório único, a nível município, sobre variáveis sociais, econômicas, infraestrura, dentre outras.
+<p style="text-align:justify">O **objetivo** deste documento é publicizar os procedimentos de tratamento de bases de dados públicas que levou à construção de um repositório único, a nível município, sobre variáveis sociais, econômicas, infraestrura, dentre outras.</p>
 
-Além de disponibilizar a base tratada, apresentamos as bases, suas fontes e os procedimentos executados para tal finalidade.
+<p style="text-align:justify">Além de disponibilizar a base tratada, apresentamos as bases, suas fontes e os procedimentos executados para tal finalidade.</p>
 
-A figura abaixo contém um racional de determinantes e suas bases de origem. Aperte em **See the Board** para habilitar o componente.
+<p style="text-align:justify">A figura abaixo contém um racional de determinantes e suas bases de origem. Aperte em **See the Board** para habilitar o componente.</p>
 
 <iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVMKP_Pzg=/?moveToViewport=-1474,-871,10760,5206&amp;embedId=518244954751" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen>
 
@@ -75,15 +75,15 @@ library(stringr)
 
 ### 1) IPEA
 
-Os dados de homicídio foram extraídos do [**Atlas da Violência do IPEA**](https://www.ipea.gov.br/atlasviolencia/). A base contém um índice de homicídios para cada um dos municípios brasileiros.
+<p style="text-align:justify">Os dados de homicídio foram extraídos do [**Atlas da Violência do IPEA**](https://www.ipea.gov.br/atlasviolencia/). A base contém um índice de homicídios para cada um dos municípios brasileiros.</p>
 
-1)  padronizamos a variável código do município para o formato texto
+<p style="text-align:justify">1)  padronizamos a variável código do município para o formato texto;</p>
 
-2)  pegamos apenas o último ano disponível (2019)
+<p style="text-align:justify">2)  pegamos apenas o último ano disponível (2019);</p>
 
-3)  a base de homicídios tinha registros duplicados. Por isso, usamos a função `distinct`
+<p style="text-align:justify">3)  a base de homicídios tinha registros duplicados. Por isso, usamos a função `distinct`;</p>
 
-4)  retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito
+<p style="text-align:justify">4)  retiramos o dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito.</p>
 
 ```{r}
 #| warning: false
@@ -106,11 +106,11 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 2) SEBRAE
 
-Aqui estamos tratando a base do [**SEBRAE**](https://transparencia.sebrae.com.br/infraestrutura?unidade=), que traz se o município possui infraestrutura do Sebrae (seja própria ou alugada) ou sala do empreendedor em parceria com a prefeitura.
+<p style="text-align:justify">Aqui estamos tratando a base do [**SEBRAE**](https://transparencia.sebrae.com.br/infraestrutura?unidade=), que traz se o município possui infraestrutura do Sebrae (seja própria ou alugada) ou sala do empreendedor em parceria com a prefeitura.
 
-1)  O primeiro passo foi a criação de um código de identificação de município (ex.: código IBGE), pois não está presente na base original e isso é importante para juntar com outras bases.
+<p style="text-align:justify">1)  O primeiro passo foi a criação de um código de identificação de município (ex.: código IBGE), pois não está presente na base original e isso é importante para juntar com outras bases.</p>
 
-2)  Além disso, usamos a função `spread`, para criar duas colunas com os tipos de estrutura.
+<p style="text-align:justify">2)  Além disso, usamos a função `spread`, para criar duas colunas com os tipos de estrutura.</p>
 
 obs.: não há identificação do ano na base. Acessamos diretamente do link do Sebrae.
 
@@ -144,15 +144,15 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 3) MUNIC
 
-A [**MUNIC**](https://www.ibge.gov.br/estatisticas/sociais/saude/10586-pesquisa-de-informacoes-basicas-municipais.html?=&t=downloads) é uma base do IBGE que traz informações sobre características dos 5570 municípios.
+<p style="text-align:justify">A [**MUNIC**](https://www.ibge.gov.br/estatisticas/sociais/saude/10586-pesquisa-de-informacoes-basicas-municipais.html?=&t=downloads) é uma base do IBGE que traz informações sobre características dos 5570 municípios.</p>
 
-Acessamos na Base Munic as variáveis dos temas recursos humanos do executivo municipal, gestão e comunicação. Para cada um desses temas tratamos os dados da seguinte maneira:
+<p style="text-align:justify">Acessamos na Base Munic as variáveis dos temas recursos humanos do executivo municipal, gestão e comunicação. Para cada um desses temas tratamos os dados da seguinte maneira:</p>
 
-1)  Selecionamos as variáveis
-2)  Convertemos o tipo das varáveis
-3)  O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo
-4)  Renomeamos as variáveis
-5)  Juntamos tudo em um só dataframe
+1)  Selecionamos as variáveis;
+2)  Convertemos o tipo das varáveis;
+3)  O R leu linhas que estavam em branco, por isso, filtramos as linhas que não continham conteúdo;
+4)  Renomeamos as variáveis;
+5)  Juntamos tudo em um só dataframe.
 
 obs.: os dados são referentes a 2019
 
@@ -297,9 +297,9 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 4) ANA
 
-Acessamos os dados do Índice de Segurança Hídrica (ISH) criado pela Agência Nacional de Águas e Saneamento Básico (ANA). O índice geral - que pode variar entre as categorias mínima, baixa, média, alta, máxima - "é calculado a partir da eficiência da produção de água (combinação de indicadores de vulnerabilidade dos mananciais e de sistemas produtores de água) e da eficiência da distribuição de água (combinação de indicadores de cobertura de rede de distribuição e de infraestrutura para o gerenciamento de perdas)".
+<p style="text-align:justify">Acessamos os dados do Índice de Segurança Hídrica (ISH) criado pela Agência Nacional de Águas e Saneamento Básico (ANA). O índice geral - que pode variar entre as categorias mínima, baixa, média, alta, máxima - "é calculado a partir da eficiência da produção de água (combinação de indicadores de vulnerabilidade dos mananciais e de sistemas produtores de água) e da eficiência da distribuição de água (combinação de indicadores de cobertura de rede de distribuição e de infraestrutura para o gerenciamento de perdas)".</p>
 
-Os dados podem ser acessados [**aqui**](https://dadosabertos.ana.gov.br/datasets/4e403e4b10ad49f996539c1ea198e0a8_0/explore?location=-13.481668%2C-51.419000%2C4.31).
+<p style="text-align:justify">Os dados podem ser acessados [**aqui**](https://dadosabertos.ana.gov.br/datasets/4e403e4b10ad49f996539c1ea198e0a8_0/explore?location=-13.481668%2C-51.419000%2C4.31).</p>
 
 obs.: os dados são referentes ao ano de 2022.
 
@@ -321,11 +321,11 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 5) IDEB
 
-Os dados do [**IDEB**](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados) (Índice de Desenvolvimento da Educação Básica) foram criados pelo governo federal para medir a qualidade do ensino nas escolas públicas.
+<p style="text-align:justify">Os dados do [**IDEB**](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados) (Índice de Desenvolvimento da Educação Básica) foram criados pelo governo federal para medir a qualidade do ensino nas escolas públicas.</p>
 
-1)  Filtragem para acessar os dados da rede de ensino pública - seja estadual ou municipal
+<p style="text-align:justify">1)  Filtragem para acessar os dados da rede de ensino pública - seja estadual ou municipal;</p>
 
-2)  Tratamento para deixar as variáveis nos tipos adequados
+<p style="text-align:justify">2)  Tratamento para deixar as variáveis nos tipos adequados.</p>
 
 obs.: os dados são referentes ao ano de 2021
 
@@ -368,7 +368,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 6) ANATEL
 
-A [**ANATEL**](https://informacoes.anatel.gov.br/paineis/meu-municipio/acessos-banda-larga-fixa) disponibiliza determinados dados referentes aos serviços de banda larga presentes nos municípios brasileiros.
+<p style="text-align:justify">A [**ANATEL**](https://informacoes.anatel.gov.br/paineis/meu-municipio/acessos-banda-larga-fixa) disponibiliza determinados dados referentes aos serviços de banda larga presentes nos municípios brasileiros.</p>
 
 obs.: os dados são referentes ao ano de 2022.
 
@@ -395,31 +395,31 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 7) CENSO EDUCAÇÃO SUPERIOR
 
-O [**Censo da Educação Superior**](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-da-educacao-superior) fornece informações sobre o ensino fundamental e médio no território nacional.
+<p style="text-align:justify">O [**Censo da Educação Superior**](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-da-educacao-superior) fornece informações sobre o ensino fundamental e médio no território nacional.</p>
 
 Sobre a Base *MICRODADOS_CADASTRO_IES_2021*:
 
-1)  Selecionamos as váriaveis necessária através da função `select`;
+<p style="text-align:justify">1)  Selecionamos as váriaveis necessária através da função `select`;</p>
 
-2)  Realizamos a contagem de categoria administrativa. Para isso, usamos a função `group_by`conjuntamente com a função `count`;
+<p style="text-align:justify">2)  Realizamos a contagem de categoria administrativa. Para isso, usamos a função `group_by`conjuntamente com a função `count`;</p>
 
-3)  Alteramos as categorias administrativas, que eram identificadas por números, para "publico" e "privado" obedecendo as suas identifcações no dicionário através da função `mutate` e `case_when`;
+<p style="text-align:justify">3)  Alteramos as categorias administrativas, que eram identificadas por números, para "publico" e "privado" obedecendo as suas identifcações no dicionário através da função `mutate` e `case_when`;</p>
 
-4)  Utilizamos a função `summarise`e o parâmentro `sum` para realizar a quantidade de tipos de instituições por município;
+<p style="text-align:justify">4)  Utilizamos a função `summarise`e o parâmentro `sum` para realizar a quantidade de tipos de instituições por município;</p>
 
-5)  Utilizamos a função `spread` para transformar as categorias em múltiplas colunas;
+<p style="text-align:justify">5)  Utilizamos a função `spread` para transformar as categorias em múltiplas colunas;</p>
 
-6)  Por intermédio do parametro `fill`, na função `spread` trocamos os valores vazios `NA` por 0.
+<p style="text-align:justify">6)  Por intermédio do parametro `fill`, na função `spread` trocamos os valores vazios `NA` por 0.</p>
 
 Sobre a Base *MICRODADOS_CADASTRO_CURSOS_2021_reduzida*:
 
-1)  Selecionamos as váriaveis necessária através da função `select`;
+<p style="text-align:justify">1)  Selecionamos as váriaveis necessária através da função `select`;</p>
 
-2)  Realizamos a soma da quantidade de cusos por área geral por município. Para isso, usamos a função `group_by`conjuntamente com a função `summarise` e o parâmetro`sum` para fazer a soma;
+<p style="text-align:justify">2)  Realizamos a soma da quantidade de cusos por área geral por município. Para isso, usamos a função `group_by`conjuntamente com a função `summarise` e o parâmetro`sum` para fazer a soma;</p>
 
-3)  Utilizamos a função `spread` para transformar as categorias em múltiplas colunas;
+<p style="text-align:justify">3)  Utilizamos a função `spread` para transformar as categorias em múltiplas colunas;</p>
 
-4)  Por intermédio do parâmetro `fill`, na função `spread` trocamos os valores vazios `NA` por 0.
+<p style="text-align:justify">4)  Por intermédio do parâmetro `fill`, na função `spread` trocamos os valores vazios `NA` por 0.</p>
 
 obs.: os dados são referentes ao ano de 2021.
 
@@ -483,17 +483,17 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 8) TSE
 
-No [**Portal de transparência do TSE**](https://dadosabertos.tse.jus.br/dataset/) encontramos algumas bases de dados sobre as eleições no Brasil.Nossa intenção foi extrair apenas os dados referentes as eleições presidenciais de 2022.
+<p style="text-align:justify">No [**Portal de transparência do TSE**](https://dadosabertos.tse.jus.br/dataset/) encontramos algumas bases de dados sobre as eleições no Brasil.Nossa intenção foi extrair apenas os dados referentes as eleições presidenciais de 2022.</p>
 
 Sobre o tratamento dos dados:
 
-1)  Houve um tratamento prévio, dimiuindo a quantidade de colunas, extraindo somente as colunas necessárias, resultando na base "tse_reduzida". Nela estão somete os dados do segundo turno de 2022.
+<p style="text-align:justify">1)  Houve um tratamento prévio, dimiuindo a quantidade de colunas, extraindo somente as colunas necessárias, resultando na base "tse_reduzida". Nela estão somete os dados do segundo turno de 2022.</p>
 
-2)  Realizamos a soma da quantidade de votos por município. Para isso, usamos a função `group_by`conjuntamente com a função `summarise` e o parâmetro`sum` para fazer a soma;
+<p style="text-align:justify">2)  Realizamos a soma da quantidade de votos por município. Para isso, usamos a função `group_by`conjuntamente com a função `summarise` e o parâmetro`sum` para fazer a soma;</p>
 
-3)  Utilizamos a função `spread` para transformar as categorias em múltiplas colunas;
+<p style="text-align:justify">3)  Utilizamos a função `spread` para transformar as categorias em múltiplas colunas;<p>
 
-4)  Por intermédio do parâmetro `fill`, na função `spread` trocamos os valores vazios `NA` por 0.
+<p style="text-align:justify">4)  Por intermédio do parâmetro `fill`, na função `spread` trocamos os valores vazios `NA` por 0.</p>
 
 obs.: os dados são referentes às últimos eleições presidenciais, 2022.
 
@@ -535,13 +535,13 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 9) ENEM
 
-O INEP disponibiliza algumas bases de dados sobre as provas do ENEM. Nós utilizamos as informações referente ao [**ENEM 2021**](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/enem)
+<p style="text-align:justify">O INEP disponibiliza algumas bases de dados sobre as provas do ENEM. Nós utilizamos as informações referente ao [**ENEM 2021**](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/enem). </p>
 
 Sobre o tratamento dos dados:
 
-1)  Houve um tratamento prévio, dimiuindo a quantidade de colunas, extraindo somente as colunas necessárias, resultando na base "enem_reduzida". Nela estão os dados referentes as notas por área de conhecimento.
+<p style="text-align:justify">1)  Houve um tratamento prévio, dimiuindo a quantidade de colunas, extraindo somente as colunas necessárias, resultando na base "enem_reduzida". Nela estão os dados referentes as notas por área de conhecimento.</p>
 
-2)  Realizamos a média de notas por área de conhecimento em cada município. Para isso, usamos a função `group_by`conjuntamente com a função `summarise` e o parâmetro`mead` para fazer a média. O parêmetro `na.rm = T`foi utilizado para considerar os valores vazios;
+<p style="text-align:justify">2)  Realizamos a média de notas por área de conhecimento em cada município. Para isso, usamos a função `group_by`conjuntamente com a função `summarise` e o parâmetro`mead` para fazer a média. O parêmetro `na.rm = T`foi utilizado para considerar os valores vazios.</p>
 
 ```{r}
 #| warning: false
@@ -567,11 +567,11 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 10) EMPRESAS - RECEITA FEDERAL
 
-Na presente subseção temos dados a nível município sobre empresas ativas em 2023, empresas criadas em 2022 e a média do tempo de criação de empresas. Temos o dado total, independente da natureza jurídica, mas também temos os dados discriminados por natureza jurídica. 
+<p style="text-align:justify">Na presente subseção temos dados a nível município sobre empresas ativas em 2023, empresas criadas em 2022 e a média do tempo de criação de empresas. Temos o dado total, independente da natureza jurídica, mas também temos os dados discriminados por natureza jurídica.</p>
 
-Todas as bases foram acessadas por meio da ferramenta [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas) do Governo Federal. A fonte original dos dados é a Receita Federal do Brasil.
+<p style="text-align:justify">Todas as bases foram acessadas por meio da ferramenta [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas) do Governo Federal. A fonte original dos dados é a Receita Federal do Brasil.</p>
 
-Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [**script**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/script_receita_ajustes.R).
+<p style="text-align:justify">Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [**script**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/script_receita_ajustes.R).</p>
 
 Abaixo só faremos a leitura da base tratada para juntarmos com as demais bases.
 
@@ -587,19 +587,19 @@ dados_receita <- read_csv("01_dados_tratados/dados_receita_tratados.csv") %>%
 
 ```
 
-Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/dados_receita_tratada.csv)
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/dados_receita_tratados.csv)
 
 ### 11) BOLSA FAMÍLIA - SAGICAD
 
-O dados de transferência do bolsa família foram retiradas da Secretaria de Avaliação, Gestão da Informação e Cadastro Único -  [**SAGICAD**](https://aplicacoes.cidadania.gov.br/vis/data3/v.php?q%5B%5D=oNOhlMHqwJOsuqSe9Wp%2BhrNe09Gv17llja1%2BYW15YmqqdH9%2BaWCEkWWXbWTZ8X5kc3xwoNqlwLNyocnWmKV4mb7nwJl3g6iv5lzDf2lfiJyZy6mmwrazlai7mnW0n666qpKSnKbfqlbTrH1rcYOprO6eiMKporycbtCen9DgiG%2BvvaJd9Fqwr6qSd9ibz6tTnfF%2BZm55c2qZrbWzpU3J0KjYoVuFu8NlbH9qdLOnwrucn8DEXJl9qY6tf2Voel5a3qXAs1ebzM2fiqKhwZzKb6Kpoa3edLOvo6C8nG7Qnp%2FQ4Ihvr72itr%2BauhHkmcDCpo2DlMo%2B%2BqClqahayXqPbqXw%2BtBT3bKmzeC7p527WJDapbzAV4HG1ZTWXYXC666nr6mZqZmdvG54os8k4Namon29v5WvsaFdu567s53wBMSc2V2gICSxnatop5%2Fcnq%2B3m5x30ZjWnqZ94a6h%2F%2FWho9qsbbKmTZjWqy3qn8bqbXauqaij5bW9iQ%3D%3D&ag=m&dt1=2022-01-01&dt2=2022-12-01), vinculada ao Ministério do Desenvolvimento e Assistência Social, Família e Combate à Fome.
+<p style="text-align:justify">O dados de transferência do bolsa família foram retiradas da Secretaria de Avaliação, Gestão da Informação e Cadastro Único -  [**SAGICAD**](https://aplicacoes.cidadania.gov.br/vis/data3/v.php?q%5B%5D=oNOhlMHqwJOsuqSe9Wp%2BhrNe09Gv17llja1%2BYW15YmqqdH9%2BaWCEkWWXbWTZ8X5kc3xwoNqlwLNyocnWmKV4mb7nwJl3g6iv5lzDf2lfiJyZy6mmwrazlai7mnW0n666qpKSnKbfqlbTrH1rcYOprO6eiMKporycbtCen9DgiG%2BvvaJd9Fqwr6qSd9ibz6tTnfF%2BZm55c2qZrbWzpU3J0KjYoVuFu8NlbH9qdLOnwrucn8DEXJl9qY6tf2Voel5a3qXAs1ebzM2fiqKhwZzKb6Kpoa3edLOvo6C8nG7Qnp%2FQ4Ihvr72itr%2BauhHkmcDCpo2DlMo%2B%2BqClqahayXqPbqXw%2BtBT3bKmzeC7p527WJDapbzAV4HG1ZTWXYXC666nr6mZqZmdvG54os8k4Namon29v5WvsaFdu567s53wBMSc2V2gICSxnatop5%2Fcnq%2B3m5x30ZjWnqZ94a6h%2F%2FWho9qsbbKmTZjWqy3qn8bqbXauqaij5bW9iQ%3D%3D&ag=m&dt1=2022-01-01&dt2=2022-12-01), vinculada ao Ministério do Desenvolvimento e Assistência Social, Família e Combate à Fome.</p>
 
 Sobre o tratamento dos dados:
 
-1)  Selecionamos as variáveis que desejamos utilizar através da função `select`;
+<p style="text-align:justify">1)  Selecionamos as variáveis que desejamos utilizar através da função `select`;</p>
 
-2)  Fizemos a renomeação dessas variáveis por intermedio da função `rename`.
+<p style="text-align:justify">2)  Fizemos a renomeação dessas variáveis por intermedio da função `rename`.</p>
 
-obs.: os dados são referentes ao mês de janeiro de 2022. Ainda utilizamos a nomenclatura Auxílio Brasil, tendo em vista ser ainda o adotado pelos dados. 
+<p style="text-align:justify">obs.: os dados são referentes ao mês de janeiro de 2022. Ainda utilizamos a nomenclatura Auxílio Brasil, tendo em vista ser ainda o adotado pelos dados.</p>
 
 ```{r}
 #| warning: false
@@ -628,15 +628,15 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 12) PIB MUNICÍPIO - IBGE
 
-Na base de [**Produto Interno Bruto dos Municípios**](https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&t=o-que-e) são apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica - Agropecuária, Indústria e Serviços - bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita.
+<p style="text-align:justify">Na base de [**Produto Interno Bruto dos Municípios**](https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&t=o-que-e) são apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica - Agropecuária, Indústria e Serviços - bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita.</p>
 
 Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [**script**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R).
 
 Nos códigos abaixo fizemos:
 
-1)  A seleção das variáveis que desejamos utilizar através da função `select`;
+<p style="text-align:justify">1)  A seleção das variáveis que desejamos utilizar através da função `select`;</p>
 
-2)  A retirada do dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito.
+<p style="text-align:justify">2)  A retirada do dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito.</p>
 
 obs.: os dados são referentes ao ano de 2020.
 
@@ -647,10 +647,9 @@ pib_municipio <- read_excel("00_bases/pib_municipio_reduzida.xlsx")
 
 
 pib_munic <- pib_municipio%>%
-             select(codigo_municipio_ibge,pib_preco_corrente,atividade_maior_valor_ad_bruto)%>%
+             select(codigo_municipio_ibge,pib_per_capita_preco_corrente,atividade_maior_valor_ad_bruto)%>%
              mutate(codigo_municipio_ibge = substr(codigo_municipio_ibge, 1, 6))
             
-
 
 
 ```
@@ -659,7 +658,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 13) GEOSES
 
-Neste contexto, o [**Índice Socioeconômico do Contexto Geográfico para Estudos em Saúde (GeoSES)**](https://legado.dados.gov.br/dataset/geoses) resume as principais dimensões socioeconômicas para fins de pesquisa, avaliação e monitoramento das desigualdades em saúde no Brasil.
+<p style="text-align:justify">Neste contexto, o [**Índice Socioeconômico do Contexto Geográfico para Estudos em Saúde (GeoSES)**](https://legado.dados.gov.br/dataset/geoses) resume as principais dimensões socioeconômicas para fins de pesquisa, avaliação e monitoramento das desigualdades em saúde no Brasil.</p>
 
 Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [**script**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R)
 
@@ -681,17 +680,17 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 14) POPULAÇÃO RESIDENTE
 
-A [**População Residente**](http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvsbr.def) é elaborada pelo Ministerio da Saúde, fornecendo estimativas preliminares sobre a população brasileira.
+<p style="text-align:justify">A [**População Residente**](http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvsbr.def) é elaborada pelo Ministerio da Saúde, fornecendo estimativas preliminares sobre a população brasileira.</p>
 
 Sobre o tratamento dos dados:
 
-1)  Selecionamos as variáveis que desejamos utilizar através da função `select`;
+<p style="text-align:justify">1)  Selecionamos as variáveis que desejamos utilizar através da função `select`;</p>
 
-2)  Fizemos a renomeação dessas variáveis por intermedio da função `rename`;
+<p style="text-align:justify">2)  Fizemos a renomeação dessas variáveis por intermedio da função `rename`;</p>
 
-3)  Juntamos as duas bases: faixa etaria e sexo;
+<p style="text-align:justify">3)  Juntamos as duas bases: faixa etaria e sexo;</p>
 
-4)  Retiramos a coluna duplicada através da função `mutate`.
+<p style="text-align:justify">4)  Retiramos a coluna duplicada através da função `mutate`.</p>
 
 ```{r}
 #| warning: false 
@@ -729,7 +728,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 15) BASE COMPLETA
 
-Juntando todas as bases, temos o seguinte resultado. É possível acessar ao dicionário de dados dessa base que criamos clicando aqui.
+<p style="text-align:justify">Juntando todas as bases, temos o seguinte resultado. É possível acessar ao dicionário de dados dessa base que criamos clicando [**aqui**]</p>
 
 ```{r}
 #| warning: false
@@ -756,6 +755,7 @@ base_completa <-
          -SG_UF_ESC, -`codigo_IBGE_dv`, -Nome_municipio.x,
          -IDEB_2021.x, -IDEB_2021.y) %>% 
   mutate(densidade_banda_larga = as.double(as.character(densidade_banda_larga)))
+
 
 glimpse(base_completa)
 
