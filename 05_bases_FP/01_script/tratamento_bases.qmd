@@ -35,7 +35,7 @@ O **objetivo** deste documento é publicizar os procedimentos de tratamento de b
 
 Além de disponibilizar a base tratada, apresentamos as bases, suas fontes e os procedimentos executados para tal finalidade.
 
-A figura abaixo contém um racional de determinantes e suas bases de origem. Aperte em **See the Board** para habilitar o componente. 
+A figura abaixo contém um racional de determinantes e suas bases de origem. Aperte em **See the Board** para habilitar o componente.
 
 <iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVMKP_Pzg=/?moveToViewport=-1474,-871,10760,5206&amp;embedId=518244954751" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen>
 
@@ -570,23 +570,21 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 10) EMPRESAS - RECEITA FEDERAL
 
-Na presente subseção temos dados a nível município sobre empresas ativas em 2023, empresas criadas em 2022 e a média do tempo de criação de empresas. Todas as bases foram acessadas por meio da ferramenta [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas) do Governo Federal. A fonte original dos dados é a Receita Federal do Brasil.
+Na presente subseção temos dados a nível município sobre empresas ativas em 2023, empresas criadas em 2022 e a média do tempo de criação de empresas. Temos o dado total, independente da natureza jurídica, mas também temos os dados discriminados por natureza jurídica. 
 
-Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [**script**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/script_receita.R).
+Todas as bases foram acessadas por meio da ferramenta [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas) do Governo Federal. A fonte original dos dados é a Receita Federal do Brasil.
+
+Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [**script**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/script_receita_ajustes.R).
 
 Abaixo só faremos a leitura da base tratada para juntarmos com as demais bases.
 
 ```{r}
 #| warning: false
 
-dados_receita <- read_csv("00_bases/dados_receita.csv") %>% 
+dados_receita <- read_csv("01_dados_tratados/dados_receita_tratados.csv") %>% 
                         select(-`...1`) %>% 
                         mutate(cod_municipio_ibge = as.character(cod_municipio_ibge)) %>% 
-                        mutate(cod_municipio_ibge = substr(cod_municipio_ibge, 1, 6)) %>% 
-                        rename(total_empresas = total,
-                               total_empresas_abertas = total_abertas,
-                               media_tempo_abertura = media_tempo_horas,
-                               media_dias_abertura = dias)
+                        mutate(cod_municipio_ibge = substr(cod_municipio_ibge, 1, 6))
 
 
 
@@ -594,36 +592,38 @@ dados_receita <- read_csv("00_bases/dados_receita.csv") %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/dados_receita_tratada.csv)
 
-### 11) AUXÍLIO BRASIL - SAGICAD
+### 11) BOLSA FAMÍLIA - SAGICAD
 
-O [**SAGICAD**](https://aplicacoes.cidadania.gov.br/vis/data3/v.php?q%5B%5D=oNOhlMHqwJOsuqSe9Wp%2BhrNe09Gv17llja1%2BYW15YmqqdH9%2BaWCEkWWXbWTZ8X5kc3xwoNqlwLNyocnWmKV4mb7nwJl3g6iv5lzDf2lfiJyZy6mmwrazlai7mnW0n666qpKSnKbfqlbTrH1rcYOprO6eiMKporycbtCen9DgiG%2BvvaJd9Fqwr6qSd9ibz6tTnfF%2BZm55c2qZrbWzpU3J0KjYoVuFu8NlbH9qdLOnwrucn8DEXJl9qY6tf2Voel5a3qXAs1ebzM2fiqKhwZzKb6Kpoa3edLOvo6C8nG7Qnp%2FQ4Ihvr72itr%2BauhHkmcDCpo2DlMo%2B%2BqClqahayXqPbqXw%2BtBT3bKmzeC7p527WJDapbzAV4HG1ZTWXYXC666nr6mZqZmdvG54os8k4Namon29v5WvsaFdu567s53wBMSc2V2gICSxnatop5%2Fcnq%2B3m5x30ZjWnqZ94a6h%2F%2FWho9qsbbKmTZjWqy3qn8bqbXauqaij5bW9iQ%3D%3D&ag=m&dt1=2022-01-01&dt2=2022-12-01)(Secretaria de Avaliação, Gestão da Informação e Cadastro Único)
-
+O dados de transferência do bolsa família foram retiradas da Secretaria de Avaliação, Gestão da Informação e Cadastro Único -  [**SAGICAD**](https://aplicacoes.cidadania.gov.br/vis/data3/v.php?q%5B%5D=oNOhlMHqwJOsuqSe9Wp%2BhrNe09Gv17llja1%2BYW15YmqqdH9%2BaWCEkWWXbWTZ8X5kc3xwoNqlwLNyocnWmKV4mb7nwJl3g6iv5lzDf2lfiJyZy6mmwrazlai7mnW0n666qpKSnKbfqlbTrH1rcYOprO6eiMKporycbtCen9DgiG%2BvvaJd9Fqwr6qSd9ibz6tTnfF%2BZm55c2qZrbWzpU3J0KjYoVuFu8NlbH9qdLOnwrucn8DEXJl9qY6tf2Voel5a3qXAs1ebzM2fiqKhwZzKb6Kpoa3edLOvo6C8nG7Qnp%2FQ4Ihvr72itr%2BauhHkmcDCpo2DlMo%2B%2BqClqahayXqPbqXw%2BtBT3bKmzeC7p527WJDapbzAV4HG1ZTWXYXC666nr6mZqZmdvG54os8k4Namon29v5WvsaFdu567s53wBMSc2V2gICSxnatop5%2Fcnq%2B3m5x30ZjWnqZ94a6h%2F%2FWho9qsbbKmTZjWqy3qn8bqbXauqaij5bW9iQ%3D%3D&ag=m&dt1=2022-01-01&dt2=2022-12-01), vinculada ao Ministério do Desenvolvimento e Assistência Social, Família e Combate à Fome.
 
 Sobre o tratamento dos dados:
 
-1) Selecionamos as variáveis que desejamos utilizar através da função `select`;
+1)  Selecionamos as variáveis que desejamos utilizar através da função `select`;
 
-2) Fizemos a renomeação dessas variáveis por intermedio da função `rename`.
+2)  Fizemos a renomeação dessas variáveis por intermedio da função `rename`.
 
-
-obs.: os dados são referentes ao ano de 2022.
+obs.: os dados são referentes ao mês de janeiro de 2022. Ainda utilizamos a nomenclatura Auxílio Brasil, tendo em vista ser ainda o adotado pelos dados. 
 
 ```{r}
 #| warning: false
 
 auxilio_brasil_2022 <- read_csv("00_bases/auxilio_brasil_2022.csv", 
-    locale = locale(encoding = "WINDOWS-1252"))
+    locale = locale(encoding = "WINDOWS-1252")) %>% 
+                       filter(Referência == "01/2022")
 
 
-auxilio_br <- auxilio_brasil_2022%>%
+auxilio_br <- auxilio_brasil_2022 %>%
                   select(Código, `Unidade Territorial`, `Referência`, 
-                         `Benefício médio recebido pelas famílias do Auxílio Brasil`)%>%
+                         `Benefício médio recebido pelas famílias do Auxílio Brasil`, Famílias, `Valor Total Repassado do Auxílio Brasil`) %>%
                   rename(codigo_municipio_ibge = Código,
-                         municipio =`Unidade Territorial`,
                          mes_referencia = `Referência`,
-                         valor_medio_recebido_familia = `Benefício médio recebido pelas famílias do Auxílio Brasil`)
-
-
+                         valor_medio_recebido_familia = `Benefício médio recebido pelas famílias do Auxílio Brasil`,
+                         familias = Famílias,
+                         valor_repassado = `Valor Total Repassado do Auxílio Brasil`) %>% 
+                  mutate(codigo_municipio_ibge = as.character(codigo_municipio_ibge)) %>% 
+                  select(codigo_municipio_ibge, valor_medio_recebido_familia,
+                         familias, valor_repassado)
+                  
 
 ```
 
@@ -631,15 +631,15 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 12) PIB MUNICÍPIO - IBGE
 
-Na base de [**Produto Interno Bruto dos Municípios**](https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&t=o-que-e) são apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica – Agropecuária, Indústria e Serviços – bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita.  
+Na base de [**Produto Interno Bruto dos Municípios**](https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9088-produto-interno-bruto-dos-municipios.html?=&t=o-que-e) são apresentados, a preços correntes, os valores adicionados brutos dos três grandes setores de atividade econômica - Agropecuária, Indústria e Serviços - bem como os impostos, líquidos de subsídios, o PIB e o PIB per capita.
 
 Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [**script**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/tratamentos_base_script.R).
 
 Nos códigos abaixo fizemos:
 
-1) A seleção das variáveis que desejamos utilizar através da função `select`;
+1)  A seleção das variáveis que desejamos utilizar através da função `select`;
 
-2) A retirada do dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito.
+2)  A retirada do dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito.
 
 obs.: os dados são referentes ao ano de 2020.
 
@@ -650,9 +650,9 @@ pib_municipio <- read_excel("00_bases/pib_municipio_reduzida.xlsx")
 
 
 pib_munic <- pib_municipio%>%
-             select(codigo_municipio_ibge,nome_municipio,pib_preco_corrente,atividade_maior_valor_ad_bruto)%>%
+             select(codigo_municipio_ibge,pib_preco_corrente,atividade_maior_valor_ad_bruto)%>%
              mutate(codigo_municipio_ibge = substr(codigo_municipio_ibge, 1, 6))
-
+            
 
 
 
@@ -668,8 +668,7 @@ Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o pr
 
 Nos códigos abaixo fizemos:
 
-1) A retirada do dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito.
-
+1)  A retirada do dígito verificador do código IBGE, pois algumas bases não utilizam o 7º dígito.
 
 ```{r}
 #| warning: false
@@ -685,47 +684,47 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 
 ### 14) POPULAÇÃO RESIDENTE
 
-A [**População Residente**](http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvsbr.def) é elaborada pelo Ministerio da Saúde, fornecendo estimativas preliminares sobre a população brasileira. 
-
+A [**População Residente**](http://tabnet.datasus.gov.br/cgi/deftohtm.exe?ibge/cnv/popsvsbr.def) é elaborada pelo Ministerio da Saúde, fornecendo estimativas preliminares sobre a população brasileira.
 
 Sobre o tratamento dos dados:
 
-1) Selecionamos as variáveis que desejamos utilizar através da função `select`;
+1)  Selecionamos as variáveis que desejamos utilizar através da função `select`;
 
-2) Fizemos a renomeação dessas variáveis por intermedio da função `rename`;
+2)  Fizemos a renomeação dessas variáveis por intermedio da função `rename`;
 
-3) Juntamos as duas bases: faixa etaria e sexo;
+3)  Juntamos as duas bases: faixa etaria e sexo;
 
-4) Retiramos a coluna duplicada através da função `mutate`.
+4)  Retiramos a coluna duplicada através da função `mutate`.
 
 ```{r}
 #| warning: false 
 
 #população por faixa etaria
 
-pop_faixa_etaria <- read_delim("00_bases/População por faixa etária (SVS - MS) semi tratada.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE, locale = locale(encoding = "latin1")) 
+pop_faixa_etaria <- read_delim("~/GitHub/lapei/05_bases_FP/01_script/00_bases/População por faixa etária (SVS - MS) semi tratada.csv", 
+                              delim = ";", escape_double = FALSE, locale = locale(decimal_mark = ","), 
+                              trim_ws = TRUE)
 
 
 pop_fx_etaria <- pop_faixa_etaria%>%
-                 select(ibge, municipio,perc_20_59_anos,perc_idosa)
+                 select(ibge,perc_20_59_anos,perc_idosa)
 
 
 #população por sexo
 
-populacao_sexo <- read_delim("00_bases/População por faixa etaria (SVS - MS) Sexo semi tratada.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE, locale = locale(encoding = "latin1")) 
+populacao_sexo <- read_delim("00_bases/População por faixa etaria (SVS - MS) Sexo semi tratada.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE, locale = locale(decimal_mark = ",")) 
 
 
 pop_sexo <- populacao_sexo%>%
-                   select(ibge, municipio,perc_masc,perc_feminino)%>%
+                   select(ibge,perc_masc,perc_feminino)%>%
                    rename(perc_masculino = perc_masc)
 
 
 #juntando as bases
 
 pop_sex_fx_et <- pop_fx_etaria%>%
-                 left_join(pop_sexo, by = "ibge")%>%
-                 mutate(municipio.y = NULL)%>%
-                 rename(municipio = municipio.x)
+                 left_join(pop_sexo, by = "ibge") %>% 
+                 mutate(ibge = as.character(ibge))
 
 ```
 
@@ -750,9 +749,12 @@ base_completa <-
   left_join(censo_edu_sup_IES_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO")) %>% 
   left_join(censo_edu_sup_cursos_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO")) %>% 
   left_join(enem_2021, by = c("cod_municipio_ibge" = "CO_MUNICIPIO_ESC")) %>% 
+  left_join(auxilio_br, by = c("cod_municipio_ibge" = "codigo_municipio_ibge")) %>% 
+  left_join(pib_munic, by = c("cod_municipio_ibge" = "codigo_municipio_ibge")) %>% 
+  left_join(pop_sex_fx_et, by = c("cod_municipio_ibge"="ibge")) %>% 
   relocate(SGUF, .after = cod_municipio_ibge) %>% 
   relocate(NMMUN, .after = SGUF) %>% 
-  select(-cod_municipiodv, -nome, -municipio, -UF.x,
+  select(-cod_municipiodv, -nome, -UF.x, -municipio,
          -UF.y, -Nome_municipio.y, -CO_UF_ESC,
          -SG_UF_ESC, -`codigo_IBGE_dv`, -Nome_municipio.x,
          -IDEB_2021.x, -IDEB_2021.y) %>% 
@@ -776,7 +778,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 ```
 <figcaption style="text-align:center">
 
- Adaleny Paiva, Título: Bacharela (Mestranda - PPGS/UFG), E-mail: adalenypaiva\@discente.ufg.br
+Adaleny Paiva, Título: Bacharela (Mestranda - PPGS/UFG), E-mail: adalenypaiva\@discente.ufg.br
 
 </figcaption>
 
@@ -792,7 +794,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 ```
 <figcaption style="text-align:center">
 
- Henrique Silveira, Título: Graduando (FACE/UFG), E-mail: henriqueribeiro\@discente.ufg.br
+Henrique Silveira, Título: Graduando (FACE/UFG), E-mail: henriqueribeiro\@discente.ufg.br
 
 </figcaption>
 
@@ -808,7 +810,7 @@ Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielpp
 ```
 <figcaption style="text-align:center">
 
- Daniel Pagotto, Título: Mestre (Doutorando PPGA/UnB), E-mail: danielppagotto\@ufg.br
+Daniel Pagotto, Título: Mestre (Doutorando PPGA/UnB), E-mail: danielppagotto\@ufg.br
 
 </figcaption>
 
