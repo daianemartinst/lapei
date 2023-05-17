@@ -793,7 +793,7 @@ Nos códigos abaixo fizemos:
 
 geoses_reduzida <- read_excel("00_bases/geoses_reduzida.xlsx")%>%
                    mutate(v0002_codigo_do_municipio = substr(v0002_codigo_do_municipio, 1, 6)) %>% 
-                   rename("cod_municipio" = v0002_codigo_do_municipio)
+                   rename(cod_municipio = v0002_codigo_do_municipio)
 
 ```
 
@@ -853,14 +853,15 @@ populacao_sexo <- read_delim("00_bases/População por faixa etaria (SVS - MS) S
 
 
 pop_sexo <- populacao_sexo%>%
-                   select(ibge,perc_masc,perc_feminino)%>%
-                   rename(perc_masculino = perc_masc)
+                   select(ibge,perc_masc,perc_feminino,Total)%>%
+                   rename(perc_masculino = perc_masc,
+                          pop_total = Total)
 
 
 #juntando as bases
 
 pop_sex_fx_et <- pop_fx_etaria%>%
-                 left_join(pop_sexo, by = "ibge") %>% 
+                 left_join(pop_sexo, by = "ibge") %>%
                  mutate(ibge = as.character(ibge))
 
 ```
@@ -902,8 +903,9 @@ base_completa <-
          -IDEB_2021.x, -IDEB_2021.y)
   
 
-
 glimpse(base_completa)
+
+export(base_completa, "base_completa_17_05.xlsx")
 
 ```
 
