@@ -603,77 +603,7 @@ censo_educacao_superior_tratado <- censo_edu_sup_cursos_2021%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/censo_educacao_superior_tratado.csv)
 
-### 8) TSE
-
-<p style="text-align:justify">
-
-No [**Portal de transparência do TSE**](https://dadosabertos.tse.jus.br/dataset/) encontramos algumas bases de dados sobre as eleições no Brasil.Nossa intenção foi extrair apenas os dados referentes as eleições presidenciais de 2022.
-
-</p>
-
-Sobre o tratamento dos dados:
-
-<p style="text-align:justify">
-
-1)  Houve um tratamento prévio, dimiuindo a quantidade de colunas, extraindo somente as colunas necessárias, resultando na base "tse_reduzida". Nela estão somete os dados do segundo turno de 2022.
-
-    </p>
-
-<p style="text-align:justify">
-
-2)  Realizamos a soma da quantidade de votos por município. Para isso, usamos a função `group_by`conjuntamente com a função `summarise` e o parâmetro`sum` para fazer a soma;
-
-    </p>
-
-<p style="text-align:justify">
-
-3)  Utilizamos a função `spread` para transformar as categorias em múltiplas colunas;
-
-    <p>
-
-<p style="text-align:justify">
-
-4)  Por intermédio do parâmetro `fill`, na função `spread` trocamos os valores vazios `NA` por 0.
-
-    </p>
-
-obs.: os dados são referentes às últimos eleições presidenciais, 2022.
-
-```{r}
-#| warning: false
-
-uf <- hierarquia_municipios %>% 
-            select(cod_uf, uf_sigla) %>% 
-            mutate(cod_uf = as.character(cod_uf)) %>% 
-            unique()
-
-tse_reduzida <- read_csv("00_bases/tse_reduzida.csv", 
-    col_types = cols(CD_MUNICIPIO = col_character())) 
-
-tse_presid_2022 <- tse_reduzida %>%
-                   filter(SG_UF != "ZZ") %>% 
-                   group_by(SG_UF,CD_MUNICIPIO,NM_MUNICIPIO,NM_VOTAVEL) %>%
-                   summarise(total_votos = sum(QT_VOTOS), .groups = 'drop') %>% 
-                   spread(NM_VOTAVEL, total_votos,  fill = "0")  %>%
-                   rename(bolsonaro = `JAIR MESSIAS BOLSONARO`,
-                          lula = `LUIZ INÁCIO LULA DA SILVA`,
-                          branco = `VOTO BRANCO`,
-                          nulo = `VOTO NULO`) %>% 
-                   mutate(lula = as.numeric(lula),
-                          bolsonaro = as.numeric(bolsonaro),
-                          branco = as.numeric(branco),
-                          nulo = as.numeric(nulo)) %>% 
-                   mutate(bolsonaro_perc = bolsonaro/(lula + bolsonaro + nulo + branco),
-                          lula_perc = lula/(lula + bolsonaro + nulo + branco)) %>% 
-                   mutate(codigo_ibge = str_pad(CD_MUNICIPIO, 5, pad = "0")) %>% 
-                   left_join(uf, by = c("SG_UF"="uf_sigla")) %>% 
-                   mutate(codigo_ibge_dv = substr(str_c(cod_uf,codigo_ibge),1,6))
-
-```
-
-Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/tse_tratado.csv)
-
-### 9) ENEM
+### 8) ENEM
 
 <p style="text-align:justify">
 
@@ -716,7 +646,7 @@ enem_2021 <- enem %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/enem_tratado.csv)
 
-### 10) EMPRESAS - RECEITA FEDERAL
+### 9) EMPRESAS - RECEITA FEDERAL
 
 <p style="text-align:justify">
 
@@ -750,7 +680,7 @@ dados_receita <- read_csv("01_dados_tratados/dados_receita_tratados.csv") %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/dados_receita_tratados.csv)
 
-### 11) BOLSA FAMÍLIA - SAGICAD
+### 10) BOLSA FAMÍLIA - SAGICAD
 
 <p style="text-align:justify">
 
@@ -802,7 +732,7 @@ auxilio_br <- auxilio_brasil_2022 %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/auxilio_brasil_tratada.csv)
 
-### 12) PIB MUNICÍPIO - IBGE
+### 11) PIB MUNICÍPIO - IBGE
 
 <p style="text-align:justify">
 
@@ -844,7 +774,7 @@ pib_munic <- pib_municipio%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/pib_munic_tratado.csv)
 
-### 13) GEOSES
+### 12) GEOSES
 
 <p style="text-align:justify">
 
@@ -863,13 +793,13 @@ Nos códigos abaixo fizemos:
 
 geoses_reduzida <- read_excel("00_bases/geoses_reduzida.xlsx")%>%
                    mutate(v0002_codigo_do_municipio = substr(v0002_codigo_do_municipio, 1, 6)) %>% 
-                   rename("cod_municipio" = v0002_codigo_do_municipio)
+                   rename(cod_municipio = v0002_codigo_do_municipio)
 
 ```
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/geoses_reduzida_tratada.csv)
 
-### 14) POPULAÇÃO RESIDENTE
+### 13) POPULAÇÃO RESIDENTE
 
 <p style="text-align:justify">
 
@@ -923,21 +853,22 @@ populacao_sexo <- read_delim("00_bases/População por faixa etaria (SVS - MS) S
 
 
 pop_sexo <- populacao_sexo%>%
-                   select(ibge,perc_masc,perc_feminino)%>%
-                   rename(perc_masculino = perc_masc)
+                   select(ibge,perc_masc,perc_feminino,Total)%>%
+                   rename(perc_masculino = perc_masc,
+                          pop_total = Total)
 
 
 #juntando as bases
 
 pop_sex_fx_et <- pop_fx_etaria%>%
-                 left_join(pop_sexo, by = "ibge") %>% 
+                 left_join(pop_sexo, by = "ibge") %>%
                  mutate(ibge = as.character(ibge))
 
 ```
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/populacao_residente_tratada.csv)
 
-### 15) BASE COMPLETA
+### 14) BASE COMPLETA
 
 <p style="text-align:justify">
 
@@ -963,19 +894,18 @@ base_completa <-
   left_join(auxilio_br, by = c("cod_municipio_ibge" = "codigo_municipio_ibge")) %>% 
   left_join(pib_munic, by = c("cod_municipio_ibge" = "codigo_municipio_ibge")) %>% 
   left_join(pop_sex_fx_et, by = c("cod_municipio_ibge" = "ibge")) %>% 
-  left_join(tse_presid_2022, by = c("cod_municipio_ibge" = "codigo_ibge_dv")) %>%
   left_join(geoses_reduzida, by = c("cod_municipio_ibge" = "cod_municipio")) %>% 
   relocate(SGUF, .after = cod_municipio_ibge) %>% 
   relocate(NMMUN, .after = SGUF) %>% 
-  select(-cod_municipiodv, -nome, -UF.x, -municipio,
+  select(-nome, -UF.x, -municipio,
          -UF.y, -Nome_municipio.y, -CO_UF_ESC,
          -SG_UF_ESC, -`codigo_IBGE_dv`, -Nome_municipio.x,
-         -IDEB_2021.x, -IDEB_2021.y, -codigo_ibge, -cod_uf, -SG_UF,
-         -SG_UF, -CD_MUNICIPIO, -NM_MUNICIPIO) %>% 
-  mutate(densidade_banda_larga = as.double(as.character(densidade_banda_larga)))
-
+         -IDEB_2021.x, -IDEB_2021.y)
+  
 
 glimpse(base_completa)
+
+export(base_completa, "base_completa_17_05.xlsx")
 
 ```
 
