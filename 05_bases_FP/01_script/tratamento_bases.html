@@ -778,7 +778,7 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>geoses_reduzida <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"00_bases/geoses_reduzida.xlsx"</span>)<span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">v0002_codigo_do_municipio =</span> <span class="fu">substr</span>(v0002_codigo_do_municipio, <span class="dv">1</span>, <span class="dv">6</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">rename</span>(<span class="st">"cod_municipio"</span> <span class="ot">=</span> v0002_codigo_do_municipio)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">rename</span>(<span class="at">cod_municipio =</span> v0002_codigo_do_municipio)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/geoses_reduzida_tratada.csv"><strong>aqui</strong></a></p>
 </section>
@@ -826,15 +826,16 @@ div.csl-indent {
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>pop_sexo <span class="ot">&lt;-</span> populacao_sexo<span class="sc">%&gt;%</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">select</span>(ibge,perc_masc,perc_feminino)<span class="sc">%&gt;%</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">rename</span>(<span class="at">perc_masculino =</span> perc_masc)</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">select</span>(ibge,perc_masc,perc_feminino,Total)<span class="sc">%&gt;%</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">rename</span>(<span class="at">perc_masculino =</span> perc_masc,</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>                          <span class="at">pop_total =</span> Total)</span>
 <span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">#juntando as bases</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>pop_sex_fx_et <span class="ot">&lt;-</span> pop_fx_etaria<span class="sc">%&gt;%</span></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">left_join</span>(pop_sexo, <span class="at">by =</span> <span class="st">"ibge"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">mutate</span>(<span class="at">ibge =</span> <span class="fu">as.character</span>(ibge))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co">#juntando as bases</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>pop_sex_fx_et <span class="ot">&lt;-</span> pop_fx_etaria<span class="sc">%&gt;%</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">left_join</span>(pop_sexo, <span class="at">by =</span> <span class="st">"ibge"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">mutate</span>(<span class="at">ibge =</span> <span class="fu">as.character</span>(ibge))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/populacao_residente_tratada.csv"><strong>aqui</strong></a></p>
 </section>
@@ -868,11 +869,10 @@ div.csl-indent {
 <span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>         <span class="sc">-</span>IDEB_2021.x, <span class="sc">-</span>IDEB_2021.y)</span>
 <span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(base_completa)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(base_completa)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 5,570
-Columns: 168
+Columns: 169
 $ cod_municipio_ibge                                                                        &lt;chr&gt; …
 $ SGUF                                                                                      &lt;chr&gt; …
 $ NMMUN                                                                                     &lt;chr&gt; …
@@ -1040,8 +1040,10 @@ $ perc_20_59_anos                                                               
 $ perc_idosa                                                                                &lt;dbl&gt; …
 $ perc_masculino                                                                            &lt;dbl&gt; …
 $ perc_feminino                                                                             &lt;dbl&gt; …
+$ pop_total                                                                                 &lt;dbl&gt; …
 $ GeoSES                                                                                    &lt;dbl&gt; …</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">export</span>(base_completa, <span class="st">"base_completa_17_05.xlsx"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Você pode baixar o dado tratado clicando <a href="https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/base_completa_tratada.xlsx"><strong>aqui</strong></a></p>
 </section>
