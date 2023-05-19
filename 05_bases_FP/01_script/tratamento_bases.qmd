@@ -96,7 +96,9 @@ library(stringr)
 
 ```
 
-### 1) IPEA
+### 1) SEGURANÇA
+
+#### IPEA
 
 <p style="text-align:justify">
 
@@ -147,7 +149,9 @@ homicidios_2019 <- homicidios %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/homicidios_tratado.csv)
 
-### 2) SEBRAE
+### 2) POLÍTICAS E AÇÕES DE APOIO
+
+#### SEBRAE
 
 <p style="text-align:justify">
 
@@ -195,7 +199,7 @@ sebrae_hieraquia <- sebrae %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/sebrae_tratado.csv)
 
-### 3) MUNIC
+#### MUNIC
 
 <p style="text-align:justify">
 
@@ -356,7 +360,9 @@ munic_tratada <- Munic_Gestao %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/munic_tratada.csv)
 
-### 4) ANA
+### 3) INFRAESTRUTURA
+
+#### ANA
 
 <p style="text-align:justify">
 
@@ -387,7 +393,39 @@ seguranca_hidrica_out_2022 <- indice_seguranca_hidrica_out_2022 %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/ish_ana.csv)
 
-### 5) IDEB
+#### ANATEL
+
+<p style="text-align:justify">
+
+A [**ANATEL**](https://informacoes.anatel.gov.br/paineis/meu-municipio/acessos-banda-larga-fixa) disponibiliza determinados dados referentes aos serviços de banda larga presentes nos municípios brasileiros.
+
+</p>
+
+obs.: os dados são referentes ao ano de 2022.
+
+```{r}
+#| warning: false
+Banda_larga_municipio_2022 <- read_delim("00_bases/bandalarga_Meu_Municipio_Acessos.csv", 
+                                          delim = ";", escape_double = FALSE, locale = locale(decimal_mark = ","), trim_ws = TRUE) %>% 
+                                    filter(Ano == 2022) %>% 
+                                    select(Serviço, Densidade, `Código IBGE`) %>% 
+                                    mutate(Codigo_IBGE = as.character(`Código IBGE`)) %>%
+                                    rename(Servico = Serviço) %>% 
+                                    spread(key = Servico, value = Densidade) %>% 
+                                    mutate(Codigo_IBGE = substr(Codigo_IBGE, 1, 6)) %>% 
+                             rename(densidade_banda_larga = `Banda Larga Fixa`,
+                                    densidade_telefonia_fixa = `Telefonia Fixa`,
+                                    densidade_telefonia_movel = `Telefonia Móvel`,
+                                    densidade_tv_assinatura = `TV por Assinatura`,
+                                    codigo_IBGE_dv = `Código IBGE`)
+
+```
+
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/anatel_tratada.csv)
+
+### 4) EDUCAÇÃO
+
+#### IDEB
 
 <p style="text-align:justify">
 
@@ -443,37 +481,7 @@ ideb_tratado <- IDEB_EM_rede_publica_2021%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/ideb_tratado.csv)
 
-### 6) ANATEL
-
-<p style="text-align:justify">
-
-A [**ANATEL**](https://informacoes.anatel.gov.br/paineis/meu-municipio/acessos-banda-larga-fixa) disponibiliza determinados dados referentes aos serviços de banda larga presentes nos municípios brasileiros.
-
-</p>
-
-obs.: os dados são referentes ao ano de 2022.
-
-```{r}
-#| warning: false
-Banda_larga_municipio_2022 <- read_delim("00_bases/bandalarga_Meu_Municipio_Acessos.csv", 
-                                          delim = ";", escape_double = FALSE, locale = locale(decimal_mark = ","), trim_ws = TRUE) %>% 
-                                    filter(Ano == 2022) %>% 
-                                    select(Serviço, Densidade, `Código IBGE`) %>% 
-                                    mutate(Codigo_IBGE = as.character(`Código IBGE`)) %>%
-                                    rename(Servico = Serviço) %>% 
-                                    spread(key = Servico, value = Densidade) %>% 
-                                    mutate(Codigo_IBGE = substr(Codigo_IBGE, 1, 6)) %>% 
-                             rename(densidade_banda_larga = `Banda Larga Fixa`,
-                                    densidade_telefonia_fixa = `Telefonia Fixa`,
-                                    densidade_telefonia_movel = `Telefonia Móvel`,
-                                    densidade_tv_assinatura = `TV por Assinatura`,
-                                    codigo_IBGE_dv = `Código IBGE`)
-
-```
-
-Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/anatel_tratada.csv)
-
-### 7) CENSO EDUCAÇÃO SUPERIOR
+#### CENSO EDUCAÇÃO SUPERIOR
 
 <p style="text-align:justify">
 
@@ -603,7 +611,7 @@ censo_educacao_superior_tratado <- censo_edu_sup_cursos_2021%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/censo_educacao_superior_tratado.csv)
 
-### 8) ENEM
+#### ENEM
 
 <p style="text-align:justify">
 
@@ -646,7 +654,9 @@ enem_2021 <- enem %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/enem_tratado.csv)
 
-### 9) EMPRESAS - RECEITA FEDERAL
+### 5) EMPRESAS 
+
+#### RECEITA FEDERAL
 
 <p style="text-align:justify">
 
@@ -680,7 +690,9 @@ dados_receita <- read_csv("01_dados_tratados/dados_receita_tratados.csv") %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/dados_receita_tratados.csv)
 
-### 10) BOLSA FAMÍLIA - SAGICAD
+### 6) SOCIOECONÔMICO
+
+#### BOLSA FAMÍLIA - SAGICAD
 
 <p style="text-align:justify">
 
@@ -732,7 +744,7 @@ auxilio_br <- auxilio_brasil_2022 %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/auxilio_brasil_tratada.csv)
 
-### 11) PIB MUNICÍPIO - IBGE
+#### PIB MUNICÍPIO - IBGE
 
 <p style="text-align:justify">
 
@@ -774,7 +786,7 @@ pib_munic <- pib_municipio%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/pib_munic_tratado.csv)
 
-### 12) GEOSES
+#### GEOSES
 
 <p style="text-align:justify">
 
@@ -799,7 +811,9 @@ geoses_reduzida <- read_excel("00_bases/geoses_reduzida.xlsx")%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/geoses_reduzida_tratada.csv)
 
-### 13) POPULAÇÃO RESIDENTE
+### 7) DEMOGRAFIA
+
+#### POPULAÇÃO RESIDENTE
 
 <p style="text-align:justify">
 
@@ -868,7 +882,7 @@ pop_sex_fx_et <- pop_fx_etaria%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/populacao_residente_tratada.csv)
 
-### 14) BASE COMPLETA
+### 8) BASE COMPLETA
 
 <p style="text-align:justify">
 
