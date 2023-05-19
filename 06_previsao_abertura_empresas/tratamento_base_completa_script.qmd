@@ -1,0 +1,85 @@
+---
+title: "Tratamento da Base Completa"
+format: html
+editor: visual
+---
+
+```{r}
+
+#instalando os pacotes 
+
+install.packages('readr')
+install.packages('dplyr')
+install.packages('tidyr')
+install.packages('rio')
+install.packages('readxl')
+install.packages('tidyverse')
+
+
+```
+
+```{r}
+#chamando os pacotes 
+
+library(readxl)
+library(readr)
+library(dplyr)
+library(tidyr)
+library(rio)
+library(tidyverse)
+
+
+```
+
+```{r}
+
+#Chamando a Base
+
+tratamento_base <- read_excel("base_empresas.xlsx")
+
+base_modificada <-tratamento_base
+
+#tranformando valores omissos em NA
+
+is.na(base_modificada [1:169]) <- base_modificada [1:169] == "Recusa"
+is.na(base_modificada [1:169]) <- base_modificada [1:169] == "-"
+is.na(base_modificada [1:169]) <- base_modificada [1:169] == "0"
+
+
+
+#selecionando as variaveis para a contagem
+
+var_select <- base_modificada%>%
+              select('Acessos_docs_', 'Infos_gerais_licitacoes','Ouvidoria','Download_docs','Consulta_processos','Consulta_previa','Diario_oficial','Concurso_publico','Cadastro_fornecedores','Emissao_certidao_negativa_debito','Emissao_alvara','Emissao_NF','Matricula_escolar','Agendamento_consulta_saude','Emissao_guia_pagamento_tributos','Emissao_docs','Pesquisa_satisfacao','Envio_SMS','Recibo_SMS','APPs_prefeitura','APPs_outros_orgaos','Website_mobile','Emissao_boletos_mobile','Nao_disponibilizou','Bilhete_eletronico_transporte','Onibus_GPS','Centro_controle_operacoes','Iluminacao_inteligente','Semaforos_inteligentes','Sensores_monitoria_area_risco')
+     
+
+#Contanodo os sim e os não
+
+contagem_var <- var_select%>%
+                 mutate(total_sim_tecnologia = rowSums(. == "Sim"))%>%
+                 mutate(total_não_tecnologia = rowSums(. == "Não"))
+
+
+tecnologia <- contagem_var%>%
+              select(total_sim_tecnologia,total_não_tecnologia)
+
+
+```
+
+```{r}
+
+#juntando as novas variaveis 
+
+Base_completa_tratada <- cbind(base_modificada, tecnologia)
+
+export(Base_completa_tratada, "Base_completa_tratada.xlsx")
+
+```
+
+
+
+
+
+
+
+
