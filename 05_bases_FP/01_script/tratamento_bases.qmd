@@ -96,9 +96,45 @@ library(stringr)
 
 ```
 
-### 1) SEGURANÇA
+## 1) EMPREENDEDORISMO 
 
-#### IPEA
+### RECEITA FEDERAL
+
+<p style="text-align:justify">
+
+Na presente subseção temos dados a nível município sobre empresas ativas em 2023, empresas criadas em 2022 e a média do tempo de criação de empresas. Temos o dado total, independente da natureza jurídica, mas também temos os dados discriminados por natureza jurídica.
+
+</p>
+
+<p style="text-align:justify">
+
+Todas as bases foram acessadas por meio da ferramenta [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas) do Governo Federal. A fonte original dos dados é a Receita Federal do Brasil.
+
+</p>
+
+<p style="text-align:justify">
+
+Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [**script**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/script_receita_ajustes.R).
+
+</p>
+
+Abaixo só faremos a leitura da base tratada para juntarmos com as demais bases.
+
+```{r}
+#| warning: false
+
+dados_receita <- read_csv("01_dados_tratados/dados_receita_tratados.csv") %>% 
+                        select(-`...1`) %>% 
+                        mutate(cod_municipio_ibge = as.character(cod_municipio_ibge)) %>% 
+                        mutate(cod_municipio_ibge = substr(cod_municipio_ibge, 1, 6))
+
+```
+
+Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/dados_receita_tratados.csv)
+
+## 2) SEGURANÇA
+
+### IPEA
 
 <p style="text-align:justify">
 
@@ -149,9 +185,9 @@ homicidios_2019 <- homicidios %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/homicidios_tratado.csv)
 
-### 2) POLÍTICAS E AÇÕES DE APOIO
+## 3) POLÍTICAS E AÇÕES DE APOIO A EMPREENDEDORISMO
 
-#### SEBRAE
+### SEBRAE
 
 <p style="text-align:justify">
 
@@ -199,7 +235,7 @@ sebrae_hieraquia <- sebrae %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/sebrae_tratado.csv)
 
-#### MUNIC
+### MUNIC
 
 <p style="text-align:justify">
 
@@ -360,9 +396,9 @@ munic_tratada <- Munic_Gestao %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/munic_tratada.csv)
 
-### 3) INFRAESTRUTURA
+## 4) INFRAESTRUTURA
 
-#### ANA
+### ANA
 
 <p style="text-align:justify">
 
@@ -393,7 +429,7 @@ seguranca_hidrica_out_2022 <- indice_seguranca_hidrica_out_2022 %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/ish_ana.csv)
 
-#### ANATEL
+### ANATEL
 
 <p style="text-align:justify">
 
@@ -423,9 +459,9 @@ Banda_larga_municipio_2022 <- read_delim("00_bases/bandalarga_Meu_Municipio_Aces
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/anatel_tratada.csv)
 
-### 4) EDUCAÇÃO
+## 5) EDUCAÇÃO
 
-#### IDEB
+### IDEB
 
 <p style="text-align:justify">
 
@@ -481,7 +517,7 @@ ideb_tratado <- IDEB_EM_rede_publica_2021%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/ideb_tratado.csv)
 
-#### CENSO EDUCAÇÃO SUPERIOR
+### CENSO EDUCAÇÃO SUPERIOR
 
 <p style="text-align:justify">
 
@@ -611,7 +647,7 @@ censo_educacao_superior_tratado <- censo_edu_sup_cursos_2021%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/censo_educacao_superior_tratado.csv)
 
-#### ENEM
+### ENEM
 
 <p style="text-align:justify">
 
@@ -654,45 +690,9 @@ enem_2021 <- enem %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/enem_tratado.csv)
 
-### 5) EMPRESAS 
+## 6) SOCIOECONÔMICO
 
-#### RECEITA FEDERAL
-
-<p style="text-align:justify">
-
-Na presente subseção temos dados a nível município sobre empresas ativas em 2023, empresas criadas em 2022 e a média do tempo de criação de empresas. Temos o dado total, independente da natureza jurídica, mas também temos os dados discriminados por natureza jurídica.
-
-</p>
-
-<p style="text-align:justify">
-
-Todas as bases foram acessadas por meio da ferramenta [**Painel de Dados de Tempo de Abertura de Empresas**](https://www.gov.br/empresas-e-negocios/pt-br/mapa-de-empresas/painel-mapa-de-empresas) do Governo Federal. A fonte original dos dados é a Receita Federal do Brasil.
-
-</p>
-
-<p style="text-align:justify">
-
-Como os dados são muito volumosos, fizemos um tratamento prévio, conforme o presente [**script**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/script_receita_ajustes.R).
-
-</p>
-
-Abaixo só faremos a leitura da base tratada para juntarmos com as demais bases.
-
-```{r}
-#| warning: false
-
-dados_receita <- read_csv("01_dados_tratados/dados_receita_tratados.csv") %>% 
-                        select(-`...1`) %>% 
-                        mutate(cod_municipio_ibge = as.character(cod_municipio_ibge)) %>% 
-                        mutate(cod_municipio_ibge = substr(cod_municipio_ibge, 1, 6))
-
-```
-
-Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/dados_receita_tratados.csv)
-
-### 6) SOCIOECONÔMICO
-
-#### BOLSA FAMÍLIA - SAGICAD
+### BOLSA FAMÍLIA - SAGICAD
 
 <p style="text-align:justify">
 
@@ -744,7 +744,7 @@ auxilio_br <- auxilio_brasil_2022 %>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/auxilio_brasil_tratada.csv)
 
-#### PIB MUNICÍPIO - IBGE
+### PIB MUNICÍPIO - IBGE
 
 <p style="text-align:justify">
 
@@ -786,7 +786,7 @@ pib_munic <- pib_municipio%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/pib_munic_tratado.csv)
 
-#### GEOSES
+### GEOSES
 
 <p style="text-align:justify">
 
@@ -811,9 +811,9 @@ geoses_reduzida <- read_excel("00_bases/geoses_reduzida.xlsx")%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/geoses_reduzida_tratada.csv)
 
-### 7) DEMOGRAFIA
+## 7) DEMOGRAFIA
 
-#### POPULAÇÃO RESIDENTE
+### POPULAÇÃO RESIDENTE
 
 <p style="text-align:justify">
 
@@ -882,7 +882,7 @@ pop_sex_fx_et <- pop_fx_etaria%>%
 
 Você pode baixar o dado tratado clicando [**aqui**](https://github.com/danielppagotto/lapei/blob/main/05_bases_FP/01_script/01_dados_tratados/populacao_residente_tratada.csv)
 
-### 8) BASE COMPLETA
+## 8) BASE COMPLETA
 
 <p style="text-align:justify">
 
