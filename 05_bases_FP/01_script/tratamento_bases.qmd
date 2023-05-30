@@ -96,7 +96,7 @@ library(stringr)
 
 ```
 
-## 1) EMPREENDEDORISMO 
+## 1) EMPREENDEDORISMO
 
 ### RECEITA FEDERAL
 
