@@ -15290,3 +15290,265 @@ sklearn.utils._param_validation.InvalidParameterError: The 'max_depth' parameter
 2023-06-15 09:27:04,369:INFO:_display_container: 11
 2023-06-15 09:27:04,369:INFO:RandomForestRegressor(n_jobs=-1, random_state=42)
 2023-06-15 09:27:04,369:INFO:tune_model() successfully completed......................................
+2023-06-15 12:19:27,051:INFO:Initializing tune_model()
+2023-06-15 12:19:27,053:INFO:tune_model(estimator=RandomForestRegressor(n_jobs=-1, random_state=42), fold=5, round=4, n_iter=10, custom_grid={'max_depth': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'min_samples_split': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'min_samples_leaf': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'ccp_alpha': [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.9]}, optimize=R2, custom_scorer=None, search_library=scikit-learn, search_algorithm=None, early_stopping=False, early_stopping_max_iters=10, choose_better=True, fit_kwargs=None, groups=None, return_tuner=False, verbose=True, tuner_verbose=True, return_train_score=False, kwargs={}, self=<pycaret.regression.oop.RegressionExperiment object at 0x000001B6FAD06B00>)
+2023-06-15 12:19:27,053:INFO:Checking exceptions
+2023-06-15 12:19:27,170:INFO:Copying training dataset
+2023-06-15 12:19:27,175:INFO:Checking base model
+2023-06-15 12:19:27,177:INFO:Base model : Random Forest Regressor
+2023-06-15 12:19:27,182:INFO:Declaring metric variables
+2023-06-15 12:19:27,185:INFO:Defining Hyperparameters
+2023-06-15 12:19:27,725:INFO:custom_grid: {'actual_estimator__max_depth': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'actual_estimator__min_samples_split': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'actual_estimator__min_samples_leaf': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 'actual_estimator__ccp_alpha': [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.9]}
+2023-06-15 12:19:27,725:INFO:Tuning with n_jobs=-1
+2023-06-15 12:19:27,726:INFO:Initializing RandomizedSearchCV
+2023-06-15 12:19:46,916:WARNING:
+10 fits failed out of a total of 50.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+5 fits failed with the following error:
+Traceback (most recent call last):
+  File "C:\Users\lapei\anaconda3\lib\site-packages\sklearn\model_selection\_validation.py", line 686, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "C:\Users\lapei\anaconda3\lib\site-packages\pycaret\internal\pipeline.py", line 260, in fit
+    fitted_estimator = self._memory_fit(
+  File "C:\Users\lapei\anaconda3\lib\site-packages\joblib\memory.py", line 594, in __call__
+    return self._cached_call(args, kwargs)[0]
+  File "C:\Users\lapei\anaconda3\lib\site-packages\pycaret\internal\memory.py", line 398, in _cached_call
+    out, metadata = self.call(*args, **kwargs)
+  File "C:\Users\lapei\anaconda3\lib\site-packages\pycaret\internal\memory.py", line 309, in call
+    output = self.func(*args, **kwargs)
+  File "C:\Users\lapei\anaconda3\lib\site-packages\pycaret\internal\pipeline.py", line 66, in _fit_one
+    transformer.fit(*args, **fit_params)
+  File "C:\Users\lapei\anaconda3\lib\site-packages\sklearn\ensemble\_forest.py", line 340, in fit
+    self._validate_params()
+  File "C:\Users\lapei\anaconda3\lib\site-packages\sklearn\base.py", line 581, in _validate_params
+    validate_parameter_constraints(
+  File "C:\Users\lapei\anaconda3\lib\site-packages\sklearn\utils\_param_validation.py", line 97, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'min_samples_leaf' parameter of RandomForestRegressor must be an int in the range [1, inf) or a float in the range (0.0, 1.0). Got 0 instead.
+
+--------------------------------------------------------------------------------
+5 fits failed with the following error:
+Traceback (most recent call last):
+  File "C:\Users\lapei\anaconda3\lib\site-packages\sklearn\model_selection\_validation.py", line 686, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "C:\Users\lapei\anaconda3\lib\site-packages\pycaret\internal\pipeline.py", line 260, in fit
+    fitted_estimator = self._memory_fit(
+  File "C:\Users\lapei\anaconda3\lib\site-packages\joblib\memory.py", line 594, in __call__
+    return self._cached_call(args, kwargs)[0]
+  File "C:\Users\lapei\anaconda3\lib\site-packages\pycaret\internal\memory.py", line 398, in _cached_call
+    out, metadata = self.call(*args, **kwargs)
+  File "C:\Users\lapei\anaconda3\lib\site-packages\pycaret\internal\memory.py", line 309, in call
+    output = self.func(*args, **kwargs)
+  File "C:\Users\lapei\anaconda3\lib\site-packages\pycaret\internal\pipeline.py", line 66, in _fit_one
+    transformer.fit(*args, **fit_params)
+  File "C:\Users\lapei\anaconda3\lib\site-packages\sklearn\ensemble\_forest.py", line 340, in fit
+    self._validate_params()
+  File "C:\Users\lapei\anaconda3\lib\site-packages\sklearn\base.py", line 581, in _validate_params
+    validate_parameter_constraints(
+  File "C:\Users\lapei\anaconda3\lib\site-packages\sklearn\utils\_param_validation.py", line 97, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_depth' parameter of RandomForestRegressor must be an int in the range [1, inf) or None. Got 0 instead.
+
+
+2023-06-15 12:19:46,919:WARNING:One or more of the test scores are non-finite: [0.71688307 0.8282534  0.7137073         nan 0.78077576 0.84008985
+        nan 0.70168477 0.74884873 0.90843499]
+
+2023-06-15 12:19:47,322:INFO:best_params: {'actual_estimator__min_samples_split': 2, 'actual_estimator__min_samples_leaf': 1, 'actual_estimator__max_depth': 7, 'actual_estimator__ccp_alpha': 0.0}
+2023-06-15 12:19:47,324:INFO:Hyperparameter search completed
+2023-06-15 12:19:47,324:INFO:SubProcess create_model() called ==================================
+2023-06-15 12:19:47,325:INFO:Initializing create_model()
+2023-06-15 12:19:47,326:INFO:create_model(self=<pycaret.regression.oop.RegressionExperiment object at 0x000001B6FAD06B00>, estimator=RandomForestRegressor(n_jobs=-1, random_state=42), fold=KFold(n_splits=5, random_state=None, shuffle=False), round=4, cross_validation=True, predict=True, fit_kwargs={}, groups=None, refit=True, probability_threshold=None, experiment_custom_tags=None, verbose=True, system=False, add_to_model_list=True, metrics=None, display=<pycaret.internal.display.display.CommonDisplay object at 0x000001B6FB7270D0>, model_only=True, return_train_score=False, kwargs={'min_samples_split': 2, 'min_samples_leaf': 1, 'max_depth': 7, 'ccp_alpha': 0.0})
+2023-06-15 12:19:47,326:INFO:Checking exceptions
+2023-06-15 12:19:47,326:INFO:Importing libraries
+2023-06-15 12:19:47,327:INFO:Copying training dataset
+2023-06-15 12:19:47,336:INFO:Defining folds
+2023-06-15 12:19:47,336:INFO:Declaring metric variables
+2023-06-15 12:19:47,343:INFO:Importing untrained model
+2023-06-15 12:19:47,343:INFO:Declaring custom model
+2023-06-15 12:19:47,353:INFO:Random Forest Regressor Imported successfully
+2023-06-15 12:19:47,367:INFO:Starting cross validation
+2023-06-15 12:19:47,370:INFO:Cross validating with KFold(n_splits=5, random_state=None, shuffle=False), n_jobs=-1
+2023-06-15 12:19:48,594:INFO:Calculating mean and std
+2023-06-15 12:19:48,596:INFO:Creating metrics dataframe
+2023-06-15 12:19:48,605:INFO:Finalizing model
+2023-06-15 12:19:49,024:INFO:Uploading results into container
+2023-06-15 12:19:49,026:INFO:Uploading model into container now
+2023-06-15 12:19:49,027:INFO:_master_model_container: 35
+2023-06-15 12:19:49,027:INFO:_display_container: 12
+2023-06-15 12:19:49,028:INFO:RandomForestRegressor(max_depth=7, n_jobs=-1, random_state=42)
+2023-06-15 12:19:49,028:INFO:create_model() successfully completed......................................
+2023-06-15 12:19:49,193:INFO:SubProcess create_model() end ==================================
+2023-06-15 12:19:49,193:INFO:choose_better activated
+2023-06-15 12:19:49,201:INFO:SubProcess create_model() called ==================================
+2023-06-15 12:19:49,201:INFO:Initializing create_model()
+2023-06-15 12:19:49,202:INFO:create_model(self=<pycaret.regression.oop.RegressionExperiment object at 0x000001B6FAD06B00>, estimator=RandomForestRegressor(n_jobs=-1, random_state=42), fold=KFold(n_splits=5, random_state=None, shuffle=False), round=4, cross_validation=True, predict=True, fit_kwargs={}, groups=None, refit=True, probability_threshold=None, experiment_custom_tags=None, verbose=False, system=False, add_to_model_list=True, metrics=None, display=None, model_only=True, return_train_score=False, kwargs={})
+2023-06-15 12:19:49,202:INFO:Checking exceptions
+2023-06-15 12:19:49,204:INFO:Importing libraries
+2023-06-15 12:19:49,204:INFO:Copying training dataset
+2023-06-15 12:19:49,214:INFO:Defining folds
+2023-06-15 12:19:49,214:INFO:Declaring metric variables
+2023-06-15 12:19:49,215:INFO:Importing untrained model
+2023-06-15 12:19:49,215:INFO:Declaring custom model
+2023-06-15 12:19:49,216:INFO:Random Forest Regressor Imported successfully
+2023-06-15 12:19:49,217:INFO:Starting cross validation
+2023-06-15 12:19:49,219:INFO:Cross validating with KFold(n_splits=5, random_state=None, shuffle=False), n_jobs=-1
+2023-06-15 12:19:50,343:INFO:Calculating mean and std
+2023-06-15 12:19:50,344:INFO:Creating metrics dataframe
+2023-06-15 12:19:50,346:INFO:Finalizing model
+2023-06-15 12:19:50,891:INFO:Uploading results into container
+2023-06-15 12:19:50,892:INFO:Uploading model into container now
+2023-06-15 12:19:50,892:INFO:_master_model_container: 36
+2023-06-15 12:19:50,893:INFO:_display_container: 13
+2023-06-15 12:19:50,893:INFO:RandomForestRegressor(n_jobs=-1, random_state=42)
+2023-06-15 12:19:50,893:INFO:create_model() successfully completed......................................
+2023-06-15 12:19:51,047:INFO:SubProcess create_model() end ==================================
+2023-06-15 12:19:51,047:INFO:RandomForestRegressor(n_jobs=-1, random_state=42) result for R2 is 0.9102
+2023-06-15 12:19:51,048:INFO:RandomForestRegressor(max_depth=7, n_jobs=-1, random_state=42) result for R2 is 0.9084
+2023-06-15 12:19:51,049:INFO:RandomForestRegressor(n_jobs=-1, random_state=42) is best model
+2023-06-15 12:19:51,049:INFO:choose_better completed
+2023-06-15 12:19:51,049:INFO:Original model was better than the tuned model, hence it will be returned. NOTE: The display metrics are for the tuned model (not the original one).
+2023-06-15 12:19:51,064:INFO:_master_model_container: 36
+2023-06-15 12:19:51,064:INFO:_display_container: 12
+2023-06-15 12:19:51,065:INFO:RandomForestRegressor(n_jobs=-1, random_state=42)
+2023-06-15 12:19:51,065:INFO:tune_model() successfully completed......................................
+2023-06-15 12:21:43,457:INFO:Initializing plot_model()
+2023-06-15 12:21:43,457:INFO:plot_model(plot=error, fold=None, use_train_data=False, verbose=True, display=None, display_format=None, estimator=RandomForestRegressor(n_jobs=-1, random_state=42), feature_name=None, fit_kwargs=None, groups=None, label=False, plot_kwargs=None, save=False, scale=1, self=<pycaret.regression.oop.RegressionExperiment object at 0x000001B6FAD06B00>, system=True)
+2023-06-15 12:21:43,458:INFO:Checking exceptions
+2023-06-15 12:21:43,488:INFO:Preloading libraries
+2023-06-15 12:21:43,515:INFO:Copying training dataset
+2023-06-15 12:21:43,516:INFO:Plot type: error
+2023-06-15 12:21:43,627:INFO:Fitting Model
+2023-06-15 12:21:43,627:WARNING:X does not have valid feature names, but RandomForestRegressor was fitted with feature names
+
+2023-06-15 12:21:43,627:INFO:Scoring test/hold-out set
+2023-06-15 12:21:43,913:INFO:Visual Rendered Successfully
+2023-06-15 12:21:44,091:INFO:plot_model() successfully completed......................................
+2023-06-15 12:21:53,497:INFO:Initializing plot_model()
+2023-06-15 12:21:53,497:INFO:plot_model(plot=error, fold=None, use_train_data=False, verbose=True, display=None, display_format=None, estimator=RandomForestRegressor(n_jobs=-1, random_state=42), feature_name=None, fit_kwargs=None, groups=None, label=False, plot_kwargs=None, save=False, scale=1, self=<pycaret.regression.oop.RegressionExperiment object at 0x000001B6FAD06B00>, system=True)
+2023-06-15 12:21:53,497:INFO:Checking exceptions
+2023-06-15 12:21:53,526:INFO:Preloading libraries
+2023-06-15 12:21:53,573:INFO:Copying training dataset
+2023-06-15 12:21:53,573:INFO:Plot type: error
+2023-06-15 12:21:53,674:INFO:Fitting Model
+2023-06-15 12:21:53,674:WARNING:X does not have valid feature names, but RandomForestRegressor was fitted with feature names
+
+2023-06-15 12:21:53,674:INFO:Scoring test/hold-out set
+2023-06-15 12:21:53,964:INFO:Visual Rendered Successfully
+2023-06-15 12:21:54,145:INFO:plot_model() successfully completed......................................
+2023-06-15 12:22:06,204:INFO:Initializing tune_model()
+2023-06-15 12:22:06,204:INFO:tune_model(estimator=RandomForestRegressor(n_jobs=-1, random_state=42), fold=5, round=4, n_iter=10, custom_grid={'max_depth': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}, optimize=R2, custom_scorer=None, search_library=scikit-learn, search_algorithm=None, early_stopping=False, early_stopping_max_iters=10, choose_better=True, fit_kwargs=None, groups=None, return_tuner=False, verbose=True, tuner_verbose=True, return_train_score=False, kwargs={}, self=<pycaret.regression.oop.RegressionExperiment object at 0x000001B6FAD06B00>)
+2023-06-15 12:22:06,204:INFO:Checking exceptions
+2023-06-15 12:22:06,237:INFO:Copying training dataset
+2023-06-15 12:22:06,244:INFO:Checking base model
+2023-06-15 12:22:06,244:INFO:Base model : Random Forest Regressor
+2023-06-15 12:22:06,248:INFO:Declaring metric variables
+2023-06-15 12:22:06,252:INFO:Defining Hyperparameters
+2023-06-15 12:22:06,415:INFO:custom_grid: {'actual_estimator__max_depth': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+2023-06-15 12:22:06,416:INFO:Tuning with n_jobs=-1
+2023-06-15 12:22:06,416:INFO:Initializing RandomizedSearchCV
+2023-06-15 12:22:18,751:WARNING:
+5 fits failed out of a total of 50.
+The score on these train-test partitions for these parameters will be set to nan.
+If these failures are not expected, you can try to debug them by setting error_score='raise'.
+
+Below are more details about the failures:
+--------------------------------------------------------------------------------
+5 fits failed with the following error:
+Traceback (most recent call last):
+  File "C:\Users\lapei\anaconda3\lib\site-packages\sklearn\model_selection\_validation.py", line 686, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "C:\Users\lapei\anaconda3\lib\site-packages\pycaret\internal\pipeline.py", line 260, in fit
+    fitted_estimator = self._memory_fit(
+  File "C:\Users\lapei\anaconda3\lib\site-packages\joblib\memory.py", line 594, in __call__
+    return self._cached_call(args, kwargs)[0]
+  File "C:\Users\lapei\anaconda3\lib\site-packages\pycaret\internal\memory.py", line 398, in _cached_call
+    out, metadata = self.call(*args, **kwargs)
+  File "C:\Users\lapei\anaconda3\lib\site-packages\pycaret\internal\memory.py", line 309, in call
+    output = self.func(*args, **kwargs)
+  File "C:\Users\lapei\anaconda3\lib\site-packages\pycaret\internal\pipeline.py", line 66, in _fit_one
+    transformer.fit(*args, **fit_params)
+  File "C:\Users\lapei\anaconda3\lib\site-packages\sklearn\ensemble\_forest.py", line 340, in fit
+    self._validate_params()
+  File "C:\Users\lapei\anaconda3\lib\site-packages\sklearn\base.py", line 581, in _validate_params
+    validate_parameter_constraints(
+  File "C:\Users\lapei\anaconda3\lib\site-packages\sklearn\utils\_param_validation.py", line 97, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'max_depth' parameter of RandomForestRegressor must be an int in the range [1, inf) or None. Got 0 instead.
+
+
+2023-06-15 12:22:18,752:WARNING:One or more of the test scores are non-finite: [       nan 0.48652662 0.84008985 0.88700297 0.89957066 0.90836024
+ 0.90866937 0.90843499 0.90995616 0.91114377]
+
+2023-06-15 12:22:19,094:INFO:best_params: {'actual_estimator__max_depth': 10}
+2023-06-15 12:22:19,095:INFO:Hyperparameter search completed
+2023-06-15 12:22:19,096:INFO:SubProcess create_model() called ==================================
+2023-06-15 12:22:19,097:INFO:Initializing create_model()
+2023-06-15 12:22:19,097:INFO:create_model(self=<pycaret.regression.oop.RegressionExperiment object at 0x000001B6FAD06B00>, estimator=RandomForestRegressor(n_jobs=-1, random_state=42), fold=KFold(n_splits=5, random_state=None, shuffle=False), round=4, cross_validation=True, predict=True, fit_kwargs={}, groups=None, refit=True, probability_threshold=None, experiment_custom_tags=None, verbose=True, system=False, add_to_model_list=True, metrics=None, display=<pycaret.internal.display.display.CommonDisplay object at 0x000001B6FCE21540>, model_only=True, return_train_score=False, kwargs={'max_depth': 10})
+2023-06-15 12:22:19,097:INFO:Checking exceptions
+2023-06-15 12:22:19,097:INFO:Importing libraries
+2023-06-15 12:22:19,097:INFO:Copying training dataset
+2023-06-15 12:22:19,103:INFO:Defining folds
+2023-06-15 12:22:19,104:INFO:Declaring metric variables
+2023-06-15 12:22:19,107:INFO:Importing untrained model
+2023-06-15 12:22:19,108:INFO:Declaring custom model
+2023-06-15 12:22:19,111:INFO:Random Forest Regressor Imported successfully
+2023-06-15 12:22:19,118:INFO:Starting cross validation
+2023-06-15 12:22:19,119:INFO:Cross validating with KFold(n_splits=5, random_state=None, shuffle=False), n_jobs=-1
+2023-06-15 12:22:20,252:INFO:Calculating mean and std
+2023-06-15 12:22:20,253:INFO:Creating metrics dataframe
+2023-06-15 12:22:20,259:INFO:Finalizing model
+2023-06-15 12:22:20,894:INFO:Uploading results into container
+2023-06-15 12:22:20,895:INFO:Uploading model into container now
+2023-06-15 12:22:20,896:INFO:_master_model_container: 37
+2023-06-15 12:22:20,896:INFO:_display_container: 13
+2023-06-15 12:22:20,896:INFO:RandomForestRegressor(max_depth=10, n_jobs=-1, random_state=42)
+2023-06-15 12:22:20,896:INFO:create_model() successfully completed......................................
+2023-06-15 12:22:21,072:INFO:SubProcess create_model() end ==================================
+2023-06-15 12:22:21,073:INFO:choose_better activated
+2023-06-15 12:22:21,076:INFO:SubProcess create_model() called ==================================
+2023-06-15 12:22:21,076:INFO:Initializing create_model()
+2023-06-15 12:22:21,077:INFO:create_model(self=<pycaret.regression.oop.RegressionExperiment object at 0x000001B6FAD06B00>, estimator=RandomForestRegressor(n_jobs=-1, random_state=42), fold=KFold(n_splits=5, random_state=None, shuffle=False), round=4, cross_validation=True, predict=True, fit_kwargs={}, groups=None, refit=True, probability_threshold=None, experiment_custom_tags=None, verbose=False, system=False, add_to_model_list=True, metrics=None, display=None, model_only=True, return_train_score=False, kwargs={})
+2023-06-15 12:22:21,077:INFO:Checking exceptions
+2023-06-15 12:22:21,079:INFO:Importing libraries
+2023-06-15 12:22:21,079:INFO:Copying training dataset
+2023-06-15 12:22:21,084:INFO:Defining folds
+2023-06-15 12:22:21,084:INFO:Declaring metric variables
+2023-06-15 12:22:21,084:INFO:Importing untrained model
+2023-06-15 12:22:21,084:INFO:Declaring custom model
+2023-06-15 12:22:21,085:INFO:Random Forest Regressor Imported successfully
+2023-06-15 12:22:21,085:INFO:Starting cross validation
+2023-06-15 12:22:21,086:INFO:Cross validating with KFold(n_splits=5, random_state=None, shuffle=False), n_jobs=-1
+2023-06-15 12:22:22,256:INFO:Calculating mean and std
+2023-06-15 12:22:22,257:INFO:Creating metrics dataframe
+2023-06-15 12:22:22,259:INFO:Finalizing model
+2023-06-15 12:22:22,670:INFO:Uploading results into container
+2023-06-15 12:22:22,671:INFO:Uploading model into container now
+2023-06-15 12:22:22,671:INFO:_master_model_container: 38
+2023-06-15 12:22:22,671:INFO:_display_container: 14
+2023-06-15 12:22:22,672:INFO:RandomForestRegressor(n_jobs=-1, random_state=42)
+2023-06-15 12:22:22,672:INFO:create_model() successfully completed......................................
+2023-06-15 12:22:22,834:INFO:SubProcess create_model() end ==================================
+2023-06-15 12:22:22,835:INFO:RandomForestRegressor(n_jobs=-1, random_state=42) result for R2 is 0.9102
+2023-06-15 12:22:22,835:INFO:RandomForestRegressor(max_depth=10, n_jobs=-1, random_state=42) result for R2 is 0.9111
+2023-06-15 12:22:22,836:INFO:RandomForestRegressor(max_depth=10, n_jobs=-1, random_state=42) is best model
+2023-06-15 12:22:22,836:INFO:choose_better completed
+2023-06-15 12:22:22,853:INFO:_master_model_container: 38
+2023-06-15 12:22:22,853:INFO:_display_container: 13
+2023-06-15 12:22:22,853:INFO:RandomForestRegressor(max_depth=10, n_jobs=-1, random_state=42)
+2023-06-15 12:22:22,853:INFO:tune_model() successfully completed......................................
+2023-06-15 12:22:27,015:INFO:Initializing plot_model()
+2023-06-15 12:22:27,016:INFO:plot_model(plot=error, fold=None, use_train_data=False, verbose=True, display=None, display_format=None, estimator=RandomForestRegressor(max_depth=10, n_jobs=-1, random_state=42), feature_name=None, fit_kwargs=None, groups=None, label=False, plot_kwargs=None, save=False, scale=1, self=<pycaret.regression.oop.RegressionExperiment object at 0x000001B6FAD06B00>, system=True)
+2023-06-15 12:22:27,016:INFO:Checking exceptions
+2023-06-15 12:22:27,038:INFO:Preloading libraries
+2023-06-15 12:22:27,046:INFO:Copying training dataset
+2023-06-15 12:22:27,046:INFO:Plot type: error
+2023-06-15 12:22:27,128:INFO:Fitting Model
+2023-06-15 12:22:27,128:WARNING:X does not have valid feature names, but RandomForestRegressor was fitted with feature names
+
+2023-06-15 12:22:27,129:INFO:Scoring test/hold-out set
+2023-06-15 12:22:27,457:INFO:Visual Rendered Successfully
+2023-06-15 12:22:27,628:INFO:plot_model() successfully completed......................................
