@@ -75,11 +75,3 @@ Base_completa_tratada <- cbind(base_modificada, tecnologia)
 export(Base_completa_tratada, "Base_completa_tratada.xlsx")
 
 ```
-
-
-
-
-
-
-
-
