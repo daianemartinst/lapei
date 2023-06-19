@@ -1,13 +1,23 @@
 library(PNSIBGE)
-library(tidyverse)
+library(dplyr)
 
-setwd("~/LAPEI/Projeto saúde do empreendedor PNS")
 
-variaveis <- c("E01401","J00402","J00101")
+# Baixando os dados -------------------------------------------------------
 
-pns <- read_pns("PNS_2019.txt", input_txt = "input_PNS_2019.txt")
 
 pns_2019 <- get_pns(year = 2019)
+
+base_pns <- pns_2019[["variables"]]
+
+pns_tratada <- 
+  base_pns %>% 
+  filter(E01401 == "Conta prÃ³pria") %>% 
+  select(V0001, )
+
+
+
+# analises ----------------------------------------------------------------
+
 
 pns.svy <- get_pns(year=2019, selected=FALSE, anthropometry=FALSE,
                    labels=TRUE, deflator=TRUE, design=TRUE, savedir=tempdir())
