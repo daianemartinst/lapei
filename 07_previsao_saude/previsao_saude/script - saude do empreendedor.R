@@ -64,11 +64,8 @@ pns_tratada <-
          W001, W00103, W00203,
          #Variáveis de amostragem
          V00281)
-         
-=======
-  select(V0001, )
 
 
->>>>>>> parent of ab227f1 (update)
 
-write.csv(pns_tratada, "pns_tratada.csv")
+# Outros ------------------------------------------------------------------
+write.csv(pns_tratada, "pns_tratada1.csv")
